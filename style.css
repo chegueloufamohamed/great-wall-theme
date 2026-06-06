@@ -1,0 +1,18 @@
+/*
+Theme Name: Great Wall Furniture Custom Theme
+Theme URI: https://greatwallfurnitures.com/
+Author: Antigravity AI
+Author URI: https://github.com/google-deepmind
+Description: A high-end, premium, and fully responsive custom theme for Great Wall Furniture Dubai. Built with a luxurious warm minimalist contemporary aesthetic, featuring dynamic glassmorphism header navigation, custom sliders, scroll animations, and full WooCommerce integration out-of-the-box.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: great-wall-theme
+Tags: custom-menu, custom-logo, featured-images, threaded-comments, translation-ready, e-commerce, portfolio
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool!
+*/
+
+/* Import the primary compiled design system and styles */
+@import url('assets/css/style.css');
