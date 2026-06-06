@@ -20,13 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================== */
 function initHeaderScroll() {
   const header = document.querySelector('.header');
-  if (!header) return;
+  const backToTop = document.querySelector('.floating-back-to-top');
+  if (!header && !backToTop) return;
 
   const handleScroll = () => {
-    if (window.scrollY > 50) {
-      header.classList.add('sticky');
-    } else {
-      header.classList.remove('sticky');
+    if (header) {
+      if (window.scrollY > 50) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    }
+
+    if (backToTop) {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
     }
   };
 

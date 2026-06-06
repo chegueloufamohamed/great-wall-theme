@@ -235,7 +235,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     <div class="container">
       <div class="popular-products-title-wrapper" data-scroll>
         <h2 class="popular-products-title">Most Popular Products</h2>
-        <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="Scroll to top"><i class="ri-arrow-up-line"></i></button>
       </div>
 
       <!-- Row 1: 5 Columns -->

@@ -155,6 +155,10 @@
       <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mobile-nav-link">Showroom Consult</a>
     </div>
   </div>
+  <!-- Global Floating Back to Top Button -->
+  <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="<?php esc_attr_e( 'Scroll to top', 'great-wall-theme' ); ?>">
+    <i class="ri-arrow-up-line"></i>
+  </button>
 
 <?php wp_footer(); ?>
 </body>

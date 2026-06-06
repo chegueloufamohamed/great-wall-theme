@@ -1590,24 +1590,37 @@ p {
 
 /* Back to Top floating arrow style */
 .floating-back-to-top {
-  width: 44px;
-  height: 44px;
-  background-color: #E2E8F0;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--bg-secondary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  color: #4A5568;
+  font-size: 1.2rem;
+  color: var(--color-primary);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  border: 1px solid rgba(0,0,0,0.03);
+  transition: all var(--transition-smooth);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.floating-back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .floating-back-to-top:hover {
-  background-color: var(--color-accent);
-  color: #FFFFFF;
-  transform: translateY(-2px);
+  background-color: var(--color-primary);
+  color: var(--bg-secondary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ==========================================================================
