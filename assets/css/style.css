@@ -3166,14 +3166,201 @@ p {
 @media (max-width: 575px) {
 }
 
+/* ==========================================================================
+   FASHION 3D CAROUSEL (Phase 17)
+   ========================================================================== */
+.fc3-outer {
+  width: 100%;
+  background: var(--bg-dark);
+  padding: 80px 0;
+  box-sizing: border-box;
+  border-top: 1px solid var(--border-color-dark);
+  border-bottom: 1px solid var(--border-color-dark);
+}
 
+.fc3-frame {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border-radius: var(--border-radius-lg) !important;
+  overflow: hidden !important;
+  display: block !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.05), 0 0 40px rgba(184, 149, 102, 0.1), 0 40px 80px rgba(0,0,0,.6) !important;
+  background: var(--bg-dark-accent) !important;
+  -webkit-font-smoothing: antialiased !important;
+}
 
+.fc3-section {
+  box-sizing: border-box;
+  background: var(--bg-dark-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 650px;
+}
 
+.fc3-section::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 200px;
+  background: radial-gradient(ellipse at center bottom, rgba(184, 149, 102, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
+.fc3-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
+.fc3-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(184, 149, 102, 0.08);
+  border: 1px solid rgba(184, 149, 102, 0.2);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
 
+.fc3-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  display: inline-block;
+}
 
+.fc3-title {
+  font-family: var(--font-serif) !important;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
 
+.fc3-title em {
+  font-family: var(--font-serif) !important;
+  color: var(--color-accent);
+  font-style: italic;
+}
 
+.fc3-desc {
+  font-family: var(--font-sans) !important;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  max-width: 480px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
 
+.fc3-scene, .fc3-ring {
+  display: grid;
+}
+
+.fc3-scene {
+  overflow: hidden;
+  perspective: 35em;
+  mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+  -webkit-mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+  height: 440px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.fc3-ring {
+  place-self: center;
+  transform-style: preserve-3d;
+  animation: fc3-ry 30s linear infinite;
+}
+
+@keyframes fc3-ry {
+  to { rotate: y 1turn; }
+}
+
+.fc3-card {
+  --w: 16em;
+  --ba: calc(1turn / var(--n));
+  grid-area: 1 / 1;
+  width: var(--w);
+  aspect-ratio: 7 / 10;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 1.2em;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: block;
+  border: 1px solid rgba(255,255,255,.06);
+  margin: 0;
+  padding: 1.2em;
+  box-shadow: 0 12px 35px rgba(0,0,0,.5);
+  background: var(--bg-light-accent);
+  box-sizing: border-box;
+  transform:
+    rotatey(calc(var(--i) * var(--ba)))
+    translatez(-38em);
+}
+
+.fc3-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  background-color: transparent !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc3-ring {
+    animation-duration: 120s;
+  }
+}
+
+@media (max-width: 768px) {
+  .fc3-outer {
+    padding: 40px 0;
+  }
+  .fc3-section {
+    min-height: 400px !important;
+    gap: 24px !important;
+    padding: 40px 0 35px !important;
+  }
+  .fc3-scene {
+    height: 300px !important;
+    font-size: 55% !important; /* shrinks em-based card sizes */
+  }
+  .fc3-title {
+    font-size: clamp(22px, 6vw, 32px) !important;
+  }
+  .fc3-desc {
+    font-size: 13px !important;
+    max-width: 320px !important;
+  }
+}
 

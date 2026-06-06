@@ -193,88 +193,40 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
-       FEATURED PRODUCTS SHOWCASE (WooCommerce loop integration with beautiful fallback)
+       3D REVOLVING SHOWCASE CAROUSEL (Phase 17)
        ========================================================================== -->
-  <section class="section" style="background-color: var(--bg-light-accent);">
-    <div class="container">
-      <div class="section-title-wrapper text-center" data-scroll>
-        <span class="section-subtitle">Curated Masterpieces</span>
-        <h2 class="section-title">The Signature Gallery</h2>
-      </div>
+  <div class="fc3-outer">
+    <div class="fc3-frame">
+      <div class="fc3-section">
 
-      <div class="grid products-grid">
-        
-        <?php
-        // Query actual WooCommerce products if active, else render high-end custom fallbacks
-        if ( class_exists( 'WooCommerce' ) ) {
-          
-          $args = array(
-            'post_type'      => 'product',
-            'posts_per_page' => 4,
-            'orderby'        => 'meta_value_num',
-            'meta_key'       => '_price',
-            'order'          => 'DESC'
-          );
-          
-          $loop = new WP_Query( $args );
-          
-          if ( $loop->have_posts() ) {
-            while ( $loop->have_posts() ) : $loop->the_post();
-              global $product;
-              $product_image = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-              if ( ! $product_image ) {
-                $product_image = $assets_uri . 'designer_chair.png'; // default fallback
-              }
-              ?>
-              <div class="product-card">
-                <div class="product-img-wrapper">
-                  <?php if ( $product->is_on_sale() ) : ?>
-                    <span class="product-badge sale">Sale</span>
-                  <?php endif; ?>
-                  <img src="<?php echo esc_url( $product_image ); ?>" alt="<?php the_title_attribute(); ?>" class="product-img main-img">
-                  <div class="product-actions">
-                    <button class="product-action-btn add-to-cart-trigger" 
-                            data-id="<?php echo esc_attr( get_the_ID() ); ?>" 
-                            data-title="<?php echo esc_attr( get_the_title() ); ?>" 
-                            data-price="<?php echo esc_attr( $product->get_price() ); ?>" 
-                            data-image="<?php echo esc_url( $product_image ); ?>"
-                            data-category="Furniture"
-                            title="Add to Shopping Bag">
-                      <i class="ri-shopping-bag-line"></i>
-                    </button>
-                    <a href="<?php the_permalink(); ?>" class="product-action-btn" title="View Details"><i class="ri-eye-line"></i></a>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <span class="product-category">Masterpiece</span>
-                  <h3 class="product-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                  <div class="product-meta">
-                    <div class="product-price">AED <?php echo esc_html( $product->get_price() ); ?></div>
-                    <div class="product-rating">
-                      <i class="ri-star-fill"></i>
-                      <span><?php echo esc_html( $product->get_average_rating() ); ?></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <?php
-            endwhile;
-            wp_reset_postdata();
-          } else {
-            great_wall_render_fallback_products( $assets_uri );
-          }
-        } else {
-          great_wall_render_fallback_products( $assets_uri );
-        }
-        ?>
+        <div class="fc3-header">
+          <span class="fc3-eyebrow"><span class="fc3-dot"></span><?php esc_html_e( 'Our Collection', 'great-wall-theme' ); ?></span>
+          <h2 class="fc3-title"><?php echo wp_kses( __( 'Design Masterpieces <em>in Motion</em>', 'great-wall-theme' ), array( 'em' => array() ) ); ?></h2>
+          <p class="fc3-desc"><?php esc_html_e( 'Explore our signature handcrafted furniture collections rotating from every angle.', 'great-wall-theme' ); ?></p>
+        </div>
 
-      </div>
+        <div class="fc3-scene">
+          <div class="fc3-ring" style="--n:14">
+            <div class="fc3-card" style="--i:0"><img src="<?php echo esc_url( $assets_uri . 'designer_chair.png' ); ?>" alt="<?php esc_attr_e( 'Aura Bouclé Accent Armchair', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:1"><img src="<?php echo esc_url( $assets_uri . 'hero_sofa.png' ); ?>" alt="<?php esc_attr_e( 'Hale Minimalist Bouclé Sofa', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:2"><img src="<?php echo esc_url( $assets_uri . 'luxury_bed.png' ); ?>" alt="<?php esc_attr_e( 'Sora Velvet Upholstered King Bed', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:3"><img src="<?php echo esc_url( $assets_uri . 'dining_room.png' ); ?>" alt="<?php esc_attr_e( 'Stella Black Marble Dining Table', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:4"><img src="<?php echo esc_url( $assets_uri . 'sofa_isolated.png' ); ?>" alt="<?php esc_attr_e( '3-Seater Sofa Set', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:5"><img src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.png' ); ?>" alt="<?php esc_attr_e( 'Accent Chair with Gold Frame', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:6"><img src="<?php echo esc_url( $assets_uri . 'baby_chair_isolated.png' ); ?>" alt="<?php esc_attr_e( 'Baby Chair', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:7"><img src="<?php echo esc_url( $assets_uri . 'box_round_stool.png' ); ?>" alt="<?php esc_attr_e( 'Box Round Sofa Seat', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:8"><img src="<?php echo esc_url( $assets_uri . 'carved_vase.png' ); ?>" alt="<?php esc_attr_e( 'Carved Vase', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:9"><img src="<?php echo esc_url( $assets_uri . 'table_lamp.png' ); ?>" alt="<?php esc_attr_e( 'Table Lamp', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:10"><img src="<?php echo esc_url( $assets_uri . 'timber_dresser.png' ); ?>" alt="<?php esc_attr_e( 'Timber Dresser', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:11"><img src="<?php echo esc_url( $assets_uri . 'pillows_stack.png' ); ?>" alt="<?php esc_attr_e( 'Pillows Stack', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:12"><img src="<?php echo esc_url( $assets_uri . 'designer_chair_h.png' ); ?>" alt="<?php esc_attr_e( 'Aura Accent Armchair Olive', 'great-wall-theme' ); ?>"></div>
+            <div class="fc3-card" style="--i:13"><img src="<?php echo esc_url( $assets_uri . 'hero_sofa.png' ); ?>" alt="<?php esc_attr_e( 'Hale Minimalist Bouclé Sofa', 'great-wall-theme' ); ?>"></div>
+          </div>
+        </div>
 
-      <div class="text-center" style="margin-top: 50px;" data-scroll>
-        <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-secondary">View Complete Catalogue</a>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ==========================================================================
        MOST POPULAR PRODUCTS SECTION (Dynamic swatches & isolated items matching screenshot)
