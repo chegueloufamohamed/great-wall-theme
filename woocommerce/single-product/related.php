@@ -49,27 +49,27 @@ if ( $related_products ) : ?>
 				$data_price = is_numeric( $price ) ? esc_attr( $price ) : '0';
 				?>
 				<div class="product-card">
-					<div class="product-img-wrapper" style="height: 280px;">
+					<div class="product-img-wrapper" style="height: 280px; overflow: hidden; position: relative;">
 						<?php if ( $product_obj->is_on_sale() ) : ?>
 							<span class="product-badge sale">Sale</span>
 						<?php endif; ?>
-						<img src="<?php echo esc_url( $product_image ); ?>" loading="lazy" alt="<?php the_title_attribute(); ?>" class="product-img main-img">
+						<img src="<?php echo esc_url( $product_image ); ?>" loading="lazy" alt="<?php echo esc_attr( $product_obj->get_name() ); ?>" class="product-img main-img">
 						<div class="product-actions">
 							<button class="product-action-btn add-to-cart-trigger" 
 									data-id="<?php echo esc_attr( $related_product_id ); ?>" 
-									data-title="<?php echo esc_attr( get_the_title() ); ?>" 
+									data-title="<?php echo esc_attr( $product_obj->get_name() ); ?>" 
 									data-price="<?php echo $data_price; ?>" 
 									data-image="<?php echo esc_url( $product_image ); ?>"
 									data-category="Furniture"
 									title="Add to Shopping Bag">
 								<i class="ri-shopping-bag-line"></i>
 							</button>
-							<a href="<?php the_permalink(); ?>" class="product-action-btn" title="View Details"><i class="ri-eye-line"></i></a>
+							<a href="<?php echo esc_url( get_permalink( $related_product_id ) ); ?>" class="product-action-btn" title="View Details"><i class="ri-eye-line"></i></a>
 						</div>
 					</div>
 					<div class="product-info">
 						<span class="product-category">Signature Range</span>
-						<h3 class="product-title" style="font-size: 0.9rem;"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						<h3 class="product-title" style="font-size: 0.9rem; margin-bottom: 10px;"><a href="<?php echo esc_url( get_permalink( $related_product_id ) ); ?>"><?php echo esc_html( $product_obj->get_name() ); ?></a></h3>
 						<div class="product-meta">
 							<div class="product-price"><?php echo esc_html( $formatted_price ); ?></div>
 						</div>
