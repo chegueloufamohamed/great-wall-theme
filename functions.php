@@ -106,7 +106,7 @@ add_action( 'wp_enqueue_scripts', 'great_wall_scripts' );
 /**
  * Defer non-critical enqueued scripts for performance.
  */
-function great_wall_defer_scripts( $tag, $handle, $src ) {
+function great_wall_defer_scripts( $tag, $handle = '', $src = '' ) {
 	if ( 'great-wall-js' === $handle ) {
 		return '<script src="' . esc_url( $src ) . '" defer id="' . esc_attr( $handle ) . '-js"></script>' . "\n";
 	}
