@@ -459,7 +459,10 @@ function initMockCart() {
       updateCartUI();
       
       // Redirect to checkout
-      const checkoutUrl = featuredBuyBtn.getAttribute('data-checkout-url') || 'checkout/';
+      const fallbackUrl = (typeof greatWallThemeParams !== 'undefined' && greatWallThemeParams.checkout_url)
+        ? greatWallThemeParams.checkout_url
+        : 'checkout/';
+      const checkoutUrl = featuredBuyBtn.getAttribute('data-checkout-url') || fallbackUrl;
       window.location.href = checkoutUrl;
     });
   }
@@ -489,7 +492,10 @@ function initMockCart() {
       updateCartUI();
       
       // Redirect to checkout
-      const checkoutUrl = detailBuyBtn.getAttribute('data-checkout-url') || 'checkout/';
+      const fallbackUrl = (typeof greatWallThemeParams !== 'undefined' && greatWallThemeParams.checkout_url)
+        ? greatWallThemeParams.checkout_url
+        : 'checkout/';
+      const checkoutUrl = detailBuyBtn.getAttribute('data-checkout-url') || fallbackUrl;
       window.location.href = checkoutUrl;
     });
   }
@@ -812,7 +818,12 @@ function initWooProductPage() {
         
         if (prodId) {
           // Redirect to checkout with add to cart query parameters
-          const checkoutUrl = window.location.origin + '/checkout/?add-to-cart=' + prodId + '&quantity=' + qty;
+          const baseUrl = (typeof greatWallThemeParams !== 'undefined' && greatWallThemeParams.checkout_url) 
+            ? greatWallThemeParams.checkout_url 
+            : (window.location.origin + '/checkout/');
+          
+          const separator = baseUrl.includes('?') ? '&' : '?';
+          const checkoutUrl = baseUrl + separator + 'add-to-cart=' + prodId + '&quantity=' + qty;
           window.location.href = checkoutUrl;
         } else {
           form.submit();

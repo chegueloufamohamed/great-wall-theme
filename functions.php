@@ -97,6 +97,10 @@ function great_wall_scripts() {
 	// Enqueue main interactive javascript core.
 	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
 
+	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
+		'checkout_url' => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' )
+	) );
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
