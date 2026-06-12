@@ -215,6 +215,10 @@ function initScrollAnimations() {
    HIGH-FIDELITY MOCK CART SYSTEM
    ========================================================================== */
 function initMockCart() {
+  if (typeof greatWallThemeParams !== 'undefined' && greatWallThemeParams.is_woocommerce) {
+    initWooCommerceCartAjaxRemove();
+    return;
+  }
   let cart = JSON.parse(localStorage.getItem('gwal_cart')) || [];
 
   const updateCartUI = () => {
@@ -833,5 +837,36 @@ function initWooProductPage() {
   }
 }
 
-
-
+/**
+ * Handle background AJAX removal of WooCommerce products in the sliding drawer cart
+ */
+function initWooCommerceCartAjaxRemove() {
+  document.addEventListener('click', (e) => {
+    const removeBtn = e.target.closest('.cart-item-remove-wc');
+    if (removeBtn) {
+      e.preventDefault();
+      const removeUrl = removeBtn.getAttribute('href');
+      if (!removeUrl) return;
+      
+      const cartItem = removeBtn.closest('.cart-item');
+      if (cartItem) {
+        cartItem.style.opacity = '0.5';
+        cartItem.style.pointerEvents = 'none';
+      }
+      
+      fetch(removeUrl)
+        .then(response => response.text())
+        .then(html => {
+          if (window.jQuery) {
+            window.jQuery(document.body).trigger('wc_fragment_refresh');
+          } else {
+            window.location.reload();
+          }
+        })
+        .catch(err => {
+          console.error('Error removing item from cart:', err);
+          window.location.reload();
+        });
+    }
+  });
+}

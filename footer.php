@@ -124,19 +124,86 @@
     </div>
     
     <div class="cart-items">
-      <!-- High-fidelity script handles frontend mock cart and WC triggers -->
-      <?php if ( class_exists( 'WooCommerce' ) && ! WC()->cart->is_empty() ) : ?>
-        <!-- WooCommerce mini-cart loop can be rendered here dynamically -->
-      <?php endif; ?>
+      <?php
+      if ( class_exists( 'WooCommerce' ) ) {
+        $cart_items = WC()->cart->get_cart();
+        if ( ! empty( $cart_items ) ) {
+          foreach ( $cart_items as $cart_item_key => $cart_item ) {
+            $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+            if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 ) {
+              $product_permalink = $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '';
+              $thumbnail         = $_product->get_image();
+              $product_name      = $_product->get_name();
+              $product_subtotal  = WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] );
+              ?>
+              <div class="cart-item" data-cart-key="<?php echo esc_attr( $cart_item_key ); ?>">
+                <div class="cart-item-img">
+                  <?php if ( ! $product_permalink ) : ?>
+                    <?php echo $thumbnail; ?>
+                  <?php else : ?>
+                    <a href="<?php echo esc_url( $product_permalink ); ?>">
+                      <?php echo $thumbnail; ?>
+                    </a>
+                  <?php endif; ?>
+                </div>
+                <div class="cart-item-details">
+                  <div class="cart-item-title-row">
+                    <div class="cart-item-title">
+                      <?php if ( ! $product_permalink ) : ?>
+                        <?php echo esc_html( $product_name ); ?>
+                      <?php else : ?>
+                        <a href="<?php echo esc_url( $product_permalink ); ?>">
+                          <?php echo esc_html( $product_name ); ?>
+                        </a>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                  <div class="cart-item-bottom">
+                    <div class="cart-item-quantity">
+                      <span>Qty: <?php echo esc_html( $cart_item['quantity'] ); ?></span>
+                    </div>
+                    <div class="cart-item-price"><?php echo $product_subtotal; ?></div>
+                    <a href="<?php echo esc_url( wc_get_cart_remove_url( $cart_item_key ) ); ?>" class="cart-item-remove-wc" data-cart-key="<?php echo esc_attr( $cart_item_key ); ?>">Remove</a>
+                  </div>
+                </div>
+              </div>
+              <?php
+            }
+          }
+        } else {
+          ?>
+          <div class="empty-cart-message" style="text-align: center; padding: 40px 20px; color: var(--color-muted);">
+            <p style="margin-bottom: 20px;">Your shopping bag is empty.</p>
+            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary drawer-close" style="display: inline-block;"><span>View Collections</span></a>
+          </div>
+          <?php
+        }
+      } else {
+        ?>
+        <div class="empty-cart-message" style="text-align: center; padding: 40px 20px; color: var(--color-muted);">
+          <p style="margin-bottom: 20px;">Your shopping bag is empty.</p>
+          <a href="#" class="btn btn-primary drawer-close" style="display: inline-block;"><span>View Collections</span></a>
+        </div>
+        <?php
+      }
+      ?>
     </div>
 
     <div class="cart-footer">
       <div class="cart-totals">
         <span>Order Subtotal</span>
-        <span class="cart-subtotal-val">AED 0</span>
+        <span class="cart-subtotal-val">
+          <?php 
+          if ( class_exists( 'WooCommerce' ) ) {
+            echo WC()->cart->get_cart_subtotal();
+          } else {
+            echo 'AED 0';
+          }
+          ?>
+        </span>
       </div>
       <div class="cart-buttons">
-        <button class="btn btn-primary" onclick="window.location.href='<?php echo esc_url( wc_get_checkout_url() ); ?>'"><span>Secure Checkout</span></button>
+        <button class="btn btn-primary" onclick="window.location.href='<?php echo class_exists( 'WooCommerce' ) ? esc_url( wc_get_checkout_url() ) : esc_url( home_url( '/checkout/' ) ); ?>'"><span>Secure Checkout</span></button>
         <a href="#" class="btn btn-secondary drawer-close" style="text-align: center;">Continue Shopping</a>
       </div>
     </div>

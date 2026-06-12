@@ -98,7 +98,8 @@ function great_wall_scripts() {
 	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
-		'checkout_url' => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' )
+		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
+		'is_woocommerce' => class_exists( 'WooCommerce' )
 	) );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -119,16 +120,87 @@ function great_wall_defer_scripts( $tag, $handle = '', $src = '' ) {
 add_filter( 'script_loader_tag', 'great_wall_defer_scripts', 10, 3 );
 
 /**
- * Filter WooCommerce Cart count update dynamically via AJAX
+ * Filter WooCommerce Cart fragments to update cart badge, drawer items, and subtotal via AJAX
  */
-if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	add_filter( 'woocommerce_add_to_cart_fragments', 'great_wall_cart_count_fragments' );
-	function great_wall_cart_count_fragments( $fragments ) {
+if ( class_exists( 'WooCommerce' ) ) {
+	add_filter( 'woocommerce_add_to_cart_fragments', 'great_wall_cart_fragments' );
+	function great_wall_cart_fragments( $fragments ) {
+		// 1. Cart Count Badge
 		ob_start();
 		?>
 		<span class="cart-count"><?php echo esc_html( WC()->cart->get_cart_contents_count() ); ?></span>
 		<?php
 		$fragments['span.cart-count'] = ob_get_clean();
+
+		// 2. Cart Drawer Items
+		ob_start();
+		?>
+		<div class="cart-items">
+			<?php
+			$cart_items = WC()->cart->get_cart();
+			if ( ! empty( $cart_items ) ) {
+				foreach ( $cart_items as $cart_item_key => $cart_item ) {
+					$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+					if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 ) {
+						$product_permalink = $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '';
+						$thumbnail         = $_product->get_image();
+						$product_name      = $_product->get_name();
+						$product_subtotal  = WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] );
+						?>
+						<div class="cart-item" data-cart-key="<?php echo esc_attr( $cart_item_key ); ?>">
+							<div class="cart-item-img">
+								<?php if ( ! $product_permalink ) : ?>
+									<?php echo $thumbnail; ?>
+								<?php else : ?>
+									<a href="<?php echo esc_url( $product_permalink ); ?>">
+										<?php echo $thumbnail; ?>
+									</a>
+								<?php endif; ?>
+							</div>
+							<div class="cart-item-details">
+								<div class="cart-item-title-row">
+									<div class="cart-item-title">
+										<?php if ( ! $product_permalink ) : ?>
+											<?php echo esc_html( $product_name ); ?>
+										<?php else : ?>
+											<a href="<?php echo esc_url( $product_permalink ); ?>">
+												<?php echo esc_html( $product_name ); ?>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="cart-item-bottom">
+									<div class="cart-item-quantity">
+										<span>Qty: <?php echo esc_html( $cart_item['quantity'] ); ?></span>
+									</div>
+									<div class="cart-item-price"><?php echo $product_subtotal; ?></div>
+									<a href="<?php echo esc_url( wc_get_cart_remove_url( $cart_item_key ) ); ?>" class="cart-item-remove-wc" data-cart-key="<?php echo esc_attr( $cart_item_key ); ?>">Remove</a>
+								</div>
+							</div>
+						</div>
+						<?php
+					}
+				}
+			} else {
+				?>
+				<div class="empty-cart-message" style="text-align: center; padding: 40px 20px; color: var(--color-muted);">
+					<p style="margin-bottom: 20px;">Your shopping bag is empty.</p>
+					<a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary drawer-close" style="display: inline-block;"><span>View Collections</span></a>
+				</div>
+				<?php
+			}
+			?>
+		</div>
+		<?php
+		$fragments['div.cart-items'] = ob_get_clean();
+
+		// 3. Subtotal Val
+		ob_start();
+		?>
+		<span class="cart-subtotal-val"><?php echo WC()->cart->get_cart_subtotal(); ?></span>
+		<?php
+		$fragments['span.cart-subtotal-val'] = ob_get_clean();
+
 		return $fragments;
 	}
 }
