@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCurtainSlider();
   initHoverShowcase();
   initWooProductPage();
+  initWooShopLoop();
 });
 
 /* ==========================================================================
@@ -868,5 +869,45 @@ function initWooCommerceCartAjaxRemove() {
           window.location.reload();
         });
     }
+  });
+}
+
+/**
+ * WooCommerce Shop Loop Enhancements (Centering Add to Cart, Injecting Buy Now next to it)
+ */
+function initWooShopLoop() {
+  const loopCartButtons = document.querySelectorAll('.woocommerce ul.products li.product .add_to_cart_button, .woocommerce-page ul.products li.product .add_to_cart_button');
+  if (loopCartButtons.length === 0) return;
+
+  loopCartButtons.forEach(btn => {
+    // Check if parent is already our custom actions container
+    const parent = btn.parentNode;
+    if (parent.classList.contains('product-loop-actions')) return;
+
+    const prodId = btn.getAttribute('data-product_id');
+    if (!prodId) return;
+
+    // Create a container wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'product-loop-actions';
+
+    // Create Buy Now Button
+    const buyNowBtn = document.createElement('a');
+    buyNowBtn.className = 'button buy-now-loop-btn';
+    
+    const baseUrl = (typeof greatWallThemeParams !== 'undefined' && greatWallThemeParams.checkout_url) 
+      ? greatWallThemeParams.checkout_url 
+      : (window.location.origin + '/checkout/');
+
+    const separator = baseUrl.includes('?') ? '&' : '?';
+    buyNowBtn.href = baseUrl + separator + 'add-to-cart=' + prodId + '&quantity=1';
+    buyNowBtn.innerHTML = '<span>Buy Now</span>';
+
+    // Insert wrapper in place of the Add to Cart button
+    parent.insertBefore(wrapper, btn);
+
+    // Append both buttons to the wrapper
+    wrapper.appendChild(btn);
+    wrapper.appendChild(buyNowBtn);
   });
 }

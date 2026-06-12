@@ -4413,12 +4413,84 @@ p {
   color: var(--color-accent) !important;
 }
 
+/* Remove yellow highlights globally in WooCommerce loops and tables */
+.woocommerce mark,
+.woocommerce mark.count,
+.woocommerce .count,
 .woocommerce-loop-category__title .count,
 .woocommerce-loop-category__title mark {
   background: none !important;
+  background-color: transparent !important;
   color: var(--color-muted) !important;
   font-weight: 500 !important;
   margin-left: 5px !important;
   font-size: 0.85rem !important;
   display: inline-block !important;
+}
+
+/* Shop Loop Actions (Add to Cart & Buy Now side-by-side) */
+.product-loop-actions {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 15px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.product-loop-actions .button.add_to_cart_button,
+.product-loop-actions .button.buy-now-loop-btn {
+  flex: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  padding: 0 10px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  border-radius: var(--border-radius-sm) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+/* Styling Add to Cart (Dark style) */
+.product-loop-actions .button.add_to_cart_button {
+  background-color: var(--color-primary) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--color-primary) !important;
+}
+
+.product-loop-actions .button.add_to_cart_button:hover {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #FFFFFF !important;
+}
+
+/* Styling Buy Now (Champagne style) */
+.product-loop-actions .button.buy-now-loop-btn {
+  background-color: var(--color-accent) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--color-accent) !important;
+}
+
+.product-loop-actions .button.buy-now-loop-btn:hover {
+  background-color: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+  color: #FFFFFF !important;
+}
+
+/* Responsive constraints for loop buttons */
+@media (max-width: 576px) {
+  .product-loop-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .product-loop-actions .button.add_to_cart_button,
+  .product-loop-actions .button.buy-now-loop-btn {
+    width: 100% !important;
+  }
 }
