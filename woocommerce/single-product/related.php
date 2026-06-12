@@ -38,7 +38,7 @@ if ( $related_products ) : ?>
 				$product_obj = wc_get_product( $related_product_id );
 				$product_image = get_the_post_thumbnail_url( $related_product_id, 'large' );
 				if ( ! $product_image ) {
-					$product_image = get_template_directory_uri() . '/assets/images/designer_chair.png'; // default fallback
+					$product_image = get_template_directory_uri() . '/assets/images/designer_chair.webp'; // default fallback
 				}
 				?>
 				<div class="product-card">
@@ -46,7 +46,7 @@ if ( $related_products ) : ?>
 						<?php if ( $product_obj->is_on_sale() ) : ?>
 							<span class="product-badge sale">Sale</span>
 						<?php endif; ?>
-						<img src="<?php echo esc_url( $product_image ); ?>" alt="<?php the_title_attribute(); ?>" class="product-img main-img">
+						<img src="<?php echo esc_url( $product_image ); ? loading="lazy">" alt="<?php the_title_attribute(); ?>" class="product-img main-img">
 						<div class="product-actions">
 							<button class="product-action-btn add-to-cart-trigger" 
 									data-id="<?php echo esc_attr( $related_product_id ); ?>" 

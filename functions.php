@@ -85,8 +85,11 @@ add_action( 'after_setup_theme', 'great_wall_setup' );
  * Enqueue scripts and styles.
  */
 function great_wall_scripts() {
-	// Enqueue main stylesheet.
-	wp_enqueue_style( 'great-wall-styles', get_stylesheet_uri(), array(), '1.0.0' );
+	// Enqueue Google Fonts directly.
+	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
+
+	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.0' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -99,6 +102,17 @@ function great_wall_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'great_wall_scripts' );
+
+/**
+ * Defer non-critical enqueued scripts for performance.
+ */
+function great_wall_defer_scripts( $tag, $handle, $src ) {
+	if ( 'great-wall-js' === $handle ) {
+		return '<script src="' . esc_url( $src ) . '" defer id="' . esc_attr( $handle ) . '-js"></script>' . "\n";
+	}
+	return $tag;
+}
+add_filter( 'script_loader_tag', 'great_wall_defer_scripts', 10, 3 );
 
 /**
  * Filter WooCommerce Cart count update dynamically via AJAX

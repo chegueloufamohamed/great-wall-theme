@@ -14,5 +14,4 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool!
 */
 
-/* Import the primary compiled design system and styles */
-@import url('assets/css/style.css');
+/* The primary compiled design system and styles are enqueued directly via functions.php */
