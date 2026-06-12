@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initCurtainSlider();
   initHoverShowcase();
+  initWooProductPage();
 });
 
 /* ==========================================================================
@@ -458,7 +459,7 @@ function initMockCart() {
       updateCartUI();
       
       // Redirect to checkout
-      const checkoutUrl = featuredBuyBtn.getAttribute('data-checkout-url') || 'contact.html';
+      const checkoutUrl = featuredBuyBtn.getAttribute('data-checkout-url') || 'checkout/';
       window.location.href = checkoutUrl;
     });
   }
@@ -488,7 +489,7 @@ function initMockCart() {
       updateCartUI();
       
       // Redirect to checkout
-      const checkoutUrl = detailBuyBtn.getAttribute('data-checkout-url') || 'contact.html';
+      const checkoutUrl = detailBuyBtn.getAttribute('data-checkout-url') || 'checkout/';
       window.location.href = checkoutUrl;
     });
   }
@@ -763,10 +764,61 @@ function initHoverShowcase() {
 
   // Pre-load trigger first element on load to show starting visual
   if (items.length > 0 && window.innerWidth > 768) {
-    // Slight delay to ensure DOM styling metrics are fully computed by browser
+    // Slight delay to ensure DOM styling metrics are failed by browser
     setTimeout(() => {
       items[0].dispatchEvent(new Event('mouseenter'));
     }, 150);
+  }
+}
+
+/* ==========================================================================
+   WOOCOMMERCE SINGLE PRODUCT PAGES DYNAMICS
+   ========================================================================== */
+function initWooProductPage() {
+  const wooAddCartBtn = document.querySelector('.single-product form.cart .single_add_to_cart_button');
+  if (wooAddCartBtn) {
+    // Check if we already added the Buy Now button
+    if (!document.querySelector('.buy-now-theme-btn')) {
+      const buyNowBtn = document.createElement('a');
+      buyNowBtn.href = '#';
+      buyNowBtn.className = 'buy-now-theme-btn';
+      buyNowBtn.innerHTML = '<span>Buy Now</span>';
+      
+      // Let's create an actions container if not exists, or just append next to it
+      wooAddCartBtn.parentNode.insertBefore(buyNowBtn, wooAddCartBtn.nextSibling);
+      
+      // Let's wrap them in an add-to-cart-row div for proper layout
+      const parent = wooAddCartBtn.parentNode;
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'add-to-cart-row';
+      
+      // Move them inside
+      parent.insertBefore(rowDiv, wooAddCartBtn);
+      rowDiv.appendChild(wooAddCartBtn);
+      rowDiv.appendChild(buyNowBtn);
+      
+      buyNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const form = wooAddCartBtn.closest('form.cart');
+        const quantityInput = form.querySelector('input.qty') || form.querySelector('[name="quantity"]');
+        const qty = quantityInput ? quantityInput.value : 1;
+        
+        // Find product ID
+        let prodId = wooAddCartBtn.value;
+        const prodIdInput = form.querySelector('input[name="add-to-cart"]') || form.querySelector('[name="add-to-cart"]');
+        if (prodIdInput) {
+          prodId = prodIdInput.value;
+        }
+        
+        if (prodId) {
+          // Redirect to checkout with add to cart query parameters
+          const checkoutUrl = window.location.origin + '/checkout/?add-to-cart=' + prodId + '&quantity=' + qty;
+          window.location.href = checkoutUrl;
+        } else {
+          form.submit();
+        }
+      });
+    }
   }
 }
 

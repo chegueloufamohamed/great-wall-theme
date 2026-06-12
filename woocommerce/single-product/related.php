@@ -36,10 +36,17 @@ if ( $related_products ) : ?>
 				setup_postdata( $GLOBALS['post'] =& $post_object ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
 				$product_obj = wc_get_product( $related_product_id );
+				if ( ! $product_obj ) {
+					continue;
+				}
 				$product_image = get_the_post_thumbnail_url( $related_product_id, 'large' );
 				if ( ! $product_image ) {
 					$product_image = get_template_directory_uri() . '/assets/images/designer_chair.webp'; // default fallback
 				}
+				
+				$price = $product_obj->get_price();
+				$formatted_price = is_numeric( $price ) ? 'AED ' . number_format( (float) $price ) : 'Contact for Price';
+				$data_price = is_numeric( $price ) ? esc_attr( $price ) : '0';
 				?>
 				<div class="product-card">
 					<div class="product-img-wrapper" style="height: 280px;">
@@ -51,7 +58,7 @@ if ( $related_products ) : ?>
 							<button class="product-action-btn add-to-cart-trigger" 
 									data-id="<?php echo esc_attr( $related_product_id ); ?>" 
 									data-title="<?php echo esc_attr( get_the_title() ); ?>" 
-									data-price="<?php echo esc_attr( $product_obj->get_price() ); ?>" 
+									data-price="<?php echo $data_price; ?>" 
 									data-image="<?php echo esc_url( $product_image ); ?>"
 									data-category="Furniture"
 									title="Add to Shopping Bag">
@@ -64,7 +71,7 @@ if ( $related_products ) : ?>
 						<span class="product-category">Signature Range</span>
 						<h3 class="product-title" style="font-size: 0.9rem;"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 						<div class="product-meta">
-							<div class="product-price">AED <?php echo esc_html( number_format($product_obj->get_price()) ); ?></div>
+							<div class="product-price"><?php echo esc_html( $formatted_price ); ?></div>
 						</div>
 					</div>
 				</div>
