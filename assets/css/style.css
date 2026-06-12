@@ -3651,3 +3651,42 @@ p {
 #reviews .comment-form input[type="submit"]:hover {
   background-color: var(--color-accent);
 }
+
+/* related and upsells full-width grid layout overrides */
+.single-product div.product > .related,
+.single-product div.product > .upsells,
+.single-product div.product > .woocommerce-tabs {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
+.related.products .products-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 30px !important;
+}
+
+@media (max-width: 991px) {
+  .related.products .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .related.products .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .related.products .product-img-wrapper {
+    height: 200px !important; /* adjust height on mobile so they fit nicely */
+  }
+}
+
+@media (max-width: 420px) {
+  .related.products .products-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .related.products .product-img-wrapper {
+    height: 280px !important;
+  }
+}

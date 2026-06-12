@@ -144,3 +144,37 @@ add_action( 'woocommerce_after_main_content', 'great_wall_wrapper_end', 10 );
 function great_wall_wrapper_end() {
 	echo '</div></section>';
 }
+
+/**
+ * Fallback WooCommerce Product Filters for Prototype / Temporary Display
+ */
+// 1. Force products to be purchasable (even without price)
+add_filter( 'woocommerce_is_purchasable', '__return_true' );
+
+// 2. Fallback price if empty (so they display Add to Cart button and fallback price)
+add_filter( 'woocommerce_product_get_price', 'great_wall_fallback_price', 10, 2 );
+add_filter( 'woocommerce_product_get_regular_price', 'great_wall_fallback_price', 10, 2 );
+function great_wall_fallback_price( $price, $product ) {
+	if ( '' === $price || false === $price || null === $price ) {
+		return '2999'; // Temporary fallback price
+	}
+	return $price;
+}
+
+// 3. Fallback short description if empty
+add_filter( 'woocommerce_short_description', 'great_wall_fallback_short_description', 10, 1 );
+function great_wall_fallback_short_description( $post_excerpt ) {
+	if ( empty( trim( $post_excerpt ) ) ) {
+		return 'Experience the peak of contemporary craftsmanship. Hand-tailored from premium materials, this architectural piece brings quiet luxury and clean, minimalist lines to any modern space in Dubai. Custom dimensions and veneers available upon request.';
+	}
+	return $post_excerpt;
+}
+
+// 4. Fallback main content (description) if empty
+add_filter( 'the_content', 'great_wall_fallback_content', 10, 1 );
+function great_wall_fallback_content( $content ) {
+	if ( is_singular( 'product' ) && empty( trim( $content ) ) ) {
+		return '<h3>Design & Craftsmanship</h3><p>Every line and detail of this piece has been carefully considered to create a sense of harmony and understated elegance. Built with premium materials selected for their durability and natural beauty, it serves as a functional art piece in your home.</p><h3>Specifications</h3><ul><li>Premium grade materials and structure</li><li>Hand-finished with natural protective oils</li><li>Custom dimensions and materials available upon consultation with our showroom team</li></ul>';
+	}
+	return $content;
+}

@@ -26,7 +26,7 @@ if ( $related_products ) : ?>
 			</div>
 		<?php endif; ?>
 		
-		<div class="grid products-grid" style="grid-template-columns: repeat(4, 1fr);">
+		<div class="grid products-grid">
 
 			<?php foreach ( $related_products as $related_product_id ) : ?>
 
