@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.1' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.2' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.1', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.2', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -211,9 +211,69 @@ if ( class_exists( 'WooCommerce' ) ) {
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 
+// Disable default WooCommerce loop titles and descriptions
+add_filter( 'woocommerce_show_page_title', '__return_false' );
+remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
+
+add_action( 'woocommerce_before_main_content', 'great_wall_shop_hero_banner', 9 );
+function great_wall_shop_hero_banner() {
+	if ( is_shop() || is_product_category() || is_product_tag() ) {
+		// Get title
+		if ( is_shop() ) {
+			$title = woocommerce_page_title( false );
+		} else {
+			$title = single_term_title( '', false );
+		}
+
+		// Get description
+		$desc = '';
+		if ( is_product_category() || is_product_tag() ) {
+			$desc = term_description();
+		} elseif ( is_shop() ) {
+			$shop_page_id = wc_get_page_id( 'shop' );
+			if ( $shop_page_id > 0 ) {
+				$desc = get_post_field( 'post_content', $shop_page_id );
+			}
+		}
+		if ( empty( trim( strip_tags( $desc ) ) ) ) {
+			$desc = 'Experience the peak of contemporary craftsmanship. Hand-tailored from premium materials, this architectural piece brings quiet luxury and clean, minimalist lines to any modern space in Dubai.';
+		}
+
+		// Get category thumbnail
+		$thumbnail_url = '';
+		if ( is_product_category() ) {
+			$cat = get_queried_object();
+			$thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+			if ( $thumbnail_id ) {
+				$thumbnail_url = wp_get_attachment_url( $thumbnail_id );
+			}
+		}
+		if ( empty( $thumbnail_url ) ) {
+			$thumbnail_url = get_template_directory_uri() . '/assets/images/dining_room.webp';
+		}
+		?>
+		<section class="shop-hero-banner" style="background-image: linear-gradient(rgba(30, 28, 25, 0.65), rgba(30, 28, 25, 0.65)), url('<?php echo esc_url( $thumbnail_url ); ?>');">
+			<div class="container">
+				<h1 class="shop-hero-title"><?php echo esc_html( $title ); ?></h1>
+				<?php if ( ! empty( $desc ) ) : ?>
+					<div class="shop-hero-desc"><?php echo wp_kses_post( $desc ); ?></div>
+				<?php endif; ?>
+				<div class="breadcrumbs shop-hero-breadcrumbs">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+					<span>/</span>
+					<span><?php echo esc_html( $title ); ?></span>
+				</div>
+			</div>
+		</section>
+		<?php
+	}
+}
+
 add_action( 'woocommerce_before_main_content', 'great_wall_wrapper_start', 10 );
 function great_wall_wrapper_start() {
-	echo '<section class="section" style="padding-top: 140px;"><div class="container">';
+	$padding = ( is_shop() || is_product_category() || is_product_tag() ) ? '40px' : '140px';
+	echo '<section class="section" style="padding-top: ' . $padding . ';"><div class="container">';
 }
 
 add_action( 'woocommerce_after_main_content', 'great_wall_wrapper_end', 10 );

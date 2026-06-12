@@ -4494,3 +4494,60 @@ p {
     width: 100% !important;
   }
 }
+
+/* ==========================================================================
+   SHOP & CATEGORY LOOP HERO BANNER OVERRIDES
+   ========================================================================== */
+.shop-hero-banner {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 160px 0 100px;
+  text-align: center;
+  color: #FFFFFF !important;
+  margin-bottom: 20px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+
+.shop-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 300;
+  color: #FFFFFF !important;
+  margin-bottom: 15px !important;
+  line-height: 1.15;
+}
+
+.shop-hero-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto 25px !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  line-height: 1.8;
+  padding: 0 20px;
+}
+
+.shop-hero-breadcrumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--color-accent-light) !important;
+}
+
+.shop-hero-breadcrumbs a {
+  color: var(--color-accent-light) !important;
+  transition: color var(--transition-fast);
+}
+
+.shop-hero-breadcrumbs a:hover {
+  color: #FFFFFF !important;
+}
