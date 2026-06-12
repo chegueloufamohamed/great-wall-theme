@@ -3841,6 +3841,9 @@ p {
 .woocommerce-message::before, 
 .woocommerce-info::before {
   color: var(--color-accent) !important;
+  margin-right: 15px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 .woocommerce-error {
@@ -3849,6 +3852,9 @@ p {
 
 .woocommerce-error::before {
   color: var(--color-error) !important;
+  margin-right: 15px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 /* ==========================================================================
