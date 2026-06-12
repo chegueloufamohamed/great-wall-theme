@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initMockCart();
   initRecentlyViewed();
-  initStickyScrollStory();
+
   initCurtainSlider();
   initHoverShowcase();
 });
@@ -399,6 +399,99 @@ function initMockCart() {
       }
     });
   }
+
+  // 1. Featured product (spotlight section) Add to Cart
+  const featuredAddBtn = document.getElementById('featured-add-to-cart');
+  if (featuredAddBtn) {
+    featuredAddBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = featuredAddBtn.getAttribute('data-id') || 'prod-velvet-sleek-chair';
+      const title = featuredAddBtn.getAttribute('data-title') || 'Velvet Sleek Lounge Chair';
+      const price = parseFloat(featuredAddBtn.getAttribute('data-price')) || 2899;
+      const image = featuredAddBtn.getAttribute('data-image') || '';
+      const category = featuredAddBtn.getAttribute('data-category') || 'Accent Seating';
+      
+      const qtyInput = document.getElementById('featured-product-qty');
+      const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+      
+      const existingItemIndex = cart.findIndex(item => item.id === id);
+      if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({ id, title, price, image, category, quantity });
+      }
+      
+      updateCartUI();
+      
+      // Open drawer
+      const cartDrawer = document.getElementById('cart-drawer');
+      const overlay = document.querySelector('.drawer-overlay');
+      if (cartDrawer && overlay) {
+        overlay.classList.add('active');
+        cartDrawer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  }
+
+  // 2. Featured product (spotlight section) Buy Now
+  const featuredBuyBtn = document.getElementById('featured-buy-now');
+  if (featuredBuyBtn) {
+    featuredBuyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = featuredAddBtn ? featuredAddBtn.getAttribute('data-id') : 'prod-velvet-sleek-chair';
+      const title = featuredAddBtn ? featuredAddBtn.getAttribute('data-title') : 'Velvet Sleek Lounge Chair';
+      const price = featuredAddBtn ? parseFloat(featuredAddBtn.getAttribute('data-price')) : 2899;
+      const image = featuredAddBtn ? featuredAddBtn.getAttribute('data-image') : '';
+      const category = featuredAddBtn ? featuredAddBtn.getAttribute('data-category') : 'Accent Seating';
+      
+      const qtyInput = document.getElementById('featured-product-qty');
+      const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+      
+      const existingItemIndex = cart.findIndex(item => item.id === id);
+      if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({ id, title, price, image, category, quantity });
+      }
+      
+      updateCartUI();
+      
+      // Redirect to checkout
+      const checkoutUrl = featuredBuyBtn.getAttribute('data-checkout-url') || 'contact.html';
+      window.location.href = checkoutUrl;
+    });
+  }
+
+  // 3. Detail Page Buy Now
+  const detailBuyBtn = document.getElementById('detail-buy-now');
+  if (detailBuyBtn) {
+    detailBuyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const detailAddBtn = document.getElementById('detail-add-to-cart');
+      const id = detailAddBtn ? detailAddBtn.getAttribute('data-id') : 'prod-velvet-sleek-chair';
+      const title = detailAddBtn ? detailAddBtn.getAttribute('data-title') : 'Velvet Sleek Lounge Chair';
+      const price = detailAddBtn ? parseFloat(detailAddBtn.getAttribute('data-price')) : 2899;
+      const image = detailAddBtn ? detailAddBtn.getAttribute('data-image') : '';
+      const category = detailAddBtn ? detailAddBtn.getAttribute('data-category') : 'Accent Seating';
+      
+      const qtyInput = document.getElementById('product-qty');
+      const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+      
+      const existingItemIndex = cart.findIndex(item => item.id === id);
+      if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({ id, title, price, image, category, quantity });
+      }
+      
+      updateCartUI();
+      
+      // Redirect to checkout
+      const checkoutUrl = detailBuyBtn.getAttribute('data-checkout-url') || 'contact.html';
+      window.location.href = checkoutUrl;
+    });
+  }
 }
 
 /* ==========================================================================
@@ -496,57 +589,7 @@ function initRecentlyViewed() {
   }
 }
 
-/* ==========================================================================
-   SCROLL-DRIVEN STICKY CABINET SHOWCASE (Phase 10)
-   ========================================================================== */
-function initStickyScrollStory() {
-  const section = document.querySelector('.sticky-scroll-section');
-  if (!section) return;
 
-  const content1 = document.getElementById('story-content-1');
-  const content2 = document.getElementById('story-content-2');
-  
-  const img1 = document.getElementById('story-img-1');
-  const img2 = document.getElementById('story-img-2');
-
-  const handleScroll = () => {
-    // Disable sticky triggers on mobile viewports
-    if (window.innerWidth <= 768) {
-      if (content1) content1.classList.add('active');
-      if (content2) content2.classList.add('active');
-      return;
-    }
-
-    const sectionRect = section.getBoundingClientRect();
-    const sectionTop = sectionRect.top;
-    const sectionHeight = sectionRect.height;
-    
-    // scrolled is how much the top of the section has gone above the top of the viewport
-    const scrolled = -sectionTop;
-    const viewportHeight = window.innerHeight;
-    
-    if (scrolled >= 0 && scrolled < sectionHeight) {
-      // Split boundary is 50% scroll height (100vh)
-      if (scrolled < viewportHeight) {
-        if (content1) content1.classList.add('active');
-        if (content2) content2.classList.remove('active');
-        if (img1) img1.classList.add('active');
-        if (img2) img2.classList.remove('active');
-      } else {
-        if (content1) content1.classList.remove('active');
-        if (content2) content2.classList.add('active');
-        if (img1) img1.classList.remove('active');
-        if (img2) img2.classList.add('active');
-      }
-    }
-  };
-
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', handleScroll);
-  
-  // Run once initially
-  handleScroll();
-}
 
 /* ==========================================================================
    CURTAIN-SLIDE PARALLAX WATERMARK SHOWCASE (Phase 12)

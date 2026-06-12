@@ -459,7 +459,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        FEATURED INTERACTIVE PRODUCT SECTION (Velvet Sleek Lounge Chair customizer)
        ========================================================================== -->
-  <section class="section featured-product-section" style="padding-top: 80px; padding-bottom: 80px; background-color: var(--bg-primary); border-top: 1px solid var(--border-color);">
+  <section class="section featured-product-section" style="padding-top: 140px; padding-bottom: 120px; background-color: var(--bg-primary); border-top: 1px solid var(--border-color);">
     <div class="container">
       <div class="section-title-wrapper text-center" style="margin-bottom: 50px;" data-scroll>
         <span class="section-subtitle"><?php esc_html_e( 'Showroom Spotlight', 'great-wall-theme' ); ?></span>
@@ -549,14 +549,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               </button>
             </div>
             
-            <button class="btn-buy-shop" style="border-radius: 30px; height: 50px; background-color: #5A31F4; color: #FFFFFF; font-weight: 600; width: 100%; border: none; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; font-size: 0.95rem;">
-              <span><?php esc_html_e( 'Buy with', 'great-wall-theme' ); ?></span>
-              <svg width="60" height="20" viewBox="0 0 46 15" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-                <path d="M7.74 12.18c0 1.98-1.48 2.82-3.48 2.82-2.14 0-3.32-.98-3.32-2.82v-1.92h1.76v1.88c0 1.02.58 1.42 1.56 1.42.94 0 1.62-.4 1.62-1.34 0-2.02-3.26-1.92-3.26-4.6 0-1.8 1.34-2.82 3.22-2.82 1.94 0 3.1.94 3.1 2.82v1.4h-1.74v-1.36c0-1.04-.54-1.4-1.36-1.4-.92 0-1.36.42-1.36 1.3 0 1.94 3.26 1.92 3.26 4.54v1.88zm8.68-7.38v2.74c0 1-.58 1.42-1.58 1.42-.96 0-1.54-.42-1.54-1.42V4.8h-1.76v5.22c0 1.92 1.28 2.82 3.3 2.82 2.06 0 3.34-.9 3.34-2.82V4.8h-1.76zm9.32 5.06c0 1.42-.88 2.32-2.22 2.32s-2.22-.9-2.22-2.32V7.12c0-1.42.88-2.32 2.22-2.32s2.22.9 2.22 2.32v2.74zm1.76-2.74c0-2.3-1.62-3.92-3.98-3.92s-3.98 1.62-3.98 3.92v2.74c0 2.3 1.62 3.92 3.98 3.92s3.98-1.62 3.98-3.92V7.12zm10.1 2.1c0 1.44-.88 2.32-2.22 2.32s-2.22-.88-2.22-2.32V4.8h-1.76v9.74h1.76v-2.18c.56.5 1.28.78 2.22.78 2.36 0 3.98-1.62 3.98-3.92V7.12c0-2.3-1.62-3.92-3.98-3.92-1 0-1.7.3-2.22.78v-1.5h-1.76v9.74" fill="#FFFFFF"/>
-              </svg>
+            <button class="btn btn-secondary btn-buy-now" id="featured-buy-now" style="border-radius: 30px; height: 50px; background-color: var(--color-accent); color: #FFFFFF; font-weight: 600; width: 100%; border: none; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; font-size: 0.95rem; margin-top: 5px;" data-checkout-url="<?php echo esc_url( wc_get_checkout_url() ); ?>">
+              <span><?php esc_html_e( 'Buy Now', 'great-wall-theme' ); ?></span>
             </button>
-            
-            <a href="#" style="text-align: center; font-size: 0.82rem; color: var(--color-secondary); text-decoration: underline; display: block; margin-top: 5px;"><?php esc_html_e( 'More payment options', 'great-wall-theme' ); ?></a>
           </div>
         </div>
         
@@ -698,52 +693,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     </div>
   </section>
 
-  <!-- ==========================================================================
-       SCROLL-DRIVEN STICKY CABINET SHOWCASE (Phase 10)
-       ========================================================================== -->
-  <section class="sticky-scroll-section">
-    <!-- Viewport Triggers -->
-    <div class="scroll-trigger" id="story-trigger-1"></div>
-    <div class="scroll-trigger" id="story-trigger-2"></div>
-    
-    <div class="sticky-container">
-      <div class="container sticky-scroll-grid">
-        <!-- Left Side: Content Panels -->
-        <div class="scroll-content-wrapper">
-          <!-- Slide 1 Panel -->
-          <div class="scroll-content-panel active" id="story-content-1">
-            <div class="mobile-story-image">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="<?php esc_attr_e( 'Modern Home Solutions', 'great-wall-theme' ); ?>">
-            </div>
-            <span class="scroll-cursive"><?php esc_html_e( 'Quality meets style perfectly', 'great-wall-theme' ); ?></span>
-            <h2 class="scroll-title"><?php esc_html_e( 'Transform Your Home with Premium Furniture Collections Designed for Modern Living...', 'great-wall-theme' ); ?></h2>
-            <h4 class="scroll-subtitle"><?php esc_html_e( 'Modern Home Solutions', 'great-wall-theme' ); ?></h4>
-            <p class="scroll-desc"><?php esc_html_e( 'Elevate your interior with sophisticated furniture designed for contemporary lifestyles. Each piece combines functionality and style to create the perfect living environment.', 'great-wall-theme' ); ?></p>
-          </div>
-          
-          <!-- Slide 2 Panel -->
-          <div class="scroll-content-panel" id="story-content-2">
-            <div class="mobile-story-image">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="<?php esc_attr_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?>">
-            </div>
-            <span class="scroll-cursive"><?php esc_html_e( 'Crafted for ultimate comfort', 'great-wall-theme' ); ?></span>
-            <h2 class="scroll-title"><?php esc_html_e( 'Experience Unmatched Comfort & Elegance in Every Crafted Detail...', 'great-wall-theme' ); ?></h2>
-            <h4 class="scroll-subtitle"><?php esc_html_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?></h4>
-            <p class="scroll-desc"><?php esc_html_e( 'Indulge in the luxury of meticulously tailored details and premium finishes. Our curated bedroom spaces are designed to provide a serene, peaceful escape from the bustling city.', 'great-wall-theme' ); ?></p>
-          </div>
-        </div>
-        
-        <!-- Right Side: Sticky Visual Capsule Frame -->
-        <div class="scroll-visual-wrapper">
-          <div class="visual-glow"></div>
-          <div class="capsule-frame">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="<?php esc_attr_e( 'Modern Home Solutions', 'great-wall-theme' ); ?>" class="capsule-img active" id="story-img-1">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="<?php esc_attr_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?>" class="capsule-img" id="story-img-2">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ==========================================================================
        CURATED ASYMMETRIC TABLE GRID SHOWCASE (Phase 11)
