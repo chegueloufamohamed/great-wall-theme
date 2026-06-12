@@ -4393,3 +4393,32 @@ p {
     width: 100% !important;
   }
 }
+
+/* ==========================================================================
+   WOOCOMMERCE LOOP CATEGORY TITLES & COUNTS OVERRIDES
+   ========================================================================== */
+.woocommerce-loop-category__title {
+  font-family: var(--font-sans) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--color-primary) !important;
+  margin-top: 15px !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+.product-category.product a:hover .woocommerce-loop-category__title {
+  color: var(--color-accent) !important;
+}
+
+.woocommerce-loop-category__title .count,
+.woocommerce-loop-category__title mark {
+  background: none !important;
+  color: var(--color-muted) !important;
+  font-weight: 500 !important;
+  margin-left: 5px !important;
+  font-size: 0.85rem !important;
+  display: inline-block !important;
+}
