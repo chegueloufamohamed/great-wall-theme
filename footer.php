@@ -24,14 +24,15 @@
         <div>
           <h4 class="footer-title">Collections</h4>
           <?php
-          if ( has_nav_menu( 'footer-menu-1' ) ) {
-            wp_nav_menu(
-              array(
-                'theme_location' => 'footer-menu-1',
-                'container'      => false,
-                'menu_class'     => 'footer-links',
-              )
-            );
+          $footer_menu_1 = great_wall_get_menu_items( 'footer-menu-1' );
+          if ( $footer_menu_1 ) {
+            ?>
+            <ul class="footer-links">
+              <?php foreach ( $footer_menu_1 as $item ) : ?>
+                <li><a href="<?php echo esc_url( $item->url ); ?>" class="footer-link"><?php echo esc_html( $item->title ); ?></a></li>
+              <?php endforeach; ?>
+            </ul>
+            <?php
           } else {
             ?>
             <ul class="footer-links">
@@ -50,14 +51,15 @@
         <div>
           <h4 class="footer-title">Showroom</h4>
           <?php
-          if ( has_nav_menu( 'footer-menu-2' ) ) {
-            wp_nav_menu(
-              array(
-                'theme_location' => 'footer-menu-2',
-                'container'      => false,
-                'menu_class'     => 'footer-links',
-              )
-            );
+          $footer_menu_2 = great_wall_get_menu_items( 'footer-menu-2' );
+          if ( $footer_menu_2 ) {
+            ?>
+            <ul class="footer-links">
+              <?php foreach ( $footer_menu_2 as $item ) : ?>
+                <li><a href="<?php echo esc_url( $item->url ); ?>" class="footer-link"><?php echo esc_html( $item->title ); ?></a></li>
+              <?php endforeach; ?>
+            </ul>
+            <?php
           } else {
             ?>
             <ul class="footer-links">
@@ -216,10 +218,24 @@
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Menu', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
     </div>
     <div class="mobile-nav">
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-nav-link text-accent">Home</a>
-      <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="mobile-nav-link">Collections</a>
-      <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="mobile-nav-link">Our Story</a>
-      <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mobile-nav-link">Showroom Consult</a>
+      <?php
+      $primary_menu_items = great_wall_get_menu_items( 'primary-menu' );
+      if ( $primary_menu_items ) {
+        foreach ( $primary_menu_items as $item ) {
+          $active_class = great_wall_is_menu_item_active( $item ) ? 'text-accent' : '';
+          ?>
+          <a href="<?php echo esc_url( $item->url ); ?>" class="mobile-nav-link <?php echo esc_attr( $active_class ); ?>"><?php echo esc_html( $item->title ); ?></a>
+          <?php
+        }
+      } else {
+        ?>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-nav-link text-accent">Home</a>
+        <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="mobile-nav-link">Collections</a>
+        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="mobile-nav-link">Our Story</a>
+        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mobile-nav-link">Showroom Consult</a>
+        <?php
+      }
+      ?>
     </div>
   </div>
   <!-- Global Floating Back to Top Button -->

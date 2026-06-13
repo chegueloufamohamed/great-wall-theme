@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.7' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.8' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.7', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.8', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -461,3 +461,72 @@ function great_wall_provision_pages() {
 		}
 	}
 }
+
+/**
+ * Helper to retrieve WordPress navigation menu items for a specific theme location.
+ * Verifies that the menu exists and contains items.
+ *
+ * @param string $location Theme location slug.
+ * @return array|false Array of menu items, or false if not assigned or empty.
+ */
+function great_wall_get_menu_items( $location ) {
+	if ( ! has_nav_menu( $location ) ) {
+		return false;
+	}
+	$locations = get_nav_menu_locations();
+	if ( ! isset( $locations[ $location ] ) ) {
+		return false;
+	}
+	$menu = wp_get_nav_menu_object( $locations[ $location ] );
+	if ( ! $menu ) {
+		return false;
+	}
+	$menu_items = wp_get_nav_menu_items( $menu->term_id );
+	if ( empty( $menu_items ) ) {
+		return false;
+	}
+
+	// Add active/current class context in-place if function exists
+	if ( function_exists( '_wp_menu_item_classes_by_context' ) ) {
+		_wp_menu_item_classes_by_context( $menu_items );
+	}
+
+	return $menu_items;
+}
+
+/**
+ * Determine if a menu item is currently active.
+ *
+ * @param object $item Menu item post object.
+ * @return bool True if active, false otherwise.
+ */
+function great_wall_is_menu_item_active( $item ) {
+	global $wp;
+
+	// Check if WP core navigation class indicates current/parent/ancestor
+	if ( ! empty( $item->classes ) && is_array( $item->classes ) ) {
+		$active_classes = array(
+			'current-menu-item',
+			'current-menu-parent',
+			'current-menu-ancestor',
+			'current_page_item',
+		);
+		foreach ( $active_classes as $class ) {
+			if ( in_array( $class, $item->classes ) ) {
+				return true;
+			}
+		}
+	}
+
+	// Fallback check against the current request URL
+	$current_url = home_url( add_query_arg( array(), $wp->request ) );
+	$current_url = rtrim( $current_url, '/' ) . '/';
+	$item_url    = rtrim( $item->url, '/' ) . '/';
+
+	if ( $current_url === $item_url ) {
+		return true;
+	}
+
+	return false;
+}
+

@@ -34,15 +34,14 @@
       <!-- Dynamic WordPress Navigation with Hardcoded Showroom Fallback -->
       <nav class="nav-menu">
         <?php
-        if ( has_nav_menu( 'primary-menu' ) ) {
-          wp_nav_menu(
-            array(
-              'theme_location' => 'primary-menu',
-              'container'      => false,
-              'items_wrap'     => '%3$s',
-              'fallback_cb'    => false,
-            )
-          );
+        $primary_menu_items = great_wall_get_menu_items( 'primary-menu' );
+        if ( $primary_menu_items ) {
+          foreach ( $primary_menu_items as $item ) {
+            $active_class = great_wall_is_menu_item_active( $item ) ? 'active' : '';
+            ?>
+            <a href="<?php echo esc_url( $item->url ); ?>" class="nav-link <?php echo esc_attr( $active_class ); ?>"><?php echo esc_html( $item->title ); ?></a>
+            <?php
+          }
         } else {
           ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>">Home</a>
