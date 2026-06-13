@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.6' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.7' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.6', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.7', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -219,26 +219,9 @@ remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_d
 add_action( 'woocommerce_before_main_content', 'great_wall_shop_hero_banner', 9 );
 function great_wall_shop_hero_banner() {
 	if ( is_shop() || is_product_category() || is_product_tag() ) {
-		// Get title
-		if ( is_shop() ) {
-			$title = woocommerce_page_title( false );
-		} else {
-			$title = single_term_title( '', false );
-		}
-
-		// Get description
+		// Set title to 'Explore Our Products' as requested by the user
+		$title = 'Explore Our Products';
 		$desc = '';
-		if ( is_product_category() || is_product_tag() ) {
-			$desc = term_description();
-		} elseif ( is_shop() ) {
-			$shop_page_id = wc_get_page_id( 'shop' );
-			if ( $shop_page_id > 0 ) {
-				$desc = get_post_field( 'post_content', $shop_page_id );
-			}
-		}
-		if ( empty( trim( strip_tags( $desc ) ) ) ) {
-			$desc = 'Experience the peak of contemporary craftsmanship. Hand-tailored from premium materials, this architectural piece brings quiet luxury and clean, minimalist lines to any modern space in Dubai.';
-		}
 
 		// Get category thumbnail
 		$thumbnail_url = '';
@@ -320,6 +303,29 @@ function great_wall_shop_hero_banner() {
 			}
 			unset( $t );
 		}
+
+		// Perform slider page grouping (6 items per page, back-filling the last slide from previous slide items if needed)
+		$chunks = array();
+		$total_items = count( $terms_list );
+		if ( $total_items > 0 ) {
+			if ( $total_items <= 6 ) {
+				$chunks[] = $terms_list;
+			} else {
+				$num_slides = ceil( $total_items / 6 );
+				for ( $i = 0; $i < $num_slides; $i++ ) {
+					if ( $i < $num_slides - 1 ) {
+						$chunks[] = array_slice( $terms_list, $i * 6, 6 );
+					} else {
+						// For the last slide, if it has fewer than 6 items, slice the last 6 items of the array
+						$start_idx = $total_items - 6;
+						if ( $start_idx < 0 ) {
+							$start_idx = 0;
+						}
+						$chunks[] = array_slice( $terms_list, $start_idx, 6 );
+					}
+				}
+			}
+		}
 		?>
 		<section class="shop-hero-banner" style="background-image: linear-gradient(rgba(30, 28, 25, 0.65), rgba(30, 28, 25, 0.65)), url('<?php echo esc_url( $thumbnail_url ); ?>');">
 			<div class="container" style="position: relative; z-index: 5;">
@@ -333,8 +339,7 @@ function great_wall_shop_hero_banner() {
 					<span><?php echo esc_html( $title ); ?></span>
 				</div>
 				<?php 
-				if ( ! empty( $terms_list ) ) : 
-					$chunks = array_chunk( $terms_list, 6 );
+				if ( ! empty( $chunks ) ) : 
 					?>
 					<div class="shop-categories-slider-container">
 						<button class="shop-cat-slider-arrow prev-btn" aria-label="Previous Slide">

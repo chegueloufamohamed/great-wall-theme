@@ -1021,7 +1021,7 @@ function initShopCategoriesSlider() {
   const startAutoplay = () => {
     autoplayInterval = setInterval(() => {
       goToSlide(currentIndex + 1);
-    }, 4500); // Slide every 4.5s
+    }, 2000); // Slide every 2s
   };
 
   const stopAutoplay = () => {
