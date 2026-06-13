@@ -3396,12 +3396,20 @@ p {
   }
 }
 
-.single-product form.cart .single_add_to_cart_button {
-  flex: 1;
-  height: 52px;
-  background-color: var(--color-primary) !important;
-  color: #FFFFFF !important;
-  border: 1px solid var(--color-primary) !important;
+.woocommerce div.product form.cart .button.single_add_to_cart_button,
+.woocommerce div.product form.cart .buy-now-theme-btn,
+.single-product form.cart .single_add_to_cart_button,
+.single-product form.cart .buy-now-theme-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 52px !important;
+  line-height: 52px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
   border-radius: var(--border-radius-sm) !important;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
@@ -3409,37 +3417,34 @@ p {
   letter-spacing: 0.1em !important;
   cursor: pointer !important;
   transition: all var(--transition-fast) !important;
-  outline: none;
+  text-decoration: none !important;
+  outline: none !important;
 }
 
+.woocommerce div.product form.cart .button.single_add_to_cart_button,
+.single-product form.cart .single_add_to_cart_button {
+  background-color: var(--color-primary) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--color-primary) !important;
+}
+
+.woocommerce div.product form.cart .button.single_add_to_cart_button:hover,
 .single-product form.cart .single_add_to_cart_button:hover {
   background-color: transparent !important;
   color: var(--color-primary) !important;
 }
 
-/* Buy Now Button in WooCommerce Theme */
+.woocommerce div.product form.cart .buy-now-theme-btn,
 .single-product form.cart .buy-now-theme-btn {
-  flex: 1;
-  height: 52px;
   background-color: var(--color-accent) !important;
   color: #FFFFFF !important;
   border: 1px solid var(--color-accent) !important;
-  border-radius: var(--border-radius-sm) !important;
-  font-size: 0.88rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  cursor: pointer !important;
-  transition: all var(--transition-fast) !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
 }
 
+.woocommerce div.product form.cart .buy-now-theme-btn:hover,
 .single-product form.cart .buy-now-theme-btn:hover {
-  background-color: var(--color-accent-hover) !important;
-  border-color: var(--color-accent-hover) !important;
+  background-color: transparent !important;
+  color: var(--color-accent) !important;
 }
 
 /* Variations styling */
