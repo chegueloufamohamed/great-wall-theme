@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.4' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.5' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.4', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.5', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -252,9 +252,77 @@ function great_wall_shop_hero_banner() {
 		if ( empty( $thumbnail_url ) ) {
 			$thumbnail_url = get_template_directory_uri() . '/assets/images/dining_room.webp';
 		}
+		// Query top-level categories for the circular selector
+		$cat_args = array(
+			'taxonomy'   => 'product_cat',
+			'hide_empty' => false,
+			'parent'     => 0,
+		);
+		$terms = get_terms( $cat_args );
+		$terms_list = array();
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				if ( 'uncategorized' !== $term->slug ) {
+					$terms_list[] = array(
+						'name'   => $term->name,
+						'slug'   => $term->slug,
+						'link'   => get_term_link( $term ),
+						'img'    => '',
+						'id'     => $term->term_id,
+						'active' => is_product_category( $term->slug )
+					);
+				}
+			}
+		}
+		
+		// If empty, let's load mock categories matching the screenshot design
+		if ( empty( $terms_list ) ) {
+			$mock_cats = array(
+				array( 'name' => 'Coffee Tables', 'slug' => 'living', 'img' => 'sofa_isolated.webp' ),
+				array( 'name' => 'Mattresses', 'slug' => 'bedroom', 'img' => 'luxury_bed.webp' ),
+				array( 'name' => 'Wardrobes', 'slug' => 'bedroom', 'img' => 'timber_dresser.webp' ),
+				array( 'name' => 'Dressers', 'slug' => 'bedroom', 'img' => 'table_lamp.webp' ),
+				array( 'name' => 'Bar Stools', 'slug' => 'dining', 'img' => 'box_round_stool.webp' ),
+				array( 'name' => 'Shelving Units', 'slug' => 'living', 'img' => 'designer_chair.webp' ),
+			);
+			foreach ( $mock_cats as $mc ) {
+				$terms_list[] = array(
+					'name'   => $mc['name'],
+					'slug'   => $mc['slug'],
+					'link'   => home_url( '/shop/?cat=' . $mc['slug'] ),
+					'img'    => get_template_directory_uri() . '/assets/images/' . $mc['img'],
+					'id'     => 0,
+					'active' => false
+				);
+			}
+		} else {
+			// Populate images for actual categories
+			foreach ( $terms_list as &$t ) {
+				$term_thumb_id = get_term_meta( $t['id'], 'thumbnail_id', true );
+				if ( $term_thumb_id ) {
+					$t['img'] = wp_get_attachment_url( $term_thumb_id );
+				}
+				if ( empty( $t['img'] ) ) {
+					// Fallback based on name
+					$name_l = strtolower( $t['name'] );
+					if ( strpos( $name_l, 'living' ) !== false ) {
+						$t['img'] = get_template_directory_uri() . '/assets/images/hero_sofa.webp';
+					} elseif ( strpos( $name_l, 'bedroom' ) !== false ) {
+						$t['img'] = get_template_directory_uri() . '/assets/images/luxury_bed.webp';
+					} elseif ( strpos( $name_l, 'dining' ) !== false ) {
+						$t['img'] = get_template_directory_uri() . '/assets/images/dining_room.webp';
+					} elseif ( strpos( $name_l, 'accent' ) !== false || strpos( $name_l, 'chair' ) !== false ) {
+						$t['img'] = get_template_directory_uri() . '/assets/images/designer_chair.webp';
+					} else {
+						$t['img'] = get_template_directory_uri() . '/assets/images/sofa_isolated.webp';
+					}
+				}
+			}
+			unset( $t );
+		}
 		?>
 		<section class="shop-hero-banner" style="background-image: linear-gradient(rgba(30, 28, 25, 0.65), rgba(30, 28, 25, 0.65)), url('<?php echo esc_url( $thumbnail_url ); ?>');">
-			<div class="container">
+			<div class="container" style="position: relative; z-index: 5;">
 				<h1 class="shop-hero-title"><?php echo esc_html( $title ); ?></h1>
 				<?php if ( ! empty( $desc ) ) : ?>
 					<div class="shop-hero-desc"><?php echo wp_kses_post( $desc ); ?></div>
@@ -264,6 +332,19 @@ function great_wall_shop_hero_banner() {
 					<span>/</span>
 					<span><?php echo esc_html( $title ); ?></span>
 				</div>
+				
+				<?php if ( ! empty( $terms_list ) ) : ?>
+					<div class="shop-hero-categories">
+						<?php foreach ( $terms_list as $term_item ) : ?>
+							<a href="<?php echo esc_url( $term_item['link'] ); ?>" class="hero-category-item <?php echo $term_item['active'] ? 'active' : ''; ?>">
+								<div class="hero-category-circle">
+									<img src="<?php echo esc_url( $term_item['img'] ); ?>" alt="<?php echo esc_attr( $term_item['name'] ); ?>">
+								</div>
+								<span class="hero-category-label"><?php echo esc_html( $term_item['name'] ); ?></span>
+							</a>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</section>
 		<?php

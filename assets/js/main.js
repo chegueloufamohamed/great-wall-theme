@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initHoverShowcase();
   initWooProductPage();
   initWooShopLoop();
+  initShopPriceSlider();
+  initViewModeToggle();
 });
 
 /* ==========================================================================
@@ -909,5 +911,71 @@ function initWooShopLoop() {
     // Append both buttons to the wrapper
     wrapper.appendChild(btn);
     wrapper.appendChild(buyNowBtn);
+  });
+}
+
+/**
+ * Shop Price Slider Double Handle Controls & Track Color fill
+ */
+function initShopPriceSlider() {
+  const minInput = document.querySelector('.price-slider-min-input');
+  const maxInput = document.querySelector('.price-slider-max-input');
+  if (!minInput || !maxInput) return;
+
+  const minValSpan = document.querySelector('.price-val-min');
+  const maxValSpan = document.querySelector('.price-val-max');
+  const track = document.querySelector('.price-slider-track-bar');
+
+  const updateSlider = () => {
+    let minVal = parseInt(minInput.value);
+    let maxVal = parseInt(maxInput.value);
+
+    // Enforce min handle doesn't cross max handle
+    if (minVal > maxVal - 500) {
+      minInput.value = maxVal - 500;
+      minVal = maxVal - 500;
+    }
+    
+    if (maxVal < minVal + 500) {
+      maxInput.value = minVal + 500;
+      maxVal = minVal + 500;
+    }
+
+    if (minValSpan) minValSpan.textContent = 'AED ' + minVal.toLocaleString();
+    if (maxValSpan) maxValSpan.textContent = 'AED ' + maxVal.toLocaleString();
+
+    // Fill track color dynamically
+    if (track) {
+      const maxLimit = parseInt(minInput.max) || 15000;
+      const percent1 = (minVal / maxLimit) * 100;
+      const percent2 = (maxVal / maxLimit) * 100;
+      track.style.background = `linear-gradient(to right, var(--border-color) ${percent1}%, var(--color-accent) ${percent1}%, var(--color-accent) ${percent2}%, var(--border-color) ${percent2}%)`;
+    }
+  };
+
+  minInput.addEventListener('input', updateSlider);
+  maxInput.addEventListener('input', updateSlider);
+  updateSlider(); // Initial run on mount
+}
+
+/**
+ * Grid View vs List View Mode Toggles
+ */
+function initViewModeToggle() {
+  const gridBtn = document.querySelector('.view-mode-btn.grid-mode');
+  const listBtn = document.querySelector('.view-mode-btn.list-mode');
+  const productsList = document.querySelector('.shop-main-content ul.products');
+  if (!gridBtn || !listBtn || !productsList) return;
+
+  gridBtn.addEventListener('click', () => {
+    gridBtn.classList.add('active');
+    listBtn.classList.remove('active');
+    productsList.classList.remove('list-view-active');
+  });
+
+  listBtn.addEventListener('click', () => {
+    listBtn.classList.add('active');
+    gridBtn.classList.remove('active');
+    productsList.classList.add('list-view-active');
   });
 }
