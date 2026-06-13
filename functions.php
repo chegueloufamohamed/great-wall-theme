@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.5' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.6' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.5', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.6', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -332,17 +332,35 @@ function great_wall_shop_hero_banner() {
 					<span>/</span>
 					<span><?php echo esc_html( $title ); ?></span>
 				</div>
-				
-				<?php if ( ! empty( $terms_list ) ) : ?>
-					<div class="shop-hero-categories">
-						<?php foreach ( $terms_list as $term_item ) : ?>
-							<a href="<?php echo esc_url( $term_item['link'] ); ?>" class="hero-category-item <?php echo $term_item['active'] ? 'active' : ''; ?>">
-								<div class="hero-category-circle">
-									<img src="<?php echo esc_url( $term_item['img'] ); ?>" alt="<?php echo esc_attr( $term_item['name'] ); ?>">
-								</div>
-								<span class="hero-category-label"><?php echo esc_html( $term_item['name'] ); ?></span>
-							</a>
-						<?php endforeach; ?>
+				<?php 
+				if ( ! empty( $terms_list ) ) : 
+					$chunks = array_chunk( $terms_list, 6 );
+					?>
+					<div class="shop-categories-slider-container">
+						<button class="shop-cat-slider-arrow prev-btn" aria-label="Previous Slide">
+							<i class="ri-arrow-left-s-line"></i>
+						</button>
+						
+						<div class="shop-categories-slider-viewport">
+							<div class="shop-categories-slider-inner">
+								<?php foreach ( $chunks as $index => $chunk ) : ?>
+									<div class="shop-categories-slide <?php echo 0 === $index ? 'active' : ''; ?>">
+										<?php foreach ( $chunk as $term_item ) : ?>
+											<a href="<?php echo esc_url( $term_item['link'] ); ?>" class="hero-category-item <?php echo $term_item['active'] ? 'active' : ''; ?>">
+												<div class="hero-category-circle">
+													<img src="<?php echo esc_url( $term_item['img'] ); ?>" alt="<?php echo esc_attr( $term_item['name'] ); ?>">
+												</div>
+												<span class="hero-category-label"><?php echo esc_html( $term_item['name'] ); ?></span>
+											</a>
+										<?php endforeach; ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+						
+						<button class="shop-cat-slider-arrow next-btn" aria-label="Next Slide">
+							<i class="ri-arrow-right-s-line"></i>
+						</button>
 					</div>
 				<?php endif; ?>
 			</div>

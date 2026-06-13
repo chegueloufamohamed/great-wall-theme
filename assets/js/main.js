@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWooShopLoop();
   initShopPriceSlider();
   initViewModeToggle();
+  initShopCategoriesSlider();
 });
 
 /* ==========================================================================
@@ -978,4 +979,77 @@ function initViewModeToggle() {
     gridBtn.classList.remove('active');
     productsList.classList.add('list-view-active');
   });
+}
+
+/**
+ * Shop Subcategories Circular Slider
+ */
+function initShopCategoriesSlider() {
+  const container = document.querySelector('.shop-categories-slider-container');
+  if (!container) return;
+
+  const inner = container.querySelector('.shop-categories-slider-inner');
+  const slides = container.querySelectorAll('.shop-categories-slide');
+  const prevBtn = container.querySelector('.prev-btn');
+  const nextBtn = container.querySelector('.next-btn');
+  if (!inner || slides.length <= 1) return;
+
+  let currentIndex = 0;
+  const slideCount = slides.length;
+  let autoplayInterval = null;
+
+  const goToSlide = (index) => {
+    if (index < 0) {
+      currentIndex = slideCount - 1;
+    } else if (index >= slideCount) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+
+    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    slides.forEach((slide, idx) => {
+      if (idx === currentIndex) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+  };
+
+  const startAutoplay = () => {
+    autoplayInterval = setInterval(() => {
+      goToSlide(currentIndex + 1);
+    }, 4500); // Slide every 4.5s
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+    }
+  };
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      goToSlide(currentIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      goToSlide(currentIndex + 1);
+    });
+  }
+
+  // Hover actions to pause/resume autoplay
+  container.addEventListener('mouseenter', () => {
+    stopAutoplay();
+  });
+
+  container.addEventListener('mouseleave', () => {
+    startAutoplay();
+  });
+
+  startAutoplay();
 }
