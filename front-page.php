@@ -84,7 +84,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       
       <div class="grid categories-grid">
         <!-- Card 1: Living -->
-        <div class="category-card" data-scroll class="delay-100" onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=living' ) ); ?>'">
+        <div class="category-card delay-100" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=living' ) ); ?>'">
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" alt="Living Room Category">
           </div>
@@ -95,7 +95,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
         
         <!-- Card 2: Bedroom -->
-        <div class="category-card" data-scroll class="delay-200" onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=bedroom' ) ); ?>'">
+        <div class="category-card delay-200" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=bedroom' ) ); ?>'">
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Bedroom Category">
           </div>
@@ -106,7 +106,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
         
         <!-- Card 3: Dining -->
-        <div class="category-card" data-scroll class="delay-300" onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=dining' ) ); ?>'">
+        <div class="category-card delay-300" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=dining' ) ); ?>'">
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="Dining Category">
           </div>
@@ -117,7 +117,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
         
         <!-- Card 4: Accent Armchairs -->
-        <div class="category-card" data-scroll class="delay-400" onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=accents' ) ); ?>'">
+        <div class="category-card delay-400" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=accents' ) ); ?>'">
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Armchair Category">
           </div>
@@ -154,7 +154,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           <!-- Top row: 2 small squares -->
           <div class="promo-right-row-1">
             <!-- Top-left small card -->
-            <div class="promo-right-card-small" data-scroll class="delay-100">
+            <div class="promo-right-card-small delay-100" data-scroll>
               <div class="promo-small-img-wrapper">
                 <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Up to 30% Off Armchair">
               </div>
@@ -164,7 +164,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               </div>
             </div>
             <!-- Top-right small card -->
-            <div class="promo-right-card-small color-tint-2" data-scroll class="delay-200">
+            <div class="promo-right-card-small color-tint-2 delay-200" data-scroll>
               <div class="promo-small-img-wrapper">
                 <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="Smart Bedside Cabinet Table">
               </div>
@@ -176,7 +176,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           </div>
 
           <!-- Bottom row: 1 wide rectangle card -->
-          <div class="promo-right-card-wide" data-scroll class="delay-300">
+          <div class="promo-right-card-wide delay-300" data-scroll>
             <div class="promo-wide-img-wrapper">
               <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'sofa_isolated.webp' ); ?>" alt="Modern Teal Couch Sofa">
             </div>
@@ -241,7 +241,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <div class="grid popular-grid" style="margin-bottom: 40px;">
         
         <!-- Product 1 -->
-        <div class="popular-card" data-scroll class="delay-100">
+        <div class="popular-card delay-100" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'sofa_isolated.webp' ); ?>" alt="3-Seater sofa set">
           </div>
@@ -254,7 +254,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 2 -->
-        <div class="popular-card" data-scroll class="delay-200">
+        <div class="popular-card delay-200" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" alt="Accent Chair with Gold Frame">
           </div>
@@ -267,7 +267,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 3 -->
-        <div class="popular-card" data-scroll class="delay-300">
+        <div class="popular-card delay-300" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'baby_chair_isolated.webp' ); ?>" alt="Baby chair">
           </div>
@@ -280,7 +280,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 4 -->
-        <div class="popular-card" data-scroll class="delay-400">
+        <div class="popular-card delay-400" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'box_round_stool.webp' ); ?>" alt="Box round sofa seat">
           </div>
@@ -295,7 +295,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 5 -->
-        <div class="popular-card" data-scroll class="delay-400">
+        <div class="popular-card delay-400" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>" alt="Chair with Cushioned Seat">
           </div>
@@ -313,7 +313,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <div class="grid popular-grid">
         
         <!-- Product 6 -->
-        <div class="popular-card" data-scroll class="delay-100">
+        <div class="popular-card delay-100" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Minimalist Kid's Bed">
           </div>
@@ -326,7 +326,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 7 -->
-        <div class="popular-card" data-scroll class="delay-200">
+        <div class="popular-card delay-200" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="Round Coffee Table">
           </div>
@@ -339,7 +339,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 8 (Badge UNIQUE) -->
-        <div class="popular-card" data-scroll class="delay-300">
+        <div class="popular-card delay-300" data-scroll>
           <div class="popular-img-box">
             <span class="popular-badge-pill">UNIQUE</span>
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="Modern Timber Dresser">
@@ -353,7 +353,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 9 -->
-        <div class="popular-card" data-scroll class="delay-400">
+        <div class="popular-card delay-400" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'table_lamp.webp' ); ?>" alt="Artisanal Table Lamp">
           </div>
@@ -366,7 +366,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product 10 -->
-        <div class="popular-card" data-scroll class="delay-400">
+        <div class="popular-card delay-400" data-scroll>
           <div class="popular-img-box">
             <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'carved_vase.webp' ); ?>" alt="Ceramic Carved Vase">
           </div>
@@ -415,7 +415,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           <!-- Top row: 2 small squares -->
           <div class="promo-right-row-1">
             <!-- Top-left small card -->
-            <div class="promo-right-card-small" style="background-color: #E3E9EB;" data-scroll class="delay-100">
+            <div class="promo-right-card-small delay-100" style="background-color: #E3E9EB;" data-scroll>
               <div class="promo-small-img-wrapper">
                 <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" alt="<?php esc_attr_e( 'Aegean Bouclé Armchair', 'great-wall-theme' ); ?>">
               </div>
@@ -425,7 +425,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               </div>
             </div>
             <!-- Top-right small card -->
-            <div class="promo-right-card-small" style="background-color: #F0EAE1;" data-scroll class="delay-200">
+            <div class="promo-right-card-small delay-200" style="background-color: #F0EAE1;" data-scroll>
               <div class="promo-small-img-wrapper">
                 <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'table_lamp.webp' ); ?>" alt="<?php esc_attr_e( 'Artisanal Sculptural Lighting', 'great-wall-theme' ); ?>">
               </div>
@@ -437,7 +437,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           </div>
 
           <!-- Bottom row: 1 wide rectangle card -->
-          <div class="promo-right-card-wide" style="background-color: #EAE6DF;" data-scroll class="delay-300">
+          <div class="promo-right-card-wide delay-300" style="background-color: #EAE6DF;" data-scroll>
             <div class="promo-wide-img-wrapper">
               <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>" alt="<?php esc_attr_e( 'The Lounger Collection', 'great-wall-theme' ); ?>">
             </div>
@@ -590,28 +590,28 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
       <div class="grid features-grid">
         <!-- Pillar 1 -->
-        <div class="feature-card" data-scroll class="delay-100">
+        <div class="feature-card delay-100" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-award-line"></i></div>
           <h3 class="feature-title">Refined Materials</h3>
           <p class="feature-desc">We import Italian marble blocks, sustainable French oak veneers, and Belgian bouclé to ensure unmatched sensory luxury.</p>
         </div>
         
         <!-- Pillar 2 -->
-        <div class="feature-card" data-scroll class="delay-200">
+        <div class="feature-card delay-200" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-hand-heart-line"></i></div>
           <h3 class="feature-title">Dubai Craftsmanship</h3>
           <p class="feature-desc">Each piece is cut, assembled, and finished by highly accomplished master carpenters locally in Ras Al Khor.</p>
         </div>
         
         <!-- Pillar 3 -->
-        <div class="feature-card" data-scroll class="delay-300">
+        <div class="feature-card delay-300" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-equalizer-line"></i></div>
           <h3 class="feature-title">Bespoke Scaling</h3>
           <p class="feature-desc">Need a table or sofa in custom dimensions? Our designers will draft CAD plans tailored specifically to your home.</p>
         </div>
         
         <!-- Pillar 4 -->
-        <div class="feature-card" data-scroll class="delay-400">
+        <div class="feature-card delay-400" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-truck-line"></i></div>
           <h3 class="feature-title">Premium Delivery</h3>
           <p class="feature-desc">Enjoy full-service white-glove transport and precise in-home installation across all seven Emirates.</p>
@@ -1030,7 +1030,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 function great_wall_render_fallback_products( $assets_uri ) {
   ?>
   <!-- Product 1 -->
-  <div class="product-card" data-scroll class="delay-100">
+  <div class="product-card delay-100" data-scroll>
     <div class="product-img-wrapper">
       <span class="product-badge">New Arrival</span>
       <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Aura Bouclé Accent Armchair" class="product-img main-img">
@@ -1062,7 +1062,7 @@ function great_wall_render_fallback_products( $assets_uri ) {
   </div>
 
   <!-- Product 2 -->
-  <div class="product-card" data-scroll class="delay-200">
+  <div class="product-card delay-200" data-scroll>
     <div class="product-img-wrapper">
       <span class="product-badge">Featured</span>
       <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" alt="Hale Minimalist Bouclé Sofa" class="product-img main-img">
@@ -1093,7 +1093,7 @@ function great_wall_render_fallback_products( $assets_uri ) {
   </div>
 
   <!-- Product 3 -->
-  <div class="product-card" data-scroll class="delay-300">
+  <div class="product-card delay-300" data-scroll>
     <div class="product-img-wrapper">
       <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Sora Velvet Upholstered King Bed" class="product-img main-img">
       <div class="product-actions">
@@ -1123,7 +1123,7 @@ function great_wall_render_fallback_products( $assets_uri ) {
   </div>
 
   <!-- Product 4 -->
-  <div class="product-card" data-scroll class="delay-400">
+  <div class="product-card delay-400" data-scroll>
     <div class="product-img-wrapper">
       <span class="product-badge sale">Special Order</span>
       <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="Stella Black Marble Dining Table" class="product-img main-img">
