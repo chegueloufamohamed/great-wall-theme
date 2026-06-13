@@ -103,9 +103,9 @@
       <div class="footer-bottom">
         <p>&copy; <?php echo date( 'Y' ); ?> Great Wall Furnitures Trading LLC. All rights reserved. Designed for Dubai Luxury Living.</p>
         <div class="footer-bottom-links">
-          <a href="#" class="footer-bottom-link">Privacy Policy</a>
-          <a href="#" class="footer-bottom-link">Terms & Conditions</a>
-          <a href="#" class="footer-bottom-link">Sitemap</a>
+          <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>" class="footer-bottom-link">Privacy Policy</a>
+          <a href="<?php echo esc_url( home_url( '/terms-conditions/' ) ); ?>" class="footer-bottom-link">Terms & Conditions</a>
+          <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="footer-bottom-link">Contact Us</a>
         </div>
       </div>
     </div>

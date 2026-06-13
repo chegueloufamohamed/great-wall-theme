@@ -314,3 +314,46 @@ function great_wall_fallback_content( $content ) {
 	}
 	return $content;
 }
+
+/**
+ * Programmatically provision standard theme pages with premium luxury content if they do not exist
+ */
+add_action( 'init', 'great_wall_provision_pages' );
+function great_wall_provision_pages() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	$pages_to_create = array(
+		'about' => array(
+			'title'   => 'Our Story',
+			'content' => '<h2>Our Heritage</h2><p>Founded on a passion for fine craftsmanship and architectural lines, Great Wall Furniture brings modern minimalist wood and upholstered masterpieces to Dubai. We partner with skilled artisans to select premium materials, ensuring every piece serves as a durable, functional art piece for your home.</p><h2>Bespoke Quality</h2><p>Every joint, finish, and detail is meticulously refined in our workshop. We invite you to explore our showroom and collaborate with our designers on custom dimensions and finishes tailored to your interior design vision.</p>',
+		),
+		'contact' => array(
+			'title'   => 'Contact Us',
+			'content' => '<h2>Visit Our Showroom</h2><p>Experience the quality of our materials and construction in person. Our design consultants are available to help you select or customize the perfect pieces for your space.</p><p><strong>Address:</strong> Showroom 4, Ras Al Khor Industrial 2, Dubai, United Arab Emirates</p><p><strong>Phone:</strong> +971 4 320 2921</p><p><strong>Email:</strong> info@greatwallfurnitures.com</p><h2>Book a Consultation</h2><p>Please contact our showroom team to schedule a private walkthrough or custom furniture consultation.</p>',
+		),
+		'privacy-policy' => array(
+			'title'   => 'Privacy Policy',
+			'content' => '<h2>Privacy Policy</h2><p>At Great Wall Furniture, we respect your privacy and protect your personal data. This privacy policy explains how we collect, use, and safeguard your information when you visit our website or showroom in Dubai.</p><h2>Data We Collect</h2><p>We collect contact information (name, email, phone) and delivery addresses when you request showroom consultations, subscribe to our newsletters, or place orders. We do not sell or share your data with third parties.</p>',
+		),
+		'terms-conditions' => array(
+			'title'   => 'Terms and Conditions',
+			'content' => '<h2>Terms and Conditions</h2><p>Welcome to Great Wall Furniture. By accessing our website or purchasing our products, you agree to comply with our terms of service.</p><h2>Custom Orders</h2><p>All custom-dimension and customized veneer orders require a 50% deposit before construction begins at our Dubai workshop. Delivery timelines are estimates and subject to material availability.</p>',
+		),
+	);
+
+	foreach ( $pages_to_create as $slug => $page_data ) {
+		$page = get_page_by_path( $slug );
+		if ( ! $page ) {
+			$new_page = array(
+				'post_title'   => $page_data['title'],
+				'post_content' => $page_data['content'],
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+				'post_name'    => $slug,
+			);
+			wp_insert_post( $new_page );
+		}
+	}
+}
