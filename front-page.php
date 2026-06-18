@@ -955,7 +955,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               <div class="showroom-icon-frame"><i class="ri-mail-line"></i></div>
               <div>
                 <div class="showroom-info-label"><?php esc_html_e( 'Email Support', 'great-wall-theme' ); ?></div>
-                <div class="showroom-info-text"><?php esc_html_e( 'info@greatwallfurnitures.com', 'great-wall-theme' ); ?></div>
+                <div class="showroom-info-text"><?php esc_html_e( 'info@greatwallfurniture.com', 'great-wall-theme' ); ?></div>
               </div>
             </div>
           </div>

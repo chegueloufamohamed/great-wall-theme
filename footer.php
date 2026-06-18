@@ -88,7 +88,7 @@
             </div>
             <div class="footer-contact-item">
               <i class="ri-mail-line"></i>
-              <span>info@greatwallfurnitures.com</span>
+              <span>info@greatwallfurniture.com</span>
             </div>
           </div>
 
