@@ -5131,6 +5131,38 @@ ul.products.list-view-active li.product .product-loop-actions {
     position: static !important;
     transform: none !important;
     width: 100% !important;
-    padding: 0 30px 30px 30px !important;
   }
+}
+
+/* ==========================================================================
+   LANGUAGE SWITCHER
+   ========================================================================== */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-primary, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-right: 8px;
+}
+
+.lang-link {
+  color: var(--color-text, #1e1e1e);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.lang-link:hover,
+.lang-link.active {
+  opacity: 1;
+  color: var(--color-accent, #c5a880);
+}
+
+.lang-separator {
+  color: var(--color-text, #1e1e1e);
+  opacity: 0.2;
+  font-size: 0.75rem;
 }

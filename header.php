@@ -55,6 +55,29 @@
       
       <!-- Header Action Triggers -->
       <div class="header-actions">
+        <?php
+        if ( function_exists( 'pll_the_languages' ) ) {
+          $languages = pll_the_languages( array( 'raw' => 1 ) );
+          if ( ! empty( $languages ) ) {
+            ?>
+            <div class="lang-switcher">
+              <?php
+              $langs_out = array();
+              foreach ( $languages as $lang ) {
+                $active_class = $lang['current_lang'] ? 'active' : '';
+                $display_name = strtoupper( $lang['slug'] );
+                if ( $display_name === 'ZH' ) { $display_name = '中文'; }
+                elseif ( $display_name === 'AR' ) { $display_name = 'العربية'; }
+                
+                $langs_out[] = '<a href="' . esc_url( $lang['url'] ) . '" class="lang-link ' . esc_attr( $active_class ) . '">' . esc_html( $display_name ) . '</a>';
+              }
+              echo implode( '<span class="lang-separator">|</span>', $langs_out );
+              ?>
+            </div>
+            <?php
+          }
+        }
+        ?>
         <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="action-btn" title="<?php esc_attr_e( 'Search Showroom', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></a>
         
         <button class="action-btn cart-trigger" title="<?php esc_attr_e( 'Open Shopping Bag', 'great-wall-theme' ); ?>">
