@@ -57,7 +57,7 @@
       <div class="header-actions">
         <?php
         if ( function_exists( 'pll_the_languages' ) ) {
-          $languages = pll_the_languages( array( 'raw' => 1 ) );
+          $languages = pll_the_languages( array( 'raw' => 1, 'hide_if_no_translation' => 0, 'hide_current' => 0 ) );
           if ( ! empty( $languages ) ) {
             ?>
             <div class="lang-switcher">
