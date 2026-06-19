@@ -238,6 +238,26 @@
       ?>
     </div>
   </div>
+
+  <!-- Search Drawer Panel -->
+  <div class="drawer" id="search-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title"><?php esc_html_e( 'Search Products', 'great-wall-theme' ); ?></h3>
+      <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Search', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
+    </div>
+    
+    <div class="drawer-search-content" style="padding: 30px;">
+      <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+        <div class="search-input-wrapper" style="position: relative; margin-bottom: 20px;">
+          <input type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'Search products...', 'placeholder', 'great-wall-theme' ); ?>" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'great-wall-theme' ); ?>" style="width: 100%; padding: 12px 40px 12px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; font-family: inherit; font-size: 0.95rem; outline: none; background: rgba(0,0,0,0.02);" />
+          <input type="hidden" name="post_type" value="product" />
+          <button type="submit" class="search-submit-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--color-accent, #c5a880);"><i class="ri-search-line"></i></button>
+        </div>
+      </form>
+      <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center;">Press Enter to search, or click the search icon.</p>
+    </div>
+  </div>
+
   <!-- Global Floating Back to Top Button -->
   <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="<?php esc_attr_e( 'Scroll to top', 'great-wall-theme' ); ?>">
     <i class="ri-arrow-up-line"></i>

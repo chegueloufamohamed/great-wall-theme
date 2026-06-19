@@ -78,7 +78,7 @@
           }
         }
         ?>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="action-btn" title="<?php esc_attr_e( 'Search Showroom', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></a>
+        <button class="action-btn search-trigger" title="<?php esc_attr_e( 'Search Products', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></button>
         
         <button class="action-btn cart-trigger" title="<?php esc_attr_e( 'Open Shopping Bag', 'great-wall-theme' ); ?>">
           <i class="ri-shopping-bag-line"></i>
