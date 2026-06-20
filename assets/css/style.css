@@ -5166,3 +5166,46 @@ ul.products.list-view-active li.product .product-loop-actions {
   opacity: 0.2;
   font-size: 0.75rem;
 }
+
+/* ==========================================================================
+   INNER PAGE HEADER FIX (DARK TEXT & LIGHT BACKGROUND ON NON-HOMEPAGES)
+   ========================================================================== */
+body:not(.home) .header.transparent:not(.sticky) {
+  background-color: #faf8f5 !important;
+  border-bottom: 1px solid var(--border-color, #e5e0d8) !important;
+  color: var(--color-primary, #2e2a25) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02) !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .nav-link {
+  color: var(--color-primary, #2e2a25) !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .nav-link::after {
+  background-color: var(--color-accent, #c5a880) !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .logo {
+  color: var(--color-primary, #2e2a25) !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .action-btn {
+  color: var(--color-primary, #2e2a25) !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .lang-link {
+  color: var(--color-primary, #2e2a25) !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .lang-separator {
+  color: var(--color-primary, #2e2a25) !important;
+  opacity: 0.3 !important;
+}
+
+body:not(.home) .header.transparent:not(.sticky) .nav-link.active,
+body:not(.home) .header.transparent:not(.sticky) .nav-link:hover,
+body:not(.home) .header.transparent:not(.sticky) .lang-link.active,
+body:not(.home) .header.transparent:not(.sticky) .lang-link:hover {
+  color: var(--color-accent, #c5a880) !important;
+  opacity: 1 !important;
+}
