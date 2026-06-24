@@ -3174,6 +3174,7 @@ p {
   margin: 0 !important;
   min-width: 0;
   overflow: hidden;
+  opacity: 1 !important;
 }
 
 .single-product .woocommerce-product-gallery .flex-viewport {
@@ -3199,6 +3200,7 @@ p {
   align-items: center !important;
   justify-content: center !important;
   background-color: var(--bg-light-accent);
+  opacity: 1 !important;
 }
 
 .single-product .woocommerce-product-gallery__image img {
@@ -3209,6 +3211,7 @@ p {
   display: block;
   margin: 0 auto;
   mix-blend-mode: multiply;
+  opacity: 1 !important;
 }
 
 /* Responsive Gallery Height Caps */
