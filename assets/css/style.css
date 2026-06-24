@@ -3194,7 +3194,6 @@ p {
 }
 
 .single-product .woocommerce-product-gallery__image {
-  width: 100% !important;
   height: 550px !important;
   display: flex !important;
   align-items: center !important;
