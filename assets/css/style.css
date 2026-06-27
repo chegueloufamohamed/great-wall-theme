@@ -4097,9 +4097,19 @@ p {
   font-size: 1.6rem;
   font-weight: 400;
   color: var(--color-primary);
-  margin-bottom: 25px;
+  margin-top: 0 !important;
+  margin-bottom: 25px !important;
+  padding-top: 0 !important;
   border-bottom: 1.5px solid var(--border-color);
   padding-bottom: 10px;
+  line-height: 1.2 !important;
+}
+
+.woocommerce-checkout #customer_details,
+.woocommerce-checkout #customer_details .col-1,
+.woocommerce-checkout #customer_details .woocommerce-billing-fields {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .woocommerce-billing-fields__field-wrapper,
@@ -4120,6 +4130,9 @@ p {
 .form-row-first,
 .form-row-last {
   grid-column: span 1;
+  width: 100% !important;
+  float: none !important;
+  margin-right: 0 !important;
 }
 
 .form-row label {
@@ -4231,13 +4244,18 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 12px 0;
+  padding: 12px 20px !important;
   color: var(--color-muted);
   border-bottom: 1.5px solid var(--border-color);
 }
 
+#order_review table.shop_table th.product-total,
+#order_review table.shop_table td.product-total {
+  text-align: right !important;
+}
+
 #order_review table.shop_table td {
-  padding: 15px 0;
+  padding: 15px 20px !important;
   border-bottom: 1px solid var(--border-color);
   font-size: 0.95rem;
 }
