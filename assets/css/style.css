@@ -4090,9 +4090,9 @@ p {
 }
 
 /* Billing and Shipping Fields styling */
-.woocommerce-billing-fields h3,
-.woocommerce-shipping-fields h3,
-#order_review_heading {
+.woocommerce-checkout form.checkout .woocommerce-billing-fields h3,
+.woocommerce-checkout form.checkout .woocommerce-shipping-fields h3,
+.woocommerce-checkout form.checkout #order_review_heading {
   font-family: var(--font-serif);
   font-size: 1.6rem;
   font-weight: 400;
@@ -4105,15 +4105,18 @@ p {
   line-height: 1.2 !important;
 }
 
-.woocommerce-checkout #customer_details,
-.woocommerce-checkout #customer_details .col-1,
-.woocommerce-checkout #customer_details .woocommerce-billing-fields {
+.woocommerce-checkout form.checkout #customer_details,
+.woocommerce-checkout form.checkout .col-1,
+.woocommerce-checkout form.checkout .col-2,
+.woocommerce-checkout form.checkout .woocommerce-billing-fields,
+.woocommerce-checkout form.checkout .woocommerce-shipping-fields {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
 
 /* Hide WooCommerce Order Attribution tracking inputs from taking layout space */
-wc-order-attribution-inputs {
+wc-order-attribution-inputs,
+.woocommerce-checkout form.checkout wc-order-attribution-inputs {
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
