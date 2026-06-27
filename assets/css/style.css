@@ -4240,6 +4240,54 @@ p {
   background-color: var(--color-accent) !important;
 }
 
+/* Tamara Checkout Gateway Integrations */
+#payment ul.payment_methods li.payment_method_tamara-gateway {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+#payment ul.payment_methods li.payment_method_tamara-gateway label[for="payment_method_tamara-gateway"] {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+#payment ul.payment_methods li.payment_method_tamara-gateway label[for="payment_method_tamara-gateway"] img.tamara-product-widget {
+  margin: 0 !important;
+  max-height: 22px !important;
+  width: auto !important;
+  vertical-align: middle;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tamara-gateway-description {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-secondary);
+  margin-top: 10px;
+}
+
+.tamara-gateway-description p {
+  margin: 0 0 8px 0;
+}
+
+.tamara-gateway-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* Hide sandbox notice on production if needed or make it subtle */
+.tamara-gateway-description a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
 /* ==========================================================================
    MY ACCOUNT PAGE DESIGN
    ========================================================================== */
