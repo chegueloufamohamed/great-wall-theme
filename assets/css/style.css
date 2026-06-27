@@ -4112,6 +4112,18 @@ p {
   padding-top: 0 !important;
 }
 
+/* Hide WooCommerce Order Attribution tracking inputs from taking layout space */
+wc-order-attribution-inputs {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+}
+
 .woocommerce-billing-fields__field-wrapper,
 .woocommerce-shipping-fields__field-wrapper {
   display: grid;
