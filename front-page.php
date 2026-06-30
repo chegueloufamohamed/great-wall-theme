@@ -248,77 +248,76 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <div class="grid popular-grid">
         <?php
         if ( class_exists( 'WooCommerce' ) ) {
-            $args = array(
-                'post_type'      => 'product',
-                'posts_per_page' => 80,
-                'post_status'    => 'publish',
-                'orderby'        => 'menu_order title',
-                'order'          => 'ASC',
-            );
-            $products_query = new WP_Query( $args );
-            $oc_products = array();
+            global $wpdb;
+            // Get all published product IDs starting with OC- or OC
+            $chair_ids = $wpdb->get_col( "
+                SELECT ID FROM {$wpdb->posts}
+                WHERE post_type = 'product'
+                  AND post_status = 'publish'
+                  AND (post_title LIKE 'OC-%' OR post_title LIKE 'OC %')
+                ORDER BY menu_order ASC, post_title ASC
+            " );
 
-            if ( $products_query->have_posts() ) {
-                while ( $products_query->have_posts() ) {
-                    $products_query->the_post();
-                    $title = get_the_title();
-                    if ( stripos( $title, 'OC-' ) === 0 || stripos( $title, 'OC ' ) === 0 ) {
-                        $oc_products[] = get_post();
-                    }
-                }
-                wp_reset_postdata();
-            }
+            if ( ! empty( $chair_ids ) ) {
+                $args = array(
+                    'post_type'      => 'product',
+                    'post__in'       => $chair_ids,
+                    'posts_per_page' => 10,
+                    'orderby'        => 'post__in',
+                );
+                $products_query = new WP_Query( $args );
 
-            $display_chairs = array_slice( $oc_products, 0, 10 );
-
-            if ( ! empty( $display_chairs ) ) {
-                $delay = 100;
-                foreach ( $display_chairs as $post_obj ) {
-                    $product = wc_get_product( $post_obj->ID );
-                    if ( ! $product ) {
-                        continue;
-                    }
-                    $permalink = get_permalink( $product->get_id() );
-                    $title = $product->get_name();
-                    $price_html = $product->get_price_html();
-                    $image_id = $product->get_image_id();
-                    $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
-                    ?>
-                    <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
-                      <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
-                        <div class="popular-img-box">
-                          <?php if ( $product->is_featured() ) : ?>
-                            <span class="popular-badge-pill">UNIQUE</span>
-                          <?php endif; ?>
-                          <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
-                        </div>
-                        <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
-                        <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
-                      </a>
-                      <div class="popular-swatches">
-                        <?php
-                        $colors = $product->get_attribute( 'pa_color' );
-                        if ( $colors ) {
-                            $color_arr = explode( ',', $colors );
-                            foreach ( $color_arr as $c ) {
-                                $c = trim( $c );
-                                $hex = '#8E8E93';
-                                if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
-                                elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
-                                elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
-                                elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
-                                elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
-                                echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
-                            }
+                if ( $products_query->have_posts() ) {
+                    $delay = 100;
+                    while ( $products_query->have_posts() ) {
+                        $products_query->the_post();
+                        $product = wc_get_product( get_the_ID() );
+                        if ( ! $product ) {
+                            continue;
                         }
+                        $permalink = get_permalink( $product->get_id() );
+                        $title = $product->get_name();
+                        $price_html = $product->get_price_html();
+                        $image_id = $product->get_image_id();
+                        $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
                         ?>
-                      </div>
-                    </div>
-                    <?php
-                    $delay += 100;
-                    if ( $delay > 400 ) {
-                        $delay = 100;
+                        <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
+                          <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="popular-img-box">
+                              <?php if ( $product->is_featured() ) : ?>
+                                <span class="popular-badge-pill">UNIQUE</span>
+                              <?php endif; ?>
+                              <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+                            </div>
+                            <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                            <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                          </a>
+                          <div class="popular-swatches">
+                            <?php
+                            $colors = $product->get_attribute( 'pa_color' );
+                            if ( $colors ) {
+                                $color_arr = explode( ',', $colors );
+                                foreach ( $color_arr as $c ) {
+                                    $c = trim( $c );
+                                    $hex = '#8E8E93';
+                                    if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                                    elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                    elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                    elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                    elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                    echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                                }
+                            }
+                            ?>
+                          </div>
+                        </div>
+                        <?php
+                        $delay += 100;
+                        if ( $delay > 400 ) {
+                            $delay = 100;
+                        }
                     }
+                    wp_reset_postdata();
                 }
             }
         }
