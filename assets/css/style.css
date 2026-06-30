@@ -315,6 +315,12 @@ p {
   background-color: transparent;
 }
 
+.home .header.transparent:not(.sticky) {
+  background-color: rgba(10, 10, 10, 0.45) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+}
+
 .header.transparent:not(.sticky) {
   color: #FFFFFF;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -322,6 +328,13 @@ p {
 
 .header.transparent:not(.sticky) .nav-link::after {
   background-color: #FFFFFF;
+}
+
+/* Dynamic filter to turn white logo charcoal on light backgrounds */
+.header.sticky .logo img,
+body:not(.home) .header.transparent:not(.sticky) .logo img {
+  filter: brightness(0) invert(0.18) !important;
+  transition: filter var(--transition-smooth);
 }
 
 .header-container {
