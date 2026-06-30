@@ -233,153 +233,101 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
        ========================================================================== -->
   <section class="section popular-products-section">
     <div class="container">
-      <div class="popular-products-title-wrapper" data-scroll>
-        <h2 class="popular-products-title">Most Popular Products</h2>
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+        <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Products', 'great-wall-theme' ); ?></h2>
+        <?php
+        $chair_cat = get_term_by( 'slug', 'chair', 'product_cat' );
+        $chair_link = $chair_cat ? get_term_link( $chair_cat ) : '#';
+        ?>
+        <a href="<?php echo esc_url( $chair_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+          <span><?php esc_html_e( 'View All Chairs', 'great-wall-theme' ); ?></span>
+          <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
+        </a>
       </div>
 
-      <!-- Row 1: 5 Columns -->
-      <div class="grid popular-grid" style="margin-bottom: 40px;">
-        
-        <!-- Product 1 -->
-        <div class="popular-card delay-100" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'sofa_isolated.webp' ); ?>" alt="3-Seater sofa set">
-          </div>
-          <h3 class="popular-card-title">3-Seater sofa set</h3>
-          <div class="popular-card-price">From AED 3,000.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #8E8E93;" title="Slate Grey"></span>
-            <span class="popular-swatch-dot" style="background-color: #1C1C1E;" title="Charcoal Black"></span>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="popular-card delay-200" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" alt="Accent Chair with Gold Frame">
-          </div>
-          <h3 class="popular-card-title">Accent Chair with Gold Frame</h3>
-          <div class="popular-card-price">AED 4,700.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #1A1F3C;" title="Royal Navy"></span>
-            <span class="popular-swatch-dot" style="background-color: #A09E9B;" title="Brushed Silver"></span>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="popular-card delay-300" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'baby_chair_isolated.webp' ); ?>" alt="Baby chair">
-          </div>
-          <h3 class="popular-card-title">Baby chair</h3>
-          <div class="popular-card-price">AED 2,500.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #D4B28C;" title="Natural Beech"></span>
-            <span class="popular-swatch-dot" style="background-color: #8D5B4C;" title="Warm Chestnut"></span>
-          </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="popular-card delay-400" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'box_round_stool.webp' ); ?>" alt="Box round sofa seat">
-          </div>
-          <h3 class="popular-card-title">Box round sofa seat</h3>
-          <div class="popular-card-price">AED 55.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #B5D2E1;" title="Soft Azure"></span>
-            <span class="popular-swatch-dot" style="background-color: #8DA98F;" title="Sage Green"></span>
-            <span class="popular-swatch-dot" style="background-color: #5C554E;" title="Charcoal"></span>
-            <span class="popular-swatch-dot" style="background-color: #705B54;" title="Muted Brown"></span>
-          </div>
-        </div>
-
-        <!-- Product 5 -->
-        <div class="popular-card delay-400" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>" alt="Chair with Cushioned Seat">
-          </div>
-          <h3 class="popular-card-title">Chair with Cushioned Seat</h3>
-          <div class="popular-card-price">AED 5,400.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #F5E6C9;" title="Warm Cream"></span>
-            <span class="popular-swatch-dot" style="background-color: #BCD3E6;" title="Linen Blue"></span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Row 2: 5 Columns -->
       <div class="grid popular-grid">
-        
-        <!-- Product 6 -->
-        <div class="popular-card delay-100" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Minimalist Kid's Bed">
-          </div>
-          <h3 class="popular-card-title">Minimalist Kid's Bed</h3>
-          <div class="popular-card-price">AED 3,200.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #A3C9A8;" title="Mint Green"></span>
-            <span class="popular-swatch-dot" style="background-color: #F3ECE3;" title="Light White"></span>
-          </div>
-        </div>
+        <?php
+        $args = array(
+            'post_type'      => 'product',
+            'posts_per_page' => 80,
+            'post_status'    => 'publish',
+            'orderby'        => 'menu_order title',
+            'order'          => 'ASC',
+        );
+        $products_query = new WP_Query( $args );
+        $oc_products = array();
+        $other_products = array();
 
-        <!-- Product 7 -->
-        <div class="popular-card delay-200" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="Round Coffee Table">
-          </div>
-          <h3 class="popular-card-title">Round Coffee Table</h3>
-          <div class="popular-card-price">AED 1,100.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #D2A87E;" title="Natural Oak"></span>
-            <span class="popular-swatch-dot" style="background-color: #4A3E3D;" title="Dark Oak"></span>
-          </div>
-        </div>
+        if ( $products_query->have_posts() ) {
+            while ( $products_query->have_posts() ) {
+                $products_query->the_post();
+                $title = get_the_title();
+                if ( stripos( $title, 'OC-' ) === 0 || stripos( $title, 'OC ' ) === 0 ) {
+                    $oc_products[] = get_post();
+                } else {
+                    $other_products[] = get_post();
+                }
+            }
+            wp_reset_postdata();
+        }
 
-        <!-- Product 8 (Badge UNIQUE) -->
-        <div class="popular-card delay-300" data-scroll>
-          <div class="popular-img-box">
-            <span class="popular-badge-pill">UNIQUE</span>
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="Modern Timber Dresser">
-          </div>
-          <h3 class="popular-card-title">Modern Timber Dresser</h3>
-          <div class="popular-card-price">AED 4,900.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #E2B27E;" title="Honey Beech"></span>
-            <span class="popular-swatch-dot" style="background-color: #1C1C1E;" title="Ebonized Black"></span>
-          </div>
-        </div>
+        $ordered_products = array_merge( $oc_products, $other_products );
+        $ordered_products = array_slice( $ordered_products, 0, 10 );
 
-        <!-- Product 9 -->
-        <div class="popular-card delay-400" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'table_lamp.webp' ); ?>" alt="Artisanal Table Lamp">
-          </div>
-          <h3 class="popular-card-title">Artisanal Table Lamp</h3>
-          <div class="popular-card-price">AED 180.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #F3ECE3;" title="Sand White"></span>
-            <span class="popular-swatch-dot" style="background-color: #A68E77;" title="Muted Oak"></span>
-          </div>
-        </div>
-
-        <!-- Product 10 -->
-        <div class="popular-card delay-400" data-scroll>
-          <div class="popular-img-box">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'carved_vase.webp' ); ?>" alt="Ceramic Carved Vase">
-          </div>
-          <h3 class="popular-card-title">Ceramic Carved Vase</h3>
-          <div class="popular-card-price">AED 220.00</div>
-          <div class="popular-swatches">
-            <span class="popular-swatch-dot active" style="background-color: #E6B6B5;" title="Soft Rose"></span>
-            <span class="popular-swatch-dot" style="background-color: #BCD3E6;" title="Sky Blue"></span>
-          </div>
-        </div>
-
+        if ( ! empty( $ordered_products ) ) {
+            $delay = 100;
+            foreach ( $ordered_products as $post_obj ) {
+                setup_postdata( $post_obj );
+                $product = wc_get_product( $post_obj->ID );
+                if ( ! $product ) {
+                    continue;
+                }
+                $permalink = get_permalink( $post_obj->ID );
+                $title = get_the_title( $post_obj->ID );
+                $price_html = $product->get_price_html();
+                $image_id = $product->get_image_id();
+                $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
+                ?>
+                <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
+                  <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="popular-img-box">
+                      <?php if ( $product->is_featured() ) : ?>
+                        <span class="popular-badge-pill">UNIQUE</span>
+                      <?php endif; ?>
+                      <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+                    </div>
+                    <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                    <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                  </a>
+                  <div class="popular-swatches">
+                    <?php
+                    $colors = $product->get_attribute( 'pa_color' );
+                    if ( $colors ) {
+                        $color_arr = explode( ',', $colors );
+                        foreach ( $color_arr as $c ) {
+                            $c = trim( $c );
+                            $hex = '#8E8E93';
+                            if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                            elif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                            elif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                            elif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                            elif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                            echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                        }
+                    }
+                    ?>
+                  </div>
+                </div>
+                <?php
+                $delay += 100;
+                if ( $delay > 400 ) {
+                    $delay = 100;
+                }
+            }
+            wp_reset_postdata();
+        }
+        ?>
       </div>
-
     </div>
   </section>
 
