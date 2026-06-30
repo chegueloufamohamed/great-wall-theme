@@ -553,31 +553,60 @@ function great_wall_sort_chairs_category( $orderby, $query ) {
 }
 
 /**
- * Customize related products:
- * If the current product name starts with "OC-", make sure it only displays other "OC-" office chairs.
+ * Customize related products to strictly match the current product's category,
+ * or prioritize only other "OC-" chairs if viewing an "OC-" office chair.
  */
-add_filter( 'woocommerce_related_products', 'great_wall_related_office_chairs', 99, 3 );
-function great_wall_related_office_chairs( $related_posts, $product_id, $args ) {
+add_filter( 'woocommerce_related_products', 'great_wall_custom_related_products', 99, 3 );
+function great_wall_custom_related_products( $related_posts, $product_id, $args ) {
     if ( function_exists( 'wc_get_product' ) ) {
         $product = wc_get_product( $product_id );
         if ( ! $product ) {
             return $related_posts;
         }
-        
+
         $title = $product->get_name();
+        
+        // If it is an office chair (OC-), query other OC- office chairs directly
         if ( stripos( $title, 'OC-' ) === 0 || stripos( $title, 'OC ' ) === 0 ) {
             global $wpdb;
-            $query_ids = $wpdb->get_col( "
+            $query_ids = $wpdb->get_col( $wpdb->prepare( "
                 SELECT ID FROM {$wpdb->posts}
                 WHERE post_type = 'product'
                   AND post_status = 'publish'
-                  AND ID != {$product_id}
-                  AND (post_title LIKE 'OC-%' OR post_title LIKE 'OC %')
-                LIMIT 4
-            " );
+                  AND ID != %d
+                  AND (post_title LIKE 'OC-%%' OR post_title LIKE 'OC %%')
+                LIMIT 8
+            ", $product_id ) );
             
             if ( ! empty( $query_ids ) ) {
                 return array_map( 'intval', $query_ids );
+            }
+        }
+        
+        // For other products, fetch products strictly matching the same product categories
+        $terms = get_the_terms( $product_id, 'product_cat' );
+        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+            $term_ids = wp_list_pluck( $terms, 'term_id' );
+            
+            $query_args = array(
+                'post_type'      => 'product',
+                'post_status'    => 'publish',
+                'posts_per_page' => 8,
+                'post__not_in'   => array( $product_id ),
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'term_id',
+                        'terms'    => $term_ids,
+                        'operator' => 'IN',
+                    ),
+                ),
+                'fields'         => 'ids',
+            );
+            
+            $related_query = new WP_Query( $query_args );
+            if ( ! empty( $related_query->posts ) ) {
+                return array_map( 'intval', $related_query->posts );
             }
         }
     }
