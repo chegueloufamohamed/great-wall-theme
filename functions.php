@@ -536,7 +536,7 @@ function great_wall_is_menu_item_active( $item ) {
  */
 add_filter( 'posts_orderby', 'great_wall_sort_chairs_category', 99, 2 );
 function great_wall_sort_chairs_category( $orderby, $query ) {
-    if ( ! is_admin() && $query->is_main_query() && ( is_product_category( 'chair' ) || is_product_category( 'chairs' ) ) ) {
+    if ( ! is_admin() && $query->is_main_query() && function_exists( 'is_product_category' ) && ( is_product_category( 'chair' ) || is_product_category( 'chairs' ) ) ) {
         global $wpdb;
         $custom_orderby = "CASE 
             WHEN {$wpdb->posts}.post_title LIKE 'OC-%' OR {$wpdb->posts}.post_title LIKE 'OC %' THEN 0 
