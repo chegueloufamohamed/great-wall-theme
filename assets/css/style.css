@@ -3464,6 +3464,30 @@ p {
   color: var(--color-accent) !important;
 }
 
+/* Add to Cart & Buy Now layout wrapper */
+.single-product form.cart .add-to-cart-row,
+.single-product .woocommerce-variation-add-to-cart .add-to-cart-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin-top: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .woocommerce div.product form.cart .button.single_add_to_cart_button,
+  .woocommerce div.product form.cart .buy-now-theme-btn,
+  .single-product form.cart .single_add_to_cart_button,
+  .single-product form.cart .buy-now-theme-btn,
+  .single-product .woocommerce-variation-add-to-cart .single_add_to_cart_button {
+    min-width: 110px !important;
+    padding: 0 10px !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.05em !important;
+  }
+}
+
 /* Variations styling */
 .single-product table.variations {
   width: 100%;
