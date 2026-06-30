@@ -17,19 +17,10 @@
   <header class="header transparent">
     <div class="header-container">
       
-      <!-- Brand Logo Customizer Synch -->
-      <?php
-      if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
-        the_custom_logo();
-      } else {
-        ?>
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-          <div class="logo-icon"></div>
-          Great Wall<span>Furniture</span>
-        </a>
-        <?php
-      }
-      ?>
+      <!-- Brand Logo -->
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
+        <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Logo.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; display: block;">
+      </a>
       
       <!-- Dynamic WordPress Navigation with Hardcoded Showroom Fallback -->
       <nav class="nav-menu">
