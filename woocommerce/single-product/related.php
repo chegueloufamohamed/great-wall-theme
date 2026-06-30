@@ -39,30 +39,56 @@ if ( $related_products ) : ?>
 				if ( ! $product_obj ) {
 					continue;
 				}
-				$product_image = get_the_post_thumbnail_url( $related_product_id, 'large' );
+				$product_image = '';
 				$hover_image = '';
-				$gallery_image_ids = $product_obj->get_gallery_image_ids();
 				
+				// 1. Check if product has a featured image
+				$image_id = $product_obj->get_image_id();
+				if ( $image_id ) {
+					$product_image = wp_get_attachment_image_url( $image_id, 'large' );
+				}
+				
+				// 2. If it is a variable product and has no featured image, check variation images
+				if ( ! $product_image && $product_obj->is_type( 'variable' ) ) {
+					$variation_ids = $product_obj->get_children();
+					foreach ( $variation_ids as $var_id ) {
+						$variation = wc_get_product( $var_id );
+						if ( $variation && $variation->get_image_id() ) {
+							$product_image = wp_get_attachment_image_url( $variation->get_image_id(), 'large' );
+							break;
+						}
+					}
+				}
+				
+				// 3. Check gallery images
+				$gallery_image_ids = $product_obj->get_gallery_image_ids();
 				if ( $product_image ) {
-					// Main image is featured image. Hover image is the first gallery image if available.
+					// Hover image is the first gallery image if available
 					if ( ! empty( $gallery_image_ids ) ) {
 						$hover_image = wp_get_attachment_image_url( $gallery_image_ids[0], 'large' );
 					}
 				} else {
-					// No featured image. Main image is the first gallery image. Hover image is the second gallery image if available.
+					// Fallback to first gallery image as main image, second as hover
 					if ( ! empty( $gallery_image_ids ) ) {
 						$product_image = wp_get_attachment_image_url( $gallery_image_ids[0], 'large' );
 						if ( count( $gallery_image_ids ) > 1 ) {
 							$hover_image = wp_get_attachment_image_url( $gallery_image_ids[1], 'large' );
 						}
 					} else {
+						// Fallback to placeholder
 						$product_image = wc_placeholder_img_src();
 					}
 				}
 
-				// Get the product's actual primary category name
-				$categories = wp_get_post_terms( $related_product_id, 'product_cat', array( 'fields' => 'names' ) );
-				$cat_label = ! empty( $categories ) && ! is_wp_error( $categories ) ? $categories[0] : 'Signature Range';
+				// Get the product's actual primary category name natively
+				$cat_ids = $product_obj->get_category_ids();
+				$cat_label = 'Signature Range';
+				if ( ! empty( $cat_ids ) ) {
+					$term = get_term_by( 'id', $cat_ids[0], 'product_cat' );
+					if ( $term ) {
+						$cat_label = $term->name;
+					}
+				}
 				?>
 				<div class="product-card">
 					<div class="product-img-wrapper" style="height: 280px; overflow: hidden; position: relative;">
