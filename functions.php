@@ -583,3 +583,91 @@ function great_wall_related_office_chairs( $related_posts, $product_id, $args ) 
     }
     return $related_posts;
 }
+
+/**
+ * Rename the WooCommerce "Description" tab to "Specifications"
+ */
+add_filter( 'woocommerce_product_tabs', 'great_wall_rename_description_tab', 98 );
+function great_wall_rename_description_tab( $tabs ) {
+    if ( isset( $tabs['description'] ) ) {
+        $tabs['description']['title'] = __( 'Specifications', 'great-wall-theme' );
+    }
+    return $tabs;
+}
+
+/**
+ * Remove the default "Description" or "Specifications" heading inside the tab content
+ */
+add_filter( 'woocommerce_product_description_heading', '__return_false' );
+
+/**
+ * Parse the product description content and convert spec lines (key: value) into a beautiful table
+ */
+add_filter( 'the_content', 'great_wall_format_product_description_to_specs_table', 99 );
+function great_wall_format_product_description_to_specs_table( $content ) {
+    if ( is_singular( 'product' ) && in_the_loop() ) {
+        // Replace common block/line tags with newlines to ease parsing
+        $clean_content = str_ireplace( array( '<br>', '<br />', '<br/>', '</p>', '</div>', '</tr>', '</td>' ), "\n", $content );
+        $clean_content = strip_tags( $clean_content );
+        $lines = explode( "\n", $clean_content );
+        
+        $specs = array();
+        $non_specs = array();
+        $has_specs = false;
+        
+        foreach ( $lines as $line ) {
+            $line = trim( html_entity_decode( $line ) );
+            if ( empty( $line ) ) {
+                continue;
+            }
+            
+            // Skip the redundant header line if it is just "Specifications" or "Description"
+            if ( strcasecmp( $line, 'Specifications' ) === 0 || strcasecmp( $line, 'Description' ) === 0 ) {
+                continue;
+            }
+            
+            if ( strpos( $line, ':' ) !== false ) {
+                list( $key, $val ) = explode( ':', $line, 2 );
+                $key = trim( $key );
+                $val = trim( $val );
+                if ( ! empty( $key ) && ! empty( $val ) ) {
+                    $specs[$key] = $val;
+                    $has_specs = true;
+                }
+            } else {
+                $non_specs[] = $line;
+            }
+        }
+        
+        if ( $has_specs ) {
+            // Build a gorgeous premium specifications table
+            $html = '<div class="specs-table-wrapper" style="margin-top: 10px; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden; background-color: #ffffff; max-width: 600px;">';
+            $html .= '<table class="specs-table" style="width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 0.9rem; margin: 0;">';
+            $html .= '<tbody>';
+            $bg_alt = false;
+            foreach ( $specs as $key => $val ) {
+                $bg_color = $bg_alt ? '#fcfcfc' : '#ffffff';
+                $html .= '<tr style="background-color: ' . esc_attr( $bg_color ) . '; border-bottom: 1px solid #eaeaea;">';
+                $html .= '<td class="spec-label" style="padding: 14px 20px; font-weight: 700; color: var(--color-primary); width: 30%; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; border-right: 1px solid #eaeaea; vertical-align: middle;">' . esc_html( $key ) . '</td>';
+                $html .= '<td class="spec-value" style="padding: 14px 20px; color: var(--color-secondary); vertical-align: middle; line-height: 1.4;">' . esc_html( $val ) . '</td>';
+                $html .= '</tr>';
+                $bg_alt = ! $bg_alt;
+            }
+            $html .= '</tbody>';
+            $html .= '</table>';
+            $html .= '</div>';
+            
+            // Append any non-spec description text if it exists
+            if ( ! empty( $non_specs ) ) {
+                $html .= '<div class="specs-description" style="margin-top: 20px; color: var(--color-secondary); font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.6;">';
+                foreach ( $non_specs as $ns ) {
+                    $html .= '<p style="margin-bottom: 10px;">' . esc_html( $ns ) . '</p>';
+                }
+                $html .= '</div>';
+            }
+            
+            return $html;
+        }
+    }
+    return $content;
+}
