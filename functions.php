@@ -585,12 +585,16 @@ function great_wall_related_office_chairs( $related_posts, $product_id, $args ) 
 }
 
 /**
- * Rename the WooCommerce "Description" tab to "Specifications"
+ * Rename the WooCommerce "Description" tab to "Specifications", and remove the redundant "Additional Information" tab
  */
 add_filter( 'woocommerce_product_tabs', 'great_wall_rename_description_tab', 98 );
 function great_wall_rename_description_tab( $tabs ) {
     if ( isset( $tabs['description'] ) ) {
         $tabs['description']['title'] = __( 'Specifications', 'great-wall-theme' );
+    }
+    // Remove the redundant WooCommerce Additional Information tab
+    if ( isset( $tabs['additional_information'] ) ) {
+        unset( $tabs['additional_information'] );
     }
     return $tabs;
 }
@@ -601,19 +605,59 @@ function great_wall_rename_description_tab( $tabs ) {
 add_filter( 'woocommerce_product_description_heading', '__return_false' );
 
 /**
- * Parse the product description content and convert spec lines (key: value) into a beautiful table
+ * Parse the product description content and combine it with WooCommerce shipping weight/dimensions/attributes
+ * into a single beautiful Specifications table with clean formatting.
  */
 add_filter( 'the_content', 'great_wall_format_product_description_to_specs_table', 99 );
 function great_wall_format_product_description_to_specs_table( $content ) {
     if ( is_singular( 'product' ) && in_the_loop() ) {
-        // Replace common block/line tags with newlines to ease parsing
+        global $product;
+        if ( ! is_object( $product ) && function_exists( 'wc_get_product' ) ) {
+            $product = wc_get_product( get_the_ID() );
+        }
+        
+        $specs = array();
+        
+        // 1. Fetch WooCommerce native weight if available
+        if ( $product && method_exists( $product, 'get_weight' ) && $product->get_weight() ) {
+            $weight_unit = get_option( 'woocommerce_weight_unit', 'kg' );
+            $specs[__( 'Weight', 'great-wall-theme' )] = $product->get_weight() . ' ' . $weight_unit;
+        }
+        
+        // 2. Fetch WooCommerce native dimensions if available, formatting as "L × W × H unit"
+        if ( $product && method_exists( $product, 'get_length' ) && ( $product->get_length() || $product->get_width() || $product->get_height() ) ) {
+            $dimension_unit = get_option( 'woocommerce_dimension_unit', 'cm' );
+            $dim_parts = array();
+            if ( $product->get_length() ) { $dim_parts[] = $product->get_length(); }
+            if ( $product->get_width() ) { $dim_parts[] = $product->get_width(); }
+            if ( $product->get_height() ) { $dim_parts[] = $product->get_height(); }
+            $specs[__( 'Dimensions', 'great-wall-theme' )] = implode( ' × ', $dim_parts ) . ' ' . $dimension_unit;
+        }
+
+        // 3. Fetch WooCommerce custom attributes if available
+        if ( $product && method_exists( $product, 'get_attributes' ) ) {
+            $attributes = $product->get_attributes();
+            foreach ( $attributes as $attribute ) {
+                $val = '';
+                if ( $attribute->is_taxonomy() ) {
+                    $terms = wp_get_post_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'names' ) );
+                    $val = implode( ', ', $terms );
+                } else {
+                    $val = implode( ', ', $attribute->get_options() );
+                }
+                $label = wc_attribute_label( $attribute->get_name() );
+                if ( ! empty( $label ) && ! empty( $val ) ) {
+                    $specs[$label] = $val;
+                }
+            }
+        }
+
+        // 4. Parse description text editor content for additional custom specifications
         $clean_content = str_ireplace( array( '<br>', '<br />', '<br/>', '</p>', '</div>', '</tr>', '</td>' ), "\n", $content );
         $clean_content = strip_tags( $clean_content );
         $lines = explode( "\n", $clean_content );
         
-        $specs = array();
         $non_specs = array();
-        $has_specs = false;
         
         foreach ( $lines as $line ) {
             $line = trim( html_entity_decode( $line ) );
@@ -631,21 +675,28 @@ function great_wall_format_product_description_to_specs_table( $content ) {
                 $key = trim( $key );
                 $val = trim( $val );
                 if ( ! empty( $key ) && ! empty( $val ) ) {
-                    $specs[$key] = $val;
-                    $has_specs = true;
+                    // Replace * with the multiplication symbol ×
+                    $val = str_replace( '*', ' × ', $val );
+                    
+                    // We only add it if not already natively defined
+                    if ( ! isset( $specs[$key] ) ) {
+                        $specs[$key] = $val;
+                    }
                 }
             } else {
                 $non_specs[] = $line;
             }
         }
         
-        if ( $has_specs ) {
+        if ( ! empty( $specs ) ) {
             // Build a gorgeous premium specifications table
             $html = '<div class="specs-table-wrapper" style="margin-top: 10px; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden; background-color: #ffffff; max-width: 600px;">';
             $html .= '<table class="specs-table" style="width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 0.9rem; margin: 0;">';
             $html .= '<tbody>';
             $bg_alt = false;
             foreach ( $specs as $key => $val ) {
+                // Clean up any double spaces or extra asterisks
+                $val = preg_replace( '/\s*×\s*/u', ' × ', $val ); // ensure spacing is exactly " × "
                 $bg_color = $bg_alt ? '#fcfcfc' : '#ffffff';
                 $html .= '<tr style="background-color: ' . esc_attr( $bg_color ) . '; border-bottom: 1px solid #eaeaea;">';
                 $html .= '<td class="spec-label" style="padding: 14px 20px; font-weight: 700; color: var(--color-primary); width: 30%; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; border-right: 1px solid #eaeaea; vertical-align: middle;">' . esc_html( $key ) . '</td>';
