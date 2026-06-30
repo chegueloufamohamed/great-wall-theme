@@ -1001,8 +1001,11 @@ p {
   z-index: 2;
 }
 
-.product-card:hover .product-img.main-img {
+.product-card:hover:has(.product-img.hover-img) .product-img.main-img {
   opacity: 0;
+}
+
+.product-card:hover .product-img.main-img {
   transform: scale(1.05);
 }
 
