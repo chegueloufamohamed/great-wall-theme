@@ -536,7 +536,7 @@ function great_wall_is_menu_item_active( $item ) {
  */
 add_filter( 'posts_orderby', 'great_wall_sort_chairs_category', 99, 2 );
 function great_wall_sort_chairs_category( $orderby, $query ) {
-    if ( ! is_admin() && $query->is_main_query() && function_exists( 'is_product_category' ) && ( is_product_category( 'chair' ) || is_product_category( 'chairs' ) ) ) {
+    if ( ! is_admin() && is_object( $query ) && method_exists( $query, 'is_main_query' ) && $query->is_main_query() && function_exists( 'is_product_category' ) && ( is_product_category( 'chair' ) || is_product_category( 'chairs' ) ) ) {
         global $wpdb;
         $custom_orderby = "CASE 
             WHEN {$wpdb->posts}.post_title LIKE 'OC-%' OR {$wpdb->posts}.post_title LIKE 'OC %' THEN 0 
@@ -554,27 +554,28 @@ function great_wall_sort_chairs_category( $orderby, $query ) {
  */
 add_filter( 'woocommerce_related_products', 'great_wall_related_office_chairs', 99, 3 );
 function great_wall_related_office_chairs( $related_posts, $product_id, $args ) {
-    $product = wc_get_product( $product_id );
-    if ( ! $product ) {
-        return $related_posts;
-    }
-    
-    $title = $product->get_name();
-    if ( stripos( $title, 'OC-' ) === 0 || stripos( $title, 'OC ' ) === 0 ) {
-        global $wpdb;
-        $query_ids = $wpdb->get_col( "
-            SELECT ID FROM {$wpdb->posts}
-            WHERE post_type = 'product'
-              AND post_status = 'publish'
-              AND ID != {$product_id}
-              AND (post_title LIKE 'OC-%' OR post_title LIKE 'OC %')
-            LIMIT 4
-        " );
+    if ( function_exists( 'wc_get_product' ) ) {
+        $product = wc_get_product( $product_id );
+        if ( ! $product ) {
+            return $related_posts;
+        }
         
-        if ( ! empty( $query_ids ) ) {
-            return array_map( 'intval', $query_ids );
+        $title = $product->get_name();
+        if ( stripos( $title, 'OC-' ) === 0 || stripos( $title, 'OC ' ) === 0 ) {
+            global $wpdb;
+            $query_ids = $wpdb->get_col( "
+                SELECT ID FROM {$wpdb->posts}
+                WHERE post_type = 'product'
+                  AND post_status = 'publish'
+                  AND ID != {$product_id}
+                  AND (post_title LIKE 'OC-%' OR post_title LIKE 'OC %')
+                LIMIT 4
+            " );
+            
+            if ( ! empty( $query_ids ) ) {
+                return array_map( 'intval', $query_ids );
+            }
         }
     }
     return $related_posts;
 }
-
