@@ -308,10 +308,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                                 $c = trim( $c );
                                 $hex = '#8E8E93';
                                 if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
-                                elif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
-                                elif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
-                                elif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
-                                elif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
                                 echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
                             }
                         }
