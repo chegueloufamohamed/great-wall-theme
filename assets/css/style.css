@@ -298,43 +298,44 @@ p {
   height: var(--header-height);
   z-index: 1000;
   transition: all var(--transition-smooth);
-  border-bottom: 1px solid transparent;
-}
-
-.header.sticky {
-  height: var(--header-height-shrink);
-  background-color: rgba(250, 248, 245, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-glass);
-}
-
-/* Header in dark context (e.g. transparent over dark hero slider) */
-.header.transparent {
-  background-color: transparent;
-}
-
-.home .header.transparent:not(.sticky) {
-  background-color: rgba(10, 10, 10, 0.45) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(10, 10, 10, 0.55) !important;
   backdrop-filter: blur(15px) !important;
   -webkit-backdrop-filter: blur(15px) !important;
 }
 
-.header.transparent:not(.sticky) {
-  color: #FFFFFF;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.header.sticky {
+  height: var(--header-height-shrink);
+  background-color: rgba(10, 10, 10, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: var(--shadow-glass);
 }
 
-.header.transparent:not(.sticky) .nav-link::after {
-  background-color: #FFFFFF;
+/* Ensure header items (links, buttons, switcher) are always white */
+.header .nav-link,
+.header .action-btn,
+.header .lang-link,
+.header .logo {
+  color: #FFFFFF !important;
 }
 
-/* Dynamic filter to turn white logo charcoal on light backgrounds */
-.header.sticky .logo img,
-body:not(.home) .header.transparent:not(.sticky) .logo img {
-  filter: brightness(0) invert(0.18) !important;
-  transition: filter var(--transition-smooth);
+.header .nav-link::after {
+  background-color: #FFFFFF !important;
+}
+
+.header .lang-separator {
+  color: #FFFFFF !important;
+  opacity: 0.25 !important;
+}
+
+.header .nav-link:hover,
+.header .nav-link.active,
+.header .action-btn:hover,
+.header .lang-link:hover,
+.header .lang-link.active {
+  color: var(--color-accent) !important;
 }
 
 .header-container {
@@ -5456,45 +5457,4 @@ ul.products.list-view-active li.product .product-loop-actions {
   font-size: 0.75rem;
 }
 
-/* ==========================================================================
-   INNER PAGE HEADER FIX (DARK TEXT & LIGHT BACKGROUND ON NON-HOMEPAGES)
-   ========================================================================== */
-body:not(.home) .header.transparent:not(.sticky) {
-  background-color: #faf8f5 !important;
-  border-bottom: 1px solid var(--border-color, #e5e0d8) !important;
-  color: var(--color-primary, #2e2a25) !important;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02) !important;
-}
 
-body:not(.home) .header.transparent:not(.sticky) .nav-link {
-  color: var(--color-primary, #2e2a25) !important;
-}
-
-body:not(.home) .header.transparent:not(.sticky) .nav-link::after {
-  background-color: var(--color-accent, #c5a880) !important;
-}
-
-body:not(.home) .header.transparent:not(.sticky) .logo {
-  color: var(--color-primary, #2e2a25) !important;
-}
-
-body:not(.home) .header.transparent:not(.sticky) .action-btn {
-  color: var(--color-primary, #2e2a25) !important;
-}
-
-body:not(.home) .header.transparent:not(.sticky) .lang-link {
-  color: var(--color-primary, #2e2a25) !important;
-}
-
-body:not(.home) .header.transparent:not(.sticky) .lang-separator {
-  color: var(--color-primary, #2e2a25) !important;
-  opacity: 0.3 !important;
-}
-
-body:not(.home) .header.transparent:not(.sticky) .nav-link.active,
-body:not(.home) .header.transparent:not(.sticky) .nav-link:hover,
-body:not(.home) .header.transparent:not(.sticky) .lang-link.active,
-body:not(.home) .header.transparent:not(.sticky) .lang-link:hover {
-  color: var(--color-accent, #c5a880) !important;
-  opacity: 1 !important;
-}
