@@ -1035,7 +1035,7 @@ p {
 
 .product-actions {
   position: absolute;
-  bottom: -50px;
+  bottom: -80px;
   left: 0;
   width: 100%;
   z-index: 5;
@@ -1043,11 +1043,13 @@ p {
   justify-content: center;
   gap: 10px;
   padding: 15px;
-  transition: bottom var(--transition-smooth);
+  opacity: 0;
+  transition: bottom var(--transition-smooth), opacity var(--transition-smooth);
 }
 
 .product-card:hover .product-actions {
   bottom: 0;
+  opacity: 1;
 }
 
 .product-action-btn {
