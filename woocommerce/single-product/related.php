@@ -40,15 +40,29 @@ if ( $related_products ) : ?>
 					continue;
 				}
 				$product_image = get_the_post_thumbnail_url( $related_product_id, 'large' );
-				if ( ! $product_image ) {
-					$gallery_image_ids = $product_obj->get_gallery_image_ids();
+				$hover_image = '';
+				$gallery_image_ids = $product_obj->get_gallery_image_ids();
+				
+				if ( $product_image ) {
+					// Main image is featured image. Hover image is the first gallery image if available.
+					if ( ! empty( $gallery_image_ids ) ) {
+						$hover_image = wp_get_attachment_image_url( $gallery_image_ids[0], 'large' );
+					}
+				} else {
+					// No featured image. Main image is the first gallery image. Hover image is the second gallery image if available.
 					if ( ! empty( $gallery_image_ids ) ) {
 						$product_image = wp_get_attachment_image_url( $gallery_image_ids[0], 'large' );
+						if ( count( $gallery_image_ids ) > 1 ) {
+							$hover_image = wp_get_attachment_image_url( $gallery_image_ids[1], 'large' );
+						}
+					} else {
+						$product_image = wc_placeholder_img_src();
 					}
 				}
-				if ( ! $product_image ) {
-					$product_image = get_template_directory_uri() . '/assets/images/designer_chair.webp'; // default fallback
-				}
+
+				// Get the product's actual primary category name
+				$categories = wp_get_post_terms( $related_product_id, 'product_cat', array( 'fields' => 'names' ) );
+				$cat_label = ! empty( $categories ) && ! is_wp_error( $categories ) ? $categories[0] : 'Signature Range';
 				?>
 				<div class="product-card">
 					<div class="product-img-wrapper" style="height: 280px; overflow: hidden; position: relative;">
@@ -56,13 +70,16 @@ if ( $related_products ) : ?>
 							<span class="product-badge sale">Sale</span>
 						<?php endif; ?>
 						<img src="<?php echo esc_url( $product_image ); ?>" loading="lazy" alt="<?php echo esc_attr( $product_obj->get_name() ); ?>" class="product-img main-img">
+						<?php if ( ! empty( $hover_image ) ) : ?>
+							<img src="<?php echo esc_url( $hover_image ); ?>" loading="lazy" alt="<?php echo esc_attr( $product_obj->get_name() ); ?>" class="product-img hover-img">
+						<?php endif; ?>
 						<div class="product-actions">
 							<button class="product-action-btn add-to-cart-trigger" 
 									data-id="<?php echo esc_attr( $related_product_id ); ?>" 
 									data-title="<?php echo esc_attr( $product_obj->get_name() ); ?>" 
 									data-price="<?php echo esc_attr( $product_obj->get_price() ); ?>" 
 									data-image="<?php echo esc_url( $product_image ); ?>"
-									data-category="Furniture"
+									data-category="<?php echo esc_attr( $cat_label ); ?>"
 									title="Add to Shopping Bag">
 								<i class="ri-shopping-bag-line"></i>
 							</button>
@@ -70,7 +87,7 @@ if ( $related_products ) : ?>
 						</div>
 					</div>
 					<div class="product-info">
-						<span class="product-category">Signature Range</span>
+						<span class="product-category"><?php echo esc_html( $cat_label ); ?></span>
 						<h3 class="product-title" style="font-size: 0.9rem; margin-bottom: 10px;"><a href="<?php echo esc_url( get_permalink( $related_product_id ) ); ?>"><?php echo esc_html( $product_obj->get_name() ); ?></a></h3>
 						<div class="product-meta">
 							<div class="product-price"><?php echo wp_kses_post( $product_obj->get_price_html() ); ?></div>
