@@ -6232,10 +6232,17 @@ ul.products.list-view-active li.product .product-loop-actions {
    PRODUCT DETAILS STACKED SECTIONS LAYOUT (NO TABS)
    ========================================================================== */
 .product-stacked-sections-wrapper {
-  margin-top: 40px !important;
+  margin-top: 60px !important;
+  margin-bottom: 60px !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 40px !important;
+  gap: 50px !important;
+  max-width: 1000px !important; /* Make the width a bit bigger */
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important; /* Center them on the page */
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
 }
 
 .product-section-block {
