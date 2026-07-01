@@ -827,3 +827,50 @@ function great_wall_render_trust_badges() {
     </div>
     <?php
 }
+
+/**
+ * Filter the product short description to dynamically remove the Specifications lines.
+ */
+add_filter( 'woocommerce_short_description', 'great_wall_remove_specs_from_short_desc', 99 );
+function great_wall_remove_specs_from_short_desc( $post_excerpt ) {
+    if ( is_admin() || ! is_product() ) {
+        return $post_excerpt;
+    }
+    
+    // Replace breaks/tags with newlines so we can split easily
+    $clean_content = str_ireplace( array( '<br>', '<br />', '<br/>', '</p>', '</div>', '<strong>', '</strong>' ), "\n", $post_excerpt );
+    $lines = explode( "\n", $clean_content );
+    $filtered_lines = array();
+    
+    foreach ( $lines as $line ) {
+        $stripped = trim( strip_tags( $line ) );
+        if ( empty( $stripped ) ) {
+            continue;
+        }
+        
+        // Remove lines matching the specifications block keywords
+        if ( strcasecmp( $stripped, 'Specifications' ) === 0 || 
+             stripos( $stripped, 'Dimensions:' ) === 0 || 
+             stripos( $stripped, 'Weight:' ) === 0 || 
+             stripos( $stripped, 'Details:' ) === 0 ) {
+            continue;
+        }
+        
+        $filtered_lines[] = $stripped;
+    }
+    
+    // Format the clean paragraphs
+    $result = '';
+    foreach ( $filtered_lines as $fline ) {
+        if ( ! empty( $fline ) ) {
+            $result .= '<p>' . esc_html( $fline ) . '</p>';
+        }
+    }
+    
+    // Fallback description if the text became completely empty after stripping specs
+    if ( empty( trim( strip_tags( $result ) ) ) ) {
+        return '<p>Experience the peak of contemporary craftsmanship. Hand-tailored from premium materials, this architectural piece brings quiet luxury and clean, minimalist lines to any modern space in Dubai.</p>';
+    }
+    
+    return $result;
+}
