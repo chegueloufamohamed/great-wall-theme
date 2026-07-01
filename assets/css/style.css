@@ -3213,6 +3213,16 @@ p {
   opacity: 1 !important;
 }
 
+/* Make product gallery sticky on desktop viewports */
+@media (min-width: 992px) {
+  .single-product .woocommerce-product-gallery {
+    position: sticky !important;
+    top: 110px !important; /* Spaced below the 90px header height */
+    align-self: start !important;
+    z-index: 99 !important;
+  }
+}
+
 .single-product .woocommerce-product-gallery .flex-viewport {
   overflow: hidden;
   width: 100% !important;
