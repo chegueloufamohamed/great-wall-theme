@@ -32,12 +32,10 @@ global $product;
             <div class="product-section-content section-specifications-content">
                 <?php 
                 $content = apply_filters( 'the_content', get_the_content() );
-                // Clean up non-breaking spaces to ensure clean matching
+                // Clean up non-breaking spaces
                 $content = str_replace( array( '&nbsp;', "\xC2\xA0" ), ' ', $content );
-                // Strip duplicate leading "Specifications" headers wrapped in any tag (h1-h6, p, div)
-                $content = preg_replace( '/^\s*<(p|h1|h2|h3|h4|h5|h6|div)[^>]*>\s*(?:<strong>|<span>|<em>)*\s*Specifications\s*:?\s*(?:<\/strong>|<\/span>|<\/em>)*\s*<\/\1>/i', '', $content );
-                // Strip duplicate leading "Specifications" raw text/inline formatting
-                $content = preg_replace( '/^\s*(?:<strong>|<span>|<em>)*\s*Specifications\s*:?\s*(?:<\/strong>|<\/span>|<\/em>)*\s*/i', '', $content );
+                // Strip duplicate leading "Specifications" headers regardless of wrapping tag types, inline styles, or tag nesting
+                $content = preg_replace( '/^\s*(?:<[a-z0-9]+[^>]*>\s*)*Specifications\s*:?\s*(?:<\/[a-z0-9]+>\s*)*\s*/i', '', $content );
                 echo $content;
                 ?>
             </div>
