@@ -751,3 +751,25 @@ function great_wall_format_product_description_to_specs_table( $content ) {
     }
     return $content;
 }
+
+/**
+ * Custom query parameter handler to allow adding multiple product IDs to the cart in a single request.
+ * e.g., greatwallfurniture.com/?add-to-cart-multiple=123,456
+ */
+add_action( 'wp_loaded', 'great_wall_add_multiple_to_cart_handler' );
+function great_wall_add_multiple_to_cart_handler() {
+    if ( isset( $_GET['add-to-cart-multiple'] ) ) {
+        $product_ids = explode( ',', $_GET['add-to-cart-multiple'] );
+        if ( function_exists( 'WC' ) && ! empty( $product_ids ) ) {
+            foreach ( $product_ids as $id ) {
+                $id = intval( $id );
+                if ( $id > 0 ) {
+                    WC()->cart->add_to_cart( $id );
+                }
+            }
+            // Clear checkout messages and redirect straight to the checkout page
+            wp_safe_redirect( wc_get_checkout_url() );
+            exit;
+        }
+    }
+}
