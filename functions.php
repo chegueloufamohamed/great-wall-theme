@@ -773,3 +773,78 @@ function great_wall_add_multiple_to_cart_handler() {
         }
     }
 }
+
+/**
+ * Render a dynamic sticky add to cart and buy now bar on product details pages.
+ */
+add_action( 'wp_footer', 'great_wall_sticky_add_to_cart_bar' );
+function great_wall_sticky_add_to_cart_bar() {
+    if ( ! is_product() ) {
+        return;
+    }
+    
+    $product = wc_get_product( get_the_ID() );
+	if ( ! $product ) {
+		return;
+	}
+	
+	$price = $product->get_price();
+	$price_html = strip_tags( wc_price( $price ) );
+	$stock_status = $product->is_in_stock() ? __( 'In stock', 'great-wall-theme' ) : __( 'Out of stock', 'great-wall-theme' );
+	?>
+	<div class="sticky-bar-global">
+		<div class="sticky-bar-content">
+			<div class="sticky-bar-info">
+				<p class="sticky-bar-title"><?php echo esc_html( $product->get_name() ); ?></p>
+				<span class="sticky-bar-meta"><?php echo esc_html( $price_html ); ?> &middot; <?php echo esc_html( $stock_status ); ?></span>
+			</div>
+			<div class="sticky-bar-btns">
+				<button class="sticky-bar-btn-buy" onclick="clickNativeBuy()"><?php esc_html_e( 'Buy now', 'great-wall-theme' ); ?></button>
+				<button class="sticky-bar-btn-cart" onclick="clickNativeCart()"><?php esc_html_e( 'Add to cart', 'great-wall-theme' ); ?></button>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	function clickNativeCart() {
+		const btn = document.querySelector('form.cart button.single_add_to_cart_button');
+		if (btn) {
+			btn.click();
+		} else {
+			window.location.href = window.location.pathname + '?add-to-cart=<?php echo esc_js( $product->get_id() ); ?>';
+		}
+	}
+	function clickNativeBuy() {
+		const btn = document.getElementById('detail-buy-now') || document.querySelector('form.cart .buy-now-theme-btn');
+		if (btn) {
+			btn.click();
+		} else {
+			window.location.href = '<?php echo esc_js( home_url( '/' ) ); ?>?add-to-cart-multiple=<?php echo esc_js( $product->get_id() ); ?>';
+		}
+	}
+	
+	window.addEventListener('load', () => {
+		const stickyBar = document.querySelector('.sticky-bar-global');
+		const buyForm = document.querySelector('form.cart');
+		if (stickyBar && buyForm) {
+			window.addEventListener('scroll', () => {
+				const formBottom = buyForm.getBoundingClientRect().bottom + window.scrollY;
+				if (window.scrollY > formBottom - 100) {
+					stickyBar.classList.add('show');
+				} else {
+					stickyBar.classList.remove('show');
+				}
+			});
+		} else if (stickyBar) {
+			window.addEventListener('scroll', () => {
+				if (window.scrollY > 500) {
+					stickyBar.classList.add('show');
+				} else {
+					stickyBar.classList.remove('show');
+				}
+			});
+		}
+	});
+	</script>
+	<?php
+}

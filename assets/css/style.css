@@ -5457,6 +5457,130 @@ ul.products.list-view-active li.product .product-loop-actions {
   font-size: 0.75rem;
 }
 
+/* ==========================================================================
+   GLOBAL STICKY ADD TO CART BAR (PRODUCT PAGES)
+   ========================================================================== */
+.sticky-bar-global {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid var(--border-color, #e5e0d8);
+  padding: 14px 40px;
+  z-index: 999;
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.05);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  justify-content: center;
+}
+
+.sticky-bar-global.show {
+  transform: translateY(0);
+}
+
+.sticky-bar-content {
+  width: 100%;
+  max-width: var(--container-max-width, 1200px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.sticky-bar-info {
+  min-width: 0;
+}
+
+.sticky-bar-title {
+  font-family: var(--font-primary, sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary, #2e2a25);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.sticky-bar-meta {
+  font-family: var(--font-primary, sans-serif);
+  font-size: 13px;
+  color: var(--color-secondary, #777);
+  margin-top: 3px;
+  display: block;
+}
+
+.sticky-bar-btns {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sticky-bar-btn-buy {
+  font-family: var(--font-primary, sans-serif);
+  background: #ffffff;
+  color: var(--color-primary, #2e2a25);
+  border: 1.5px solid var(--color-primary, #2e2a25);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.sticky-bar-btn-buy:hover {
+  background: #fdf0e8;
+  border-color: var(--color-accent, #c5a880);
+  color: var(--color-accent, #c5a880);
+}
+
+.sticky-bar-btn-cart {
+  font-family: var(--font-primary, sans-serif);
+  background: var(--bg-dark, #1c1c1e);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.sticky-bar-btn-cart:hover {
+  background: var(--color-accent, #c5a880);
+}
+
+@media(max-width: 768px) {
+  .sticky-bar-global {
+    padding: 12px 20px;
+  }
+  .sticky-bar-info {
+    display: none;
+  }
+  .sticky-bar-content {
+    justify-content: center;
+  }
+  .sticky-bar-btns {
+    width: 100%;
+  }
+  .sticky-bar-btn-buy,
+  .sticky-bar-btn-cart {
+    flex: 1;
+    text-align: center;
+    padding: 11px 14px;
+    font-size: 13px;
+  }
+}
+
+
 
 
 
