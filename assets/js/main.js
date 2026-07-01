@@ -1156,3 +1156,84 @@ window.addEventListener('load', () => {
     });
   }
 });
+
+/**
+ * Initialize product thumbnail carousel with autoplay and pause-on-interaction
+ */
+window.addEventListener('load', () => {
+  const thumbsList = document.querySelector('.woocommerce-product-gallery ol.flex-control-thumbs');
+  if (thumbsList) {
+    const items = thumbsList.querySelectorAll('li');
+    if (items.length <= 1) return;
+
+    const parent = thumbsList.parentNode;
+    
+    // Wrap ol.flex-control-thumbs in a helper slider container if not already wrapped
+    const wrapper = document.createElement('div');
+    wrapper.className = 'thumbs-slider-wrapper';
+    
+    // Insert wrapper into parent, then move thumbsList inside it
+    parent.insertBefore(wrapper, thumbsList);
+    wrapper.appendChild(thumbsList);
+    
+    // Create arrow buttons
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'thumb-nav-btn prev';
+    prevBtn.setAttribute('type', 'button');
+    prevBtn.setAttribute('aria-label', 'Previous Thumbnails');
+    prevBtn.innerHTML = '<i class="ri-arrow-left-s-line"></i>';
+    
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'thumb-nav-btn next';
+    nextBtn.setAttribute('type', 'button');
+    nextBtn.setAttribute('aria-label', 'Next Thumbnails');
+    nextBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
+    
+    wrapper.appendChild(prevBtn);
+    wrapper.appendChild(nextBtn);
+    
+    // Autoplay scroll settings
+    const scrollAmount = 102; // Thumbnail width (90px) + gap (12px)
+    let autoplayInterval;
+    
+    const startAutoplay = () => {
+      autoplayInterval = setInterval(() => {
+        const maxScroll = thumbsList.scrollWidth - thumbsList.clientWidth;
+        if (thumbsList.scrollLeft >= maxScroll - 5) {
+          // Wrap back to start
+          thumbsList.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          thumbsList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }, 3000);
+    };
+    
+    const stopAutoplay = () => {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    };
+    
+    // Click navigations
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      stopAutoplay();
+      thumbsList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      stopAutoplay();
+      thumbsList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+    
+    // Stop autoplay when a thumbnail is clicked
+    thumbsList.addEventListener('click', () => {
+      stopAutoplay();
+    });
+    
+    // Start the animation
+    startAutoplay();
+  }
+});
