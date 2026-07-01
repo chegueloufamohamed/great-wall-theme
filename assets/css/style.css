@@ -3513,15 +3513,25 @@ p {
 }
 
 @media (max-width: 768px) {
+  .single-product form.cart .add-to-cart-row,
+  .single-product .woocommerce-variation-add-to-cart .add-to-cart-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
   .woocommerce div.product form.cart .button.single_add_to_cart_button,
   .woocommerce div.product form.cart .buy-now-theme-btn,
   .single-product form.cart .single_add_to_cart_button,
   .single-product form.cart .buy-now-theme-btn,
   .single-product .woocommerce-variation-add-to-cart .single_add_to_cart_button {
-    min-width: 110px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    flex: none !important;
     padding: 0 10px !important;
-    font-size: 0.8rem !important;
-    letter-spacing: 0.05em !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.08em !important;
+    display: flex !important;
   }
 }
 
