@@ -3465,7 +3465,7 @@ p {
   width: auto !important;
   box-sizing: border-box !important;
   text-align: center !important;
-  border-radius: var(--border-radius-sm) !important;
+  border-radius: 8px !important;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -3478,28 +3478,29 @@ p {
 
 .woocommerce div.product form.cart .button.single_add_to_cart_button,
 .single-product form.cart .single_add_to_cart_button {
-  background-color: var(--color-primary) !important;
+  background-color: var(--bg-dark, #1c1c1e) !important;
   color: #FFFFFF !important;
-  border: 1px solid var(--color-primary) !important;
+  border: none !important;
 }
 
 .woocommerce div.product form.cart .button.single_add_to_cart_button:hover,
 .single-product form.cart .single_add_to_cart_button:hover {
-  background-color: transparent !important;
-  color: var(--color-primary) !important;
+  background-color: var(--color-accent, #c5a880) !important;
+  color: #FFFFFF !important;
 }
 
 .woocommerce div.product form.cart .buy-now-theme-btn,
 .single-product form.cart .buy-now-theme-btn {
-  background-color: var(--color-accent) !important;
-  color: #FFFFFF !important;
-  border: 1px solid var(--color-accent) !important;
+  background-color: #FFFFFF !important;
+  color: var(--color-primary, #2e2a25) !important;
+  border: 1.5px solid var(--color-primary, #2e2a25) !important;
 }
 
 .woocommerce div.product form.cart .buy-now-theme-btn:hover,
 .single-product form.cart .buy-now-theme-btn:hover {
-  background-color: transparent !important;
-  color: var(--color-accent) !important;
+  background-color: #fdf0e8 !important;
+  color: var(--color-accent, #c5a880) !important;
+  border-color: var(--color-accent, #c5a880) !important;
 }
 
 .single-product form.cart .apple-pay-theme-btn {
