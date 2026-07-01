@@ -3415,7 +3415,7 @@ p {
   align-items: center !important;
   gap: 20px !important;
   width: 100% !important;
-  margin-bottom: 25px !important;
+  margin-bottom: 12px !important;
 }
 
 .quantity-wrapper .quantity-label {
@@ -3549,7 +3549,7 @@ p {
   align-items: center !important;
   gap: 12px !important;
   width: 100% !important;
-  margin-top: 20px !important;
+  margin-top: 12px !important;
 }
 
 @media (max-width: 768px) {
@@ -3585,7 +3585,7 @@ p {
   }
 
   .quantity-wrapper {
-    margin-bottom: 15px !important;
+    margin-bottom: 10px !important;
   }
 }
 
