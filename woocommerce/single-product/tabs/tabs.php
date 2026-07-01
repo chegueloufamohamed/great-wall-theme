@@ -10,20 +10,7 @@ global $product;
 ?>
 <div class="product-stacked-sections-wrapper">
     
-    <!-- 1. Description Section -->
-    <?php 
-    $description = get_the_content();
-    if ( ! empty( trim( $description ) ) ) : ?>
-        <div class="product-section-block section-description">
-            <h2 class="product-section-title"><?php esc_html_e( 'Description', 'great-wall-theme' ); ?></h2>
-            <div class="product-section-content">
-                <?php the_content(); ?>
-            </div>
-        </div>
-        <div class="section-divider-stacked"></div>
-    <?php endif; ?>
-    
-    <!-- 2. Reviews Section -->
+    <!-- 1. Reviews Section (Top) -->
     <div class="product-section-block section-reviews">
         <div class="product-section-content">
             <?php 
@@ -33,5 +20,19 @@ global $product;
             ?>
         </div>
     </div>
+    
+    <div class="section-divider-stacked"></div>
+    
+    <!-- 2. Specifications Section (Bottom) -->
+    <?php 
+    $description = get_the_content();
+    if ( ! empty( trim( $description ) ) ) : ?>
+        <div class="product-section-block section-specifications">
+            <h2 class="product-section-title"><?php esc_html_e( 'Specifications', 'great-wall-theme' ); ?></h2>
+            <div class="product-section-content section-specifications-content">
+                <?php the_content(); ?>
+            </div>
+        </div>
+    <?php endif; ?>
     
 </div>

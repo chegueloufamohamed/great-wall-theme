@@ -6275,3 +6275,20 @@ ul.products.list-view-active li.product .product-loop-actions {
   background-color: var(--border-color, #e5e0d8) !important;
   width: 100% !important;
 }
+
+/* Styling to separate specifications lines with border bottom */
+.section-specifications-content p,
+.section-specifications-content li {
+  border-bottom: 1.5px solid var(--border-color, #e5e0d8) !important;
+  padding-bottom: 14px !important;
+  margin-bottom: 14px !important;
+  font-size: 0.95rem !important;
+  color: var(--color-secondary, #555) !important;
+}
+
+.section-specifications-content p:last-child,
+.section-specifications-content li:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
