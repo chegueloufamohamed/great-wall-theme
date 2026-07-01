@@ -829,18 +829,32 @@ function initWooProductPage() {
       buyNowBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const form = wooAddCartBtn.closest('form.cart');
+        if (!form) return;
+
+        const isVariable = form.classList.contains('variations_form') || form.querySelector('.variations');
+        const variationIdInput = form.querySelector('input[name="variation_id"]');
+        let prodId = '';
+
+        if (isVariable) {
+          const variationId = variationIdInput ? variationIdInput.value : '';
+          if (!variationId || variationId === '0') {
+            // Variation not selected yet, click native add to cart button to trigger WooCommerce validation alerts
+            wooAddCartBtn.click();
+            return;
+          }
+          prodId = variationId;
+        } else {
+          prodId = wooAddCartBtn.value;
+          const prodIdInput = form.querySelector('input[name="add-to-cart"]') || form.querySelector('[name="add-to-cart"]');
+          if (prodIdInput && prodIdInput.value) {
+            prodId = prodIdInput.value;
+          }
+        }
+
         const quantityInput = form.querySelector('input.qty') || form.querySelector('[name="quantity"]');
         const qty = quantityInput ? quantityInput.value : 1;
         
-        // Find product ID
-        let prodId = wooAddCartBtn.value;
-        const prodIdInput = form.querySelector('input[name="add-to-cart"]') || form.querySelector('[name="add-to-cart"]');
-        if (prodIdInput) {
-          prodId = prodIdInput.value;
-        }
-        
         if (prodId) {
-          // Redirect to checkout with add to cart query parameters
           const baseUrl = (typeof greatWallThemeParams !== 'undefined' && greatWallThemeParams.checkout_url) 
             ? greatWallThemeParams.checkout_url 
             : (window.location.origin + '/checkout/');
