@@ -3408,48 +3408,81 @@ p {
   margin-top: 15px !important;
 }
 
-/* Quantity Selection - Full width block on desktop & mobile */
-.single-product form.cart .quantity,
-.single-product .woocommerce-variation-add-to-cart .quantity {
-  margin: 0 0 20px 0 !important;
+/* Custom Quantity Layout wrapper (Desktop & Mobile) */
+.quantity-wrapper {
   display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 20px !important;
   width: 100% !important;
-  gap: 8px !important;
+  margin-bottom: 25px !important;
 }
 
-.single-product form.cart .quantity::before,
-.single-product .woocommerce-variation-add-to-cart .quantity::before {
-  content: 'Quantity' !important;
+.quantity-wrapper .quantity-label {
   font-size: 0.85rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
-  color: var(--color-primary) !important;
-  display: block !important;
+  color: var(--color-primary, #2e2a25) !important;
+  min-width: 80px !important;
   text-align: left !important;
+  display: block !important;
 }
 
-.single-product form.cart .quantity input.qty,
-.single-product .woocommerce-variation-add-to-cart .quantity input.qty {
-  height: 52px !important; /* Match checkout buttons height */
-  width: 100% !important;
-  border-radius: var(--border-radius-sm, 8px) !important;
-  border: 1.5px solid var(--border-color) !important;
-  background-color: var(--bg-primary) !important;
-  color: var(--color-primary) !important;
-  text-align: center !important;
-  font-weight: 600 !important;
-  font-size: 0.95rem !important;
-  outline: none !important;
-  transition: border-color var(--transition-fast) !important;
+.quantity-wrapper .quantity {
+  display: flex !important;
+  align-items: center !important;
+  border: 1.5px solid var(--border-color, #e5e0d8) !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+  height: 52px !important;
+  flex: 1 !important;
+  max-width: 180px !important; /* Elegant size on desktop */
+  margin: 0 !important;
   box-sizing: border-box !important;
 }
 
-.single-product form.cart .quantity input.qty:focus,
-.single-product .woocommerce-variation-add-to-cart .quantity input.qty:focus {
-  border-color: var(--color-accent) !important;
+.quantity .qty-btn {
+  border: none !important;
+  background: transparent !important;
+  width: 50px !important;
+  height: 100% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--color-primary, #2e2a25) !important;
+  font-size: 1.1rem !important;
+  transition: background-color 0.2s ease !important;
+  outline: none !important;
+  padding: 0 !important;
+}
+
+.quantity .qty-btn:hover {
+  background-color: #fdfaf6 !important;
+}
+
+.quantity input.qty {
+  flex: 1 !important;
+  width: 0 !important;
+  border: none !important;
+  height: 100% !important;
+  background: transparent !important;
+  text-align: center !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--color-primary, #2e2a25) !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -moz-appearance: textfield !important;
+  padding: 0 !important;
+}
+
+.quantity input.qty::-webkit-outer-spin-button,
+.quantity input.qty::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
 }
 
 /* Add to Cart Actions */
@@ -3542,14 +3575,16 @@ p {
   }
 
   /* Mobile: Hide Quantity label and stack input with full width */
-  .single-product form.cart .quantity::before,
-  .single-product .woocommerce-variation-add-to-cart .quantity::before {
+  .quantity-wrapper .quantity-label {
     display: none !important;
   }
 
-  .single-product form.cart .quantity,
-  .single-product .woocommerce-variation-add-to-cart .quantity {
-    gap: 0 !important;
+  .quantity-wrapper .quantity {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .quantity-wrapper {
     margin-bottom: 15px !important;
   }
 }

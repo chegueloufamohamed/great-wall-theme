@@ -1082,3 +1082,37 @@ function initShopCategoriesSlider() {
 
   startAutoplay();
 }
+
+/**
+ * Handle custom quantity increment/decrement buttons click events
+ */
+document.addEventListener('click', (e) => {
+  const button = e.target.closest('.qty-btn');
+  if (!button) return;
+  
+  e.preventDefault();
+  const quantityContainer = button.closest('.quantity');
+  if (!quantityContainer) return;
+  
+  const input = quantityContainer.querySelector('input.qty');
+  if (!input) return;
+  
+  const val = parseFloat(input.value) || 1;
+  const step = parseFloat(input.getAttribute('step')) || 1;
+  const min = parseFloat(input.getAttribute('min')) || 1;
+  const max = parseFloat(input.getAttribute('max')) || Infinity;
+  
+  if (button.classList.contains('plus')) {
+    if (val + step <= max) {
+      input.value = val + step;
+    }
+  } else if (button.classList.contains('minus')) {
+    if (val - step >= min) {
+      input.value = val - step;
+    }
+  }
+  
+  // Trigger change event so WooCommerce detects the update
+  const event = new Event('change', { bubbles: true });
+  input.dispatchEvent(event);
+});
