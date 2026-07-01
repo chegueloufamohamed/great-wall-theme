@@ -6447,3 +6447,63 @@ ul.products.list-view-active li.product .product-loop-actions {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* ==========================================================================
+   PRODUCT GALLERY NAVIGATION ARROWS OVERLAYS
+   ========================================================================== */
+.single-product .woocommerce-product-gallery {
+  position: relative !important;
+}
+
+.gallery-nav-btn {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 99 !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border: 1.5px solid var(--border-color, #e5e0d8) !important;
+  color: var(--color-primary, #2e2a25) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  font-size: 1.5rem !important;
+  outline: none !important;
+  padding: 0 !important;
+}
+
+.gallery-nav-btn:hover {
+  background-color: #ffffff !important;
+  color: var(--color-accent, #c5a880) !important;
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.gallery-nav-btn.prev {
+  left: 20px !important;
+}
+
+.gallery-nav-btn.next {
+  right: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .gallery-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.2rem !important;
+  }
+  
+  .gallery-nav-btn.prev {
+    left: 10px !important;
+  }
+  
+  .gallery-nav-btn.next {
+    right: 10px !important;
+  }
+}

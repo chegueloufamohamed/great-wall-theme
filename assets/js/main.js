@@ -1116,3 +1116,43 @@ document.addEventListener('click', (e) => {
   const event = new Event('change', { bubbles: true });
   input.dispatchEvent(event);
 });
+
+/**
+ * Inject and initialize navigation arrow controls in single product gallery
+ */
+window.addEventListener('load', () => {
+  const gallery = document.querySelector('.woocommerce-product-gallery');
+  if (gallery && typeof jQuery !== 'undefined') {
+    // Check if there are multiple images before adding arrows
+    const images = gallery.querySelectorAll('.woocommerce-product-gallery__image');
+    if (images.length <= 1) return;
+
+    // Create prev button
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'gallery-nav-btn prev';
+    prevBtn.setAttribute('type', 'button');
+    prevBtn.setAttribute('aria-label', 'Previous Image');
+    prevBtn.innerHTML = '<i class="ri-arrow-left-s-line"></i>';
+    
+    // Create next button
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'gallery-nav-btn next';
+    nextBtn.setAttribute('type', 'button');
+    nextBtn.setAttribute('aria-label', 'Next Image');
+    nextBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
+    
+    gallery.appendChild(prevBtn);
+    gallery.appendChild(nextBtn);
+    
+    // Handle navigation click triggers
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      jQuery('.woocommerce-product-gallery').flexslider('prev');
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      jQuery('.woocommerce-product-gallery').flexslider('next');
+    });
+  }
+});
