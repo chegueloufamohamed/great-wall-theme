@@ -3616,10 +3616,14 @@ p {
 
 /* 3. Product Tabs / Reviews / Description panels */
 .single-product .woocommerce-tabs {
-  grid-column: 1 / -1;
-  border-top: 1px solid var(--border-color);
-  padding-top: 50px;
-  margin-top: 30px;
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
+  border-top: 1px solid var(--border-color) !important;
+  padding-top: 50px !important;
+  margin-top: 30px !important;
+  display: block !important;
 }
 
 .single-product .woocommerce-tabs ul.tabs {
