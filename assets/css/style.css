@@ -3798,6 +3798,56 @@ p {
   width: 100% !important;
 }
 
+/* Product Cards (Grid/Related) Overrides */
+.products-grid li.product,
+.related.products li.product,
+ul.products li.product {
+  position: relative !important;
+}
+
+/* Remove underlines from links and prices inside product cards */
+.products-grid li.product a,
+.related.products li.product a,
+ul.products li.product a,
+.products-grid li.product p.price,
+.related.products li.product p.price,
+ul.products li.product p.price,
+.products-grid li.product p.price *,
+.related.products li.product p.price * {
+  text-decoration: none !important;
+}
+
+/* Soften the crossed-out regular price color inside product cards */
+.products-grid li.product p.price del,
+.related.products li.product p.price del,
+ul.products li.product p.price del,
+.products-grid li.product p.price del .amount,
+.related.products li.product p.price del .amount {
+  color: #c0c0c0 !important; /* Very soft light gray */
+  font-weight: 400 !important;
+  font-size: 0.9rem !important;
+  text-decoration: line-through !important;
+}
+
+/* Position the Save Badge on the top-right of the product card image */
+.products-grid li.product p.price .badge-sale,
+.related.products li.product p.price .badge-sale,
+ul.products li.product p.price .badge-sale {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  z-index: 10 !important;
+  margin: 0 !important;
+  background: #fdf0e8 !important;
+  color: #8b4513 !important;
+  border-radius: 20px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  padding: 5px 12px !important;
+  letter-spacing: 0.05em !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+
 .related.products .products-grid {
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 30px !important;
