@@ -5765,6 +5765,24 @@ ul.products.list-view-active li.product .product-loop-actions {
   color: var(--color-accent, #c5a880) !important;
 }
 
+@media (max-width: 768px) {
+  .product-trust-badges-row {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+  
+  .trust-badge-item {
+    font-size: 10.5px !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+  }
+  
+  .trust-badge-item i {
+    font-size: 14px !important;
+  }
+}
+
 /* Subtitle / Short Description styling */
 .single-product .woocommerce-product-details__short-description {
   font-size: 0.95rem !important;
