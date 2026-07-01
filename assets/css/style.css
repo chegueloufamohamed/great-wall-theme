@@ -5470,14 +5470,8 @@ ul.products.list-view-active li.product .product-loop-actions {
   padding: 14px 40px;
   z-index: 999;
   box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.05);
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   display: flex;
   justify-content: center;
-}
-
-.sticky-bar-global.show {
-  transform: translateY(0);
 }
 
 .sticky-bar-content {

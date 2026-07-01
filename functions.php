@@ -823,28 +823,7 @@ function great_wall_sticky_add_to_cart_bar() {
 		}
 	}
 	
-	window.addEventListener('load', () => {
-		const stickyBar = document.querySelector('.sticky-bar-global');
-		const buyForm = document.querySelector('form.cart');
-		if (stickyBar && buyForm) {
-			window.addEventListener('scroll', () => {
-				const formBottom = buyForm.getBoundingClientRect().bottom + window.scrollY;
-				if (window.scrollY > formBottom - 100) {
-					stickyBar.classList.add('show');
-				} else {
-					stickyBar.classList.remove('show');
-				}
-			});
-		} else if (stickyBar) {
-			window.addEventListener('scroll', () => {
-				if (window.scrollY > 500) {
-					stickyBar.classList.add('show');
-				} else {
-					stickyBar.classList.remove('show');
-				}
-			});
-		}
-	});
+	// Sticky bar is permanently visible on load
 	</script>
 	<?php
 }
