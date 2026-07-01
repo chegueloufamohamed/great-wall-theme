@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.1.5' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.1.6' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.1.5', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.1.6', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -892,12 +892,17 @@ function great_wall_remove_product_title_from_breadcrumbs( $crumbs, $breadcrumb 
 }
 
 /**
- * Force UAE Dirham currency symbol to render in English (AED) instead of Arabic (د.إ).
+ * Force UAE Dirham currency symbol to render in English (AED) instead of Arabic (د.إ) with appropriate spacing.
  */
 add_filter( 'woocommerce_currency_symbol', 'great_wall_force_aed_currency_symbol', 99, 2 );
 function great_wall_force_aed_currency_symbol( $currency_symbol, $currency ) {
     if ( $currency === 'AED' ) {
-        return 'AED';
+        $pos = get_option( 'woocommerce_currency_pos' );
+        if ( $pos === 'left' || $pos === 'left_space' ) {
+            return 'AED ';
+        } else {
+            return ' AED';
+        }
     }
     return $currency_symbol;
 }
