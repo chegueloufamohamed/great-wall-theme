@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.2.1' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.2.2' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.2.1', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.2.2', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -376,7 +376,13 @@ function great_wall_shop_hero_banner() {
 
 add_action( 'woocommerce_before_main_content', 'great_wall_wrapper_start', 10 );
 function great_wall_wrapper_start() {
-	$padding = ( is_shop() || is_product_category() || is_product_tag() ) ? '40px' : '140px';
+	if ( is_shop() || is_product_category() || is_product_tag() ) {
+		$padding = '40px';
+	} elseif ( is_product() ) {
+		$padding = '95px'; /* Reduced from 140px to align tightly below the header */
+	} else {
+		$padding = '140px';
+	}
 	echo '<section class="section" style="padding-top: ' . $padding . ';"><div class="container">';
 }
 
