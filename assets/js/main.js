@@ -1154,6 +1154,20 @@ window.addEventListener('load', () => {
       e.preventDefault();
       jQuery('.woocommerce-product-gallery').flexslider('next');
     });
+
+    // Pause gallery slideshow when clicked/tapped (on mobile/desktop)
+    const pauseGallery = () => {
+      const $gallery = jQuery('.woocommerce-product-gallery');
+      if ($gallery.length && $gallery.data('flexslider')) {
+        $gallery.flexslider('pause');
+      }
+    };
+    gallery.addEventListener('click', pauseGallery);
+    gallery.addEventListener('touchstart', pauseGallery, { passive: true });
+    
+    // Also pause if the navigation buttons are clicked
+    prevBtn.addEventListener('click', pauseGallery);
+    nextBtn.addEventListener('click', pauseGallery);
   }
 });
 

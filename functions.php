@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.2.5' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.2.6' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.2.5', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.2.6', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -929,3 +929,16 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_d
 
 add_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products', 20 );
 add_action( 'woocommerce_after_single_product', 'woocommerce_upsell_display', 15 );
+
+/**
+ * Enable autoplay/slideshow for WooCommerce product gallery Flexslider.
+ * Slides automatically unless hovered (on desktop) or touched/interacted.
+ */
+add_filter( 'woocommerce_single_product_carousel_options', 'great_wall_custom_carousel_options', 99 );
+function great_wall_custom_carousel_options( $options ) {
+	$options['slideshow']      = true;  // Enable automatic sliding
+	$options['slideshowSpeed'] = 3500;  // Time between slides in milliseconds (3.5 seconds)
+	$options['animationSpeed'] = 600;   // Transition duration (0.6 seconds)
+	$options['pauseOnHover']   = true;  // Pause slideshow when mouse hovers over it
+	return $options;
+}
