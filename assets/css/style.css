@@ -5726,6 +5726,7 @@ ul.products.list-view-active li.product .product-loop-actions {
   border-radius: 12px !important;
   padding: 14px 18px !important;
   border-left: 4px solid var(--color-accent, #c5a880) !important;
+  border-right: 4px solid var(--color-accent, #c5a880) !important;
 }
 
 .bnpl-strip-detail p {
