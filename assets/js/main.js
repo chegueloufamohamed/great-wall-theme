@@ -816,16 +816,6 @@ function initWooProductPage() {
       buyNowBtn.className = 'buy-now-theme-btn';
       buyNowBtn.innerHTML = '<span>Buy Now</span>';
       
-      const applePayBtn = document.createElement('a');
-      applePayBtn.href = '#';
-      applePayBtn.className = 'apple-pay-theme-btn';
-      applePayBtn.innerHTML = '<span> Pay</span>';
-      
-      const googlePayBtn = document.createElement('a');
-      googlePayBtn.href = '#';
-      googlePayBtn.className = 'google-pay-theme-btn';
-      googlePayBtn.innerHTML = '<span><svg class="google-pay-svg" width="60" height="24" viewBox="0 0 37 15" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; display: inline-block; margin-top: -2px;"><path d="M15.5 1.1h-2.3v9.5h-1.2V1.1H9.8V0h5.7v1.1zm2.3 3.3c.4 0 .8.1 1 .4.3.3.4.6.4 1v2.7h-1.2v-.6c-.2.2-.4.4-.7.6s-.6.2-.9.2c-.4 0-.8-.1-1.1-.4-.3-.3-.4-.6-.4-1 0-.5.2-.9.5-1.1.3-.2.8-.4 1.4-.4h1.1v-.3c0-.3-.1-.5-.2-.7s-.4-.2-.7-.2c-.3 0-.5 0-.7.2-.2.1-.4.3-.6.5l-.7-.6c.3-.3.6-.5.9-.7s.7-.2 1.1-.2zm.3 2.5v-.6h-1c-.3 0-.5.1-.7.2-.2.1-.2.3-.2.5 0 .2.1.4.2.5.1.1.3.2.5.2.3 0 .5-.1.7-.2s.4-.3.5-.6zm5.2-2.4l-2.4 5.6h-1.2l.9-2-1.6-3.6h1.3l.9 2.2.9-2.2h1.2z" fill="#5f6368"/><path d="M2.7 11.7c-1.3 0-2.3-1-2.3-2.3s1-2.3 2.3-2.3c.6 0 1.2.2 1.6.6l-1.1 1.1c-.1-.1-.3-.2-.5-.2-.6 0-1.1.5-1.1 1.1s.5 1.1 1.1 1.1c.6 0 1.1-.5 1.1-1.1H2.7V8.7h2.3c0 .1.1.3.1.4 0 1.4-1.1 2.6-2.4 2.6z" fill="#4285F4"/><path d="M5.3 9.4c0-1.3 1-2.3 2.3-2.3s2.3 1 2.3 2.3-1 2.3-2.3 2.3-2.3-1-2.3-2.3zm1.1 0c0 .6.5 1.1 1.1 1.1s1.1-.5 1.1-1.1-.5-1.1-1.1-1.1-1.1.5-1.1 1.1z" fill="#EA4335"/><path d="M10.2 9.4c0-1.3 1-2.3 2.3-2.3s2.3 1 2.3 2.3-1 2.3-2.3 2.3-2.3-1-2.3-2.3zm1.2 0c0 .6.5 1.1 1.1 1.1s1.1-.5 1.1-1.1-.5-1.1-1.1-1.1-1.1.5-1.1 1.1z" fill="#FBBC05"/><path d="M15.1 9.4c0-1.3 1-2.3 2.3-2.3s2.3 1 2.3 2.3-1 2.3-2.3 2.3-2.3-1-2.3-2.3zm1.1 0c0 .6.5 1.1 1.1 1.1s1.1-.5 1.1-1.1-.5-1.1-1.1-1.1-1.1.5-1.1 1.1z" fill="#34A853"/></svg></span>';
-      
       // Let's wrap them in an add-to-cart-row div for proper layout
       const parent = wooAddCartBtn.parentNode;
       const rowDiv = document.createElement('div');
@@ -835,10 +825,9 @@ function initWooProductPage() {
       parent.insertBefore(rowDiv, wooAddCartBtn);
       rowDiv.appendChild(wooAddCartBtn);
       rowDiv.appendChild(buyNowBtn);
-      rowDiv.appendChild(applePayBtn);
-      rowDiv.appendChild(googlePayBtn);
       
-      const triggerBuyRedirect = () => {
+      buyNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         const form = wooAddCartBtn.closest('form.cart');
         const quantityInput = form.querySelector('input.qty') || form.querySelector('[name="quantity"]');
         const qty = quantityInput ? quantityInput.value : 1;
@@ -862,21 +851,6 @@ function initWooProductPage() {
         } else {
           form.submit();
         }
-      };
-
-      buyNowBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        triggerBuyRedirect();
-      });
-
-      applePayBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        triggerBuyRedirect();
-      });
-
-      googlePayBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        triggerBuyRedirect();
       });
     }
   }

@@ -3450,18 +3450,16 @@ p {
 .woocommerce div.product form.cart .buy-now-theme-btn,
 .single-product form.cart .single_add_to_cart_button,
 .single-product form.cart .buy-now-theme-btn,
-.single-product form.cart .apple-pay-theme-btn,
-.single-product form.cart .google-pay-theme-btn,
 .single-product .woocommerce-variation-add-to-cart .single_add_to_cart_button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   height: 52px !important;
   line-height: 52px !important;
-  padding: 0 15px !important;
+  padding: 0 25px !important;
   margin: 0 !important;
   flex: 1 !important;
-  min-width: 110px !important;
+  min-width: 180px !important;
   width: auto !important;
   box-sizing: border-box !important;
   text-align: center !important;
@@ -3469,7 +3467,7 @@ p {
   font-size: 0.88rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.1em !important;
   cursor: pointer !important;
   transition: all var(--transition-fast) !important;
   text-decoration: none !important;
@@ -3503,33 +3501,12 @@ p {
   border-color: var(--color-accent, #c5a880) !important;
 }
 
-.single-product form.cart .apple-pay-theme-btn {
-  background-color: #000000 !important;
-  color: #FFFFFF !important;
-  border: 1px solid #000000 !important;
-}
-
-.single-product form.cart .apple-pay-theme-btn:hover {
-  background-color: #222222 !important;
-  border-color: #222222 !important;
-}
-
-.single-product form.cart .google-pay-theme-btn {
-  background-color: #FFFFFF !important;
-  color: #111111 !important;
-  border: 1.5px solid var(--border-color, #e5e0d8) !important;
-}
-
-.single-product form.cart .google-pay-theme-btn:hover {
-  background-color: #fafafa !important;
-  border-color: var(--color-primary, #2e2a25) !important;
-}
-
-/* Add to Cart, Buy Now, Apple Pay & Google Pay layout wrapper - 2x2 grid */
+/* Add to Cart & Buy Now layout wrapper */
 .single-product form.cart .add-to-cart-row,
 .single-product .woocommerce-variation-add-to-cart .add-to-cart-row {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
   gap: 12px !important;
   width: 100% !important;
   margin-top: 20px !important;
@@ -3540,12 +3517,10 @@ p {
   .woocommerce div.product form.cart .buy-now-theme-btn,
   .single-product form.cart .single_add_to_cart_button,
   .single-product form.cart .buy-now-theme-btn,
-  .single-product form.cart .apple-pay-theme-btn,
-  .single-product form.cart .google-pay-theme-btn,
   .single-product .woocommerce-variation-add-to-cart .single_add_to_cart_button {
-    min-width: 90px !important;
-    padding: 0 8px !important;
-    font-size: 0.78rem !important;
+    min-width: 110px !important;
+    padding: 0 10px !important;
+    font-size: 0.8rem !important;
     letter-spacing: 0.05em !important;
   }
 }
@@ -5614,12 +5589,6 @@ ul.products.list-view-active li.product .product-loop-actions {
   }
 }
 
-/* Hide native Stripe express checkout buttons on single product pages to prevent duplicate buttons */
-.single-product #payment-request-button,
-.single-product .wc-stripe-payment-request-wrapper,
-.single-product .wc-stripe-payment-request-divider {
-  display: none !important;
-}
 
 
 
