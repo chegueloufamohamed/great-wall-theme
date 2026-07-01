@@ -1172,7 +1172,8 @@ window.addEventListener('load', () => {
 });
 
 /**
- * Initialize product thumbnail carousel with autoplay and pause-on-interaction
+ * Initialize product thumbnail carousel with continuous slow "train-like" scroll
+ * Animates slowly and smoothly using requestAnimationFrame. Pauses on hover, touch, or click.
  */
 window.addEventListener('load', () => {
   const thumbsList = document.querySelector('.woocommerce-product-gallery ol.flex-control-thumbs');
@@ -1183,71 +1184,105 @@ window.addEventListener('load', () => {
     const parent = thumbsList.parentNode;
     
     // Wrap ol.flex-control-thumbs in a helper slider container if not already wrapped
-    const wrapper = document.createElement('div');
-    wrapper.className = 'thumbs-slider-wrapper';
-    
-    // Insert wrapper into parent, then move thumbsList inside it
-    parent.insertBefore(wrapper, thumbsList);
-    wrapper.appendChild(thumbsList);
-    
-    // Create arrow buttons
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'thumb-nav-btn prev';
-    prevBtn.setAttribute('type', 'button');
-    prevBtn.setAttribute('aria-label', 'Previous Thumbnails');
-    prevBtn.innerHTML = '<i class="ri-arrow-left-s-line"></i>';
-    
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'thumb-nav-btn next';
-    nextBtn.setAttribute('type', 'button');
-    nextBtn.setAttribute('aria-label', 'Next Thumbnails');
-    nextBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
-    
-    wrapper.appendChild(prevBtn);
-    wrapper.appendChild(nextBtn);
-    
-    // Autoplay scroll settings
-    const scrollAmount = 102; // Thumbnail width (90px) + gap (12px)
-    let autoplayInterval;
-    
-    const startAutoplay = () => {
-      autoplayInterval = setInterval(() => {
+    let wrapper = parent.querySelector('.thumbs-slider-wrapper');
+    if (!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'thumbs-slider-wrapper';
+      parent.insertBefore(wrapper, thumbsList);
+      wrapper.appendChild(thumbsList);
+      
+      // Create arrow buttons
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'thumb-nav-btn prev';
+      prevBtn.setAttribute('type', 'button');
+      prevBtn.setAttribute('aria-label', 'Previous Thumbnails');
+      prevBtn.innerHTML = '<i class="ri-arrow-left-s-line"></i>';
+      
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'thumb-nav-btn next';
+      nextBtn.setAttribute('type', 'button');
+      nextBtn.setAttribute('aria-label', 'Next Thumbnails');
+      nextBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
+      
+      wrapper.appendChild(prevBtn);
+      wrapper.appendChild(nextBtn);
+    }
+
+    // Continuous scroll animation logic
+    let animationId = null;
+    let isPaused = false;
+    let scrollSpeed = 0.5; // Pixels per frame (very slow, smooth continuous animation)
+    let currentScroll = thumbsList.scrollLeft;
+    let resumeTimeout = null;
+
+    const animateScroll = () => {
+      if (!isPaused) {
+        currentScroll += scrollSpeed;
         const maxScroll = thumbsList.scrollWidth - thumbsList.clientWidth;
-        if (thumbsList.scrollLeft >= maxScroll - 5) {
-          // Wrap back to start
-          thumbsList.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          thumbsList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        
+        if (currentScroll >= maxScroll) {
+          currentScroll = 0;
         }
-      }, 3000);
+        thumbsList.scrollLeft = currentScroll;
+      }
+      animationId = requestAnimationFrame(animateScroll);
     };
-    
-    const stopAutoplay = () => {
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-        autoplayInterval = null;
+
+    const startAnimation = () => {
+      if (!animationId) {
+        animateScroll();
       }
     };
-    
-    // Click navigations
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      stopAutoplay();
-      thumbsList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+
+    const stopAnimation = () => {
+      isPaused = true;
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+        resumeTimeout = null;
+      }
+    };
+
+    const resumeAnimation = () => {
+      // Sync currentScroll with actual scroll position
+      currentScroll = thumbsList.scrollLeft;
+      isPaused = false;
+    };
+
+    const triggerTemporaryPause = (ms) => {
+      stopAnimation();
+      resumeTimeout = setTimeout(resumeAnimation, ms);
+    };
+
+    // Pause on hover (desktop)
+    wrapper.addEventListener('mouseenter', stopAnimation);
+    wrapper.addEventListener('mouseleave', resumeAnimation);
+
+    // Pause on touch (mobile)
+    wrapper.addEventListener('touchstart', stopAnimation, { passive: true });
+    wrapper.addEventListener('touchend', () => {
+      triggerTemporaryPause(1500); // Resume after 1.5 seconds once touch scroll settles
     });
-    
-    nextBtn.addEventListener('click', (e) => {
+
+    // Navigation buttons scroll increments
+    const navScrollAmount = 102; // Item width + gap
+    wrapper.querySelector('.thumb-nav-btn.prev').addEventListener('click', (e) => {
       e.preventDefault();
-      stopAutoplay();
-      thumbsList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      thumbsList.scrollBy({ left: -navScrollAmount, behavior: 'smooth' });
+      triggerTemporaryPause(3000); // Pause for 3s after button navigation click
     });
-    
-    // Stop autoplay when a thumbnail is clicked
+
+    wrapper.querySelector('.thumb-nav-btn.next').addEventListener('click', (e) => {
+      e.preventDefault();
+      thumbsList.scrollBy({ left: navScrollAmount, behavior: 'smooth' });
+      triggerTemporaryPause(3000); // Pause for 3s after button navigation click
+    });
+
+    // Pause on manual thumbnail click to let the user choose & view the featured photo
     thumbsList.addEventListener('click', () => {
-      stopAutoplay();
+      triggerTemporaryPause(6000); // Pause for 6 seconds when choosing featured image
     });
-    
-    // Start the animation
-    startAutoplay();
+
+    // Start the marquee scroll
+    startAnimation();
   }
 });
