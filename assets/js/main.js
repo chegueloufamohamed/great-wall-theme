@@ -816,8 +816,15 @@ function initWooProductPage() {
       buyNowBtn.className = 'buy-now-theme-btn';
       buyNowBtn.innerHTML = '<span>Buy Now</span>';
       
-      // Let's create an actions container if not exists, or just append next to it
-      wooAddCartBtn.parentNode.insertBefore(buyNowBtn, wooAddCartBtn.nextSibling);
+      const applePayBtn = document.createElement('a');
+      applePayBtn.href = '#';
+      applePayBtn.className = 'apple-pay-theme-btn';
+      applePayBtn.innerHTML = '<span> Pay</span>';
+      
+      const googlePayBtn = document.createElement('a');
+      googlePayBtn.href = '#';
+      googlePayBtn.className = 'google-pay-theme-btn';
+      googlePayBtn.innerHTML = '<span>G Pay</span>';
       
       // Let's wrap them in an add-to-cart-row div for proper layout
       const parent = wooAddCartBtn.parentNode;
@@ -828,9 +835,10 @@ function initWooProductPage() {
       parent.insertBefore(rowDiv, wooAddCartBtn);
       rowDiv.appendChild(wooAddCartBtn);
       rowDiv.appendChild(buyNowBtn);
+      rowDiv.appendChild(applePayBtn);
+      rowDiv.appendChild(googlePayBtn);
       
-      buyNowBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+      const triggerBuyRedirect = () => {
         const form = wooAddCartBtn.closest('form.cart');
         const quantityInput = form.querySelector('input.qty') || form.querySelector('[name="quantity"]');
         const qty = quantityInput ? quantityInput.value : 1;
@@ -854,6 +862,21 @@ function initWooProductPage() {
         } else {
           form.submit();
         }
+      };
+
+      buyNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerBuyRedirect();
+      });
+
+      applePayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerBuyRedirect();
+      });
+
+      googlePayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerBuyRedirect();
       });
     }
   }
