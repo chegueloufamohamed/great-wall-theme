@@ -391,14 +391,28 @@ function great_wall_wrapper_end() {
 // 1. Force products to be purchasable (even without price)
 add_filter( 'woocommerce_is_purchasable', '__return_true' );
 
-// 2. Fallback price if empty (so they display Add to Cart button and fallback price)
+// 2. Force products to be on sale for prototype styling
+add_filter( 'woocommerce_product_is_on_sale', '__return_true' );
+
+// Fallback active/sale prices
 add_filter( 'woocommerce_product_get_price', 'great_wall_fallback_price', 10, 2 );
-add_filter( 'woocommerce_product_get_regular_price', 'great_wall_fallback_price', 10, 2 );
+add_filter( 'woocommerce_product_get_sale_price', 'great_wall_fallback_price', 10, 2 );
 function great_wall_fallback_price( $price, $product ) {
-	if ( '' === $price || false === $price || null === $price ) {
-		return '2999'; // Temporary fallback price
+	if ( '' === $price || false === $price || null === $price || (float)$price <= 0 ) {
+		return '2999'; // Fallback active price
 	}
 	return $price;
+}
+
+// Fallback regular price (always 21% higher than the active price)
+add_filter( 'woocommerce_product_get_regular_price', 'great_wall_fallback_regular_price', 10, 2 );
+function great_wall_fallback_regular_price( $regular_price, $product ) {
+	$price = $product->get_price();
+	if ( ! $price || (float)$price <= 0 ) {
+		$price = 2999;
+	}
+	$calculated_reg = round( (float)$price / 0.79 );
+	return (string) $calculated_reg;
 }
 
 // 3. Fallback short description if empty
@@ -847,4 +861,32 @@ function great_wall_remove_specs_from_short_desc( $post_excerpt ) {
     }
     
     return $post_excerpt;
+}
+
+/**
+ * Remove brackets from all product titles globally on the front-end.
+ */
+add_filter( 'the_title', 'great_wall_strip_parentheses_from_title', 10, 2 );
+function great_wall_strip_parentheses_from_title( $title, $id = null ) {
+    if ( ! is_admin() && $id && get_post_type( $id ) === 'product' ) {
+        return str_replace( array( '(', ')' ), '', $title );
+    }
+    return $title;
+}
+
+/**
+ * Move WooCommerce breadcrumbs inside the single product summary column right above the title.
+ */
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_breadcrumb', 4 );
+
+/**
+ * Remove the product name from the end of the breadcrumb trail.
+ */
+add_filter( 'woocommerce_get_breadcrumb', 'great_wall_remove_product_title_from_breadcrumbs', 10, 2 );
+function great_wall_remove_product_title_from_breadcrumbs( $crumbs, $breadcrumb ) {
+    if ( is_product() && ! empty( $crumbs ) ) {
+        array_pop( $crumbs );
+    }
+    return $crumbs;
 }
