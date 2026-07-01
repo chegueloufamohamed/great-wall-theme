@@ -5589,6 +5589,191 @@ ul.products.list-view-active li.product .product-loop-actions {
   }
 }
 
+/* ==========================================================================
+   PRODUCT PAGE DETAIL SUMMARY PANEL & GALLERY (HIGH FIDELITY)
+   ========================================================================== */
+/* Main Gallery image bg and radius */
+.single-product .woocommerce-product-gallery__wrapper {
+  background-color: var(--bg-light-accent, #f2ede5) !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--border-color, #e5e0d8) !important;
+}
+
+.single-product .woocommerce-product-gallery__image {
+  background-color: var(--bg-light-accent, #f2ede5) !important;
+}
+
+.single-product .woocommerce-product-gallery__image img {
+  mix-blend-mode: multiply !important;
+  padding: 15px !important;
+}
+
+/* Thumbnails bg, border, active state */
+.single-product .woocommerce-product-gallery ol.flex-control-thumbs li {
+  background-color: var(--bg-light-accent, #f2ede5) !important;
+  border: 1.5px solid transparent !important;
+  border-radius: 8px !important;
+}
+
+.single-product .woocommerce-product-gallery ol.flex-control-thumbs li img {
+  mix-blend-mode: multiply !important;
+  padding: 4px !important;
+}
+
+.single-product .woocommerce-product-gallery ol.flex-control-thumbs li:has(img.flex-active),
+.single-product .woocommerce-product-gallery ol.flex-control-thumbs li img.flex-active,
+.single-product .woocommerce-product-gallery ol.flex-control-thumbs li:hover {
+  border-color: var(--color-primary, #2e2a25) !important;
+}
+
+/* Save Percentage Badge next to Price */
+.badge-sale {
+  background: #fdf0e8 !important;
+  color: #8b4513 !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  letter-spacing: 0.05em !important;
+  margin-left: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+}
+
+/* BNPL Calculator container style */
+.bnpl-container-detail {
+  margin: 1.5rem 0 !important;
+  font-family: var(--font-primary, sans-serif) !important;
+}
+
+.bnpl-header-title {
+  font-size: 13px !important;
+  color: #777 !important;
+  margin-bottom: 10px !important;
+  font-weight: 500 !important;
+}
+
+.bnpl-tabs-detail {
+  display: flex !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.bnpl-tab-detail {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: #ffffff !important;
+  border: 1.5px solid var(--border-color, #e5e0d8) !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.bnpl-tab-detail:hover,
+.bnpl-tab-detail.active {
+  border-color: var(--color-primary, #2e2a25) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.bnpl-dot-detail {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+
+.bnpl-dot-detail.tabby-dot {
+  background-color: #3dbf7e !important;
+}
+
+.bnpl-dot-detail.tamara-dot {
+  background-color: #f7a244 !important;
+}
+
+.bnpl-tab-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+}
+
+.bnpl-tab-name {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--color-primary, #2e2a25) !important;
+}
+
+.bnpl-tab-sub {
+  font-size: 11px !important;
+  color: #888 !important;
+  margin-top: 1px !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bnpl-strip-detail {
+  background: #fdfaf6 !important;
+  border-radius: 12px !important;
+  padding: 14px 18px !important;
+  border-left: 4px solid var(--color-accent, #c5a880) !important;
+}
+
+.bnpl-strip-detail p {
+  font-size: 13.5px !important;
+  color: var(--color-secondary, #555) !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+.bnpl-strip-detail strong {
+  color: var(--color-primary, #2e2a25) !important;
+  font-weight: 700 !important;
+}
+
+/* Trust Badges Row */
+.product-trust-badges-row {
+  display: flex !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+  border-top: 1px solid var(--border-color, #e5e0d8) !important;
+  padding-top: 1.5rem !important;
+  margin-top: 1.5rem !important;
+}
+
+.trust-badge-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 13px !important;
+  color: var(--color-secondary, #777) !important;
+  font-weight: 500 !important;
+}
+
+.trust-badge-item i {
+  font-size: 18px !important;
+  color: var(--color-accent, #c5a880) !important;
+}
+
+/* Subtitle / Short Description styling */
+.single-product .woocommerce-product-details__short-description {
+  font-size: 0.95rem !important;
+  color: var(--color-secondary, #555) !important;
+  line-height: 1.6 !important;
+  margin: 8px 0 20px 0 !important;
+}
+
+@media(max-width: 576px) {
+  .bnpl-tabs-detail {
+    flex-direction: column !important;
+  }
+}
+
 
 
 

@@ -827,3 +827,130 @@ function great_wall_sticky_add_to_cart_bar() {
 	</script>
 	<?php
 }
+
+/**
+ * Render dynamic save percentage badge next to single product price.
+ */
+add_filter( 'woocommerce_get_price_html', 'great_wall_custom_sale_percentage_badge', 10, 2 );
+function great_wall_custom_sale_percentage_badge( $price_html, $product ) {
+    if ( is_admin() || ! is_product() ) {
+        return $price_html;
+    }
+    if ( $product->is_on_sale() && $product->get_type() === 'simple' ) {
+        $regular_price = $product->get_regular_price();
+        $sale_price = $product->get_sale_price();
+        if ( $regular_price > 0 ) {
+            $percentage = round( ( ( $regular_price - $sale_price ) / $regular_price ) * 100 );
+            $price_html .= ' <span class="badge-sale">' . sprintf( esc_html__( 'Save %d%%', 'great-wall-theme' ), $percentage ) . '</span>';
+        }
+    } elseif ( $product->is_on_sale() && $product->get_type() === 'variable' ) {
+        $available_variations = $product->get_available_variations();
+        $max_percentage = 0;
+        foreach ( $available_variations as $variation ) {
+            $reg_price = $variation['display_regular_price'];
+            $sal_price = $variation['display_price'];
+            if ( $reg_price > 0 && $sal_price < $reg_price ) {
+                $pct = round( ( ( $reg_price - $sal_price ) / $reg_price ) * 100 );
+                if ( $pct > $max_percentage ) {
+                    $max_percentage = $pct;
+                }
+            }
+        }
+        if ( $max_percentage > 0 ) {
+            $price_html .= ' <span class="badge-sale">' . sprintf( esc_html__( 'Save %d%%', 'great-wall-theme' ), $max_percentage ) . '</span>';
+        }
+    }
+    return $price_html;
+}
+
+/**
+ * Render dynamic Tabby and Tamara installment breakdown calculator tabs.
+ */
+add_action( 'woocommerce_single_product_summary', 'great_wall_render_bnpl_tabs', 15 );
+function great_wall_render_bnpl_tabs() {
+    global $product;
+    if ( ! $product ) {
+        return;
+    }
+    $price = $product->get_price();
+    if ( ! $price || $price <= 0 ) {
+        return;
+    }
+    
+    $tabby_installment = number_format( $price / 4, 2 );
+    $tamara_installment = number_format( $price / 3, 2 );
+    ?>
+    <div class="bnpl-container-detail">
+        <p class="bnpl-header-title"><?php esc_html_e( 'Pay in installments with', 'great-wall-theme' ); ?></p>
+        <div class="bnpl-tabs-detail">
+            <div class="bnpl-tab-detail active" data-bnpl="tabby">
+                <span class="bnpl-dot-detail tabby-dot"></span>
+                <div class="bnpl-tab-meta">
+                    <span class="bnpl-tab-name">Tabby</span>
+                    <span class="bnpl-tab-sub">4 &times; AED <?php echo esc_html( $tabby_installment ); ?> &mdash; 0% interest</span>
+                </div>
+            </div>
+            <div class="bnpl-tab-detail" data-bnpl="tamara">
+                <span class="bnpl-dot-detail tamara-dot"></span>
+                <div class="bnpl-tab-meta">
+                    <span class="bnpl-tab-name">Tamara</span>
+                    <span class="bnpl-tab-sub">3 &times; AED <?php echo esc_html( $tamara_installment ); ?> &mdash; 0% interest</span>
+                </div>
+            </div>
+        </div>
+        <div class="bnpl-strip-detail">
+            <p id="bnpl-strip-text">Split into <strong class="bnpl-highlight">4 easy payments of AED <span id="bnpl-strip-amount"><?php echo esc_html( $tabby_installment ); ?></span></strong> with <span id="bnpl-strip-provider">Tabby</span> &mdash; zero interest, zero fees.</p>
+        </div>
+    </div>
+    
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.bnpl-tab-detail');
+        const amountText = document.getElementById('bnpl-strip-amount');
+        const providerText = document.getElementById('bnpl-strip-provider');
+        const highlightText = document.querySelector('.bnpl-highlight');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const bnpl = tab.getAttribute('data-bnpl');
+                if (bnpl === 'tabby') {
+                    amountText.textContent = '<?php echo esc_js( $tabby_installment ); ?>';
+                    providerText.textContent = 'Tabby';
+                    highlightText.innerHTML = '4 easy payments of AED <?php echo esc_js( $tabby_installment ); ?>';
+                } else {
+                    amountText.textContent = '<?php echo esc_js( $tamara_installment ); ?>';
+                    providerText.textContent = 'Tamara';
+                    highlightText.innerHTML = '3 easy payments of AED <?php echo esc_js( $tamara_installment ); ?>';
+                }
+            });
+        });
+    });
+    </script>
+    <?php
+}
+
+/**
+ * Render premium Trust Badges row right below the cart buttons.
+ */
+add_action( 'woocommerce_single_product_summary', 'great_wall_render_trust_badges', 35 );
+function great_wall_render_trust_badges() {
+    ?>
+    <div class="product-trust-badges-row">
+        <div class="trust-badge-item">
+            <i class="ri-truck-line"></i>
+            <span><?php esc_html_e( 'Free UAE delivery', 'great-wall-theme' ); ?></span>
+        </div>
+        <div class="trust-badge-item">
+            <i class="ri-refresh-line"></i>
+            <span><?php esc_html_e( '14-day returns', 'great-wall-theme' ); ?></span>
+        </div>
+        <div class="trust-badge-item">
+            <i class="ri-shield-check-line"></i>
+            <span><?php esc_html_e( '2-year warranty', 'great-wall-theme' ); ?></span>
+        </div>
+    </div>
+    <?php
+}
