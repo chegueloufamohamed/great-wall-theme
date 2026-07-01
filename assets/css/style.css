@@ -5554,23 +5554,37 @@ ul.products.list-view-active li.product .product-loop-actions {
 
 @media(max-width: 768px) {
   .sticky-bar-global {
-    padding: 12px 20px;
-  }
-  .sticky-bar-info {
-    display: none;
+    padding: 10px 15px;
   }
   .sticky-bar-content {
-    justify-content: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .sticky-bar-info {
+    display: block;
+    flex: 1;
+    min-width: 0;
+  }
+  .sticky-bar-title {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sticky-bar-meta {
+    font-size: 11px;
+    margin-top: 2px;
   }
   .sticky-bar-btns {
-    width: 100%;
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
   }
   .sticky-bar-btn-buy,
   .sticky-bar-btn-cart {
-    flex: 1;
-    text-align: center;
-    padding: 11px 14px;
-    font-size: 13px;
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 6px;
   }
 }
 
