@@ -890,3 +890,14 @@ function great_wall_remove_product_title_from_breadcrumbs( $crumbs, $breadcrumb 
     }
     return $crumbs;
 }
+
+/**
+ * Force UAE Dirham currency symbol to render in English (AED) instead of Arabic (د.إ).
+ */
+add_filter( 'woocommerce_currency_symbol', 'great_wall_force_aed_currency_symbol', 99, 2 );
+function great_wall_force_aed_currency_symbol( $currency_symbol, $currency ) {
+    if ( $currency === 'AED' ) {
+        return 'AED';
+    }
+    return $currency_symbol;
+}
