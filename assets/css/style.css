@@ -4548,9 +4548,9 @@ wc-order-attribution-inputs,
 
 /* Payment selection overrides */
 #payment {
-  background-color: var(--bg-light-accent) !important;
-  border-radius: var(--border-radius-sm);
-  padding: 20px;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
   margin-top: 25px;
 }
 
@@ -4603,13 +4603,56 @@ wc-order-attribution-inputs,
 #payment .payment_box .wc-payment-form,
 #payment .payment_box .woocommerce-SavedPaymentMethods-saveNew,
 #payment .payment_box div.form-row.woocommerce-SavedPaymentMethods-saveNew,
-#payment .payment_box .stripe-source-saved {
+#payment .payment_box .stripe-source-saved,
+#payment .wc-credit-card-form,
+#payment #wc-stripe-cc-form,
+#payment .wc-payment-form,
+#payment fieldset,
+#payment .wc-stripe-elements-container,
+#payment .stripe-card-group {
   border: none !important;
   background-color: transparent !important;
   background: transparent !important;
   box-shadow: none !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+/* Align checkout save payment checkbox inline on the right of its label text */
+#payment .woocommerce-SavedPaymentMethods-saveNew,
+#payment .stripe-source-saved,
+#payment div.form-row.woocommerce-SavedPaymentMethods-saveNew {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 15px !important;
+  width: 100% !important;
+  margin: 20px 0 0 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+#payment .woocommerce-SavedPaymentMethods-saveNew label,
+#payment .stripe-source-saved label {
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--color-primary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  cursor: pointer !important;
+}
+
+#payment .woocommerce-SavedPaymentMethods-saveNew input[type="checkbox"],
+#payment .stripe-source-saved input[type="checkbox"] {
+  margin: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
 }
 
 #payment .place-order {
