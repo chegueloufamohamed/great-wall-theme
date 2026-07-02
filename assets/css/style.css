@@ -4030,11 +4030,12 @@ ul.products li.product p.price .badge-sale {
 .woocommerce button.button,
 .woocommerce input.button,
 .woocommerce #respond input#submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  padding: 0 30px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 48px !important;
+  line-height: 1 !important;
+  padding: 0 30px !important;
   background-color: var(--color-primary) !important;
   color: #FFFFFF !important;
   font-family: var(--font-sans);
@@ -4046,6 +4047,21 @@ ul.products li.product p.price .badge-sale {
   border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: all var(--transition-fast) !important;
+}
+
+/* Ensure WooCommerce loop buttons (Add to Cart, Read More, etc.) are perfectly centered vertically */
+.woocommerce ul.products li.product .button,
+.woocommerce-page ul.products li.product .button,
+.woocommerce ul.products li.product .added_to_cart,
+.woocommerce-page ul.products li.product .added_to_cart,
+.product-loop-actions .button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 44px !important;
+  line-height: 1 !important;
+  padding: 0 15px !important; /* Equal horizontal padding, 0 vertical padding */
+  box-sizing: border-box !important;
 }
 
 .woocommerce a.button:hover,
