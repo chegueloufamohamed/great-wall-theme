@@ -4283,8 +4283,8 @@ ul.products li.product p.price .badge-sale {
    ========================================================================== */
 .woocommerce-checkout form.checkout {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 50px;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
   align-items: start;
 }
 
