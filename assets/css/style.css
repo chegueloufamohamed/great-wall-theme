@@ -4318,12 +4318,6 @@ ul.products li.product p.price .badge-sale {
   padding-bottom: 10px;
 }
 
-@media (min-width: 992px) {
-  .woocommerce-checkout form.checkout #order_review_heading {
-    margin-top: 32px !important;
-  }
-}
-
 .woocommerce-checkout form.checkout #order_review {
   grid-column: 2;
   grid-row: 2;
@@ -4348,6 +4342,12 @@ ul.products li.product p.price .badge-sale {
   border-bottom: 1.5px solid var(--border-color);
   padding-bottom: 10px;
   line-height: 1.2 !important;
+}
+
+@media (min-width: 992px) {
+  .woocommerce-checkout form.checkout #order_review_heading {
+    margin-top: 35px !important;
+  }
 }
 
 .woocommerce-checkout form.checkout #customer_details,
