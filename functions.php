@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.2.9' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.3.0' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.2.9', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.3.0', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -391,35 +391,6 @@ function great_wall_wrapper_end() {
 	echo '</div></section>';
 }
 
-/**
- * Fallback WooCommerce Product Filters for Prototype / Temporary Display
- */
-// 1. Force products to be purchasable (even without price)
-add_filter( 'woocommerce_is_purchasable', '__return_true' );
-
-// 2. Force products to be on sale for prototype styling
-add_filter( 'woocommerce_product_is_on_sale', '__return_true' );
-
-// Fallback active/sale prices
-add_filter( 'woocommerce_product_get_price', 'great_wall_fallback_price', 10, 2 );
-add_filter( 'woocommerce_product_get_sale_price', 'great_wall_fallback_price', 10, 2 );
-function great_wall_fallback_price( $price, $product ) {
-	if ( '' === $price || false === $price || null === $price || (float)$price <= 0 ) {
-		return '2999'; // Fallback active price
-	}
-	return $price;
-}
-
-// Fallback regular price (always 21% higher than the active price)
-add_filter( 'woocommerce_product_get_regular_price', 'great_wall_fallback_regular_price', 10, 2 );
-function great_wall_fallback_regular_price( $regular_price, $product ) {
-	$price = $product->get_price();
-	if ( ! $price || (float)$price <= 0 ) {
-		$price = 2999;
-	}
-	$calculated_reg = round( (float)$price / 0.79 );
-	return (string) $calculated_reg;
-}
 
 // 3. Fallback short description if empty
 add_filter( 'woocommerce_short_description', 'great_wall_fallback_short_description', 10, 1 );
