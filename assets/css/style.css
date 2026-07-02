@@ -4580,19 +4580,36 @@ wc-order-attribution-inputs,
 }
 
 #payment .payment_box {
-  background-color: var(--bg-secondary) !important;
+  background-color: transparent !important;
   color: var(--color-secondary) !important;
   font-size: 0.85rem !important;
   line-height: 1.6 !important;
-  border-radius: var(--border-radius-sm) !important;
-  padding: 15px !important;
+  border-radius: 0 !important;
+  padding: 10px 0 !important; /* Zero horizontal padding to align with outer card layout */
   margin: 10px 0 0 0 !important;
-  border: 1px solid var(--border-color) !important;
+  border: none !important;
+  box-shadow: none !important;
   position: relative;
 }
 
 #payment .payment_box::before {
   content: none !important;
+}
+
+/* Remove internal container borders, backgrounds, and shadows from inline card details fields */
+#payment .payment_box fieldset,
+#payment .payment_box .wc-stripe-elements-container,
+#payment .payment_box .stripe-card-group,
+#payment .payment_box .wc-payment-form,
+#payment .payment_box .woocommerce-SavedPaymentMethods-saveNew,
+#payment .payment_box div.form-row.woocommerce-SavedPaymentMethods-saveNew,
+#payment .payment_box .stripe-source-saved {
+  border: none !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 #payment .place-order {
