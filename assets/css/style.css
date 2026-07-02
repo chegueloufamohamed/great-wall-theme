@@ -4618,15 +4618,15 @@ wc-order-attribution-inputs,
   padding-right: 0 !important;
 }
 
-/* Align checkout save payment checkbox inline on the right of its label text */
+/* Align checkout save payment checkbox inline on the left of its label text */
 #payment .woocommerce-SavedPaymentMethods-saveNew,
 #payment .stripe-source-saved,
 #payment div.form-row.woocommerce-SavedPaymentMethods-saveNew {
   display: flex !important;
-  flex-direction: row-reverse !important;
+  flex-direction: row !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  gap: 15px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
   width: 100% !important;
   margin: 20px 0 0 0 !important;
   padding: 0 !important;
