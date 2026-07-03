@@ -4694,6 +4694,7 @@ wc-order-attribution-inputs,
 #payment button#place_order {
   width: 100% !important;
   height: 52px;
+  margin-top: 25px !important; /* Space between privacy text/terms above and the checkout button */
   background-color: var(--color-primary) !important;
   color: #FFFFFF !important;
   font-size: 0.9rem;
