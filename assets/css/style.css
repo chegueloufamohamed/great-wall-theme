@@ -4072,9 +4072,14 @@ ul.products li.product p.price .badge-sale {
   color: #FFFFFF !important;
 }
 
+/* WooCommerce Notifications (Messages, Infos, Errors) */
 .woocommerce-message, 
 .woocommerce-info, 
 .woocommerce-error {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 15px !important;
   border-top: 3px solid var(--color-accent) !important;
   background-color: var(--bg-secondary) !important;
   color: var(--color-primary) !important;
@@ -4085,14 +4090,19 @@ ul.products li.product p.price .badge-sale {
   font-family: var(--font-sans);
   font-size: 0.95rem;
   list-style: none !important;
+  position: relative;
 }
 
 .woocommerce-message::before, 
-.woocommerce-info::before {
+.woocommerce-info::before,
+.woocommerce-error::before {
+  position: static !important; /* Reset Storefront absolute positioning */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   color: var(--color-accent) !important;
-  margin-right: 15px !important;
-  display: inline-block !important;
-  vertical-align: middle !important;
+  margin: 0 !important; /* Rely on flexbox gap instead of margins */
+  font-size: 1.1rem !important;
 }
 
 .woocommerce-error {
@@ -4101,9 +4111,30 @@ ul.products li.product p.price .badge-sale {
 
 .woocommerce-error::before {
   color: var(--color-error) !important;
-  margin-right: 15px !important;
-  display: inline-block !important;
-  vertical-align: middle !important;
+}
+
+.woocommerce-message a.button.wc-forward,
+.woocommerce-info a.button.wc-forward,
+.woocommerce-error a.button.wc-forward {
+  margin-left: auto !important; /* Push button to the right end */
+}
+
+@media (max-width: 768px) {
+  .woocommerce-message, 
+  .woocommerce-info, 
+  .woocommerce-error {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 20px !important;
+  }
+  
+  .woocommerce-message a.button.wc-forward,
+  .woocommerce-info a.button.wc-forward,
+  .woocommerce-error a.button.wc-forward {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
 }
 
 /* ==========================================================================
