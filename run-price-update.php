@@ -266,52 +266,57 @@ foreach ( $batch_updates as $update ) {
 	$width      = $update['width'];
 	$height     = $update['height'];
 	
-	$product = wc_get_product( $wp_id );
-	if ( $product ) {
-		$log_info = array();
-		
-		// 1. Update SKU
-		$product->set_sku( $sku );
-		$log_info[] = "SKU set to: " . $sku;
-		
-		// 2. Set descriptive name if matched
-		if ( null !== $new_title ) {
-			$product->set_name( $new_title );
-			$log_info[] = "Name set to: " . $new_title;
+	try {
+		$product = wc_get_product( $wp_id );
+		if ( $product ) {
+			$log_info = array();
+			
+			// 1. Update SKU
+			$product->set_sku( $sku );
+			$log_info[] = "SKU set to: " . $sku;
+			
+			// 2. Set descriptive name if matched
+			if ( null !== $new_title ) {
+				$product->set_name( $new_title );
+				$log_info[] = "Name set to: " . $new_title;
+			}
+			
+			// 3. Update Pricing
+			if ( null !== $price && $price > 0 ) {
+				$product->set_regular_price( $price );
+				$product->set_price( $price );
+				$product->set_sale_price( '' );
+				$log_info[] = "Price set to: AED " . $price;
+			}
+			
+			// 4. Update Dimensions
+			$dims_info = array();
+			if ( null !== $length ) {
+				$product->set_length( $length );
+				$dims_info[] = "L: " . $length . "cm";
+			}
+			if ( null !== $width ) {
+				$product->set_width( $width );
+				$dims_info[] = "W: " . $width . "cm";
+			}
+			if ( null !== $height ) {
+				$product->set_height( $height );
+				$dims_info[] = "H: " . $height . "cm";
+			}
+			if ( ! empty( $dims_info ) ) {
+				$log_info[] = "Dimensions: " . implode( ", ", $dims_info );
+			}
+			
+			$product->save();
+			
+			echo "<p style='color: green; font-family:sans-serif;'>[SUCCESS] ID " . $wp_id . " (" . $title . ") ➔ " . implode( " | ", $log_info ) . "</p>";
+			$success_count++;
+		} else {
+			echo "<p style='color: red; font-family:sans-serif;'>[SKIP] Failed to load product ID " . $wp_id . " (" . $title . ").</p>";
+			$fail_count++;
 		}
-		
-		// 3. Update Pricing
-		if ( null !== $price && $price > 0 ) {
-			$product->set_regular_price( $price );
-			$product->set_price( $price );
-			$product->set_sale_price( '' );
-			$log_info[] = "Price set to: AED " . $price;
-		}
-		
-		// 4. Update Dimensions
-		$dims_info = array();
-		if ( null !== $length ) {
-			$product->set_length( $length );
-			$dims_info[] = "L: " . $length . "cm";
-		}
-		if ( null !== $width ) {
-			$product->set_width( $width );
-			$dims_info[] = "W: " . $width . "cm";
-		}
-		if ( null !== $height ) {
-			$product->set_height( $height );
-			$dims_info[] = "H: " . $height . "cm";
-		}
-		if ( ! empty( $dims_info ) ) {
-			$log_info[] = "Dimensions: " . implode( ", ", $dims_info );
-		}
-		
-		$product->save();
-		
-		echo "<p style='color: green; font-family:sans-serif;'>Updated ID " . $wp_id . " (" . $title . ") ➔ " . implode( " | ", $log_info ) . "</p>";
-		$success_count++;
-	} else {
-		echo "<p style='color: red; font-family:sans-serif;'>Failed to load product ID " . $wp_id . " (" . $title . ").</p>";
+	} catch ( Exception $e ) {
+		echo "<p style='color: orange; font-family:sans-serif;'>[WARNING] Error updating ID " . $wp_id . " (" . $title . "): " . $e->getMessage() . "</p>";
 		$fail_count++;
 	}
 }
