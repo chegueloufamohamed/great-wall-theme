@@ -21,6 +21,36 @@ if ( ! isset( $_GET['key'] ) || $_GET['key'] !== 'great_wall_secret_998' ) {
 	die( 'Unauthorized access.' );
 }
 
+// Helper function to set unique SKU by appending variation suffixes if SKU already exists
+function wc_set_product_unique_sku( $product, $sku ) {
+	if ( empty( $sku ) ) {
+		return false;
+	}
+
+	$original_sku = $sku;
+	$counter = 1;
+	
+	while ( true ) {
+		try {
+			$product->set_sku( $sku );
+			$product->save();
+			return $sku;
+		} catch ( Exception $e ) {
+			$msg = $e->getMessage();
+			// If duplicate SKU exception is thrown, retry with incremented suffix
+			if ( strpos( $msg, 'SKU' ) !== false || strpos( $msg, 'unique' ) !== false || strpos( $msg, 'duplicated' ) !== false || strpos( $msg, 'already exists' ) !== false ) {
+				$sku = $original_sku . '-' . $counter;
+				$counter++;
+				if ( $counter > 20 ) {
+					throw $e;
+				}
+			} else {
+				throw $e;
+			}
+		}
+	}
+}
+
 // Dataset containing all products (both matched and unmatched)
 $updates = array(
   array('wp_id' => 519, 'wp_title' => 'MODEL TG-8', 'new_title' => 'Multi-Purpose Family Steel Cupboard', 'sku' => 'TG-8', 'price' => 250, 'length' => 185, 'width' => 50, 'height' => 60),
@@ -271,17 +301,13 @@ foreach ( $batch_updates as $update ) {
 		if ( $product ) {
 			$log_info = array();
 			
-			// 1. Update SKU
-			$product->set_sku( $sku );
-			$log_info[] = "SKU set to: " . $sku;
-			
-			// 2. Set descriptive name if matched
+			// 1. Set descriptive name if matched
 			if ( null !== $new_title ) {
 				$product->set_name( $new_title );
 				$log_info[] = "Name set to: " . $new_title;
 			}
 			
-			// 3. Update Pricing
+			// 2. Update Pricing
 			if ( null !== $price && $price > 0 ) {
 				$product->set_regular_price( $price );
 				$product->set_price( $price );
@@ -289,7 +315,7 @@ foreach ( $batch_updates as $update ) {
 				$log_info[] = "Price set to: AED " . $price;
 			}
 			
-			// 4. Update Dimensions
+			// 3. Update Dimensions
 			$dims_info = array();
 			if ( null !== $length ) {
 				$product->set_length( $length );
@@ -307,7 +333,12 @@ foreach ( $batch_updates as $update ) {
 				$log_info[] = "Dimensions: " . implode( ", ", $dims_info );
 			}
 			
+			// Save the pricing/dimension changes first
 			$product->save();
+			
+			// 4. Update SKU with automatic uniqueness disambiguation
+			$final_sku = wc_set_product_unique_sku( $product, $sku );
+			$log_info[] = "SKU set to: " . $final_sku;
 			
 			echo "<p style='color: green; font-family:sans-serif;'>[SUCCESS] ID " . $wp_id . " (" . $title . ") ➔ " . implode( " | ", $log_info ) . "</p>";
 			$success_count++;
