@@ -1,13 +1,13 @@
 <?php
 /**
- * Temporary WooCommerce catalog optimizer: Price, Dimensions, SKU, and descriptive Titles updater.
+ * WooCommerce Catalog SKU and Title Optimizer Tool.
  * Call this by visiting: https://greatwallfurniture.com/wp-content/themes/great-wall-theme/run-price-update.php?key=great_wall_secret_998
  */
 
 // Prevent directory traversal or direct load outside WP
 $wp_load_path = dirname(dirname(dirname(dirname(__FILE__)))) . '/wp-load.php';
 if ( ! file_exists( $wp_load_path ) ) {
-	die( 'WordPress load file not found at: ' . $wp_load_path );
+	die( 'WordPress load file not found.' );
 }
 
 require_once $wp_load_path;
@@ -17,7 +17,7 @@ if ( ! isset( $_GET['key'] ) || $_GET['key'] !== 'great_wall_secret_998' ) {
 	die( 'Unauthorized access.' );
 }
 
-// Matched dataset
+// Dataset containing all products (both matched and unmatched)
 $updates = array(
   array('wp_id' => 519, 'wp_title' => 'MODEL TG-8', 'new_title' => 'Multi-Purpose Family Steel Cupboard', 'sku' => 'TG-8', 'price' => 250, 'length' => 185, 'width' => 50, 'height' => 60),
   array('wp_id' => 516, 'wp_title' => 'MODEL TGD-1', 'new_title' => 'Professional Steel Filing Cabinet', 'sku' => 'TGD-1', 'price' => 390, 'length' => 183, 'width' => 90, 'height' => 45),
@@ -121,11 +121,112 @@ $updates = array(
   array('wp_id' => 65, 'wp_title' => 'HW-5', 'new_title' => 'Plastic Chair', 'sku' => 'HW-5', 'price' => 70, 'length' => 57, 'width' => 46, 'height' => 83),
   array('wp_id' => 63, 'wp_title' => 'CN', 'new_title' => 'Portable Folding Chair', 'sku' => 'CN-', 'price' => 40, 'length' => null, 'width' => null, 'height' => null),
   array('wp_id' => 59, 'wp_title' => 'NS', 'new_title' => 'Portable Folding Stool', 'sku' => 'NS-', 'price' => 30, 'length' => null, 'width' => null, 'height' => null),
-  array('wp_id' => 19, 'wp_title' => 'XG-3', 'new_title' => 'Wooden Shoe Storage Cabinet with Doors', 'sku' => 'XG-3', 'price' => 160, 'length' => 90, 'width' => 60, 'height' => 40)
+  array('wp_id' => 19, 'wp_title' => 'XG-3', 'new_title' => 'Wooden Shoe Storage Cabinet with Doors', 'sku' => 'XG-3', 'price' => 160, 'length' => 90, 'width' => 60, 'height' => 40),
+  array('wp_id' => 285, 'wp_title' => 'SHD-2', 'new_title' => null, 'sku' => 'SHD-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 284, 'wp_title' => 'LK-2', 'new_title' => null, 'sku' => 'LK-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 281, 'wp_title' => 'SK-2', 'new_title' => null, 'sku' => 'SK-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 280, 'wp_title' => 'W-2', 'new_title' => null, 'sku' => 'W-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 278, 'wp_title' => 'LK-1', 'new_title' => null, 'sku' => 'LK-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 275, 'wp_title' => 'SHD-1', 'new_title' => null, 'sku' => 'SHD-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 272, 'wp_title' => 'PF-1', 'new_title' => null, 'sku' => 'PF-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 271, 'wp_title' => 'TG-1A', 'new_title' => null, 'sku' => 'TG-1A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 250, 'wp_title' => 'PF-3', 'new_title' => null, 'sku' => 'PF-3', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 249, 'wp_title' => 'PF-4', 'new_title' => null, 'sku' => 'PF-4', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 248, 'wp_title' => 'PF-5', 'new_title' => null, 'sku' => 'PF-5', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 247, 'wp_title' => 'PF-6', 'new_title' => null, 'sku' => 'PF-6', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 246, 'wp_title' => 'PF-8', 'new_title' => null, 'sku' => 'PF-8', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 245, 'wp_title' => 'PF-9', 'new_title' => null, 'sku' => 'PF-9', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 244, 'wp_title' => 'PF-10', 'new_title' => null, 'sku' => 'PF-10', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 243, 'wp_title' => 'PF-11', 'new_title' => null, 'sku' => 'PF-11', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 242, 'wp_title' => 'PF-12', 'new_title' => null, 'sku' => 'PF-12', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 241, 'wp_title' => 'PF-13', 'new_title' => null, 'sku' => 'PF-13', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 240, 'wp_title' => 'PF-14', 'new_title' => null, 'sku' => 'PF-14', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 233, 'wp_title' => 'DT-2', 'new_title' => null, 'sku' => 'DT-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 232, 'wp_title' => 'DT-1', 'new_title' => null, 'sku' => 'DT-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 231, 'wp_title' => 'DT-3', 'new_title' => null, 'sku' => 'DT-3', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 229, 'wp_title' => 'LCS-1A', 'new_title' => null, 'sku' => 'LCS-1A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 228, 'wp_title' => 'LCS-2A', 'new_title' => null, 'sku' => 'LCS-2A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 227, 'wp_title' => 'LCS-2B', 'new_title' => null, 'sku' => 'LCS-2B', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 226, 'wp_title' => 'LCB-1A', 'new_title' => null, 'sku' => 'LCB-1A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 225, 'wp_title' => 'LCB-1B', 'new_title' => null, 'sku' => 'LCB-1B', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 224, 'wp_title' => 'LCB-2A', 'new_title' => null, 'sku' => 'LCB-2A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 222, 'wp_title' => 'HF', 'new_title' => null, 'sku' => 'HF', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 221, 'wp_title' => 'GHF', 'new_title' => null, 'sku' => 'GHF', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 218, 'wp_title' => 'C-1', 'new_title' => null, 'sku' => 'C-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 216, 'wp_title' => 'C-2', 'new_title' => null, 'sku' => 'C-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 215, 'wp_title' => 'HF-4', 'new_title' => null, 'sku' => 'HF-4', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 214, 'wp_title' => 'HF-5', 'new_title' => null, 'sku' => 'HF-5', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 213, 'wp_title' => 'HF-6', 'new_title' => null, 'sku' => 'HF-6', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 212, 'wp_title' => 'HF-7', 'new_title' => null, 'sku' => 'HF-7', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 211, 'wp_title' => 'HF-1', 'new_title' => null, 'sku' => 'HF-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 210, 'wp_title' => 'HF-2', 'new_title' => null, 'sku' => 'HF-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 209, 'wp_title' => '235-10', 'new_title' => null, 'sku' => '235-10', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 208, 'wp_title' => '233-12', 'new_title' => null, 'sku' => '233-12', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 207, 'wp_title' => 'HC5101-12', 'new_title' => null, 'sku' => 'HC5101-12', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 206, 'wp_title' => 'HC5102-16', 'new_title' => null, 'sku' => 'HC5102-16', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 205, 'wp_title' => '649-14', 'new_title' => null, 'sku' => '649-14', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 204, 'wp_title' => 'AA03', 'new_title' => null, 'sku' => 'AA03', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 203, 'wp_title' => '822M', 'new_title' => null, 'sku' => '822M', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 202, 'wp_title' => 'GYHH', 'new_title' => null, 'sku' => 'GYHH', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 201, 'wp_title' => 'GYH', 'new_title' => null, 'sku' => 'GYH', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 200, 'wp_title' => 'GYHG', 'new_title' => null, 'sku' => 'GYHG', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 199, 'wp_title' => '5013M', 'new_title' => null, 'sku' => '5013M', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 198, 'wp_title' => 'J109A', 'new_title' => null, 'sku' => 'J109A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 192, 'wp_title' => 'SHD-2', 'new_title' => null, 'sku' => 'SHD-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 190, 'wp_title' => 'LK-2', 'new_title' => null, 'sku' => 'LK-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 184, 'wp_title' => 'SK-2', 'new_title' => null, 'sku' => 'SK-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 182, 'wp_title' => 'W-2', 'new_title' => null, 'sku' => 'W-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 178, 'wp_title' => 'LK-1', 'new_title' => null, 'sku' => 'LK-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 172, 'wp_title' => 'SHD-1', 'new_title' => null, 'sku' => 'SHD-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 167, 'wp_title' => 'PF-1', 'new_title' => null, 'sku' => 'PF-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 165, 'wp_title' => 'TG-1A', 'new_title' => null, 'sku' => 'TG-1A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 125, 'wp_title' => 'PF-3', 'new_title' => null, 'sku' => 'PF-3', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 123, 'wp_title' => 'PF-4', 'new_title' => null, 'sku' => 'PF-4', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 121, 'wp_title' => 'PF-5', 'new_title' => null, 'sku' => 'PF-5', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 119, 'wp_title' => 'PF-6', 'new_title' => null, 'sku' => 'PF-6', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 117, 'wp_title' => 'PF-8', 'new_title' => null, 'sku' => 'PF-8', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 115, 'wp_title' => 'PF-9', 'new_title' => null, 'sku' => 'PF-9', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 113, 'wp_title' => 'PF-10', 'new_title' => null, 'sku' => 'PF-10', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 111, 'wp_title' => 'PF-11', 'new_title' => null, 'sku' => 'PF-11', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 109, 'wp_title' => 'PF-12', 'new_title' => null, 'sku' => 'PF-12', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 107, 'wp_title' => 'PF-13', 'new_title' => null, 'sku' => 'PF-13', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 105, 'wp_title' => 'PF-14', 'new_title' => null, 'sku' => 'PF-14', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 91, 'wp_title' => 'DT-2', 'new_title' => null, 'sku' => 'DT-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 89, 'wp_title' => 'DT-1', 'new_title' => null, 'sku' => 'DT-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 87, 'wp_title' => 'DT-3', 'new_title' => null, 'sku' => 'DT-3', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 83, 'wp_title' => 'LCS-1A', 'new_title' => null, 'sku' => 'LCS-1A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 81, 'wp_title' => 'LCS-2A', 'new_title' => null, 'sku' => 'LCS-2A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 79, 'wp_title' => 'LCS-2B', 'new_title' => null, 'sku' => 'LCS-2B', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 77, 'wp_title' => 'LCB-1A', 'new_title' => null, 'sku' => 'LCB-1A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 75, 'wp_title' => 'LCB-1B', 'new_title' => null, 'sku' => 'LCB-1B', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 73, 'wp_title' => 'LCB-2A', 'new_title' => null, 'sku' => 'LCB-2A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 69, 'wp_title' => 'HF', 'new_title' => null, 'sku' => 'HF', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 67, 'wp_title' => 'GHF', 'new_title' => null, 'sku' => 'GHF', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 61, 'wp_title' => 'C-1', 'new_title' => null, 'sku' => 'C-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 57, 'wp_title' => 'C-2', 'new_title' => null, 'sku' => 'C-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 55, 'wp_title' => 'HF-4', 'new_title' => null, 'sku' => 'HF-4', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 53, 'wp_title' => 'HF-5', 'new_title' => null, 'sku' => 'HF-5', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 51, 'wp_title' => 'HF-6', 'new_title' => null, 'sku' => 'HF-6', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 49, 'wp_title' => 'HF-7', 'new_title' => null, 'sku' => 'HF-7', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 47, 'wp_title' => 'HF-1', 'new_title' => null, 'sku' => 'HF-1', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 45, 'wp_title' => 'HF-2', 'new_title' => null, 'sku' => 'HF-2', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 43, 'wp_title' => '235-10', 'new_title' => null, 'sku' => '235-10', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 41, 'wp_title' => '233-12', 'new_title' => null, 'sku' => '233-12', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 39, 'wp_title' => 'HC5101-12', 'new_title' => null, 'sku' => 'HC5101-12', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 37, 'wp_title' => 'HC5102-16', 'new_title' => null, 'sku' => 'HC5102-16', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 35, 'wp_title' => '649-14', 'new_title' => null, 'sku' => '649-14', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 33, 'wp_title' => 'AA03', 'new_title' => null, 'sku' => 'AA03', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 31, 'wp_title' => '822M', 'new_title' => null, 'sku' => '822M', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 29, 'wp_title' => 'GYHH', 'new_title' => null, 'sku' => 'GYHH', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 27, 'wp_title' => 'GYH', 'new_title' => null, 'sku' => 'GYH', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 25, 'wp_title' => 'GYHG', 'new_title' => null, 'sku' => 'GYHG', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 23, 'wp_title' => '5013M', 'new_title' => null, 'sku' => '5013M', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 21, 'wp_title' => 'J109A', 'new_title' => null, 'sku' => 'J109A', 'price' => null, 'length' => null, 'width' => null, 'height' => null),
+  array('wp_id' => 16, 'wp_title' => 'test', 'new_title' => null, 'sku' => 'test', 'price' => null, 'length' => null, 'width' => null, 'height' => null)
 );
 
-echo '<h1>WooCommerce SKU & descriptive Title Catalog Optimizer Tool</h1>';
-echo '<p>Found ' . count( $updates ) . ' pending catalog updates...</p>';
+echo '<h1>WooCommerce SKU Coverage & Title Catalog Optimizer</h1>';
+echo '<p>Found ' . count( $updates ) . ' catalog updates to process...</p>';
 echo '<hr>';
 
 $success_count = 0;
@@ -136,49 +237,55 @@ foreach ( $updates as $update ) {
 	$title      = $update['wp_title'];
 	$new_title  = $update['new_title'];
 	$sku        = $update['sku'];
-	$price      = (float) $update['price'];
+	$price      = $update['price'];
 	$length     = $update['length'];
 	$width      = $update['width'];
 	$height     = $update['height'];
 	
-	if ( $price <= 0 ) {
-		echo "<p style='color: orange;'>Skipping ID " . $wp_id . " (" . $title . "): Price is zero or invalid.</p>";
-		continue;
-	}
-	
 	$product = wc_get_product( $wp_id );
 	if ( $product ) {
-		// 1. Update WooCommerce pricing meta fields
-		$product->set_regular_price( $price );
-		$product->set_price( $price );
-		$product->set_sale_price( '' ); // Clear sale pricing
+		$log_info = array();
 		
-		// 2. Set descriptive title / name
-		$product->set_name( $new_title );
-		
-		// 3. Set unique item code as SKU
+		// 1. Update SKU (Item Code)
 		$product->set_sku( $sku );
+		$log_info[] = "SKU set to: " . $sku;
+		
+		// 2. Set new descriptive title / name if present
+		if ( null !== $new_title ) {
+			$product->set_name( $new_title );
+			$log_info[] = "Name set to: " . $new_title;
+		}
+		
+		// 3. Update WooCommerce pricing meta fields if present
+		if ( null !== $price && $price > 0 ) {
+			$product->set_regular_price( $price );
+			$product->set_price( $price );
+			$product->set_sale_price( '' ); // Clear sale pricing
+			$log_info[] = "Price set to: AED " . $price;
+		}
 		
 		// 4. Update WooCommerce dimension meta fields if present
 		$dims_info = array();
 		if ( null !== $length ) {
 			$product->set_length( $length );
-			$dims_info[] = "Length: " . $length . "cm";
+			$dims_info[] = "L: " . $length . "cm";
 		}
 		if ( null !== $width ) {
 			$product->set_width( $width );
-			$dims_info[] = "Width: " . $width . "cm";
+			$dims_info[] = "W: " . $width . "cm";
 		}
 		if ( null !== $height ) {
 			$product->set_height( $height );
-			$dims_info[] = "Height: " . $height . "cm";
+			$dims_info[] = "H: " . $height . "cm";
+		}
+		if ( ! empty( $dims_info ) ) {
+			$log_info[] = "Dimensions: " . implode( ", ", $dims_info );
 		}
 		
 		// Save the product changes
 		$product->save();
 		
-		$dims_str = ! empty( $dims_info ) ? " [Dimensions: " . implode( ", ", $dims_info ) . "]" : "";
-		echo "<p style='color: green;'>Updated ID " . $wp_id . " -> SKU: <strong>" . $sku . "</strong>, Name: <strong>" . $new_title . "</strong>, Price: <strong>AED " . $price . "</strong>" . $dims_str . "</p>";
+		echo "<p style='color: green;'>Updated ID " . $wp_id . " (" . $title . ") ➔ " . implode( " | ", $log_info ) . "</p>";
 		$success_count++;
 	} else {
 		echo "<p style='color: red;'>Failed to load product ID " . $wp_id . " (" . $title . ").</p>";
