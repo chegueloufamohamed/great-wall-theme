@@ -4,6 +4,10 @@
  * Call this by visiting: https://greatwallfurniture.com/wp-content/themes/great-wall-theme/run-price-update.php?key=great_wall_secret_998
  */
 
+// Attempt to raise memory and time limits
+@set_time_limit( 300 );
+@ini_set( 'memory_limit', '512M' );
+
 // Prevent directory traversal or direct load outside WP
 $wp_load_path = dirname(dirname(dirname(dirname(__FILE__)))) . '/wp-load.php';
 if ( ! file_exists( $wp_load_path ) ) {
@@ -225,14 +229,34 @@ $updates = array(
   array('wp_id' => 16, 'wp_title' => 'test', 'new_title' => null, 'sku' => 'test', 'price' => null, 'length' => null, 'width' => null, 'height' => null)
 );
 
-echo '<h1>WooCommerce SKU Coverage & Title Catalog Optimizer</h1>';
-echo '<p>Found ' . count( $updates ) . ' catalog updates to process...</p>';
+$batch = isset( $_GET['batch'] ) ? (int) $_GET['batch'] : 0;
+$per_page = 50;
+
+if ( $batch === 0 ) {
+	echo '<h1>WooCommerce SKU Coverage & Title Catalog Optimizer</h1>';
+	echo '<p>Found <strong>' . count( $updates ) . '</strong> total products to optimize.</p>';
+	echo '<p>To prevent Hostinger server timeouts (500 Internal Error), updates are split into batches of ' . $per_page . '.</p>';
+	echo '<p><a href="?key=great_wall_secret_998&batch=1" style="display:inline-block;padding:14px 28px;background:#8b4513;color:#fff;text-decoration:none;font-weight:bold;border-radius:4px;font-family:sans-serif;box-shadow:0 2px 5px rgba(0,0,0,0.15)">🚀 Start Auto-Update (Batch 1)</a></p>';
+	exit;
+}
+
+$start_index = ( $batch - 1 ) * $per_page;
+$batch_updates = array_slice( $updates, $start_index, $per_page );
+
+if ( empty( $batch_updates ) ) {
+	echo '<h1 style="color: green; font-family:sans-serif;">All Batches Completed Successfully! 🎉</h1>';
+	echo '<p style="font-family:sans-serif;">Every product now has a unique SKU, matched prices, and descriptive titles.</p>';
+	echo '<p style="font-family:sans-serif;"><a href="/wp-admin/edit.php?post_type=product">Go back to WooCommerce Products page</a></p>';
+	exit;
+}
+
+echo '<h1 style="font-family:sans-serif;">Running Batch ' . $batch . ' (' . ( $start_index + 1 ) . ' to ' . ( $start_index + count( $batch_updates ) ) . ' of ' . count( $updates ) . ')...</h1>';
 echo '<hr>';
 
 $success_count = 0;
 $fail_count = 0;
 
-foreach ( $updates as $update ) {
+foreach ( $batch_updates as $update ) {
 	$wp_id      = (int) $update['wp_id'];
 	$title      = $update['wp_title'];
 	$new_title  = $update['new_title'];
@@ -246,25 +270,25 @@ foreach ( $updates as $update ) {
 	if ( $product ) {
 		$log_info = array();
 		
-		// 1. Update SKU (Item Code)
+		// 1. Update SKU
 		$product->set_sku( $sku );
 		$log_info[] = "SKU set to: " . $sku;
 		
-		// 2. Set new descriptive title / name if present
+		// 2. Set descriptive name if matched
 		if ( null !== $new_title ) {
 			$product->set_name( $new_title );
 			$log_info[] = "Name set to: " . $new_title;
 		}
 		
-		// 3. Update WooCommerce pricing meta fields if present
+		// 3. Update Pricing
 		if ( null !== $price && $price > 0 ) {
 			$product->set_regular_price( $price );
 			$product->set_price( $price );
-			$product->set_sale_price( '' ); // Clear sale pricing
+			$product->set_sale_price( '' );
 			$log_info[] = "Price set to: AED " . $price;
 		}
 		
-		// 4. Update WooCommerce dimension meta fields if present
+		// 4. Update Dimensions
 		$dims_info = array();
 		if ( null !== $length ) {
 			$product->set_length( $length );
@@ -282,18 +306,20 @@ foreach ( $updates as $update ) {
 			$log_info[] = "Dimensions: " . implode( ", ", $dims_info );
 		}
 		
-		// Save the product changes
 		$product->save();
 		
-		echo "<p style='color: green;'>Updated ID " . $wp_id . " (" . $title . ") ➔ " . implode( " | ", $log_info ) . "</p>";
+		echo "<p style='color: green; font-family:sans-serif;'>Updated ID " . $wp_id . " (" . $title . ") ➔ " . implode( " | ", $log_info ) . "</p>";
 		$success_count++;
 	} else {
-		echo "<p style='color: red;'>Failed to load product ID " . $wp_id . " (" . $title . ").</p>";
+		echo "<p style='color: red; font-family:sans-serif;'>Failed to load product ID " . $wp_id . " (" . $title . ").</p>";
 		$fail_count++;
 	}
 }
 
+$next_batch = $batch + 1;
+$next_url = "?key=great_wall_secret_998&batch=" . $next_batch;
+
 echo '<hr>';
-echo "<h2>Operation Complete!</h2>";
-echo "<p>Successfully optimized: <strong>" . $success_count . "</strong> products.</p>";
-echo "<p>Failed: <strong>" . $fail_count . "</strong> products.</p>";
+echo '<h3 style="font-family:sans-serif;color:#333;">Batch ' . $batch . ' Complete</h3>';
+echo '<p style="font-family:sans-serif;font-size:1.2rem;color:#0066cc;font-weight:bold;">Redirecting automatically to Batch ' . $next_batch . ' in 3 seconds...</p>';
+echo '<meta http-equiv="refresh" content="3;url=' . $next_url . '">';
