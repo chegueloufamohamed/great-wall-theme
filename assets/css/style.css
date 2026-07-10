@@ -3266,6 +3266,7 @@ p {
   display: block;
   margin: 0 auto;
   mix-blend-mode: multiply;
+  transform: scale(1.25) !important; /* Scale up image to clip out large white borders in photo files */
 }
 
 /* Responsive Gallery Height Caps */
@@ -5866,7 +5867,8 @@ ul.products.list-view-active li.product .product-loop-actions {
 
 .single-product .woocommerce-product-gallery__image img {
   mix-blend-mode: multiply !important;
-  padding: 15px !important;
+  padding: 0px !important;
+  transform: scale(1.25) !important;
 }
 
 /* Thumbnails bg, border, active state */
