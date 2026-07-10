@@ -49,6 +49,19 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 					) );
 					
 					$has_sub = ( ! is_wp_error( $sub_cats ) && ! empty( $sub_cats ) );
+					if ( $has_sub ) {
+						usort( $sub_cats, function( $a, $b ) {
+							$is_office_a = ( stripos( $a->slug, 'office' ) !== false || stripos( $a->name, 'office' ) !== false );
+							$is_office_b = ( stripos( $b->slug, 'office' ) !== false || stripos( $b->name, 'office' ) !== false );
+							if ( $is_office_a && ! $is_office_b ) {
+								return -1;
+							}
+							if ( ! $is_office_a && $is_office_b ) {
+								return 1;
+							}
+							return strcmp( $a->name, $b->name );
+						} );
+					}
 					
 					// Determine if the parent or any child is active
 					$is_parent_active = is_product_category( $cat->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $cat->slug );
