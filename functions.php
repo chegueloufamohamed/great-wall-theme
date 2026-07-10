@@ -292,6 +292,7 @@ function great_wall_shop_hero_banner() {
 						'post_type'      => 'product',
 						'posts_per_page' => 1,
 						'post_status'    => 'publish',
+						'fields'         => 'ids',
 						'tax_query'      => array(
 							array(
 								'taxonomy' => 'product_cat',
@@ -300,16 +301,14 @@ function great_wall_shop_hero_banner() {
 							),
 						),
 					);
-					$prod_query = new WP_Query( $prod_args );
-					if ( $prod_query->have_posts() ) {
-						$prod_query->the_post();
-						$prod_id = get_the_ID();
+					$prod_ids = get_posts( $prod_args );
+					if ( ! empty( $prod_ids ) ) {
+						$prod_id = $prod_ids[0];
 						$prod_thumb_id = get_post_thumbnail_id( $prod_id );
 						if ( $prod_thumb_id ) {
 							$t['img'] = wp_get_attachment_url( $prod_thumb_id );
 						}
 					}
-					wp_reset_postdata();
 				}
 				
 				// Final static fallback if there are absolutely no products or images in the category
