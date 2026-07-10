@@ -40,10 +40,59 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 						continue;
 					}
 					$has_categories = true;
-					$is_active = is_product_category( $cat->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $cat->slug );
-					$active_class = $is_active ? 'active' : '';
-					echo '<li class="' . esc_attr( $active_class ) . '">';
+					
+					// Get subcategories of this parent category dynamically
+					$sub_cats = get_terms( array(
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => false,
+						'parent'     => $cat->term_id,
+					) );
+					
+					$has_sub = ( ! is_wp_error( $sub_cats ) && ! empty( $sub_cats ) );
+					
+					// Determine if the parent or any child is active
+					$is_parent_active = is_product_category( $cat->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $cat->slug );
+					
+					$is_child_active = false;
+					if ( $has_sub ) {
+						foreach ( $sub_cats as $sub ) {
+							if ( is_product_category( $sub->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $sub->slug ) ) {
+								$is_child_active = true;
+								break;
+							}
+						}
+					}
+					
+					$parent_class = '';
+					if ( $is_parent_active ) {
+						$parent_class = 'active';
+					} elseif ( $is_child_active ) {
+						$parent_class = 'active-parent';
+					}
+					
+					$li_class = trim( 'parent-cat-item ' . ( $has_sub ? 'has-children ' : '' ) . $parent_class );
+					
+					echo '<li class="' . esc_attr( $li_class ) . '">';
+					echo '<div class="parent-link-row">';
 					echo '<a href="' . esc_url( get_term_link( $cat ) ) . '">' . esc_html( $cat->name ) . '</a>';
+					if ( $has_sub ) {
+						$toggle_icon = ( $is_parent_active || $is_child_active ) ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line';
+						echo '<span class="sub-toggle"><i class="' . esc_attr( $toggle_icon ) . '"></i></span>';
+					}
+					echo '</div>';
+					
+					if ( $has_sub ) {
+						$style = ( $is_parent_active || $is_child_active ) ? 'display: block;' : 'display: none;';
+						echo '<ul class="sub-list" style="' . $style . '">';
+						foreach ( $sub_cats as $sub ) {
+							$is_sub_active = is_product_category( $sub->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $sub->slug );
+							$sub_class = $is_sub_active ? 'active' : '';
+							echo '<li class="' . esc_attr( $sub_class ) . '">';
+							echo '<a href="' . esc_url( get_term_link( $sub ) ) . '">' . esc_html( $sub->name ) . '</a>';
+							echo '</li>';
+						}
+						echo '</ul>';
+					}
 					echo '</li>';
 				}
 			}

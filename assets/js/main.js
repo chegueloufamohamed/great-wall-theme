@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initShopPriceSlider();
   initViewModeToggle();
   initShopCategoriesSlider();
+  initSidebarCategoryAccordion();
 });
 
 /* ==========================================================================
@@ -1082,6 +1083,35 @@ function initShopCategoriesSlider() {
 
   startAutoplay();
 }
+
+/**
+ * Sidebar Categories Accordion Dropdown Toggles
+ */
+function initSidebarCategoryAccordion() {
+  const toggles = document.querySelectorAll('.sub-toggle');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const parentLi = this.closest('li.has-children');
+      if (!parentLi) return;
+      
+      const subList = parentLi.querySelector('.sub-list');
+      const icon = this.querySelector('i');
+      if (!subList || !icon) return;
+      
+      const isHidden = subList.style.display === 'none' || !subList.style.display;
+      if (isHidden) {
+        subList.style.display = 'block';
+        icon.className = 'ri-arrow-down-s-line';
+      } else {
+        subList.style.display = 'none';
+        icon.className = 'ri-arrow-right-s-line';
+      }
+    });
+  });
+}
+
 
 /**
  * Handle custom quantity increment/decrement buttons click events

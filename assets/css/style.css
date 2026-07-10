@@ -6751,3 +6751,58 @@ ul.products.list-view-active li.product .product-loop-actions {
     font-size: 0.9rem !important;
   }
 }
+
+/* Sidebar Category Accordion Dropdown Styling */
+.parent-link-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.sub-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background-color: transparent !important;
+  color: var(--color-muted, #76726c) !important;
+  cursor: pointer !important;
+  transition: background-color var(--transition-fast), color var(--transition-fast) !important;
+}
+
+.sub-toggle:hover {
+  background-color: var(--border-color, #e5e0d8) !important;
+  color: var(--color-accent, #8b4513) !important;
+}
+
+.sub-list {
+  list-style: none !important;
+  padding: 8px 0 0 16px !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  border-left: 1px solid var(--border-color, #e5e0d8) !important;
+  margin-top: 8px !important;
+}
+
+.sub-list li a {
+  font-size: 0.85rem !important;
+  color: var(--color-muted, #76726c) !important;
+  font-weight: 400 !important;
+  padding-left: 0 !important;
+}
+
+.sub-list li a:hover,
+.sub-list li.active a {
+  color: var(--color-accent, #8b4513) !important;
+  padding-left: 5px !important;
+}
+
+.sub-list li.active a {
+  font-weight: 600 !important;
+}
+
