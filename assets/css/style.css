@@ -6801,6 +6801,21 @@ ul.products.list-view-active li.product .product-loop-actions {
 }
 
 .sub-list li.active a {
-  font-weight: 600 !important;
+  font-weight: 600;
 }
+
+/* Force disable all product gallery zoom/hover scale effects */
+.single-product .woocommerce-product-gallery__image img {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Hide WooCommerce native lens zoom hover overlay if injected by scripts */
+.zoomImg {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 
