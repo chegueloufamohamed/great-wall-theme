@@ -419,7 +419,7 @@ function great_wall_wrapper_end() {
 
 
 // 3. Fallback short description if empty
-add_filter( 'woocommerce_short_description', 'great_wall_fallback_short_description', 10, 1 );
+// add_filter( 'woocommerce_short_description', 'great_wall_fallback_short_description', 10, 1 );
 function great_wall_fallback_short_description( $post_excerpt ) {
 	if ( empty( trim( $post_excerpt ) ) ) {
 		return 'Experience the peak of contemporary craftsmanship. Hand-tailored from premium materials, this architectural piece brings quiet luxury and clean, minimalist lines to any modern space in Dubai. Custom dimensions and veneers available upon request.';
@@ -852,7 +852,7 @@ function great_wall_render_trust_badges() {
 /**
  * Filter the product short description to dynamically remove the Specifications lines.
  */
-add_filter( 'woocommerce_short_description', 'great_wall_remove_specs_from_short_desc', 99 );
+// add_filter( 'woocommerce_short_description', 'great_wall_remove_specs_from_short_desc', 99 );
 function great_wall_remove_specs_from_short_desc( $post_excerpt ) {
     if ( is_admin() || ! is_product() ) {
         return $post_excerpt;
