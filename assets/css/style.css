@@ -6905,6 +6905,12 @@ ul.products.list-view-active li.product .product-loop-actions {
   margin-top: 40px !important;
 }
 
+/* Adjust spacing between reviews slider controls and write review section */
+.add-review-section {
+  margin-top: 35px !important;
+}
+
+
 
 
 
