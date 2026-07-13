@@ -6849,5 +6849,10 @@ ul.products.list-view-active li.product .product-loop-actions {
   background-color: var(--bg-light-accent, #F4EFEA) !important;
 }
 
+.single-product .woocommerce-tabs ul.tabs {
+  justify-content: center !important;
+}
+
+
 
 
