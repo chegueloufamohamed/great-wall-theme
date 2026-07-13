@@ -6804,10 +6804,15 @@ ul.products.list-view-active li.product .product-loop-actions {
   font-weight: 600;
 }
 
-/* Force disable all product gallery zoom/hover scale effects */
+/* Force disable all product gallery zoom/hover scale effects and constrain image sizes to prevent stretching */
 .single-product .woocommerce-product-gallery__image img {
   transform: none !important;
   transition: none !important;
+  max-height: 420px !important;
+  max-width: 420px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 
 /* Hide WooCommerce native lens zoom hover overlay if injected by scripts */
