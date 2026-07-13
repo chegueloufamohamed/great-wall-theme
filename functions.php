@@ -1072,4 +1072,13 @@ function great_wall_render_specs_tab_content() {
  */
 remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
 
+/**
+ * Dequeue WooCommerce native gallery zoom scripts to completely prevent hover zooming.
+ */
+add_action( 'wp_enqueue_scripts', 'great_wall_dequeue_gallery_zoom', 999 );
+function great_wall_dequeue_gallery_zoom() {
+    wp_dequeue_script( 'zoom' );
+}
+
+
 

@@ -6920,6 +6920,20 @@ ul.products.list-view-active li.product .product-loop-actions {
   display: none !important;
 }
 
+/* 
+ * Ultra-specific single-product gallery image constraints.
+ * This completely prevents the active image from stretching, cropping, or zooming when sliding.
+ */
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image img {
+  max-height: 420px !important;
+  max-width: 420px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+
 
 
 
