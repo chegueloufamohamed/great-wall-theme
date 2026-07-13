@@ -970,15 +970,14 @@ function great_wall_save_specs_custom_field( $post_id ) {
  * Helper function to parse raw Markdown tables into clean HTML tables.
  */
 function great_wall_parse_markdown_table( $content ) {
-	// If it doesn't look like a markdown table, return it as standard paragraph format
-	if ( strpos( $content, '|' ) === false ) {
-		return wpautop( esc_html( $content ) );
+	$content = trim( $content );
+	if ( empty( $content ) ) {
+		return '';
 	}
 
 	$lines = explode( "\n", $content );
-	$html = '<table class="shop-specs-table" style="width: 100%; border-collapse: collapse; margin: 20px 0;">';
-	$has_header = false;
-	$in_table = false;
+	$is_table = false;
+	$parsed_rows = array();
 
 	foreach ( $lines as $line ) {
 		$line = trim( $line );
@@ -986,9 +985,8 @@ function great_wall_parse_markdown_table( $content ) {
 			continue;
 		}
 
-		// Check if it's a table row (starts and ends with | or contains |)
 		if ( strpos( $line, '|' ) !== false ) {
-			// Skip separator lines like |---|---| or | :--- | ---: |
+			// Skip separator lines like |---|---|
 			if ( preg_match( '/^[|:\s\-]+$/', $line ) ) {
 				continue;
 			}
@@ -1002,38 +1000,40 @@ function great_wall_parse_markdown_table( $content ) {
 				array_pop( $cells );
 			}
 
-			$in_table = true;
-			$html .= '<tr>';
-			foreach ( $cells as $index => $cell ) {
-				$cell_val = trim( $cell );
-				if ( ! $has_header ) {
-					$html .= '<th style="text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid #e5e0d8; font-family: \'Plus Jakarta Sans\', sans-serif;">' . esc_html( $cell_val ) . '</th>';
-				} else {
-					// Left-hand column is the label, right-hand is details. We style them nicely!
-					$bg_style = 'border-bottom: 1px solid #e5e0d8; padding: 12px 16px; font-family: \'Plus Jakarta Sans\', sans-serif; font-size: 0.95rem;';
-					if ( 0 === $index ) {
-						$html .= '<td style="' . $bg_style . ' font-weight: 500; color: #2e2a25; width: 30%;">' . esc_html( $cell_val ) . '</td>';
-					} else {
-						$html .= '<td style="' . $bg_style . ' color: #76726c;">' . esc_html( $cell_val ) . '</td>';
-					}
-				}
-			}
-			$html .= '</tr>';
-			$has_header = true;
-		} else {
-			// If we were inside a table and hit a non-table line, close the table
-			if ( $in_table ) {
-				$html .= '</table>';
-				$in_table = false;
-			}
-			$html .= '<p style="margin-bottom: 15px; font-family: \'Plus Jakarta Sans\', sans-serif; color: #76726c;">' . esc_html( $line ) . '</p>';
+			$parsed_rows[] = array_map( 'trim', $cells );
+			$is_table = true;
+		} elseif ( strpos( $line, ':' ) !== false ) {
+			// Split by the first colon only
+			$parts = explode( ':', $line, 2 );
+			$parsed_rows[] = array( trim( $parts[0] ), trim( $parts[1] ) );
+			$is_table = true;
 		}
 	}
 
-	if ( $in_table ) {
-		$html .= '</table>';
+	if ( ! $is_table || empty( $parsed_rows ) ) {
+		return wpautop( esc_html( $content ) );
 	}
 
+	$html = '<table class="shop-specs-table" style="width: 100%; border-collapse: collapse; margin: 20px 0;">';
+	$html .= '<thead><tr>';
+	$html .= '<th style="text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid #e5e0d8; font-family: \'Plus Jakarta Sans\', sans-serif; width: 30%;">' . __( 'Specification', 'great-wall-theme' ) . '</th>';
+	$html .= '<th style="text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid #e5e0d8; font-family: \'Plus Jakarta Sans\', sans-serif;">' . __( 'Details', 'great-wall-theme' ) . '</th>';
+	$html .= '</tr></thead><tbody>';
+
+	foreach ( $parsed_rows as $row ) {
+		if ( count( $row ) < 2 ) {
+			$html .= '<tr><td colspan="2" style="border-bottom: 1px solid #e5e0d8; padding: 12px 16px; font-family: \'Plus Jakarta Sans\', sans-serif; font-weight: 600; color: #2e2a25; background-color: #FAF8F5;">' . esc_html( $row[0] ) . '</td></tr>';
+			continue;
+		}
+
+		$bg_style = 'border-bottom: 1px solid #e5e0d8; padding: 12px 16px; font-family: \'Plus Jakarta Sans\', sans-serif; font-size: 0.95rem;';
+		$html .= '<tr>';
+		$html .= '<td style="' . $bg_style . ' font-weight: 500; color: #2e2a25; width: 30%;">' . esc_html( $row[0] ) . '</td>';
+		$html .= '<td style="' . $bg_style . ' color: #76726c;">' . esc_html( $row[1] ) . '</td>';
+		$html .= '</tr>';
+	}
+
+	$html .= '</tbody></table>';
 	return $html;
 }
 
