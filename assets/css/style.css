@@ -6910,6 +6910,12 @@ ul.products.list-view-active li.product .product-loop-actions {
   margin-top: 35px !important;
 }
 
+/* Hide default WooCommerce Sale! badges on product detail pages */
+.single-product .onsale {
+  display: none !important;
+}
+
+
 
 
 

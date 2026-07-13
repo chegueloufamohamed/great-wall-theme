@@ -1067,3 +1067,9 @@ function great_wall_render_specs_tab_content() {
 	}
 }
 
+/**
+ * Remove default WooCommerce "Sale!" badge from product detail pages.
+ */
+remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
+
+
