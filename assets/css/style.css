@@ -6851,7 +6851,60 @@ ul.products.list-view-active li.product .product-loop-actions {
 
 .single-product .woocommerce-tabs ul.tabs {
   justify-content: center !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 40px !important;
+  display: flex !important;
+  gap: 40px !important;
+  border-bottom: 1px solid var(--border-color, #e5e0d8) !important;
 }
+
+.single-product .woocommerce-tabs ul.tabs li {
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li a {
+  font-family: var(--font-sans) !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--color-secondary, #76726c) !important;
+  padding: 12px 0 !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+  display: inline-block !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li.active a {
+  color: var(--color-primary, #2e2a25) !important;
+  border-bottom-color: var(--color-primary, #2e2a25) !important;
+  font-weight: 600 !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li a:hover {
+  color: var(--color-primary, #2e2a25) !important;
+}
+
+/* Hide reviews dividers and clean up top padding lines */
+.reviews-divider {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.single-product .woocommerce-tabs {
+  border-top: none !important;
+  padding-top: 0 !important;
+  margin-top: 40px !important;
+}
+
 
 
 
