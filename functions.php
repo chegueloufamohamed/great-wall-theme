@@ -639,6 +639,10 @@ function great_wall_rename_description_tab( $tabs ) {
     if ( isset( $tabs['additional_information'] ) ) {
         unset( $tabs['additional_information'] );
     }
+    // Remove the Reviews tab to render it as a standalone section instead
+    if ( isset( $tabs['reviews'] ) ) {
+        unset( $tabs['reviews'] );
+    }
     return $tabs;
 }
 

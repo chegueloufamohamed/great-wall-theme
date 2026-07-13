@@ -13,6 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// 1. Render Standalone Reviews Section at the top (before the Description/Specs tabs)
+if ( comments_open() ) : ?>
+	<div class="product-reviews-standalone-section" style="margin-bottom: 50px;">
+		<?php comments_template(); ?>
+	</div>
+	<div class="section-divider-stacked" style="border-top: 1px solid var(--border-color, #e5e0d8); margin-bottom: 50px;"></div>
+<?php endif;
+
 /**
  * Filter tabs and allow third parties to add their own.
  *
