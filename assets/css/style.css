@@ -6818,4 +6818,36 @@ ul.products.list-view-active li.product .product-loop-actions {
   pointer-events: none !important;
 }
 
+/* Product Specifications Table Styling */
+.shop-specs-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 30px 0 !important;
+}
+
+.shop-specs-table th {
+  text-align: left !important;
+  padding: 16px 20px !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  color: var(--color-primary, #2e2a25) !important;
+  border-bottom: 2px solid var(--border-color, #e5e0d8) !important;
+}
+
+.shop-specs-table td {
+  padding: 16px 20px !important;
+  font-size: 0.95rem !important;
+  border-bottom: 1px solid var(--border-color, #e5e0d8) !important;
+  vertical-align: middle !important;
+}
+
+.shop-specs-table tr:nth-child(even) {
+  background-color: var(--bg-primary, #FAF8F5) !important;
+}
+
+.shop-specs-table tr:hover {
+  background-color: var(--bg-light-accent, #F4EFEA) !important;
+}
+
+
 

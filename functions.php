@@ -939,3 +939,130 @@ function great_wall_custom_carousel_options( $options ) {
 	$options['pauseOnHover']   = true;  // Pause slideshow when mouse hovers over it
 	return $options;
 }
+
+/**
+ * Add a custom "Product Specifications" field in the product edit screen in Admin.
+ */
+add_action( 'woocommerce_product_options_general_product_data', 'great_wall_add_specs_custom_field' );
+function great_wall_add_specs_custom_field() {
+	echo '<div class="options_group">';
+	woocommerce_wp_textarea_input( array(
+		'id'          => '_product_specs',
+		'label'       => __( 'Product Specifications', 'great-wall-theme' ),
+		'placeholder' => __( "Paste markdown table or specifications text here...", 'great-wall-theme' ),
+		'desc_tip'    => 'true',
+		'description' => __( 'Pasted markdown tables will be automatically converted to clean tables on the website.', 'great-wall-theme' ),
+		'style'       => 'height: 150px;',
+	) );
+	echo '</div>';
+}
+
+/**
+ * Save the "Product Specifications" custom field value.
+ */
+add_action( 'woocommerce_process_product_meta', 'great_wall_save_specs_custom_field' );
+function great_wall_save_specs_custom_field( $post_id ) {
+	$product_specs = isset( $_POST['_product_specs'] ) ? $_POST['_product_specs'] : '';
+	update_post_meta( $post_id, '_product_specs', $product_specs );
+}
+
+/**
+ * Helper function to parse raw Markdown tables into clean HTML tables.
+ */
+function great_wall_parse_markdown_table( $content ) {
+	// If it doesn't look like a markdown table, return it as standard paragraph format
+	if ( strpos( $content, '|' ) === false ) {
+		return wpautop( esc_html( $content ) );
+	}
+
+	$lines = explode( "\n", $content );
+	$html = '<table class="shop-specs-table" style="width: 100%; border-collapse: collapse; margin: 20px 0;">';
+	$has_header = false;
+	$in_table = false;
+
+	foreach ( $lines as $line ) {
+		$line = trim( $line );
+		if ( empty( $line ) ) {
+			continue;
+		}
+
+		// Check if it's a table row (starts and ends with | or contains |)
+		if ( strpos( $line, '|' ) !== false ) {
+			// Skip separator lines like |---|---| or | :--- | ---: |
+			if ( preg_match( '/^[|:\s\-]+$/', $line ) ) {
+				continue;
+			}
+
+			$cells = explode( '|', $line );
+			// Remove the empty first and last cells if they exist (due to leading/trailing pipes)
+			if ( empty( trim( $cells[0] ) ) && count( $cells ) > 1 ) {
+				array_shift( $cells );
+			}
+			if ( ! empty( $cells ) && empty( trim( $cells[ count( $cells ) - 1 ] ) ) ) {
+				array_pop( $cells );
+			}
+
+			$in_table = true;
+			$html .= '<tr>';
+			foreach ( $cells as $index => $cell ) {
+				$cell_val = trim( $cell );
+				if ( ! $has_header ) {
+					$html .= '<th style="text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid #e5e0d8; font-family: \'Plus Jakarta Sans\', sans-serif;">' . esc_html( $cell_val ) . '</th>';
+				} else {
+					// Left-hand column is the label, right-hand is details. We style them nicely!
+					$bg_style = 'border-bottom: 1px solid #e5e0d8; padding: 12px 16px; font-family: \'Plus Jakarta Sans\', sans-serif; font-size: 0.95rem;';
+					if ( 0 === $index ) {
+						$html .= '<td style="' . $bg_style . ' font-weight: 500; color: #2e2a25; width: 30%;">' . esc_html( $cell_val ) . '</td>';
+					} else {
+						$html .= '<td style="' . $bg_style . ' color: #76726c;">' . esc_html( $cell_val ) . '</td>';
+					}
+				}
+			}
+			$html .= '</tr>';
+			$has_header = true;
+		} else {
+			// If we were inside a table and hit a non-table line, close the table
+			if ( $in_table ) {
+				$html .= '</table>';
+				$in_table = false;
+			}
+			$html .= '<p style="margin-bottom: 15px; font-family: \'Plus Jakarta Sans\', sans-serif; color: #76726c;">' . esc_html( $line ) . '</p>';
+		}
+	}
+
+	if ( $in_table ) {
+		$html .= '</table>';
+	}
+
+	return $html;
+}
+
+/**
+ * Register the custom "Specifications" product tab.
+ */
+add_filter( 'woocommerce_product_tabs', 'great_wall_add_specs_product_tab' );
+function great_wall_add_specs_product_tab( $tabs ) {
+	global $post;
+	$specs = get_post_meta( $post->ID, '_product_specs', true );
+	
+	if ( ! empty( trim( $specs ) ) ) {
+		$tabs['product_specifications'] = array(
+			'title'    => __( 'Specifications', 'great-wall-theme' ),
+			'priority' => 25,
+			'callback' => 'great_wall_render_specs_tab_content'
+		);
+	}
+	
+	return $tabs;
+}
+
+function great_wall_render_specs_tab_content() {
+	global $post;
+	$specs = get_post_meta( $post->ID, '_product_specs', true );
+	if ( ! empty( $specs ) ) {
+		echo '<div class="product-specs-tab-content" style="max-width: 900px; margin: 0 auto;">';
+		echo great_wall_parse_markdown_table( $specs );
+		echo '</div>';
+	}
+}
+
