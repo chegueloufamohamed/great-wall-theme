@@ -1019,10 +1019,7 @@ function great_wall_parse_markdown_table( $content ) {
 	}
 
 	$html = '<table class="shop-specs-table" style="width: 100%; border-collapse: collapse; margin: 20px 0;">';
-	$html .= '<thead><tr>';
-	$html .= '<th style="text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid #e5e0d8; font-family: \'Plus Jakarta Sans\', sans-serif; width: 30%;">' . __( 'Specification', 'great-wall-theme' ) . '</th>';
-	$html .= '<th style="text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid #e5e0d8; font-family: \'Plus Jakarta Sans\', sans-serif;">' . __( 'Details', 'great-wall-theme' ) . '</th>';
-	$html .= '</tr></thead><tbody>';
+	$html .= '<tbody>';
 
 	foreach ( $parsed_rows as $row ) {
 		if ( count( $row ) < 2 ) {
