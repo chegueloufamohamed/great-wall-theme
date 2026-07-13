@@ -760,7 +760,7 @@ function great_wall_custom_sale_percentage_badge( $price_html, $product ) {
 /**
  * Render dynamic Tabby and Tamara installment breakdown calculator tabs.
  */
-add_action( 'woocommerce_single_product_summary', 'great_wall_render_bnpl_tabs', 15 );
+// add_action( 'woocommerce_single_product_summary', 'great_wall_render_bnpl_tabs', 15 );
 function great_wall_render_bnpl_tabs() {
     global $product;
     if ( ! $product ) {
