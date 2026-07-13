@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="product-tabs-outer-container" style="max-width: 850px; margin: 0 auto; padding: 0 20px;">
+<div class="product-tabs-outer-container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
 	
 	<!-- 1. Render Standalone Reviews Section at the top (before the Description/Specs tabs) -->
 	<?php if ( comments_open() ) : ?>
