@@ -28,14 +28,15 @@ if ( $related_products ) : ?>
 		
 		<div class="grid products-grid">
 
-			<?php foreach ( $related_products as $related_product_id ) : ?>
+			<?php foreach ( $related_products as $related_product_item ) : ?>
 
 				<?php
-				$post_object = get_post( $related_product_id );
+				$related_actual_id = is_object( $related_product_item ) ? $related_product_item->get_id() : $related_product_item;
+				$post_object = get_post( $related_actual_id );
 
 				setup_postdata( $GLOBALS['post'] =& $post_object ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
-				$product_obj = wc_get_product( $related_product_id );
+				$product_obj = wc_get_product( $related_actual_id );
 				if ( ! $product_obj ) {
 					continue;
 				}
@@ -101,7 +102,7 @@ if ( $related_products ) : ?>
 						<?php endif; ?>
 						<div class="product-actions">
 							<button class="product-action-btn add-to-cart-trigger" 
-									data-id="<?php echo esc_attr( $related_product_id ); ?>" 
+									data-id="<?php echo esc_attr( $related_actual_id ); ?>" 
 									data-title="<?php echo esc_attr( $product_obj->get_name() ); ?>" 
 									data-price="<?php echo esc_attr( $product_obj->get_price() ); ?>" 
 									data-image="<?php echo esc_url( $product_image ); ?>"
@@ -109,12 +110,12 @@ if ( $related_products ) : ?>
 									title="Add to Shopping Bag">
 								<i class="ri-shopping-bag-line"></i>
 							</button>
-							<a href="<?php echo esc_url( get_permalink( $related_product_id ) ); ?>" class="product-action-btn" title="View Details"><i class="ri-eye-line"></i></a>
+							<a href="<?php echo esc_url( get_permalink( $related_actual_id ) ); ?>" class="product-action-btn" title="View Details"><i class="ri-eye-line"></i></a>
 						</div>
 					</div>
 					<div class="product-info">
 						<span class="product-category"><?php echo esc_html( $cat_label ); ?></span>
-						<h3 class="product-title" style="font-size: 0.9rem; margin-bottom: 10px;"><a href="<?php echo esc_url( get_permalink( $related_product_id ) ); ?>"><?php echo esc_html( $product_obj->get_name() ); ?></a></h3>
+						<h3 class="product-title" style="font-size: 0.9rem; margin-bottom: 10px;"><a href="<?php echo esc_url( get_permalink( $related_actual_id ) ); ?>"><?php echo esc_html( $product_obj->get_name() ); ?></a></h3>
 						<div class="product-meta">
 							<div class="product-price"><?php echo wp_kses_post( $product_obj->get_price_html() ); ?></div>
 						</div>
