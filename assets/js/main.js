@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initShopCategoriesSlider();
   initSidebarCategoryAccordion();
   initWooCommerceFeaturedProduct();
+  initLoungeScrollDrag();
 });
 
 /* ==========================================================================
@@ -1386,4 +1387,42 @@ function initWooCommerceFeaturedProduct() {
     });
   }
 }
+
+/**
+ * Enable smooth drag-to-scroll behavior for the RLS-3 horizontal showroom strip
+ */
+function initLoungeScrollDrag() {
+  const slider = document.querySelector('.rls-horizontal-scroll');
+  if (!slider) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.style.cursor = 'grabbing';
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.style.cursor = 'grab';
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.style.cursor = 'grab';
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5; // Scroll speed multiplier
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+
 

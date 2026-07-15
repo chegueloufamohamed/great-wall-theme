@@ -195,59 +195,79 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        RECEPTION LOUNGE SET SPOTLIGHT (RLS-3 Showcase)
        ========================================================================== -->
-  <section class="section rls-showcase-section" style="background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 120px 0;">
+  <section class="section rls-showcase-section" style="background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 90px 0; overflow: hidden;">
     <div class="container">
-      <div class="section-title-wrapper text-center" style="margin-bottom: 60px;" data-scroll>
-        <span class="section-subtitle"><?php esc_html_e( 'Exclusive Lobby Concepts', 'great-wall-theme' ); ?></span>
-        <h2 class="section-title"><?php esc_html_e( 'Reception & Lounge Masterpiece', 'great-wall-theme' ); ?></h2>
+      <div class="section-title-wrapper" style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end;" data-scroll>
+        <div>
+          <span class="section-subtitle"><?php esc_html_e( 'Exclusive Lobby Concepts', 'great-wall-theme' ); ?></span>
+          <h2 class="section-title" style="margin-bottom: 0;"><?php esc_html_e( 'Verona Reception Lounge', 'great-wall-theme' ); ?></h2>
+        </div>
+        <div class="rls-nav-controls">
+          <a href="https://greatwallfurniture.com/product/premium-reception-lounge-set/" class="btn btn-primary" style="padding: 12px 28px; font-size: 0.85rem; border-radius: 30px; background-color: var(--color-primary); color: #FFFFFF; font-weight: 600;"><span>Explore Collection</span></a>
+        </div>
       </div>
-      
-      <div class="rls-showcase-grid">
-        <!-- Left Side: Hero Image Frame with overlay content -->
-        <div class="rls-hero-column" data-scroll>
-          <div class="rls-hero-card">
-            <div class="rls-hero-img-wrapper">
-              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Verona Executive Reception Lounge Set Hero">
-              <div class="rls-hero-gradient"></div>
-            </div>
-            <div class="rls-hero-content">
-              <span class="rls-badge">Collection 2026</span>
-              <h3 class="rls-hero-title">Verona Executive Lounge Suite</h3>
-              <p class="rls-hero-desc">Elevate your corporate reception area or business lobby with our premium 4-piece leather lounge sofa and oval coffee table set.</p>
-              <a href="https://greatwallfurniture.com/product/premium-reception-lounge-set/" class="btn btn-accent">Explore Collection</a>
+    </div>
+
+    <!-- Horizontal scrollable strip overflowing to the right edge of screen -->
+    <div class="rls-horizontal-scroll" data-scroll>
+      <div class="rls-scroll-inner">
+        
+        <!-- Card 1: Wide Hero View -->
+        <div class="rls-card rls-card-wide">
+          <div class="rls-img-frame">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Verona Reception Set Hero View">
+            <div class="rls-card-overlay">
+              <span class="rls-card-badge">Complete Set</span>
+              <h3 class="rls-card-title">Verona Executive Lounge Suite</h3>
+              <p class="rls-card-desc">Featuring 3-seater, 2-seater, armchair, and custom table.</p>
             </div>
           </div>
         </div>
         
-        <!-- Right Side: 2x2 Grid of detailed frames -->
-        <div class="rls-gallery-column">
-          <div class="rls-gallery-grid">
-            <div class="rls-gallery-card delay-100" data-scroll>
-              <div class="rls-gallery-img-wrapper">
-                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square.webp" alt="Lounge Set Detail View 1">
-              </div>
-              <div class="rls-gallery-frame-label">Ribbed Panel Oval Coffee Table</div>
-            </div>
-            <div class="rls-gallery-card delay-200" data-scroll>
-              <div class="rls-gallery-img-wrapper">
-                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-3.webp" alt="Lounge Set Detail View 2">
-              </div>
-              <div class="rls-gallery-frame-label">Contrast Stitching & Leather Finishes</div>
-            </div>
-            <div class="rls-gallery-card delay-300" data-scroll>
-              <div class="rls-gallery-img-wrapper">
-                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-2.webp" alt="Lounge Set Detail View 3">
-              </div>
-              <div class="rls-gallery-frame-label">Plush Orange Accent Comfort</div>
-            </div>
-            <div class="rls-gallery-card delay-400" data-scroll>
-              <div class="rls-gallery-img-wrapper">
-                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-1.webp" alt="Lounge Set Detail View 4">
-              </div>
-              <div class="rls-gallery-frame-label">Sleek Metal Frame Structure</div>
+        <!-- Card 2: Square Detail 1 -->
+        <div class="rls-card rls-card-square">
+          <div class="rls-img-frame">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square.webp" alt="Verona Table Detail">
+            <div class="rls-card-overlay">
+              <h3 class="rls-card-title">Ribbed Oval Coffee Table</h3>
+              <p class="rls-card-desc">Wood panel sides and dark top surface.</p>
             </div>
           </div>
         </div>
+
+        <!-- Card 3: Square Detail 2 -->
+        <div class="rls-card rls-card-square">
+          <div class="rls-img-frame">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-3.webp" alt="Verona Stitching Detail">
+            <div class="rls-card-overlay">
+              <h3 class="rls-card-title">Contrast Stitching</h3>
+              <p class="rls-card-desc">High-end craftsmanship detail and seams.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Square Detail 3 -->
+        <div class="rls-card rls-card-square">
+          <div class="rls-img-frame">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-2.webp" alt="Verona Comfort Detail">
+            <div class="rls-card-overlay">
+              <h3 class="rls-card-title">Plush Accent Cushioning</h3>
+              <p class="rls-card-desc">Contrast orange cushions in premium density.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Square Detail 4 -->
+        <div class="rls-card rls-card-square">
+          <div class="rls-img-frame">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-1.webp" alt="Verona Frame Detail">
+            <div class="rls-card-overlay">
+              <h3 class="rls-card-title">Sleek Metal Legs</h3>
+              <p class="rls-card-desc">Durable black powder-coated support.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
