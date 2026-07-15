@@ -193,6 +193,66 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
+       RECEPTION LOUNGE SET SPOTLIGHT (RLS-3 Showcase)
+       ========================================================================== -->
+  <section class="section rls-showcase-section" style="background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 120px 0;">
+    <div class="container">
+      <div class="section-title-wrapper text-center" style="margin-bottom: 60px;" data-scroll>
+        <span class="section-subtitle"><?php esc_html_e( 'Exclusive Lobby Concepts', 'great-wall-theme' ); ?></span>
+        <h2 class="section-title"><?php esc_html_e( 'Reception & Lounge Masterpiece', 'great-wall-theme' ); ?></h2>
+      </div>
+      
+      <div class="rls-showcase-grid">
+        <!-- Left Side: Hero Image Frame with overlay content -->
+        <div class="rls-hero-column" data-scroll>
+          <div class="rls-hero-card">
+            <div class="rls-hero-img-wrapper">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Verona Executive Reception Lounge Set Hero">
+              <div class="rls-hero-gradient"></div>
+            </div>
+            <div class="rls-hero-content">
+              <span class="rls-badge">Collection 2026</span>
+              <h3 class="rls-hero-title">Verona Executive Lounge Suite</h3>
+              <p class="rls-hero-desc">Elevate your corporate reception area or business lobby with our premium 4-piece leather lounge sofa and oval coffee table set.</p>
+              <a href="https://greatwallfurniture.com/product/premium-reception-lounge-set/" class="btn btn-accent">Explore Collection</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Side: 2x2 Grid of detailed frames -->
+        <div class="rls-gallery-column">
+          <div class="rls-gallery-grid">
+            <div class="rls-gallery-card delay-100" data-scroll>
+              <div class="rls-gallery-img-wrapper">
+                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square.webp" alt="Lounge Set Detail View 1">
+              </div>
+              <div class="rls-gallery-frame-label">Ribbed Panel Oval Coffee Table</div>
+            </div>
+            <div class="rls-gallery-card delay-200" data-scroll>
+              <div class="rls-gallery-img-wrapper">
+                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-3.webp" alt="Lounge Set Detail View 2">
+              </div>
+              <div class="rls-gallery-frame-label">Contrast Stitching & Leather Finishes</div>
+            </div>
+            <div class="rls-gallery-card delay-300" data-scroll>
+              <div class="rls-gallery-img-wrapper">
+                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-2.webp" alt="Lounge Set Detail View 3">
+              </div>
+              <div class="rls-gallery-frame-label">Plush Orange Accent Comfort</div>
+            </div>
+            <div class="rls-gallery-card delay-400" data-scroll>
+              <div class="rls-gallery-img-wrapper">
+                <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-1.webp" alt="Lounge Set Detail View 4">
+              </div>
+              <div class="rls-gallery-frame-label">Sleek Metal Frame Structure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
        3D REVOLVING SHOWCASE CAROUSEL (Phase 17)
        ========================================================================== -->
   <div class="fc3-outer">
