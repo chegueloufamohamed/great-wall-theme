@@ -83,47 +83,47 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       </div>
       
       <div class="grid categories-grid">
-        <!-- Card 1: Living -->
-        <div class="category-card delay-100" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=living' ) ); ?>'">
+        <!-- Card 1: Office Workspace -->
+        <div class="category-card delay-100" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/chair/office-chairs/' ) ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" alt="Living Room Category">
+            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Office Workspace Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Living Room</h3>
-            <span class="category-count">Explore Designs</span>
+            <h3 class="category-title">Office Chairs</h3>
+            <span class="category-count">Ergonomic & Task Seating</span>
           </div>
         </div>
         
-        <!-- Card 2: Bedroom -->
-        <div class="category-card delay-200" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=bedroom' ) ); ?>'">
+        <!-- Card 2: Bunk & Single Beds -->
+        <div class="category-card delay-200" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Bedroom Category">
+            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Bunk & Single Beds Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Bedroom</h3>
-            <span class="category-count">Serene Concepts</span>
+            <h3 class="category-title">Luxury Beds</h3>
+            <span class="category-count">Bunk & Single Frames</span>
           </div>
         </div>
         
-        <!-- Card 3: Dining -->
-        <div class="category-card delay-300" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=dining' ) ); ?>'">
+        <!-- Card 3: Foldable Room Dividers -->
+        <div class="category-card delay-300" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="Dining Category">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/PF-1-2.jpg" alt="Foldable Room Dividers Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Dining Room</h3>
-            <span class="category-count">Gathering Sets</span>
+            <h3 class="category-title">Room Dividers</h3>
+            <span class="category-count">Foldable Partition Screens</span>
           </div>
         </div>
         
-        <!-- Card 4: Accent Armchairs -->
-        <div class="category-card delay-400" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/shop/?cat=accents' ) ); ?>'">
+        <!-- Card 4: Cabinets & Storage -->
+        <div class="category-card delay-400" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Armchair Category">
+            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="Storage Cabinets Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Accent Armchairs</h3>
-            <span class="category-count">Statement Seating</span>
+            <h3 class="category-title">Storage Cabinets</h3>
+            <span class="category-count">Sideboards & Lockers</span>
           </div>
         </div>
       </div>

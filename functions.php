@@ -1080,5 +1080,24 @@ function great_wall_dequeue_gallery_zoom() {
     wp_dequeue_script( 'zoom' );
 }
 
+/**
+ * Dynamically fix category spelling typos on the frontend.
+ */
+add_filter( 'get_term', 'greatwall_fix_term_name_spelling', 10, 2 );
+function greatwall_fix_term_name_spelling( $_term, $taxonomy ) {
+    if ( 'product_cat' === $taxonomy && is_object( $_term ) ) {
+        $display_names = array(
+            'Forldable Room Divider' => 'Foldable Room Divider',
+            'Dinning Tables'         => 'Dining Tables',
+            'Shoerack'               => 'Shoe Racks',
+        );
+        if ( isset( $display_names[ $_term->name ] ) ) {
+            $_term->name = $display_names[ $_term->name ];
+        }
+    }
+    return $_term;
+}
+
+
 
 
