@@ -412,21 +412,20 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       </div>
 
       <div class="detail-grid" style="align-items: center;">
-        
-        <!-- Left Column: Gallery Carousel -->
+           <!-- Left Column: Gallery Carousel -->
         <div class="product-gallery">
           <div class="gallery-thumbs">
-            <div class="gallery-thumb active" onclick="changeFeaturedImage('<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>', this)">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Velvet Lounge Chair View 1">
+            <div class="gallery-thumb active" onclick="changeFeaturedImage('https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-1.webp', this)">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-1.webp" alt="Velvet Tufted Chair Beige">
             </div>
-            <div class="gallery-thumb" onclick="changeFeaturedImage('<?php echo esc_url( $assets_uri . 'designer_chair_h.webp' ); ?>', this)">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair_h.webp' ); ?>" alt="Velvet Lounge Chair View 2">
+            <div class="gallery-thumb" onclick="changeFeaturedImage('https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-2.webp', this)">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-2.webp" alt="Velvet Tufted Chair Green">
             </div>
-            <div class="gallery-thumb" onclick="changeFeaturedImage('<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>', this)">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" alt="Velvet Lounge Chair View 3">
+            <div class="gallery-thumb" onclick="changeFeaturedImage('https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-3.webp', this)">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-3.webp" alt="Velvet Tufted Chair Blue">
             </div>
-            <div class="gallery-thumb" onclick="changeFeaturedImage('<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>', this)">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>" alt="Velvet Lounge Chair View 4">
+            <div class="gallery-thumb" onclick="changeFeaturedImage('https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-4.webp', this)">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-4.webp" alt="Velvet Tufted Chair Grey">
             </div>
           </div>
           
@@ -436,27 +435,32 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             
             <!-- Gallery Navigation Arrows -->
             <button class="gallery-nav-btn prev-btn" onclick="prevFeaturedGalleryImage()" aria-label="Previous Image"><i class="ri-arrow-left-s-line"></i></button>
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" id="featured-product-main-img" alt="Velvet Sleek Lounge Chair Main View">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-1.webp" id="featured-product-main-img" alt="Premium Velvet Tufted Accent Chair Main View">
             <button class="gallery-nav-btn next-btn" onclick="nextFeaturedGalleryImage()" aria-label="Next Image"><i class="ri-arrow-right-s-line"></i></button>
           </div>
         </div>
         
         <!-- Right Column: Specs and Cart Trigger -->
         <div class="product-detail-info">
-          <h1 class="detail-title" style="font-size: 2.2rem; margin-bottom: 10px;"><?php esc_html_e( 'Velvet Sleek Lounge Chair', 'great-wall-theme' ); ?></h1>
+          <h1 class="detail-title" style="font-size: 2.2rem; margin-bottom: 10px;"><?php esc_html_e( 'Premium Velvet Tufted Accent Chair', 'great-wall-theme' ); ?></h1>
           
-          <div class="detail-price" id="featured-price-text" style="font-size: 1.8rem; font-weight: 500; color: var(--color-accent); margin-bottom: 20px;">AED 2,899</div>
+          <div class="detail-price-wrapper" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+            <div class="detail-price" id="featured-price-text" style="font-size: 1.8rem; font-weight: 500; color: var(--color-accent); margin-bottom: 0;">AED 300</div>
+            <span class="detail-price-original" style="font-size: 1.2rem; text-decoration: line-through; color: var(--color-muted); margin-bottom: 0;">AED 450</span>
+            <span class="discount-badge" style="background-color: #FDE8E8; color: #E02424; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;">SAVE 33%</span>
+          </div>
           
-          <p class="detail-desc" style="margin-bottom: 25px;"><?php esc_html_e( 'In our showroom haven, every curve resonates with the power to inspire, soothe, and elevate. Immerse yourself in premium comfort where minimalist structural walnut base and plush upholstery weave details of elegance.', 'great-wall-theme' ); ?></p>
+          <p class="detail-desc" style="margin-bottom: 25px;"><?php esc_html_e( 'A stylish upholstered accent chair designed to combine elegance with everyday comfort. Featuring a soft velvet fabric finish, diamond-tufted backrest, integrated armrests, and high-density cushioned seat.', 'great-wall-theme' ); ?></p>
           
           <!-- Product Custom Options -->
           <div class="options-group" style="margin-bottom: 20px;">
-            <span class="option-label" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: block;"><?php esc_html_e( 'Select color:', 'great-wall-theme' ); ?> <span id="featured-color-name" style="text-transform: none; font-weight: 500; color: var(--color-secondary);"><?php esc_html_e( 'Gray', 'great-wall-theme' ); ?></span></span>
+            <span class="option-label" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: block;"><?php esc_html_e( 'Select color:', 'great-wall-theme' ); ?> <span id="featured-color-name" style="text-transform: none; font-weight: 500; color: var(--color-secondary);"><?php esc_html_e( 'Beige', 'great-wall-theme' ); ?></span></span>
             <div style="display: flex; gap: 12px; align-items: center;">
               <!-- Circle swatches matching user screenshot -->
-              <span class="featured-swatch active" style="background-color: #8E8E93; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1.5px var(--color-primary);" data-color="Gray" data-price="2899" data-img="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" onclick="selectFeaturedColor(this)"></span>
-              <span class="featured-swatch" style="background-color: #1C1C1E; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px rgba(0,0,0,0.1);" data-color="Charcoal Black" data-price="3199" data-img="<?php echo esc_url( $assets_uri . 'designer_chair_h.webp' ); ?>" onclick="selectFeaturedColor(this)"></span>
-              <span class="featured-swatch" style="background-color: #BCD3E6; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px rgba(0,0,0,0.1);" data-color="Aegean Blue" data-price="3499" data-img="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" onclick="selectFeaturedColor(this)"></span>
+              <span class="featured-swatch active" style="background-color: #EADBC8; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1.5px var(--color-primary);" data-color="Beige" data-price="300" data-img="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-1.webp" onclick="selectFeaturedColor(this)"></span>
+              <span class="featured-swatch" style="background-color: #5A624E; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px rgba(0,0,0,0.1);" data-color="Green" data-price="300" data-img="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-2.webp" onclick="selectFeaturedColor(this)"></span>
+              <span class="featured-swatch" style="background-color: #2A3A5E; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px rgba(0,0,0,0.1);" data-color="Blue" data-price="300" data-img="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-3.webp" onclick="selectFeaturedColor(this)"></span>
+              <span class="featured-swatch" style="background-color: #E5E4E2; width: 28px; height: 28px; border-radius: 50%; display: inline-block; cursor: pointer; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px rgba(0,0,0,0.1);" data-color="Grey (Wood Legs)" data-price="300" data-img="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-4.webp" onclick="selectFeaturedColor(this)"></span>
             </div>
           </div>
           
@@ -466,7 +470,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               <button class="wood-option active" style="border: 1px solid var(--color-primary); border-radius: 6px; padding: 10px 20px; background-color: transparent; font-weight: 600; cursor: pointer; font-family: var(--font-sans); color: var(--color-primary);"><?php esc_html_e( 'Upholstered', 'great-wall-theme' ); ?></button>
             </div>
           </div>
-
+ 
           <div class="options-group" style="margin-bottom: 25px;">
             <span class="option-label" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: block;"><?php esc_html_e( 'Material:', 'great-wall-theme' ); ?></span>
             <div style="display: flex; gap: 10px;">
@@ -485,11 +489,11 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               
               <button class="btn btn-primary btn-add-to-cart" id="featured-add-to-cart"
                       style="border-radius: 30px; height: 50px; background-color: var(--color-primary); color: #FFFFFF; font-weight: 600; flex: 1; border: none; font-size: 0.95rem; cursor: pointer;"
-                      data-id="prod-velvet-sleek-chair" 
-                      data-title="Velvet Sleek Lounge Chair" 
-                      data-price="2899" 
-                      data-image="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>"
-                      data-category="Accent Seating">
+                      data-id="1019" 
+                      data-title="Premium Velvet Tufted Accent Chair" 
+                      data-price="300" 
+                      data-image="https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-1.webp"
+                      data-category="Chair">
                 <span><?php esc_html_e( 'Add to cart', 'great-wall-theme' ); ?></span>
               </button>
             </div>
@@ -498,7 +502,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               <span><?php esc_html_e( 'Buy Now', 'great-wall-theme' ); ?></span>
             </button>
           </div>
-        </div>
+        </div></div>
         
       </div>
     </div>
@@ -1105,10 +1109,10 @@ function great_wall_render_fallback_products( $assets_uri ) {
   <script>
     // --- Featured Product Gallery ---
     const featuredGalleryImages = [
-      '<?php echo esc_url( $assets_uri . "designer_chair.webp" ); ?>',
-      '<?php echo esc_url( $assets_uri . "designer_chair_h.webp" ); ?>',
-      '<?php echo esc_url( $assets_uri . "blue_chair_isolated.webp" ); ?>',
-      '<?php echo esc_url( $assets_uri . "cushion_chair.webp" ); ?>'
+      'https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-1.webp',
+      'https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-2.webp',
+      'https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-3.webp',
+      'https://greatwallfurniture.com/wp-content/uploads/2026/07/C-17-4.webp'
     ];
     let currentFeaturedIndex = 0;
 
@@ -1190,7 +1194,7 @@ function great_wall_render_fallback_products( $assets_uri ) {
       const addCartBtn = document.getElementById('featured-add-to-cart');
       if (addCartBtn) {
         addCartBtn.setAttribute('data-price', price);
-        addCartBtn.setAttribute('data-title', `Velvet Sleek Lounge Chair (${color})`);
+        addCartBtn.setAttribute('data-title', `Premium Velvet Tufted Accent Chair (${color})`);
         addCartBtn.setAttribute('data-image', imgSrc);
       }
     }

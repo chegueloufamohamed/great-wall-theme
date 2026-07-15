@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initViewModeToggle();
   initShopCategoriesSlider();
   initSidebarCategoryAccordion();
+  initWooCommerceFeaturedProduct();
 });
 
 /* ==========================================================================
@@ -1316,3 +1317,73 @@ window.addEventListener('load', () => {
     startAnimation();
   }
 });
+
+/**
+ * Initialize WooCommerce integrations for the Homepage Featured Spotlight Section
+ */
+function initWooCommerceFeaturedProduct() {
+  if (typeof greatWallThemeParams === 'undefined' || !greatWallThemeParams.is_woocommerce) {
+    return;
+  }
+  
+  const featuredAddBtn = document.getElementById('featured-add-to-cart');
+  const featuredBuyBtn = document.getElementById('featured-buy-now');
+  
+  if (featuredAddBtn) {
+    featuredAddBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const prodId = featuredAddBtn.getAttribute('data-id') || '1019';
+      const qtyInput = document.getElementById('featured-product-qty');
+      const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+      
+      featuredAddBtn.disabled = true;
+      featuredAddBtn.style.opacity = '0.5';
+      
+      const formData = new FormData();
+      formData.append('add-to-cart', prodId);
+      formData.append('quantity', qty);
+      
+      fetch(window.location.origin + '/', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        featuredAddBtn.disabled = false;
+        featuredAddBtn.style.opacity = '1';
+        
+        if (window.jQuery) {
+          window.jQuery(document.body).trigger('wc_fragment_refresh');
+        }
+        
+        const cartDrawer = document.getElementById('cart-drawer');
+        const overlay = document.querySelector('.drawer-overlay');
+        if (cartDrawer && overlay) {
+          overlay.classList.add('active');
+          cartDrawer.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      })
+      .catch(err => {
+        featuredAddBtn.disabled = false;
+        featuredAddBtn.style.opacity = '1';
+        console.error('Error adding to WooCommerce cart:', err);
+      });
+    });
+  }
+  
+  if (featuredBuyBtn) {
+    featuredBuyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const prodId = featuredAddBtn ? (featuredAddBtn.getAttribute('data-id') || '1019') : '1019';
+      const qtyInput = document.getElementById('featured-product-qty');
+      const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+      
+      const baseUrl = greatWallThemeParams.checkout_url || (window.location.origin + '/checkout/');
+      const separator = baseUrl.includes('?') ? '&' : '?';
+      window.location.href = baseUrl + separator + 'add-to-cart=' + prodId + '&quantity=' + qty;
+    });
+  }
+}
+
