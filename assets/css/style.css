@@ -6938,18 +6938,21 @@ ul.products.list-view-active li.product .product-loop-actions {
    ========================================================================== */
 .rls-showcase-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 30px;
   align-items: stretch;
+  height: 440px; /* Constrains the section height so it fits in a single scroll */
 }
 
 .rls-hero-column {
   display: flex;
+  height: 100%;
 }
 
 .rls-hero-card {
   position: relative;
   width: 100%;
+  height: 100%;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
@@ -6961,7 +6964,6 @@ ul.products.list-view-active li.product .product-loop-actions {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 500px;
   overflow: hidden;
 }
 
@@ -6981,8 +6983,8 @@ ul.products.list-view-active li.product .product-loop-actions {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  height: 70%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
   z-index: 1;
 }
 
@@ -6991,7 +6993,7 @@ ul.products.list-view-active li.product .product-loop-actions {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 40px;
+  padding: 30px;
   z-index: 2;
   color: #FFFFFF;
 }
@@ -7006,52 +7008,55 @@ ul.products.list-view-active li.product .product-loop-actions {
   padding: 4px 12px;
   border-radius: 20px;
   display: inline-block;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .rls-hero-title {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: 2.0rem;
   font-weight: 400;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #FFFFFF;
   line-height: 1.2;
 }
 
 .rls-hero-desc {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.5;
   opacity: 0.85;
-  margin-bottom: 25px;
-  max-width: 500px;
+  margin-bottom: 20px;
+  max-width: 480px;
 }
 
 .rls-gallery-column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100%;
 }
 
 .rls-gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  height: 100%;
 }
 
 .rls-gallery-card {
   background-color: #FFFFFF;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: 12px;
+  padding: 10px;
   box-shadow: var(--shadow-sm);
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .rls-gallery-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-md);
   border-color: var(--color-accent);
 }
@@ -7059,7 +7064,8 @@ ul.products.list-view-active li.product .product-loop-actions {
 .rls-gallery-img-wrapper {
   border-radius: calc(var(--border-radius-md) - 4px);
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  flex: 1; /* Automatically takes the remaining space in the card */
+  min-height: 0;
 }
 
 .rls-gallery-img-wrapper img {
@@ -7074,11 +7080,11 @@ ul.products.list-view-active li.product .product-loop-actions {
 }
 
 .rls-gallery-frame-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--color-secondary);
   text-align: center;
-  padding: 4px 0 2px;
+  padding: 8px 0 2px;
   opacity: 0.85;
 }
 
@@ -7086,10 +7092,15 @@ ul.products.list-view-active li.product .product-loop-actions {
 @media (max-width: 1024px) {
   .rls-showcase-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    height: auto;
+    gap: 30px;
   }
   .rls-hero-img-wrapper {
     min-height: 400px;
+  }
+  .rls-gallery-grid {
+    height: auto;
+    grid-template-rows: auto;
   }
 }
 
