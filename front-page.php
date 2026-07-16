@@ -131,6 +131,150 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
+       SHOP BY ROOM COLLECTION - EXTENDED BANNER & CATEGORY GRID SECTION
+       ========================================================================== -->
+  <section class="section category-extended-section" style="padding-top: 0; padding-bottom: 80px;">
+    <div class="container">
+      
+      <!-- Part 1: Top 3 Large Banners -->
+      <div class="rls-banners-row" style="margin-bottom: 50px;">
+        <!-- Banner 1: Steel Furniture -->
+        <div class="rls-banner-card banner-steel" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-banner-img">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TGD-1-PIC-1.webp" alt="Steel Furniture Banner">
+          </div>
+          <div class="rls-banner-overlay">
+            <h3 class="rls-banner-title">Steel Furniture</h3>
+            <span class="rls-banner-btn btn-white">Shop This</span>
+          </div>
+        </div>
+
+        <!-- Banner 2: Office Furniture -->
+        <div class="rls-banner-card banner-office" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
+          <div class="rls-banner-img">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/OC-10B-1.webp" alt="Office Furniture Banner">
+          </div>
+          <div class="rls-banner-overlay">
+            <h3 class="rls-banner-title">Office Furniture</h3>
+            <span class="rls-banner-btn btn-pink">Shop Online</span>
+          </div>
+        </div>
+
+        <!-- Banner 3: Staff Accommodation -->
+        <div class="rls-banner-card banner-staff" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
+          <div class="rls-banner-img">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/LK-2-3--scaled.webp" alt="Staff Accommodation Banner">
+          </div>
+          <div class="rls-banner-overlay">
+            <h3 class="rls-banner-title">Staff Accommodation</h3>
+            <span class="rls-banner-btn btn-black">Shop Online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: 12 Categories Grid -->
+      <div class="rls-category-grid-12">
+        <!-- Card 1: Safes -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TG-1-PIC-1.webp" alt="Safes">
+          </div>
+          <h4 class="rls-cat-label">Safes</h4>
+        </div>
+
+        <!-- Card 2: TV Cabinets -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TGD-5-PIC-1.webp" alt="TV Cabinets">
+          </div>
+          <h4 class="rls-cat-label">TV Cabinets</h4>
+        </div>
+
+        <!-- Card 3: Bar Cabinets -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TG-3-PIC-2.webp" alt="Bar Cabinets">
+          </div>
+          <h4 class="rls-cat-label">Bar Cabinets</h4>
+        </div>
+
+        <!-- Card 4: Shoe Cabinets -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/shoerack/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-XG-3-PIC-1-.webp" alt="Shoe Cabinets">
+          </div>
+          <h4 class="rls-cat-label">Shoe Cabinets</h4>
+        </div>
+
+        <!-- Card 5: Bed Side Tables -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-ST-2-PIC-2.webp" alt="Bed Side Tables">
+          </div>
+          <h4 class="rls-cat-label">Bed Side Tables</h4>
+        </div>
+
+        <!-- Card 6: Book Cabinets -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TGD-2-PIC-2.webp" alt="Book Cabinets">
+          </div>
+          <h4 class="rls-cat-label">Book Cabinets</h4>
+        </div>
+
+        <!-- Card 7: Chest of Drawers -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/WG-2-1.webp" alt="Chest of Drawers">
+          </div>
+          <h4 class="rls-cat-label">Chest of Drawers</h4>
+        </div>
+
+        <!-- Card 8: Coffee Tables -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square.webp" alt="Coffee Tables">
+          </div>
+          <h4 class="rls-cat-label">Coffee Tables</h4>
+        </div>
+
+        <!-- Card 9: Dressing Tables In Dubai -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-ST-2-PIC-1.webp" alt="Dressing Tables In Dubai">
+          </div>
+          <h4 class="rls-cat-label">Dressing Tables In Dubai</h4>
+        </div>
+
+        <!-- Card 10: Wardrobes -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TG-8-PIC-1.webp" alt="Wardrobes">
+          </div>
+          <h4 class="rls-cat-label">Wardrobes</h4>
+        </div>
+
+        <!-- Card 11: File Cabinets & Cupboards -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TGD-1-PIC-1.webp" alt="File Cabinets & Cupboards">
+          </div>
+          <h4 class="rls-cat-label">File Cabinets & Cupboards</h4>
+        </div>
+
+        <!-- Card 12: Steel Lockers & Cupboards -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/HTG-2-7.webp" alt="Steel Lockers & Cupboards">
+          </div>
+          <h4 class="rls-cat-label">Steel Lockers & Cupboards</h4>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
        ASYMMETRIC PROMOTIONAL GRID SECTION (Sale event and feature cards)
        ========================================================================== -->
   <section class="section promo-grid-section" style="padding-bottom: 60px;">
