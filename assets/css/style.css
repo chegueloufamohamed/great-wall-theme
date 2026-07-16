@@ -7182,7 +7182,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 /* 12 Category Grid Styles */
 .rls-category-grid-12 {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 20px;
 }
 
