@@ -378,52 +378,52 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Verona Reception Set Hero View">
             <div class="rls-card-overlay">
               <span class="rls-card-badge">Complete Set</span>
-              <h3 class="rls-card-title">Verona Executive Lounge Suite</h3>
-              <p class="rls-card-desc">Featuring 3-seater, 2-seater, armchair, and custom table.</p>
+              <h3 class="rls-card-title">Verona Reception Lounge</h3>
+              <p class="rls-card-desc">Complete three-piece set featuring three-seater, two-seater, and armchair.</p>
             </div>
           </div>
         </div>
         
-        <!-- Card 2: Square Detail 1 -->
+        <!-- Card 2: Three Seater -->
         <div class="rls-card rls-card-square">
           <div class="rls-img-frame">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square.webp" alt="Verona Table Detail">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square.webp" alt="Verona Three Seater">
             <div class="rls-card-overlay">
-              <h3 class="rls-card-title">Ribbed Oval Coffee Table</h3>
-              <p class="rls-card-desc">Wood panel sides and dark top surface.</p>
+              <h3 class="rls-card-title">Three Seater Sofa</h3>
+              <p class="rls-card-desc">Spacious triple-seater layout designed for maximum lobby comfort.</p>
             </div>
           </div>
         </div>
 
-        <!-- Card 3: Square Detail 2 -->
+        <!-- Card 3: Two Seater -->
         <div class="rls-card rls-card-square">
           <div class="rls-img-frame">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-3.webp" alt="Verona Stitching Detail">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-3.webp" alt="Verona Two Seater">
             <div class="rls-card-overlay">
-              <h3 class="rls-card-title">Contrast Stitching</h3>
-              <p class="rls-card-desc">High-end craftsmanship detail and seams.</p>
+              <h3 class="rls-card-title">Two Seater Sofa</h3>
+              <p class="rls-card-desc">Loveseat model perfect for professional waiting rooms and offices.</p>
             </div>
           </div>
         </div>
 
-        <!-- Card 4: Square Detail 3 -->
+        <!-- Card 4: Armchair -->
         <div class="rls-card rls-card-square">
           <div class="rls-img-frame">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-2.webp" alt="Verona Comfort Detail">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-2.webp" alt="Verona Armchair">
             <div class="rls-card-overlay">
-              <h3 class="rls-card-title">Plush Accent Cushioning</h3>
-              <p class="rls-card-desc">Contrast orange cushions in premium density.</p>
+              <h3 class="rls-card-title">Single Seater Sofa</h3>
+              <p class="rls-card-desc">Matching individual accent seat with premium leatherette.</p>
             </div>
           </div>
         </div>
 
-        <!-- Card 5: Square Detail 4 -->
+        <!-- Card 5: Accent pillows & stitching -->
         <div class="rls-card rls-card-square">
           <div class="rls-img-frame">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-1.webp" alt="Verona Frame Detail">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Square-1.webp" alt="Verona Stitching & Cushioning">
             <div class="rls-card-overlay">
-              <h3 class="rls-card-title">Sleek Metal Legs</h3>
-              <p class="rls-card-desc">Durable black powder-coated support.</p>
+              <h3 class="rls-card-title">Contrast Stitching & Accents</h3>
+              <p class="rls-card-desc">High-density foam with contrast orange accent cushioning.</p>
             </div>
           </div>
         </div>
