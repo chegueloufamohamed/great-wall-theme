@@ -298,19 +298,19 @@ p {
   height: var(--header-height);
   z-index: 1000;
   transition: all var(--transition-smooth);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background-color: rgba(10, 10, 10, 0.55) !important;
-  backdrop-filter: blur(15px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background-color: rgba(10, 10, 10, 0.35) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
 }
 
 .header.sticky {
   height: var(--header-height-shrink);
-  background-color: rgba(10, 10, 10, 0.85) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: var(--shadow-glass);
+  background-color: rgba(10, 10, 10, 0.5) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Ensure header items (links, buttons, switcher) are always white */
@@ -446,12 +446,12 @@ p {
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: rgba(10, 10, 10, 0.94) !important;
-  backdrop-filter: blur(25px) !important;
-  -webkit-backdrop-filter: blur(25px) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  background-color: rgba(10, 10, 10, 0.6) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
   padding: 40px var(--container-padding, 80px);
   opacity: 0;
   visibility: hidden;
