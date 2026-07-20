@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSidebarCategoryAccordion();
   initWooCommerceFeaturedProduct();
   initLoungeScrollDrag();
+  initWishlist();
 });
 
 /* ==========================================================================
@@ -62,10 +63,12 @@ function initDrawers() {
   const cartDrawer = document.getElementById('cart-drawer');
   const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
   const searchDrawer = document.getElementById('search-drawer');
+  const wishlistDrawer = document.getElementById('wishlist-drawer');
   
   const cartTriggers = document.querySelectorAll('.cart-trigger');
   const menuTriggers = document.querySelectorAll('.menu-toggle-trigger');
   const searchTriggers = document.querySelectorAll('.search-trigger');
+  const wishlistTriggers = document.querySelectorAll('.wishlist-trigger');
   const closeBtns = document.querySelectorAll('.drawer-close');
 
   if (!overlay) return;
@@ -81,6 +84,7 @@ function initDrawers() {
     if (cartDrawer) cartDrawer.classList.remove('active');
     if (mobileMenuDrawer) mobileMenuDrawer.classList.remove('active');
     if (searchDrawer) searchDrawer.classList.remove('active');
+    if (wishlistDrawer) wishlistDrawer.classList.remove('active');
     document.body.style.overflow = ''; // Unlock background scroll
   };
 
@@ -97,6 +101,20 @@ function initDrawers() {
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
       if (mobileMenuDrawer) openDrawer(mobileMenuDrawer);
+    });
+  });
+
+  // Add click handlers for Wishlist Drawer
+  wishlistTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeAllDrawers();
+      if (wishlistDrawer) {
+        openDrawer(wishlistDrawer);
+        if (typeof renderWishlistDrawer === 'function') {
+          renderWishlistDrawer();
+        }
+      }
     });
   });
 
@@ -1441,6 +1459,187 @@ function initLoungeScrollDrag() {
     const walk = (x - startX) * 1.5; // Scroll speed multiplier
     slider.scrollLeft = scrollLeft - walk;
   });
+}
+
+/* ==========================================================================
+   WISHLIST CORE FUNCTIONALITY (Local Storage Based)
+   ========================================================================== */
+
+function initWishlist() {
+  updateWishlistBadge();
+  updateWishlistButtonsUI();
+
+  // Delegation on click of wishlist toggle buttons anywhere in page
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-wishlist-toggle');
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const id = btn.getAttribute('data-product-id');
+      const name = btn.getAttribute('data-product-name');
+      const price = btn.getAttribute('data-product-price');
+      const img = btn.getAttribute('data-product-img');
+      const link = btn.getAttribute('data-product-link');
+
+      if (id) {
+        toggleWishlistItem(id, name, price, img, link, btn);
+      }
+    }
+  });
+}
+
+function getWishlist() {
+  try {
+    const items = localStorage.getItem('great_wall_wishlist');
+    return items ? JSON.parse(items) : [];
+  } catch (e) {
+    console.error('Error reading wishlist from localStorage:', e);
+    return [];
+  }
+}
+
+function saveWishlist(wishlist) {
+  try {
+    localStorage.setItem('great_wall_wishlist', JSON.stringify(wishlist));
+  } catch (e) {
+    console.error('Error writing wishlist to localStorage:', e);
+  }
+}
+
+function toggleWishlistItem(id, name, price, img, link, clickedBtn = null) {
+  let wishlist = getWishlist();
+  const existingIndex = wishlist.findIndex(item => item.id === id);
+
+  if (existingIndex > -1) {
+    // Remove from wishlist
+    wishlist.splice(existingIndex, 1);
+    showWishlistToast(name + ' removed from wishlist.');
+  } else {
+    // Add to wishlist
+    wishlist.push({ id, name, price, img, link });
+    showWishlistToast(name + ' added to wishlist.', true);
+  }
+
+  saveWishlist(wishlist);
+  updateWishlistBadge();
+  updateWishlistButtonsUI();
+
+  // If we are currently in the wishlist drawer, re-render it
+  const wishlistDrawer = document.getElementById('wishlist-drawer');
+  if (wishlistDrawer && wishlistDrawer.classList.contains('active')) {
+    renderWishlistDrawer();
+  }
+}
+
+function updateWishlistBadge() {
+  const wishlist = getWishlist();
+  const badges = document.querySelectorAll('.wishlist-count');
+  badges.forEach(badge => {
+    if (wishlist.length === 0) {
+      badge.style.display = 'none';
+      badge.textContent = '0';
+    } else {
+      badge.style.display = 'flex';
+      badge.textContent = wishlist.length;
+    }
+  });
+}
+
+function updateWishlistButtonsUI() {
+  const wishlist = getWishlist();
+  const wishlistIds = wishlist.map(item => item.id);
+
+  const buttons = document.querySelectorAll('.btn-wishlist-toggle');
+  buttons.forEach(btn => {
+    const id = btn.getAttribute('data-product-id');
+    const icon = btn.querySelector('.wishlist-icon');
+    
+    if (wishlistIds.includes(id)) {
+      btn.classList.add('active');
+      if (icon) {
+        icon.className = 'ri-heart-fill wishlist-icon';
+      }
+    } else {
+      btn.classList.remove('active');
+      if (icon) {
+        icon.className = 'ri-heart-line wishlist-icon';
+      }
+    }
+  });
+}
+
+function renderWishlistDrawer() {
+  const container = document.getElementById('wishlist-items-container');
+  const emptyMsg = document.getElementById('wishlist-empty-msg');
+  if (!container || !emptyMsg) return;
+
+  const wishlist = getWishlist();
+  container.innerHTML = '';
+
+  if (wishlist.length === 0) {
+    container.style.display = 'none';
+    emptyMsg.style.display = 'block';
+  } else {
+    container.style.display = 'flex';
+    emptyMsg.style.display = 'none';
+
+    const origin = window.location.origin;
+
+    wishlist.forEach(item => {
+      // Add-to-cart link via query args (natively supported by WooCommerce)
+      const addToCartUrl = `${origin}/?add-to-cart=${item.id}`;
+      
+      const itemHtml = `
+        <div class="wishlist-item" data-product-id="${item.id}">
+          <div class="wishlist-item-img">
+            <a href="${item.link}"><img src="${item.img}" alt="${item.name}"></a>
+          </div>
+          <div class="wishlist-item-details">
+            <div class="wishlist-item-title"><a href="${item.link}">${item.name}</a></div>
+            <div class="wishlist-item-price">${item.price}</div>
+            <div class="wishlist-item-actions">
+              <a href="${addToCartUrl}" class="btn btn-primary wishlist-add-to-cart"><span>Add to Bag</span></a>
+              <button type="button" class="wishlist-item-remove" data-id="${item.id}" title="Remove"><i class="ri-delete-bin-line"></i></button>
+            </div>
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', itemHtml);
+    });
+
+    // Add click listeners to remove buttons inside drawer
+    container.querySelectorAll('.wishlist-item-remove').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = btn.getAttribute('data-id');
+        const item = wishlist.find(item => item.id === id);
+        if (id) {
+          toggleWishlistItem(id, item ? item.name : 'Product', '', '', '');
+        }
+      });
+    });
+  }
+}
+
+// Simple Toast Notification for Wishlist events
+function showWishlistToast(message, isHeart = false) {
+  // Check if active toast exists
+  let toast = document.querySelector('.wishlist-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'wishlist-toast';
+    document.body.appendChild(toast);
+  }
+  
+  const icon = isHeart ? '<i class="ri-heart-fill" style="color: #ff3366; margin-right: 8px;"></i>' : '<i class="ri-delete-bin-line" style="color: #c5a880; margin-right: 8px;"></i>';
+  toast.innerHTML = icon + `<span>${message}</span>`;
+  toast.classList.add('show');
+
+  // Slide up/fade out
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
 }
 
 

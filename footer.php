@@ -287,6 +287,25 @@
     </div>
   </div>
 
+  <!-- Wishlist Drawer Panel -->
+  <div class="drawer" id="wishlist-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title"><?php esc_html_e( 'My Wishlist', 'great-wall-theme' ); ?></h3>
+      <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Wishlist', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
+    </div>
+    
+    <div class="wishlist-drawer-content">
+      <div class="wishlist-items" id="wishlist-items-container">
+        <!-- Rendered dynamically by javascript -->
+      </div>
+      <div class="wishlist-empty-state" id="wishlist-empty-msg" style="text-align: center; padding: 40px 20px; display: none;">
+        <i class="ri-heart-line" style="font-size: 2.5rem; color: var(--color-accent, #c5a880); opacity: 0.5; display: block; margin-bottom: 15px;"></i>
+        <p style="color: var(--color-muted); margin-bottom: 20px;">Your wishlist is empty.</p>
+        <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary drawer-close" style="display: inline-block;"><span>Go To Shop</span></a>
+      </div>
+    </div>
+  </div>
+
   <!-- Global Floating Back to Top Button -->
   <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="<?php esc_attr_e( 'Scroll to top', 'great-wall-theme' ); ?>">
     <i class="ri-arrow-up-line"></i>

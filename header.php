@@ -120,6 +120,12 @@
         ?>
         <button class="action-btn search-trigger" title="<?php esc_attr_e( 'Search Products', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></button>
         
+        <!-- Wishlist Header Trigger -->
+        <button class="action-btn wishlist-trigger" title="<?php esc_attr_e( 'Open Wishlist', 'great-wall-theme' ); ?>">
+          <i class="ri-heart-line wishlist-header-icon"></i>
+          <span class="wishlist-count" style="display: none;">0</span>
+        </button>
+        
         <button class="action-btn cart-trigger" title="<?php esc_attr_e( 'Open Shopping Bag', 'great-wall-theme' ); ?>">
           <i class="ri-shopping-bag-line"></i>
           <!-- Show WooCommerce active cart contents dynamically if active -->

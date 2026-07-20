@@ -89,13 +89,13 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.5.0' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.5.1' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
 
 	// Enqueue main interactive javascript core.
-	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.5.0', true );
+	wp_enqueue_script( 'great-wall-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.5.1', true );
 
 	wp_localize_script( 'great-wall-js', 'greatWallThemeParams', array(
 		'checkout_url'   => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : home_url( '/checkout/' ),
@@ -1096,6 +1096,50 @@ function greatwall_fix_term_name_spelling( $_term, $taxonomy ) {
         }
     }
     return $_term;
+}
+
+/**
+ * Output Wishlist Heart Button on Single Product Detail Page next to Add to Cart
+ */
+add_action( 'woocommerce_after_add_to_cart_button', 'great_wall_single_wishlist_button' );
+function great_wall_single_wishlist_button() {
+    global $product;
+    if ( ! $product ) return;
+    $product_id = $product->get_id();
+    $product_name = esc_js( $product->get_name() );
+    $product_price = esc_js( strip_tags( $product->get_price_html() ) );
+    
+    // Get correct thumbnail image URL
+    $img_id = $product->get_image_id();
+    $product_img = $img_id ? esc_url( wp_get_attachment_image_url( $img_id, 'thumbnail' ) ) : esc_url( wc_placeholder_img_src( 'thumbnail' ) );
+    $product_link = esc_url( get_permalink( $product_id ) );
+    ?>
+    <button type="button" class="btn-wishlist-toggle single-wishlist-btn" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-product-name="<?php echo esc_attr( $product_name ); ?>" data-product-price="<?php echo esc_attr( $product_price ); ?>" data-product-img="<?php echo esc_attr( $product_img ); ?>" data-product-link="<?php echo esc_attr( $product_link ); ?>" title="<?php esc_attr_e( 'Add to Wishlist', 'great-wall-theme' ); ?>">
+      <i class="ri-heart-line wishlist-icon"></i>
+    </button>
+    <?php
+}
+
+/**
+ * Output Wishlist Heart Button inside Loop Product Cards (Catalog Grids)
+ */
+add_action( 'woocommerce_before_shop_loop_item', 'great_wall_loop_wishlist_button', 5 );
+function great_wall_loop_wishlist_button() {
+    global $product;
+    if ( ! $product ) return;
+    $product_id = $product->get_id();
+    $product_name = esc_js( $product->get_name() );
+    $product_price = esc_js( strip_tags( $product->get_price_html() ) );
+    
+    // Get correct thumbnail image URL
+    $img_id = $product->get_image_id();
+    $product_img = $img_id ? esc_url( wp_get_attachment_image_url( $img_id, 'thumbnail' ) ) : esc_url( wc_placeholder_img_src( 'thumbnail' ) );
+    $product_link = esc_url( get_permalink( $product_id ) );
+    ?>
+    <button type="button" class="btn-wishlist-toggle card-wishlist-btn" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-product-name="<?php echo esc_attr( $product_name ); ?>" data-product-price="<?php echo esc_attr( $product_price ); ?>" data-product-img="<?php echo esc_attr( $product_img ); ?>" data-product-link="<?php echo esc_attr( $product_link ); ?>" title="<?php esc_attr_e( 'Add to Wishlist', 'great-wall-theme' ); ?>">
+      <i class="ri-heart-line wishlist-icon"></i>
+    </button>
+    <?php
 }
 
 
