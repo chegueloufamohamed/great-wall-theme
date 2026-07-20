@@ -330,9 +330,42 @@ p {
 }
 
 .top-bar-content {
+  overflow: hidden;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.top-bar-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  animation: topBarScroll 8s infinite ease-in-out;
+}
+
+.top-bar-slide {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+@keyframes topBarScroll {
+  0%, 35% {
+    transform: translateY(0);
+  }
+  45%, 85% {
+    transform: translateY(-36px);
+  }
+  95%, 100% {
+    transform: translateY(0);
+  }
 }
 
 /* Keep topbar and wrapper bg/padding when sticky */

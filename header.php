@@ -18,7 +18,10 @@
     <!-- Premium Announcement/Top Bar -->
     <div class="top-bar">
       <div class="top-bar-content">
-        <span>FREE SHIPPING FOR ORDERS OVER AED 1000</span>
+        <div class="top-bar-slider">
+          <div class="top-bar-slide">FREE SHIPPING FOR ORDERS OVER AED 1000</div>
+          <div class="top-bar-slide">DELIVERY WITHIN 2-4 BUSINESS DAYS IN UAE</div>
+        </div>
       </div>
     </div>
     
