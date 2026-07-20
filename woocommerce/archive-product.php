@@ -147,7 +147,6 @@ do_action( 'woocommerce_before_main_content' );
 					<div class="shop-toolbar-left">
 						<div class="view-mode-selector">
 							<button class="view-mode-btn grid-mode active" aria-label="Grid View"><i class="ri-grid-fill"></i></button>
-							<button class="view-mode-btn list-mode" aria-label="List View"><i class="ri-list-check"></i></button>
 						</div>
 						<?php woocommerce_result_count(); ?>
 					</div>

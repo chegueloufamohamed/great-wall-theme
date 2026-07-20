@@ -8080,6 +8080,11 @@ ul.products li.product .price del,
   }
 }
 
+/* Hide List View mode switcher button globally */
+.view-mode-btn.list-mode {
+  display: none !important;
+}
+
 
 
 
