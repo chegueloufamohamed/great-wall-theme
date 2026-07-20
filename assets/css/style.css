@@ -7717,6 +7717,14 @@ ul.products.list-view-active li.product .product-loop-actions {
   pointer-events: auto;
 }
 
+/* Disable WooCommerce sale flashes / badges globally */
+.onsale,
+.woocommerce span.onsale,
+.woocommerce-page span.onsale,
+.badge-sale {
+  display: none !important;
+}
+
 
 
 
