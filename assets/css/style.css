@@ -7754,6 +7754,40 @@ ul.products li.product .price del,
   font-weight: 500 !important;
 }
 
+/* Floating WhatsApp Button on bottom-left */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 48px;
+  height: 48px;
+  z-index: 999;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-smooth, 0.3s ease);
+}
+
+.floating-whatsapp-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 480px) {
+  .floating-whatsapp-btn {
+    bottom: 20px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
 
 
 

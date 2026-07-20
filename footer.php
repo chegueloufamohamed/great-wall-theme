@@ -306,6 +306,11 @@
     </div>
   </div>
 
+  <!-- Floating WhatsApp Chat Button -->
+  <a href="https://wa.me/97143202921" class="floating-whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat with us on WhatsApp', 'great-wall-theme' ); ?>">
+    <img src="https://greatwallfurniture.com/wp-content/uploads/2026/07/whatsapp.webp" alt="WhatsApp">
+  </a>
+
   <!-- Global Floating Back to Top Button -->
   <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="<?php esc_attr_e( 'Scroll to top', 'great-wall-theme' ); ?>">
     <i class="ri-arrow-up-line"></i>

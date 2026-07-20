@@ -120,6 +120,11 @@
         ?>
         <button class="action-btn search-trigger" title="<?php esc_attr_e( 'Search Products', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></button>
         
+        <!-- Call Header Link -->
+        <a href="tel:+97143202921" class="action-btn call-header-btn" title="<?php esc_attr_e( 'Call Us', 'great-wall-theme' ); ?>">
+          <i class="ri-phone-line"></i>
+        </a>
+
         <!-- Wishlist Header Trigger -->
         <button class="action-btn wishlist-trigger" title="<?php esc_attr_e( 'Open Wishlist', 'great-wall-theme' ); ?>">
           <i class="ri-heart-line wishlist-header-icon"></i>
