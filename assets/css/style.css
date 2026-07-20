@@ -867,6 +867,9 @@ p {
   transition: transform var(--transition-smooth);
   display: flex;
   flex-direction: column;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+  overflow: hidden !important;
 }
 
 .drawer.active {
@@ -903,6 +906,10 @@ p {
   right: auto;
   transform: translateX(-100%);
   max-width: 320px;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
 }
 
 .mobile-menu-drawer.active {
