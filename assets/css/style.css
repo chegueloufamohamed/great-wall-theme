@@ -8109,6 +8109,9 @@ ul.products li.product .price del,
     flex-direction: column !important;
     padding: 0 !important;
     border-right: none !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    overflow: hidden !important;
   }
   
   .shop-sidebar.active {
