@@ -520,9 +520,9 @@ p {
   align-items: center !important;
   justify-content: center !important;
   gap: 6px;
-  color: #0C0C0C !important;
+  color: #000000 !important;
   font-size: 0.82rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   padding: 0 20px !important;
@@ -698,14 +698,14 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-accent, #c5a880) !important;
+  color: #000000 !important;
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.06) !important;
   padding-bottom: 8px;
   margin-bottom: 4px;
 }
 
 .mega-menu-title a {
-  color: var(--color-accent, #c5a880) !important;
+  color: #000000 !important;
 }
 
 .mega-menu-title a:hover {
@@ -724,7 +724,7 @@ p {
 .mega-menu-list li a {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #2E2A25 !important;
+  color: #000000 !important;
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
@@ -800,13 +800,13 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-accent, #c5a880);
+  color: #000000 !important;
 }
 
 .mobile-dropdown-section a {
   font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-secondary, #2e2a25) !important;
+  font-weight: 600 !important;
+  color: #000000 !important;
   padding: 2px 0;
   transition: color 0.25s ease;
   text-transform: capitalize;
@@ -1029,7 +1029,7 @@ p {
 }
 
 .mobile-nav-socials a {
-  color: var(--color-primary, #2e2a25) !important;
+  color: #000000 !important;
   font-size: 1.8rem !important;
   transition: all 0.2s ease !important;
   display: flex !important;
@@ -1044,13 +1044,14 @@ p {
 }
 
 .mobile-nav-link {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 400;
+  font-family: var(--font-sans) !important;
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: #000000 !important;
 }
 
 .mobile-nav-link:hover {
-  color: var(--color-accent);
+  color: var(--color-accent, #c5a880) !important;
 }
 
 /* Cart Drawer Content */
