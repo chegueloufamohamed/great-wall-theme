@@ -7788,6 +7788,19 @@ ul.products li.product .price del,
   }
 }
 
+/* Raise WhatsApp and Back to Top buttons on Single Product pages to clear the sticky checkout bar */
+.single-product .floating-back-to-top,
+.single-product .floating-whatsapp-btn {
+  bottom: 100px !important;
+}
+
+@media (max-width: 480px) {
+  .single-product .floating-back-to-top,
+  .single-product .floating-whatsapp-btn {
+    bottom: 90px !important;
+  }
+}
+
 
 
 
