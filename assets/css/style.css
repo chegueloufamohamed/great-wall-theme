@@ -776,6 +776,10 @@ p {
   align-items: center;
 }
 
+.mobile-dropdown-trigger i {
+  color: #000000 !important;
+}
+
 .mobile-dropdown-content {
   display: none;
   flex-direction: column;
@@ -813,7 +817,8 @@ p {
 }
 
 .mobile-dropdown-section a:hover {
-  color: var(--color-accent, #c5a880) !important;
+  color: #000000 !important;
+  text-decoration: underline !important;
 }
 
 .header-actions {
@@ -1050,8 +1055,9 @@ p {
   color: #000000 !important;
 }
 
-.mobile-nav-link:hover {
-  color: var(--color-accent, #c5a880) !important;
+.mobile-nav-link:hover,
+.mobile-nav-item-dropdown.active .mobile-dropdown-trigger {
+  color: #000000 !important;
 }
 
 /* Cart Drawer Content */
