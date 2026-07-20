@@ -296,8 +296,9 @@ p {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 10px 10px 0 10px;
+  padding: 0 10px 0 10px;
   box-sizing: border-box;
+  background-color: var(--color-accent, #E2B27E) !important;
   transition: all 0.3s ease;
   pointer-events: none;
 }
@@ -309,8 +310,6 @@ p {
 .top-bar {
   background-color: var(--color-accent, #E2B27E) !important;
   color: #0A0A0A !important;
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
   height: 36px;
   display: flex;
   align-items: center;
@@ -320,12 +319,12 @@ p {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  width: 100%;
+  margin: 0 -10px;
+  width: calc(100% + 20px) !important;
   box-sizing: border-box;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 1;
   overflow: hidden;
-  margin-bottom: 6px;
 }
 
 .top-bar-content {
@@ -336,7 +335,8 @@ p {
 
 /* Hide top-bar when header becomes sticky */
 .site-header-wrapper.sticky-active {
-  padding-top: 5px !important;
+  background-color: transparent !important;
+  padding: 0 !important;
 }
 
 .site-header-wrapper.sticky-active .top-bar {
@@ -361,6 +361,8 @@ p {
   -webkit-backdrop-filter: blur(20px) !important;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 /* Admin bar offsets for floating header wrapper */
@@ -381,8 +383,10 @@ p {
   -webkit-backdrop-filter: blur(25px) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 /* Ensure header items (links, buttons, switcher) are always white */
