@@ -266,6 +266,13 @@
 
       <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="mobile-nav-link <?php echo is_page( 'about' ) ? 'text-accent' : ''; ?>">Our Story</a>
       <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mobile-nav-link <?php echo is_page( 'contact' ) ? 'text-accent' : ''; ?>">Showroom</a>
+      
+      <!-- Mobile Drawer Social Media Links -->
+      <div class="mobile-nav-socials">
+        <a href="https://www.facebook.com/greatwallfurniture/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+        <a href="https://www.instagram.com/greatwallfurniture/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+        <a href="https://www.tiktok.com/@greatwallfurniture" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
+      </div>
     </div>
   </div>
 

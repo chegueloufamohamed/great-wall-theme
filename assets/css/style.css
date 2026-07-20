@@ -940,7 +940,7 @@ p {
   top: auto !important;
   width: 100% !important;
   max-width: 100% !important;
-  height: 80% !important;
+  height: 90% !important;
   transform: translateY(100%) !important;
   border-top-left-radius: 24px !important;
   border-top-right-radius: 24px !important;
@@ -978,6 +978,32 @@ p {
   gap: 24px;
   overflow-y: auto !important;
   flex-grow: 1 !important;
+}
+
+.mobile-nav-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-top: auto !important;
+  padding-top: 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0 !important;
+}
+
+.mobile-nav-socials a {
+  color: var(--color-primary, #2e2a25) !important;
+  font-size: 1.4rem !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+.mobile-nav-socials a:hover {
+  color: var(--color-accent, #c5a880) !important;
+  transform: scale(1.15) !important;
 }
 
 .mobile-nav-link {
