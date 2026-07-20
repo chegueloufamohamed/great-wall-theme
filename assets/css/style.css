@@ -5443,17 +5443,53 @@ wc-order-attribution-inputs,
 }
 
 @media (max-width: 768px) {
+  .shop-hero-banner {
+    padding: 95px 0 45px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .shop-hero-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .shop-categories-slider-container {
+    margin-top: 25px !important;
+  }
+
   .shop-categories-slider-container .shop-cat-slider-arrow {
     display: none !important;
   }
+  
   .shop-categories-slide {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 0 10px;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    padding: 0 20px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
   }
+  
+  .shop-categories-slide::-webkit-scrollbar {
+    display: none !important;
+  }
+  
   .hero-category-item {
-    width: calc(33.33% - 15px);
+    width: 80px !important;
+    flex: 0 0 80px !important;
+    gap: 8px !important;
+  }
+  
+  .hero-category-circle {
+    width: 66px !important;
+    height: 66px !important;
+    border-width: 2px !important;
+  }
+  
+  .hero-category-label {
+    font-size: 0.65rem !important;
+    line-height: 1.25 !important;
   }
 }
 
