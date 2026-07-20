@@ -212,7 +212,8 @@
 
   <!-- Mobile Drawer Menu Panel -->
   <div class="drawer mobile-menu-drawer" id="mobile-menu-drawer">
-    <div class="drawer-header">
+    <div class="mobile-drawer-handle drawer-close" aria-label="<?php esc_attr_e( 'Close Menu', 'great-wall-theme' ); ?>"></div>
+    <div class="drawer-header" style="display: none !important;">
       <h3 class="drawer-title">Navigation</h3>
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Menu', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
     </div>
