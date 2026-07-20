@@ -344,16 +344,17 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100%;
   animation: topBarScroll 8s infinite ease-in-out;
 }
 
 .top-bar-slide {
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
+  height: 36px !important;
+  line-height: 36px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
 }
 
 @keyframes topBarScroll {
