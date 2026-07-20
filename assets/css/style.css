@@ -7725,6 +7725,35 @@ ul.products.list-view-active li.product .product-loop-actions {
   display: none !important;
 }
 
+/* Swapped price display (sale price on left, regular crossed-out price on right) on product cards */
+.product-card .product-price,
+ul.products li.product .price,
+.products-grid li.product .price {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+}
+
+.product-card .product-price ins,
+ul.products li.product .price ins,
+.products-grid li.product .price ins {
+  text-decoration: none !important;
+  color: var(--color-primary, #2e2a25) !important;
+  font-weight: 700 !important;
+}
+
+.product-card .product-price del,
+ul.products li.product .price del,
+.products-grid li.product .price del {
+  font-size: 0.85rem !important;
+  color: rgba(46, 42, 37, 0.45) !important; /* Muted color */
+  text-decoration: line-through !important;
+  font-weight: 500 !important;
+}
+
 
 
 
