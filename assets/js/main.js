@@ -23,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoungeScrollDrag();
   initWishlist();
   initMobileFilterDrawer();
+  
+  // Sidebar Category Pill Hover initializations
+  initSidebarCategoryPills();
+  if (window.jQuery) {
+    jQuery(document).ajaxComplete(function() {
+      initSidebarCategoryPills();
+    });
+  }
 });
 
 /* ==========================================================================
@@ -1153,6 +1161,18 @@ function initSidebarCategoryAccordion() {
         icon.className = 'ri-arrow-right-s-line';
       }
     });
+  });
+}
+
+/**
+ * Sidebar Categories Pill Hover Wrappers
+ */
+function initSidebarCategoryPills() {
+  const categoryLinks = document.querySelectorAll('.shop-sidebar .filter-list li a');
+  categoryLinks.forEach(link => {
+    if (link.querySelector('.nav-text-original')) return;
+    const innerHTML = link.innerHTML;
+    link.innerHTML = `<span class="nav-text-original">${innerHTML}</span><span class="nav-text-hover">${innerHTML}</span>`;
   });
 }
 
