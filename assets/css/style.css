@@ -290,11 +290,68 @@ p {
 /* ==========================================================================
    HEADER / NAVIGATION
    ========================================================================== */
-.header {
+.site-header-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1000;
+  padding: 10px 10px 0 10px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.site-header-wrapper * {
+  pointer-events: auto;
+}
+
+.top-bar {
+  background-color: var(--color-accent, #E2B27E) !important;
+  color: #0A0A0A !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.top-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide top-bar when header becomes sticky */
+.site-header-wrapper.sticky-active {
+  padding-top: 5px !important;
+}
+
+.site-header-wrapper.sticky-active .top-bar {
+  max-height: 0 !important;
+  height: 0 !important;
+  margin-bottom: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.header {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
   height: var(--header-height);
   z-index: 1000;
   transition: all var(--transition-smooth);
@@ -302,6 +359,19 @@ p {
   background-color: rgba(10, 10, 10, 0.35) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+}
+
+/* Admin bar offsets for floating header wrapper */
+.admin-bar .site-header-wrapper {
+  top: 32px !important;
+}
+
+@media (max-width: 782px) {
+  .admin-bar .site-header-wrapper {
+    top: 46px !important;
+  }
 }
 
 .header.sticky {
@@ -311,6 +381,8 @@ p {
   -webkit-backdrop-filter: blur(25px) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
 }
 
 /* Ensure header items (links, buttons, switcher) are always white */

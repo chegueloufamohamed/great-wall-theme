@@ -35,10 +35,13 @@ function initHeaderScroll() {
 
   const handleScroll = () => {
     if (header) {
+      const wrapper = header.closest('.site-header-wrapper');
       if (window.scrollY > 50) {
         header.classList.add('sticky');
+        if (wrapper) wrapper.classList.add('sticky-active');
       } else {
         header.classList.remove('sticky');
+        if (wrapper) wrapper.classList.remove('sticky-active');
       }
     }
 

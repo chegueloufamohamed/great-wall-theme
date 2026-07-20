@@ -14,7 +14,15 @@
   <!-- ==========================================================================
        GLOBAL GLASSMORPHIC HEADER
        ========================================================================== -->
-  <header class="header transparent">
+  <div class="site-header-wrapper">
+    <!-- Premium Announcement/Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-content">
+        <span>FREE SHIPPING FOR ORDERS OVER AED 1000</span>
+      </div>
+    </div>
+    
+    <header class="header transparent">
     <div class="header-container">
       
       <!-- Brand Logo -->
@@ -151,3 +159,4 @@
       </div>
     </div>
   </header>
+</div>
