@@ -298,7 +298,7 @@ p {
   z-index: 1000;
   padding: 0;
   box-sizing: border-box;
-  background-color: var(--color-accent, #E2B27E) !important;
+  background-color: #0C0C0C !important;
   transition: all 0.3s ease;
   pointer-events: none;
 }
@@ -308,8 +308,8 @@ p {
 }
 
 .top-bar {
-  background-color: var(--color-accent, #E2B27E) !important;
-  color: #0A0A0A !important;
+  background-color: #0C0C0C !important;
+  color: #FFFFFF !important;
   height: 36px;
   display: flex;
   align-items: center;
@@ -337,7 +337,7 @@ p {
 
 /* Keep topbar and wrapper bg/padding when sticky */
 .site-header-wrapper.sticky-active {
-  background-color: var(--color-accent, #E2B27E) !important;
+  background-color: #0C0C0C !important;
   padding: 0 !important;
 }
 
@@ -357,8 +357,8 @@ p {
   height: var(--header-height);
   z-index: 1000;
   transition: all var(--transition-smooth);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  background-color: #0C0C0C !important; /* solid black to block wrapper bg */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  background-color: #FFFFFF !important;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   border-bottom-left-radius: 0 !important;
@@ -380,9 +380,9 @@ p {
 
 .header.sticky {
   height: var(--header-height-shrink);
-  background-color: #0C0C0C !important; /* solid black to block wrapper bg */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   border-bottom-left-radius: 0 !important;
@@ -391,20 +391,24 @@ p {
   margin-bottom: 0 !important;
 }
 
-/* Ensure header items (links, buttons, switcher) are always white */
+/* Ensure header items (links, buttons, switcher) are always dark */
 .header .nav-link,
 .header .action-btn,
 .header .lang-link,
 .header .logo {
-  color: #FFFFFF !important;
+  color: #0C0C0C !important;
+}
+
+.header .logo img {
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.3)) drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.25)) !important;
 }
 
 .header .nav-link::after {
-  background-color: #FFFFFF !important;
+  background-color: #0C0C0C !important;
 }
 
 .header .lang-separator {
-  color: #FFFFFF !important;
+  color: #0C0C0C !important;
   opacity: 0.25 !important;
 }
 
