@@ -5687,14 +5687,23 @@ wc-order-attribution-inputs,
 
 /* Sidebar Filter Panel */
 .shop-sidebar {
-  background-color: var(--bg-primary);
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02) !important;
+  padding: 30px !important;
   position: sticky;
-  top: 100px;
+  top: 130px;
+  box-sizing: border-box !important;
 }
 
 @media (max-width: 991px) {
   .shop-sidebar {
-    position: static;
+    position: static !important;
+    border-radius: 20px !important;
   }
 }
 
