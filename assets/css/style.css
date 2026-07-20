@@ -296,7 +296,7 @@ p {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 0 10px 0 10px;
+  padding: 0;
   box-sizing: border-box;
   background-color: var(--color-accent, #E2B27E) !important;
   transition: all 0.3s ease;
@@ -319,10 +319,10 @@ p {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin: 0 -10px !important;
+  margin: 0 !important;
   margin-bottom: 0 !important;
   padding: 0 !important;
-  width: calc(100% + 20px) !important;
+  width: 100% !important;
   box-sizing: border-box;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 1;
@@ -338,7 +338,7 @@ p {
 /* Keep topbar and wrapper bg/padding when sticky */
 .site-header-wrapper.sticky-active {
   background-color: var(--color-accent, #E2B27E) !important;
-  padding: 0 10px 0 10px !important;
+  padding: 0 !important;
 }
 
 .site-header-wrapper.sticky-active .top-bar {
