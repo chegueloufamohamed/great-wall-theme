@@ -3791,10 +3791,16 @@ p {
     min-width: 0 !important;
     width: 100% !important;
     flex: none !important;
-    padding: 0 10px !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    padding: 0 16px !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.08em !important;
-    display: flex !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
   }
 
   /* Mobile: Hide Quantity label and stack input with full width */
@@ -6046,9 +6052,17 @@ ul.products.list-view-active li.product .product-loop-actions {
   }
   .sticky-bar-btn-buy,
   .sticky-bar-btn-cart {
-    padding: 10px 14px;
-    font-size: 12px;
-    border-radius: 6px;
+    height: 44px !important;
+    line-height: 44px !important;
+    padding: 0 16px !important;
+    font-size: 12px !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    width: 50% !important;
+    box-sizing: border-box !important;
   }
 }
 
