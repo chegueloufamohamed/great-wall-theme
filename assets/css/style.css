@@ -5214,14 +5214,32 @@ wc-order-attribution-inputs,
 }
 
 /* Responsive constraints for loop buttons */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .product-loop-actions {
     flex-direction: column !important;
     gap: 8px !important;
+    padding: 0 12px 15px 12px !important;
   }
+  
   .product-loop-actions .button.add_to_cart_button,
   .product-loop-actions .button.buy-now-loop-btn {
     width: 100% !important;
+    flex: none !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    padding: 0 8px !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.05em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    box-sizing: border-box !important;
+    border-radius: 6px !important;
+    margin: 0 !important;
   }
 }
 
