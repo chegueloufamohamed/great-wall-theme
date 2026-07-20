@@ -32,12 +32,16 @@
       
       <!-- Hardcoded Premium Navigation Menu with Mega Dropdown -->
       <nav class="nav-menu">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>">Home</a>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>">
+          <span class="nav-text-original">Home</span>
+          <span class="nav-text-hover">Home</span>
+        </a>
         
         <!-- Shop Dropdown Container -->
         <div class="nav-item-dropdown">
           <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="nav-link has-dropdown <?php echo is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ? 'active' : ''; ?>">
-            Shop <i class="ri-arrow-down-s-line dropdown-arrow"></i>
+            <span class="nav-text-original">Shop <i class="ri-arrow-down-s-line dropdown-arrow"></i></span>
+            <span class="nav-text-hover">Shop <i class="ri-arrow-down-s-line dropdown-arrow"></i></span>
           </a>
           
           <!-- Mega Menu Panel -->
@@ -97,8 +101,14 @@
           </div>
         </div>
         
-        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-link <?php echo is_page( 'about' ) ? 'active' : ''; ?>">Our Story</a>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="nav-link <?php echo is_page( 'contact' ) ? 'active' : ''; ?>">Showroom</a>
+        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-link <?php echo is_page( 'about' ) ? 'active' : ''; ?>">
+          <span class="nav-text-original">Our Story</span>
+          <span class="nav-text-hover">Our Story</span>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="nav-link <?php echo is_page( 'contact' ) ? 'active' : ''; ?>">
+          <span class="nav-text-original">Showroom</span>
+          <span class="nav-text-hover">Showroom</span>
+        </a>
       </nav>
       
       <!-- Header Action Triggers -->
