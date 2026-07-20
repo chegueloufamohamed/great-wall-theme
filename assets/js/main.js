@@ -1469,6 +1469,13 @@ function initWishlist() {
   updateWishlistBadge();
   updateWishlistButtonsUI();
 
+  // Relocate single product page wishlist button inside the gallery container
+  const singleWishBtn = document.querySelector('.single-wishlist-btn');
+  const gallery = document.querySelector('.woocommerce-product-gallery');
+  if (singleWishBtn && gallery) {
+    gallery.appendChild(singleWishBtn);
+  }
+
   // Delegation on click of wishlist toggle buttons anywhere in page
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-wishlist-toggle');

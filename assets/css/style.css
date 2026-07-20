@@ -7536,35 +7536,39 @@ ul.products.list-view-active li.product .product-loop-actions {
   display: block !important;
 }
 
-/* Single product detail page wishlist button next to Add to Cart */
+/* Single product detail page wishlist button floating on top-right of featured photo */
 .single-wishlist-btn {
-  display: inline-flex !important;
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 99 !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 54px !important;
-  height: 54px !important;
-  border-radius: 8px !important;
-  border: 1px solid var(--border-color, #e5e0d8) !important;
-  background-color: var(--bg-light-accent, #f2ede5) !important;
-  color: var(--color-primary, #2e2a25) !important;
-  font-size: 1.4rem !important;
   cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
   transition: all 0.25s ease !important;
-  margin-left: 12px !important;
-  vertical-align: middle !important;
+  color: #1a1a1a !important;
+  margin: 0 !important;
   padding: 0 !important;
 }
 
 .single-wishlist-btn:hover {
-  background-color: #ff3366 !important;
-  border-color: #ff3366 !important;
-  color: #ffffff !important;
+  transform: scale(1.08) !important;
+  color: #ff3366 !important;
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 .single-wishlist-btn.active {
-  background-color: #ff3366 !important;
-  border-color: #ff3366 !important;
-  color: #ffffff !important;
+  color: #ff3366 !important;
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 .single-wishlist-btn.active .wishlist-icon {
