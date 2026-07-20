@@ -5690,11 +5690,15 @@ wc-order-attribution-inputs,
   background-color: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.05) !important;
   border-radius: 20px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05) !important;
   padding: 30px !important;
   position: sticky;
   top: 130px;
   box-sizing: border-box !important;
+}
+
+.sidebar-drawer-header {
+  display: none !important;
 }
 
 @media (max-width: 991px) {
