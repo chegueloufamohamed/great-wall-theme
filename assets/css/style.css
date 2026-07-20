@@ -614,7 +614,22 @@ p {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  opacity: 0;
+  transform: translateX(15px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+.nav-item-dropdown:hover .mega-menu-col {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-item-dropdown:hover .mega-menu-col:nth-child(1) { transition-delay: 0.1s; }
+.nav-item-dropdown:hover .mega-menu-col:nth-child(2) { transition-delay: 0.18s; }
+.nav-item-dropdown:hover .mega-menu-col:nth-child(3) { transition-delay: 0.26s; }
+.nav-item-dropdown:hover .mega-menu-col:nth-child(4) { transition-delay: 0.34s; }
+.nav-item-dropdown:hover .mega-menu-col:nth-child(5) { transition-delay: 0.42s; }
 
 .mega-menu-title {
   font-size: 0.85rem;
