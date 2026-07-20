@@ -167,7 +167,11 @@
         </button>
         
         <button class="action-btn menu-toggle menu-toggle-trigger" title="<?php esc_attr_e( 'Open Menu', 'great-wall-theme' ); ?>">
-          <i class="ri-menu-line"></i>
+          <span class="custom-hamburger">
+            <span class="bar bar-top"></span>
+            <span class="bar bar-middle"></span>
+            <span class="bar bar-bottom"></span>
+          </span>
         </button>
       </div>
     </div>
