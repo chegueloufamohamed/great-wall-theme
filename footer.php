@@ -217,24 +217,54 @@
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Menu', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
     </div>
     <div class="mobile-nav">
-      <?php
-      $primary_menu_items = great_wall_get_menu_items( 'primary-menu' );
-      if ( $primary_menu_items ) {
-        foreach ( $primary_menu_items as $item ) {
-          $active_class = great_wall_is_menu_item_active( $item ) ? 'text-accent' : '';
-          ?>
-          <a href="<?php echo esc_url( $item->url ); ?>" class="mobile-nav-link <?php echo esc_attr( $active_class ); ?>"><?php echo esc_html( $item->title ); ?></a>
-          <?php
-        }
-      } else {
-        ?>
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-nav-link text-accent">Home</a>
-        <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="mobile-nav-link">Collections</a>
-        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="mobile-nav-link">Our Story</a>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mobile-nav-link">Showroom Consult</a>
-        <?php
-      }
-      ?>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-nav-link <?php echo is_front_page() ? 'text-accent' : ''; ?>">Home</a>
+      
+      <!-- Mobile Shop Dropdown (Accordion) -->
+      <div class="mobile-nav-item-dropdown">
+        <a href="#" class="mobile-nav-link mobile-dropdown-trigger">
+          Shop <i class="ri-add-line dropdown-icon"></i>
+        </a>
+        <div class="mobile-dropdown-content">
+          
+          <div class="mobile-dropdown-section">
+            <span class="mobile-section-title">Office Seating</span>
+            <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">Office Systems</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge</a>
+          </div>
+          
+          <div class="mobile-dropdown-section">
+            <span class="mobile-section-title">Steel Furniture</span>
+            <a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>">Cabinets & Lockers</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>">Shelves & Racks</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/shoerack/' ) ); ?>">Wooden Shoe Racks</a>
+          </div>
+          
+          <div class="mobile-dropdown-section">
+            <span class="mobile-section-title">Accommodation</span>
+            <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>">Metal Bunk Beds</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>">Single Metal Beds</a>
+          </div>
+          
+          <div class="mobile-dropdown-section">
+            <span class="mobile-section-title">Tables & Dining</span>
+            <a href="<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>">Dining Tables</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>">Folding Tables</a>
+          </div>
+          
+          <div class="mobile-dropdown-section">
+            <span class="mobile-section-title">Utility & Racks</span>
+            <a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>">Foldable Divider</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/hanger-stands/' ) ); ?>">Hanger Stands</a>
+            <a href="<?php echo esc_url( home_url( '/product-category/air-cooler/' ) ); ?>">Air Coolers</a>
+          </div>
+
+        </div>
+      </div>
+
+      <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="mobile-nav-link <?php echo is_page( 'about' ) ? 'text-accent' : ''; ?>">Our Story</a>
+      <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mobile-nav-link <?php echo is_page( 'contact' ) ? 'text-accent' : ''; ?>">Showroom</a>
     </div>
   </div>
 

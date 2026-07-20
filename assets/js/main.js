@@ -126,6 +126,24 @@ function initDrawers() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAllDrawers();
   });
+
+  // Mobile accordion toggle for Shop dropdown
+  const mobileDropTrigger = document.querySelector('.mobile-dropdown-trigger');
+  if (mobileDropTrigger) {
+    mobileDropTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const parent = mobileDropTrigger.closest('.mobile-nav-item-dropdown');
+      parent.classList.toggle('active');
+      const icon = mobileDropTrigger.querySelector('.dropdown-icon');
+      if (icon) {
+        if (parent.classList.contains('active')) {
+          icon.className = 'ri-subtract-line dropdown-icon';
+        } else {
+          icon.className = 'ri-add-line dropdown-icon';
+        }
+      }
+    });
+  }
 }
 
 /* ==========================================================================

@@ -22,26 +22,75 @@
         <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Logo-White.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; display: block;">
       </a>
       
-      <!-- Dynamic WordPress Navigation with Hardcoded Showroom Fallback -->
+      <!-- Hardcoded Premium Navigation Menu with Mega Dropdown -->
       <nav class="nav-menu">
-        <?php
-        $primary_menu_items = great_wall_get_menu_items( 'primary-menu' );
-        if ( $primary_menu_items ) {
-          foreach ( $primary_menu_items as $item ) {
-            $active_class = great_wall_is_menu_item_active( $item ) ? 'active' : '';
-            ?>
-            <a href="<?php echo esc_url( $item->url ); ?>" class="nav-link <?php echo esc_attr( $active_class ); ?>"><?php echo esc_html( $item->title ); ?></a>
-            <?php
-          }
-        } else {
-          ?>
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>">Home</a>
-          <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="nav-link <?php echo is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ? 'active' : ''; ?>">Collections</a>
-          <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-link <?php echo is_page( 'about' ) ? 'active' : ''; ?>">Our Story</a>
-          <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="nav-link <?php echo is_page( 'contact' ) ? 'active' : ''; ?>">Showroom</a>
-          <?php
-        }
-        ?>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>">Home</a>
+        
+        <!-- Shop Dropdown Container -->
+        <div class="nav-item-dropdown">
+          <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="nav-link has-dropdown <?php echo is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ? 'active' : ''; ?>">
+            Shop <i class="ri-arrow-down-s-line dropdown-arrow"></i>
+          </a>
+          
+          <!-- Mega Menu Panel -->
+          <div class="mega-menu-panel">
+            <div class="mega-menu-grid">
+              
+              <!-- Column 1: OFFICE SEATING -->
+              <div class="mega-menu-col">
+                <h4 class="mega-menu-title">Office Seating</h4>
+                <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs <span class="mega-badge badge-popular">Popular</span></a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">Office Systems</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge <span class="mega-badge badge-new">New</span></a></li>
+                </ul>
+              </div>
+
+              <!-- Column 2: STEEL FURNITURE -->
+              <div class="mega-menu-col">
+                <h4 class="mega-menu-title">Steel Furniture</h4>
+                <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>">Cabinets & Lockers <span class="mega-badge badge-hot">Hot</span></a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>">Shelves & Racks</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/shoerack/' ) ); ?>">Wooden Shoe Racks</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 3: BEDS & ACCOMMODATION -->
+              <div class="mega-menu-col">
+                <h4 class="mega-menu-title">Accommodation</h4>
+                <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>">Metal Bunk Beds</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>">Single Metal Beds</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 4: TABLES & DINING -->
+              <div class="mega-menu-col">
+                <h4 class="mega-menu-title">Tables & Dining</h4>
+                <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>">Dining Tables</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>">Folding Tables</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 5: UTILITY & SYSTEMS -->
+              <div class="mega-menu-col">
+                <h4 class="mega-menu-title">Utility & Racks</h4>
+                <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>">Foldable Divider</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/hanger-stands/' ) ); ?>">Hanger Stands</a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/air-cooler/' ) ); ?>">Air Coolers</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-link <?php echo is_page( 'about' ) ? 'active' : ''; ?>">Our Story</a>
+        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="nav-link <?php echo is_page( 'contact' ) ? 'active' : ''; ?>">Showroom</a>
       </nav>
       
       <!-- Header Action Triggers -->
