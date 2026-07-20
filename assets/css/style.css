@@ -358,9 +358,7 @@ p {
   z-index: 1000;
   transition: all var(--transition-smooth);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  background-color: rgba(10, 10, 10, 0.35) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  background-color: #0C0C0C !important; /* solid black to block wrapper bg */
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   border-bottom-left-radius: 0 !important;
@@ -382,9 +380,7 @@ p {
 
 .header.sticky {
   height: var(--header-height-shrink);
-  background-color: rgba(10, 10, 10, 0.5) !important;
-  backdrop-filter: blur(25px) !important;
-  -webkit-backdrop-filter: blur(25px) !important;
+  background-color: #0C0C0C !important; /* solid black to block wrapper bg */
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
   border-top-left-radius: 20px !important;
