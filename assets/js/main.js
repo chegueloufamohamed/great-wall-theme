@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWooCommerceFeaturedProduct();
   initLoungeScrollDrag();
   initWishlist();
+  initMobileFilterDrawer();
 });
 
 /* ==========================================================================
@@ -85,6 +86,8 @@ function initDrawers() {
     if (mobileMenuDrawer) mobileMenuDrawer.classList.remove('active');
     if (searchDrawer) searchDrawer.classList.remove('active');
     if (wishlistDrawer) wishlistDrawer.classList.remove('active');
+    const sidebar = document.querySelector('.shop-sidebar');
+    if (sidebar) sidebar.classList.remove('active');
     document.body.style.overflow = ''; // Unlock background scroll
   };
 
@@ -1647,6 +1650,60 @@ function showWishlistToast(message, isHeart = false) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 2500);
+}
+
+/**
+ * Mobile slide-out filters drawer toggle handler
+ */
+function initMobileFilterDrawer() {
+  const shopLayout = document.querySelector('.shop-layout');
+  const shopMain = document.querySelector('.shop-main-content');
+  const sidebar = document.querySelector('.shop-sidebar');
+  const overlay = document.querySelector('.drawer-overlay');
+
+  if (!shopLayout || !shopMain || !sidebar || !overlay) return;
+
+  // 1. Inject the Mobile filter trigger button dynamically at the top of the products grid
+  if (!document.querySelector('.mobile-filter-trigger-wrapper')) {
+    const triggerWrapper = document.createElement('div');
+    triggerWrapper.className = 'mobile-filter-trigger-wrapper';
+    triggerWrapper.innerHTML = `
+      <button type="button" class="mobile-filter-trigger-btn">
+        <i class="ri-filter-3-line"></i>
+        <span>Filters & Categories</span>
+      </button>
+    `;
+    shopMain.insertBefore(triggerWrapper, shopMain.firstChild);
+    
+    // Bind click event to open the sidebar drawer
+    const triggerBtn = triggerWrapper.querySelector('.mobile-filter-trigger-btn');
+    triggerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      overlay.classList.add('active');
+      sidebar.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Lock background scroll
+    });
+  }
+
+  // 2. Inject Drawer Header inside sidebar if not exists
+  if (!sidebar.querySelector('.sidebar-drawer-header')) {
+    const header = document.createElement('div');
+    header.className = 'sidebar-drawer-header';
+    header.innerHTML = `
+      <h4 class="sidebar-drawer-title">Filters & Categories</h4>
+      <button type="button" class="sidebar-drawer-close" aria-label="Close filters"><i class="ri-close-line"></i></button>
+    `;
+    sidebar.insertBefore(header, sidebar.firstChild);
+
+    // Bind click event to close the sidebar drawer
+    const closeBtn = header.querySelector('.sidebar-drawer-close');
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      overlay.classList.remove('active');
+      sidebar.classList.remove('active');
+      document.body.style.overflow = ''; // Unlock background scroll
+    });
+  }
 }
 
 
