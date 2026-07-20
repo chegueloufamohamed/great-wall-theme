@@ -93,9 +93,15 @@ if ( $related_products ) : ?>
 				?>
 				<div class="product-card">
 					<div class="product-img-wrapper" style="height: 280px; overflow: hidden; position: relative;">
-						<?php if ( $product_obj->is_on_sale() ) : ?>
-							<span class="product-badge sale">Sale</span>
-						<?php endif; ?>
+						<?php
+						$rel_name = esc_js( $product_obj->get_name() );
+						$rel_price = esc_js( strip_tags( $product_obj->get_price_html() ) );
+						$rel_img = $image_id ? esc_url( wp_get_attachment_image_url( $image_id, 'thumbnail' ) ) : esc_url( wc_placeholder_img_src( 'thumbnail' ) );
+						$rel_link = esc_url( get_permalink( $related_actual_id ) );
+						?>
+						<button type="button" class="btn-wishlist-toggle card-wishlist-btn" data-product-id="<?php echo esc_attr( $related_actual_id ); ?>" data-product-name="<?php echo esc_attr( $rel_name ); ?>" data-product-price="<?php echo esc_attr( $rel_price ); ?>" data-product-img="<?php echo esc_attr( $rel_img ); ?>" data-product-link="<?php echo esc_attr( $rel_link ); ?>" title="<?php esc_attr_e( 'Add to Wishlist', 'great-wall-theme' ); ?>">
+							<i class="ri-heart-line wishlist-icon"></i>
+						</button>
 						<img src="<?php echo esc_url( $product_image ); ?>" loading="lazy" alt="<?php echo esc_attr( $product_obj->get_name() ); ?>" class="product-img main-img">
 						<?php if ( ! empty( $hover_image ) ) : ?>
 							<img src="<?php echo esc_url( $hover_image ); ?>" loading="lazy" alt="<?php echo esc_attr( $product_obj->get_name() ); ?>" class="product-img hover-img">

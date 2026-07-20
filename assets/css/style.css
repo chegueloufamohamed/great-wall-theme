@@ -7583,7 +7583,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 
 /* Wishlist Drawer Layout */
 #wishlist-drawer {
-  z-index: 1001; /* Sits directly over sticky header */
+  z-index: 2001; /* Sits directly over the overlay (which is z-index 2000) */
 }
 
 .wishlist-drawer-content {
