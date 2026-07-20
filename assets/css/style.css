@@ -7841,8 +7841,15 @@ ul.products li.product .price del,
 @media (max-width: 767px) {
   .mobile-filter-trigger-wrapper {
     display: block !important;
-    margin-bottom: 24px;
-    width: 100%;
+    position: sticky !important;
+    top: 70px !important;
+    z-index: 998 !important;
+    background-color: var(--bg-primary, #FAF8F5) !important;
+    padding: 12px 15px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
   }
   
   .mobile-filter-trigger-btn {
@@ -7999,6 +8006,7 @@ ul.products li.product .price del,
   .shop-main-content ul.products {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 16px !important;
+    margin-top: 15px !important;
   }
   
   .shop-main-content ul.products li.product {
