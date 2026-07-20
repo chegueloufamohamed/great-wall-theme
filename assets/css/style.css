@@ -332,9 +332,6 @@ p {
 .top-bar-content {
   overflow: hidden;
   height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   width: 100%;
 }
@@ -345,6 +342,7 @@ p {
   align-items: center;
   justify-content: flex-start;
   animation: topBarScroll 8s infinite ease-in-out;
+  width: 100%;
 }
 
 .top-bar-slide {
