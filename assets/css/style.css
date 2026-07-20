@@ -749,7 +749,7 @@ p {
   flex-direction: column;
   gap: 22px;
   padding: 15px 0 10px 15px;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
   margin-top: 5px;
 }
 
@@ -774,14 +774,14 @@ p {
 .mobile-dropdown-section a {
   font-size: 0.85rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.65) !important;
+  color: var(--color-secondary, #2e2a25) !important;
   padding: 2px 0;
   transition: color 0.25s ease;
   text-transform: capitalize;
 }
 
 .mobile-dropdown-section a:hover {
-  color: #FFFFFF !important;
+  color: var(--color-accent, #c5a880) !important;
 }
 
 .header-actions {
