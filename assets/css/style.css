@@ -8169,7 +8169,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 .wishlist-item-remove {
   background: none !important;
   border: none !important;
-  color: rgba(255,255,255,0.4) !important;
+  color: rgba(0, 0, 0, 0.4) !important;
   font-size: 1.15rem !important;
   cursor: pointer !important;
   transition: color 0.25s ease !important;
