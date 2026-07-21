@@ -7488,34 +7488,67 @@ ul.products.list-view-active li.product .product-loop-actions {
   border-bottom: 1px solid var(--border-color, #e5e0d8) !important;
 }
 
+.single-product .woocommerce-tabs ul.tabs {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: #F3EFEA !important;
+  padding: 6px !important;
+  border-radius: 100px !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  margin: 0 auto 40px auto !important;
+  list-style: none !important;
+  position: relative !important;
+  max-width: fit-content !important;
+}
+
 .single-product .woocommerce-tabs ul.tabs li {
-  background: transparent !important;
-  border: none !important;
   margin: 0 !important;
   padding: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  float: none !important;
+  display: inline-block !important;
+  border-radius: 99px !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li::after,
+.single-product .woocommerce-tabs ul.tabs li::before {
+  display: none !important;
 }
 
 .single-product .woocommerce-tabs ul.tabs li a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 24px !important;
   font-family: var(--font-sans) !important;
-  font-size: 0.9rem !important;
-  font-weight: 500 !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  color: var(--color-secondary, #76726c) !important;
-  padding: 12px 0 !important;
-  border-bottom: 2px solid transparent !important;
-  transition: all 0.2s ease !important;
-  display: inline-block !important;
+  color: #76726c !important;
+  border-radius: 99px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  line-height: 1.4 !important;
+  border-bottom: none !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li:not(.active) a:hover {
+  color: #000000 !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+.single-product .woocommerce-tabs ul.tabs li.active {
+  background-color: #000000 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
 }
 
 .single-product .woocommerce-tabs ul.tabs li.active a {
-  color: var(--color-primary, #2e2a25) !important;
-  border-bottom-color: var(--color-primary, #2e2a25) !important;
-  font-weight: 600 !important;
-}
-
-.single-product .woocommerce-tabs ul.tabs li a:hover {
-  color: var(--color-primary, #2e2a25) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
 }
 
 /* Hide reviews dividers and clean up top padding lines */

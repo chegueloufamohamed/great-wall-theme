@@ -33,8 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	if ( ! empty( $product_tabs ) ) : ?>
 
-		<div class="woocommerce-tabs wc-tabs-wrapper">
-			<ul class="tabs wc-tabs" role="tablist" style="justify-content: center !important; border-bottom: 1px solid var(--border-color, #e5e0d8) !important;">
+		<div class="woocommerce-tabs wc-tabs-wrapper" style="text-align: center !important;">
+			<ul class="tabs wc-tabs" role="tablist">
 				<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
 					<li class="<?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
 						<a href="#tab-<?php echo esc_attr( $key ); ?>">
