@@ -12,7 +12,7 @@
           </a>
           <p class="footer-desc">Curating premium contemporary and minimalist wooden & upholstered masterpieces. Bringing high-end design showroom standards directly to Dubai.</p>
           <div class="social-links">
-            <a href="https://www.facebook.com/profile.php?id=61592114514223" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590594036730" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
             <a href="https://www.instagram.com/greatwallfurnitures/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
             <a href="https://www.tiktok.com/@greatwall.furnitures.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
           </div>
@@ -269,7 +269,7 @@
       
       <!-- Mobile Drawer Social Media Links -->
       <div class="mobile-nav-socials">
-        <a href="https://www.facebook.com/profile.php?id=61592114514223" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61590594036730" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
         <a href="https://www.instagram.com/greatwallfurnitures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
         <a href="https://www.tiktok.com/@greatwall.furnitures.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
       </div>
