@@ -8230,7 +8230,7 @@ ul.products li.product .price del,
   .mobile-filter-trigger-wrapper {
     display: block !important;
     position: sticky !important;
-    top: 70px !important;
+    top: 106px !important;
     z-index: 998 !important;
     background-color: var(--bg-primary, #FAF8F5) !important;
     padding: 12px 15px !important;
@@ -8238,6 +8238,10 @@ ul.products li.product .price del,
     width: 100% !important;
     box-sizing: border-box !important;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  .admin-bar .mobile-filter-trigger-wrapper {
+    top: 152px !important;
   }
   
   .mobile-filter-trigger-btn {
