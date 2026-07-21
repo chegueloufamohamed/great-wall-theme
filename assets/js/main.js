@@ -1713,19 +1713,32 @@ function initMobileFilterDrawer() {
     const header = document.createElement('div');
     header.className = 'sidebar-drawer-header';
     header.innerHTML = `
-      <h4 class="sidebar-drawer-title">Filters & Categories</h4>
-      <button type="button" class="sidebar-drawer-close" aria-label="Close filters"><i class="ri-close-line"></i></button>
+      <div class="sidebar-drawer-handle" aria-label="Close filters"></div>
+      <h4 class="sidebar-drawer-title" style="display: none !important;">Filters & Categories</h4>
+      <button type="button" class="sidebar-drawer-close" style="display: none !important;" aria-label="Close filters"><i class="ri-close-line"></i></button>
     `;
     sidebar.insertBefore(header, sidebar.firstChild);
 
     // Bind click event to close the sidebar drawer
+    const handle = header.querySelector('.sidebar-drawer-handle');
+    if (handle) {
+      handle.addEventListener('click', (e) => {
+        e.preventDefault();
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+        document.body.style.overflow = ''; // Unlock background scroll
+      });
+    }
+
     const closeBtn = header.querySelector('.sidebar-drawer-close');
-    closeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      overlay.classList.remove('active');
-      sidebar.classList.remove('active');
-      document.body.style.overflow = ''; // Unlock background scroll
-    });
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+        document.body.style.overflow = ''; // Unlock background scroll
+      });
+    }
   }
 }
 
