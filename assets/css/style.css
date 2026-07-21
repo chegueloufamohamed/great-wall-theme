@@ -1072,8 +1072,8 @@ p {
     width: 100% !important;
   }
 
-  #cart-drawer .drawer-close,
-  #wishlist-drawer .drawer-close {
+  #cart-drawer .drawer-header .drawer-close,
+  #wishlist-drawer .drawer-header .drawer-close {
     display: none !important;
   }
 }
