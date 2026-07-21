@@ -278,6 +278,7 @@
 
   <!-- Search Drawer Panel -->
   <div class="drawer" id="search-drawer">
+    <div class="mobile-drawer-handle drawer-close" aria-label="<?php esc_attr_e( 'Close Search', 'great-wall-theme' ); ?>"></div>
     <div class="drawer-header">
       <h3 class="drawer-title"><?php esc_html_e( 'Search Products', 'great-wall-theme' ); ?></h3>
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Search', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
