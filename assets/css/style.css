@@ -7446,7 +7446,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 /* Conflicting old tab style removed */
 
 .single-product .woocommerce-tabs ul.tabs {
-  display: inline-flex !important;
+  display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   background-color: #F3EFEA !important;
@@ -7456,10 +7456,13 @@ ul.products.list-view-active li.product .product-loop-actions {
   margin: 0 auto 40px auto !important;
   list-style: none !important;
   position: relative !important;
-  max-width: fit-content !important;
+  max-width: 600px !important;
+  width: 100% !important;
 }
 
 .single-product .woocommerce-tabs ul.tabs li {
+  flex: 1 !important;
+  text-align: center !important;
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
@@ -7479,7 +7482,8 @@ ul.products.list-view-active li.product .product-loop-actions {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 10px 24px !important;
+  width: 100% !important;
+  padding: 10px 0 !important;
   font-family: var(--font-sans) !important;
   font-size: 0.82rem !important;
   font-weight: 700 !important;
@@ -7506,6 +7510,10 @@ ul.products.list-view-active li.product .product-loop-actions {
 .single-product .woocommerce-tabs ul.tabs li.active a {
   color: #FFFFFF !important;
   font-weight: 700 !important;
+}
+
+.single-product .woocommerce-Tabs-panel {
+  text-align: left !important;
 }
 
 @media (max-width: 480px) {
