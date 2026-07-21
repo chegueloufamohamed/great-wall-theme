@@ -4219,40 +4219,7 @@ p {
   margin-top: 30px !important;
   display: block !important;
 }
-
-.single-product .woocommerce-tabs ul.tabs {
-  display: flex;
-  gap: 40px;
-  border-bottom: 1px solid var(--border-color) !important;
-  padding: 0 0 15px !important;
-  margin-bottom: 30px !important;
-  list-style: none !important;
-}
-
-.single-product .woocommerce-tabs ul.tabs li {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: none !important;
-  border: none !important;
-}
-
-.single-product .woocommerce-tabs ul.tabs li a {
-  font-family: var(--font-sans) !important;
-  font-size: 0.88rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  color: var(--color-secondary) !important;
-  padding-bottom: 15px !important;
-  border-bottom: 2px solid transparent !important;
-  transition: all var(--transition-fast) !important;
-}
-
-.single-product .woocommerce-tabs ul.tabs li.active a,
-.single-product .woocommerce-tabs ul.tabs li a:hover {
-  color: var(--color-primary) !important;
-  border-bottom-color: var(--color-primary) !important;
-}
+/* WooCommerce tabs list layout overrides moved to custom section at the bottom of stylesheet */
 
 .single-product .woocommerce-Tabs-panel {
   font-size: 1rem;
@@ -7476,17 +7443,7 @@ ul.products.list-view-active li.product .product-loop-actions {
   background-color: var(--bg-light-accent, #F4EFEA) !important;
 }
 
-.single-product .woocommerce-tabs ul.tabs {
-  justify-content: center !important;
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin-bottom: 40px !important;
-  display: flex !important;
-  gap: 40px !important;
-  border-bottom: 1px solid var(--border-color, #e5e0d8) !important;
-}
+/* Conflicting old tab style removed */
 
 .single-product .woocommerce-tabs ul.tabs {
   display: inline-flex !important;
@@ -7549,6 +7506,19 @@ ul.products.list-view-active li.product .product-loop-actions {
 .single-product .woocommerce-tabs ul.tabs li.active a {
   color: #FFFFFF !important;
   font-weight: 700 !important;
+}
+
+@media (max-width: 480px) {
+  .single-product .woocommerce-tabs ul.tabs {
+    padding: 4px !important;
+    gap: 0 !important;
+    margin-bottom: 24px !important;
+  }
+  .single-product .woocommerce-tabs ul.tabs li a {
+    padding: 8px 12px !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.05em !important;
+  }
 }
 
 /* Hide reviews dividers and clean up top padding lines */
