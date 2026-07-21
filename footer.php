@@ -119,6 +119,7 @@
 
   <!-- Shopping Bag Cart Drawer -->
   <div class="drawer" id="cart-drawer">
+    <div class="mobile-drawer-handle drawer-close" aria-label="<?php esc_attr_e( 'Close Shopping Bag', 'great-wall-theme' ); ?>"></div>
     <div class="drawer-header">
       <h3 class="drawer-title"><?php esc_html_e( 'Shopping Bag', 'great-wall-theme' ); ?></h3>
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Shopping Bag', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
@@ -297,6 +298,7 @@
 
   <!-- Wishlist Drawer Panel -->
   <div class="drawer" id="wishlist-drawer">
+    <div class="mobile-drawer-handle drawer-close" aria-label="<?php esc_attr_e( 'Close Wishlist', 'great-wall-theme' ); ?>"></div>
     <div class="drawer-header">
       <h3 class="drawer-title"><?php esc_html_e( 'My Wishlist', 'great-wall-theme' ); ?></h3>
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Wishlist', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
