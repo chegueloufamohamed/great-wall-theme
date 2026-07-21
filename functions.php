@@ -1148,6 +1148,76 @@ function great_wall_loop_wishlist_button() {
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
 
+/**
+ * Register the custom "FAQs" product tab.
+ */
+add_filter( 'woocommerce_product_tabs', 'great_wall_add_faq_product_tab' );
+function great_wall_add_faq_product_tab( $tabs ) {
+	$tabs['product_faq'] = array(
+		'title'    => __( 'FAQs', 'great-wall-theme' ),
+		'priority' => 30,
+		'callback' => 'great_wall_render_faq_tab_content'
+	);
+	
+	return $tabs;
+}
 
+function great_wall_render_faq_tab_content() {
+	?>
+	<div class="product-faqs-container">
+		<div class="faq-item">
+			<details>
+				<summary><span>How long does delivery take within the UAE?</span> <i class="ri-add-line"></i></summary>
+				<div class="faq-content">
+					<p>We deliver within 2 to 4 business days to all locations across the UAE (Dubai, Abu Dhabi, Sharjah, Ajman, Umm Al Quwain, Ras Al Khaimah, and Fujairah).</p>
+				</div>
+			</details>
+		</div>
+		
+		<div class="faq-item">
+			<details>
+				<summary><span>Do you provide free shipping?</span> <i class="ri-add-line"></i></summary>
+				<div class="faq-content">
+					<p>Yes, we offer free shipping on all orders over AED 1000. For orders below AED 1000, shipping rates are calculated at checkout based on your location.</p>
+				</div>
+			</details>
+		</div>
 
+		<div class="faq-item">
+			<details>
+				<summary><span>Can I order custom sizes or colors for office desks and partitions?</span> <i class="ri-add-line"></i></summary>
+				<div class="faq-content">
+					<p>Absolutely! We specialize in custom office layouts, partitions, workstation desks, bunk beds, and steel lockers. Please get in touch with our design team through the WhatsApp bubble or contact page to discuss your project requirements.</p>
+				</div>
+			</details>
+		</div>
 
+		<div class="faq-item">
+			<details>
+				<summary><span>Is assembly and installation included with delivery?</span> <i class="ri-add-line"></i></summary>
+				<div class="faq-content">
+					<p>Yes, our delivery team provides free professional on-site installation and assembly for all modular desks, systems, chairs, and beds to make sure they are set up perfectly.</p>
+				</div>
+			</details>
+		</div>
+
+		<div class="faq-item">
+			<details>
+				<summary><span>Do your products come with a warranty?</span> <i class="ri-add-line"></i></summary>
+				<div class="faq-content">
+					<p>Yes, all our office seating, commercial chairs, steel cabinetry, and beds are covered by a manufacturer warranty against any defects. Please refer to our support team for product-specific details.</p>
+				</div>
+			</details>
+		</div>
+
+		<div class="faq-item">
+			<details>
+				<summary><span>Can I visit your showroom to see the items before purchasing?</span> <i class="ri-add-line"></i></summary>
+				<div class="faq-content">
+					<p>Yes, you are welcome to visit our physical showroom in Dubai to experience the quality of our office seating, desks, bunk beds, and other collections first-hand. Please find our coordinates on the contact page.</p>
+				</div>
+			</details>
+		</div>
+	</div>
+	<?php
+}
