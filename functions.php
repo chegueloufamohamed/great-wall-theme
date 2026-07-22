@@ -548,25 +548,26 @@ function great_wall_is_menu_item_active( $item ) {
 }
 
 /**
- * Custom sorting for "Chair" category archive page:
- * Show products starting with "OC-" first, and all other chairs below them.
+ * Set default product catalog ordering to "date" (Latest first)
  */
-add_filter( 'posts_orderby', 'great_wall_sort_chairs_category', 99, 2 );
-function great_wall_sort_chairs_category( $orderby, $query ) {
-    if ( ! is_admin() && is_object( $query ) && method_exists( $query, 'is_main_query' ) && $query->is_main_query() ) {
-        // Safe check for product_cat taxonomy using native query variables
-        $product_cat = $query->get( 'product_cat' );
-        if ( 'chair' === $product_cat || 'chairs' === $product_cat ) {
-            global $wpdb;
-            $custom_orderby = "CASE 
-                WHEN {$wpdb->posts}.post_title LIKE 'OC-%' OR {$wpdb->posts}.post_title LIKE 'OC %' THEN 0 
-                ELSE 1 
-            END ASC, {$wpdb->posts}.menu_order ASC, {$wpdb->posts}.post_title ASC";
-            
-            return $custom_orderby;
-        }
-    }
-    return $orderby;
+add_filter( 'woocommerce_default_catalog_orderby', 'great_wall_default_catalog_orderby' );
+function great_wall_default_catalog_orderby( $orderby ) {
+	return 'date';
+}
+
+/**
+ * Enforce sorting by latest first (date DESC) when default catalog sorting is selected on shop/archive queries
+ */
+add_filter( 'woocommerce_get_catalog_ordering_args', 'great_wall_catalog_ordering_args' );
+function great_wall_catalog_ordering_args( $args ) {
+	$orderby_value = isset( $_GET['orderby'] ) ? wc_clean( wp_unslash( $_GET['orderby'] ) ) : 'menu_order';
+
+	if ( 'menu_order' === $orderby_value ) {
+		$args['orderby']  = 'date';
+		$args['order']    = 'DESC';
+		$args['meta_key'] = '';
+	}
+	return $args;
 }
 
 /**
