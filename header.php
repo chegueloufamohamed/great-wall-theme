@@ -51,14 +51,15 @@
           <div class="mega-menu-panel">
             <div class="mega-menu-grid">
               
-              <!-- Column 1: OFFICE SEATING -->
+              <!-- Column 1: OFFICE FURNITURE -->
               <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Office Seating</h4>
+                <h4 class="mega-menu-title">Office Furniture</h4>
                 <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Office Desks <span class="mega-badge badge-new">New</span></a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs <span class="mega-badge badge-popular">Popular</span></a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">Office Systems</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge <span class="mega-badge badge-new">New</span></a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge</a></li>
                 </ul>
               </div>
 

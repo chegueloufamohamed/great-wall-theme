@@ -228,7 +228,8 @@
         <div class="mobile-dropdown-content">
           
           <div class="mobile-dropdown-section">
-            <span class="mobile-section-title">Office Seating</span>
+            <span class="mobile-section-title">Office Furniture</span>
+            <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Office Desks</a>
             <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs</a>
             <a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a>
             <a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">Office Systems</a>
