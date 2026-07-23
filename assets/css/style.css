@@ -8844,3 +8844,42 @@ ul.products li.product .price del,
   opacity: 1 !important;
   transform: translateX(-50%) scale(1) !important;
 }
+
+/* Overrides for product cards inside You may also like 6-column grid on desktop */
+@media (min-width: 769px) {
+  .related-collection-slider .product-card .product-price {
+    font-size: 0.82rem !important; /* Slightly smaller price size on desktop product page cards */
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+  }
+
+  .related-collection-slider .product-card .product-price ins,
+  .related-collection-slider .product-card .product-price del {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+  }
+
+  .related-collection-slider .product-card .product-price del {
+    font-size: 0.72rem !important;
+    font-weight: 400 !important;
+    color: #8E8E93 !important;
+    margin-left: 4px !important;
+  }
+
+  /* Compact Free Shipping and Fixing pill styling for narrow columns */
+  .related-collection-slider .product-card .card-free-shipping-badge {
+    font-size: 0.65rem !important;
+    padding: 3px 8px !important;
+    margin-top: 8px !important;
+    white-space: nowrap !important; /* Prevent text wrapping to another line inside the pill */
+  }
+
+  .related-collection-slider .product-card .card-free-shipping-badge i {
+    font-size: 0.76rem !important;
+  }
+}
