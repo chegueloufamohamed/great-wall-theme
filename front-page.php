@@ -566,6 +566,101 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     </div>
   </section>
 
+  <!-- ==========================================================================
+       MOST POPULAR PRODUCTS (OFFICE DESKS) SECTION
+       ========================================================================== -->
+  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 0;">
+    <div class="container">
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+        <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Desks', 'great-wall-theme' ); ?></h2>
+        <?php
+        $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
+        $desks_link = $desks_cat ? get_term_link( $desks_cat ) : '#';
+        ?>
+        <a href="<?php echo esc_url( $desks_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+          <span><?php esc_html_e( 'View All Desks', 'great-wall-theme' ); ?></span>
+          <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
+        </a>
+      </div>
+
+      <div class="grid popular-grid">
+        <?php
+        if ( class_exists( 'WooCommerce' ) ) {
+            $args = array(
+                'post_type'      => 'product',
+                'posts_per_page' => 10,
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'slug',
+                        'terms'    => 'desks',
+                    ),
+                ),
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+            );
+            $products_query = new WP_Query( $args );
+
+            if ( $products_query->have_posts() ) {
+                $delay = 100;
+                while ( $products_query->have_posts() ) {
+                    $products_query->the_post();
+                    $product = wc_get_product( get_the_ID() );
+                    if ( ! $product ) {
+                        continue;
+                    }
+                    $permalink = get_permalink( $product->get_id() );
+                    $title = $product->get_name();
+                    $price_html = $product->get_price_html();
+                    $image_id = $product->get_image_id();
+                    $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
+                    ?>
+                    <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
+                      <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
+                        <div class="popular-img-box">
+                          <?php if ( $product->is_featured() ) : ?>
+                            <span class="popular-badge-pill">UNIQUE</span>
+                          <?php endif; ?>
+                          <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+                        </div>
+                        <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                        <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                      </a>
+                      <div class="popular-swatches">
+                        <?php
+                        $colors = $product->get_attribute( 'pa_color' );
+                        if ( $colors ) {
+                            $color_arr = explode( ',', $colors );
+                            foreach ( $color_arr as $c ) {
+                                $c = trim( $c );
+                                $hex = '#8E8E93';
+                                if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                                elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                            }
+                        }
+                        ?>
+                      </div>
+                    </div>
+                    <?php
+                    $delay += 100;
+                    if ( $delay > 400 ) {
+                        $delay = 100;
+                    }
+                }
+                wp_reset_postdata();
+            } else {
+                echo '<p class="no-products" style="grid-column: 1/-1; text-align: center; color: var(--color-muted);">' . esc_html__( 'No desks found.', 'great-wall-theme' ) . '</p>';
+            }
+        }
+        ?>
+      </div>
+    </div>
+  </section>
+
 
 
   <!-- ==========================================================================
