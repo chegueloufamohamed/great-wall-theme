@@ -6736,17 +6736,18 @@ ul.products.list-view-active li.product .product-loop-actions {
 /* Breadcrumbs inside product summary column */
 .single-product .woocommerce-breadcrumb {
   font-size: 0.82rem !important;
-  color: #888888 !important;
+  color: #0C0C0C !important;
   margin-bottom: 8px !important;
-  font-weight: 500 !important;
+  font-weight: 700 !important;
   font-family: var(--font-sans, sans-serif) !important;
   text-transform: capitalize !important;
 }
 
 .single-product .woocommerce-breadcrumb a {
-  color: #888888 !important;
+  color: #0C0C0C !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
+  font-weight: 700 !important;
 }
 
 .single-product .woocommerce-breadcrumb a:hover {
