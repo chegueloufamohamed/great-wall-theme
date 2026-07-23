@@ -1309,6 +1309,7 @@ function great_wall_render_faq_tab_content() {
 			</details>
 		</div>
 	</div>
+	<?php
 }
 
 /**
