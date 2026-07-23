@@ -6753,6 +6753,22 @@ ul.products.list-view-active li.product .product-loop-actions {
   color: var(--color-accent, #c5a880) !important;
 }
 
+/* Bold the Chairs category in breadcrumbs */
+.woocommerce-breadcrumb a[href*="/product-category/chair/"],
+.woocommerce-breadcrumb a[href*="/product-category/chairs/"],
+.shop-hero-breadcrumbs a[href*="/product-category/chair/"],
+.shop-hero-breadcrumbs a[href*="/product-category/chairs/"] {
+  font-weight: 700 !important;
+}
+
+/* Bold the Chairs breadcrumb item when active (non-link at the end) */
+.tax-product_cat.term-chair .woocommerce-breadcrumb span:last-child,
+.tax-product_cat.term-chairs .woocommerce-breadcrumb span:last-child,
+.tax-product_cat.term-chair .shop-hero-breadcrumbs span:last-child,
+.tax-product_cat.term-chairs .shop-hero-breadcrumbs span:last-child {
+  font-weight: 700 !important;
+}
+
 /* Price row display on one line with custom order (Active price left, crossed-out original middle, save badge right) */
 .single-product p.price {
   display: flex !important;

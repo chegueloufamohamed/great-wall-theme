@@ -33,7 +33,7 @@ do_action( 'woocommerce_before_main_content' );
 		}
 
 		$queried_obj = get_queried_object();
-		$is_parent_chair = ( is_product_category() && isset( $queried_obj->slug ) && 'chair' === $queried_obj->slug );
+		$is_parent_chair = ( is_product_category() && isset( $queried_obj->slug ) && ( 'chair' === $queried_obj->slug || 'chairs' === $queried_obj->slug ) );
 
 		if ( $is_parent_chair ) {
 			// Render subcategories separately: Office Chairs then Commercial Chairs

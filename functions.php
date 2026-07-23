@@ -360,9 +360,20 @@ function great_wall_shop_hero_banner() {
 					<div class="shop-hero-desc"><?php echo wp_kses_post( $desc ); ?></div>
 				<?php endif; ?>
 				<div class="breadcrumbs shop-hero-breadcrumbs">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-					<span>/</span>
-					<span><?php echo esc_html( $title ); ?></span>
+					<?php 
+					if ( function_exists( 'woocommerce_breadcrumb' ) ) {
+						woocommerce_breadcrumb( array(
+							'wrap_before' => '',
+							'wrap_after'  => '',
+						) );
+					} else {
+						?>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+						<span>/</span>
+						<span><?php echo esc_html( $title ); ?></span>
+						<?php
+					}
+					?>
 				</div>
 				<?php 
 				if ( ! empty( $chunks ) ) : 
@@ -889,14 +900,92 @@ remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 )
 add_action( 'woocommerce_single_product_summary', 'woocommerce_breadcrumb', 4 );
 
 /**
- * Remove the product name from the end of the breadcrumb trail.
+ * Customize WooCommerce breadcrumbs trail:
+ * 1. Remove the product name from the end of the trail on single product pages.
+ * 2. Ensure "Products" is the second item (Home / Products / ...).
+ * 3. Change "Chair" category name to "Chairs".
  */
-add_filter( 'woocommerce_get_breadcrumb', 'great_wall_remove_product_title_from_breadcrumbs', 10, 2 );
-function great_wall_remove_product_title_from_breadcrumbs( $crumbs, $breadcrumb ) {
-    if ( is_product() && ! empty( $crumbs ) ) {
-        array_pop( $crumbs );
-    }
-    return $crumbs;
+add_filter( 'woocommerce_get_breadcrumb', 'great_wall_custom_breadcrumbs', 10, 2 );
+function great_wall_custom_breadcrumbs( $crumbs, $breadcrumb ) {
+	if ( is_product() && ! empty( $crumbs ) ) {
+		array_pop( $crumbs );
+	}
+
+	$new_crumbs = array();
+
+	if ( ! empty( $crumbs ) ) {
+		// Keep the first item (Home)
+		$new_crumbs[] = $crumbs[0];
+
+		// Check if the second item is Shop
+		$has_shop = false;
+		if ( isset( $crumbs[1] ) ) {
+			$shop_page_id = wc_get_page_id( 'shop' );
+			$shop_url     = $shop_page_id ? get_permalink( $shop_page_id ) : '';
+			if ( $crumbs[1][0] === 'Shop' || ( $shop_url && strpos( $crumbs[1][1], $shop_url ) !== false ) ) {
+				$crumbs[1][0] = 'Products';
+				$has_shop     = true;
+			}
+		}
+
+		if ( ! $has_shop ) {
+			// Inject "Products" linking to shop
+			$shop_page_id = wc_get_page_id( 'shop' );
+			$shop_url     = $shop_page_id ? get_permalink( $shop_page_id ) : home_url( '/shop/' );
+			$new_crumbs[] = array( 'Products', $shop_url );
+
+			// Copy rest of crumbs
+			for ( $i = 1; $i < count( $crumbs ); $i++ ) {
+				$new_crumbs[] = $crumbs[ $i ];
+			}
+		} else {
+			// Copy rest of crumbs
+			for ( $i = 1; $i < count( $crumbs ); $i++ ) {
+				$new_crumbs[] = $crumbs[ $i ];
+			}
+		}
+	}
+
+	// Rename any occurrence of "Chair" to "Chairs" in the trail labels
+	foreach ( $new_crumbs as &$crumb ) {
+		if ( strtolower( $crumb[0] ) === 'chair' ) {
+			$crumb[0] = 'Chairs';
+		}
+	}
+
+	return $new_crumbs;
+}
+
+/**
+ * Automatically rename "Chair" category to "Chairs" (and optionally update slug) in the database if it exists
+ */
+add_action( 'init', 'great_wall_rename_chair_category_term' );
+function great_wall_rename_chair_category_term() {
+	$term = get_term_by( 'slug', 'chair', 'product_cat' );
+	if ( $term && $term->name !== 'Chairs' ) {
+		wp_update_term( $term->term_id, 'product_cat', array(
+			'name' => 'Chairs',
+			'slug' => 'chairs'
+		) );
+	}
+
+	$term_plural = get_term_by( 'slug', 'chairs', 'product_cat' );
+	if ( $term_plural && $term_plural->name !== 'Chairs' ) {
+		wp_update_term( $term_plural->term_id, 'product_cat', array(
+			'name' => 'Chairs'
+		) );
+	}
+}
+
+/**
+ * Customize default WooCommerce breadcrumb arguments to wrap items in spans
+ */
+add_filter( 'woocommerce_breadcrumb_defaults', 'great_wall_breadcrumb_defaults' );
+function great_wall_breadcrumb_defaults( $defaults ) {
+	$defaults['delimiter']   = ' <span>/</span> ';
+	$defaults['before']      = '<span>';
+	$defaults['after']       = '</span>';
+	return $defaults;
 }
 
 /**
