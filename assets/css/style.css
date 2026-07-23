@@ -906,11 +906,17 @@ p {
   .header .logo img {
     max-height: 38px !important;
   }
+  .header-container {
+    padding: 0 20px !important;
+  }
 }
 
 @media (max-width: 480px) {
   .header .logo img {
     max-height: 32px !important;
+  }
+  .header-container {
+    padding: 0 16px !important;
   }
 }
 
