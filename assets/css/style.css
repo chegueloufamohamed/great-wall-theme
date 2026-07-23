@@ -903,6 +903,15 @@ p {
   .menu-toggle {
     display: block;
   }
+  .header .logo img {
+    max-height: 38px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header .logo img {
+    max-height: 32px !important;
+  }
 }
 
 /* ==========================================================================
