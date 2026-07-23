@@ -2172,7 +2172,18 @@ p {
 .popular-card-price {
   font-size: 0.88rem;
   color: var(--color-secondary);
-  font-weight: 500;
+  font-weight: 700;
+}
+
+.popular-card-price ins {
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+.popular-card-price del {
+  font-weight: 400 !important;
+  color: #8E8E93 !important;
+  margin-right: 6px;
 }
 
 .popular-swatches {
