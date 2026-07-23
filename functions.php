@@ -1311,3 +1311,13 @@ function great_wall_render_faq_tab_content() {
 	</div>
 	<?php
 }
+
+/**
+ * Add "Free Shipping and Fixing" badge under the product price on single product pages.
+ */
+add_action( 'woocommerce_single_product_summary', 'great_wall_add_free_shipping_fixing_badge', 15 );
+function great_wall_add_free_shipping_fixing_badge() {
+	echo '<div class="free-shipping-fixing-badge-wrapper">';
+	echo '<div class="free-shipping-fixing-badge">' . esc_html__( 'Free Shipping and Fixing', 'great-wall-theme' ) . '</div>';
+	echo '</div>';
+}
