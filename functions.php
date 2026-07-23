@@ -1327,8 +1327,8 @@ function great_wall_add_free_shipping_fixing_badge() {
  */
 add_action( 'woocommerce_after_shop_loop_item', 'great_wall_add_free_shipping_loop_badge', 15 );
 function great_wall_add_free_shipping_loop_badge() {
-	echo '<div class="card-free-shipping-badge">';
+	echo '<div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">';
 	echo '<i class="ri-truck-fill"></i>';
-	echo '<span>' . esc_html__( 'Free shipping', 'great-wall-theme' ) . '</span>';
+	echo '<span>' . esc_html__( 'Free Shipping and Fixing', 'great-wall-theme' ) . '</span>';
 	echo '</div>';
 }

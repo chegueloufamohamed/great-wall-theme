@@ -209,9 +209,9 @@ if ( ! empty( $collections ) ) : ?>
 								<div class="product-meta">
 									<div class="product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
 								</div>
-								<div class="card-free-shipping-badge">
+								<div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
 									<i class="ri-truck-fill"></i>
-									<span><?php esc_html_e( 'Free shipping', 'great-wall-theme' ); ?></span>
+									<span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
 								</div>
 							</div>
 						</div>
