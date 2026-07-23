@@ -448,6 +448,174 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
+       CURATED SHOWROOM EXPERIENCE SECTION (Second asymmetric promo grid with header)
+       ========================================================================== -->
+  <section class="section promo-grid-section bg-light-accent" style="padding-top: 80px; padding-bottom: 80px; background-color: var(--bg-light-accent);">
+    <div class="container">
+      <div class="section-title-wrapper text-center" style="margin-bottom: 50px;" data-scroll>
+        <span class="section-subtitle"><?php esc_html_e( 'Exquisite Spaces', 'great-wall-theme' ); ?></span>
+        <h2 class="section-title"><?php esc_html_e( 'The Curated Showroom Experience', 'great-wall-theme' ); ?></h2>
+        <p class="section-desc" style="max-width: 650px; margin: 15px auto 0; color: var(--color-secondary); font-size: 1rem; line-height: 1.6;">
+          <?php esc_html_e( 'Explore our designer-curated settings, blending minimalist structural integrity with the warm textiles of high-end contemporary living.', 'great-wall-theme' ); ?>
+        </p>
+      </div>
+
+      <div class="promo-grid-layout">
+        
+        <!-- Left large panel: Bespoke Bedroom Sanctuary -->
+        <div class="promo-left-panel" style="background-color: #ECE7E1;" data-scroll>
+          <div class="promo-left-img-wrapper">
+            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="<?php esc_attr_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?>">
+          </div>
+          <div>
+            <h3 class="promo-card-title"><?php esc_html_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?></h3>
+            <p class="promo-card-desc"><?php esc_html_e( 'Indulge in absolute comfort with our premium, bespoke bed frames designed for deep, restorative sleep.', 'great-wall-theme' ); ?></p>
+          </div>
+        </div>
+
+        <!-- Right stacked panel -->
+        <div class="promo-right-panel">
+          
+          <!-- Top row: 2 small squares -->
+          <div class="promo-right-row-1">
+            <!-- Top-left small card -->
+            <div class="promo-right-card-small delay-100" style="background-color: #E3E9EB;" data-scroll>
+              <div class="promo-small-img-wrapper">
+                <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" alt="<?php esc_attr_e( 'Aegean Bouclé Armchair', 'great-wall-theme' ); ?>">
+              </div>
+              <div>
+                <h3 class="promo-card-title" style="font-size: 1.25rem; margin-bottom: 8px;"><?php esc_html_e( 'Aegean Bouclé', 'great-wall-theme' ); ?></h3>
+                <p class="promo-card-desc" style="font-size: 0.82rem;"><?php esc_html_e( 'Add a striking pop of texture and deep sea tone to your living space.', 'great-wall-theme' ); ?></p>
+              </div>
+            </div>
+            <!-- Top-right small card -->
+            <div class="promo-right-card-small delay-200" style="background-color: #F0EAE1;" data-scroll>
+              <div class="promo-small-img-wrapper">
+                <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'table_lamp.webp' ); ?>" alt="<?php esc_attr_e( 'Artisanal Sculptural Lighting', 'great-wall-theme' ); ?>">
+              </div>
+              <div>
+                <h3 class="promo-card-title" style="font-size: 1.25rem; margin-bottom: 8px;"><?php esc_html_e( 'Bespoke Lighting', 'great-wall-theme' ); ?></h3>
+                <p class="promo-card-desc" style="font-size: 0.82rem;"><?php esc_html_e( 'Warm, ambient lighting options to complete your cozy home interior.', 'great-wall-theme' ); ?></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom row: 1 wide rectangle card -->
+          <div class="promo-right-card-wide delay-300" style="background-color: #EAE6DF;" data-scroll>
+            <div class="promo-wide-img-wrapper">
+              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>" alt="<?php esc_attr_e( 'The Lounger Collection', 'great-wall-theme' ); ?>">
+            </div>
+            <div>
+              <h3 class="promo-card-title" style="font-size: 1.35rem; margin-bottom: 8px;"><?php esc_html_e( 'The Lounger Collection', 'great-wall-theme' ); ?></h3>
+              <p class="promo-card-desc" style="font-size: 0.85rem;"><?php esc_html_e( 'Ergonomically crafted statement chairs that balance soft cushioning with minimalist timber frames.', 'great-wall-theme' ); ?></p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MOST POPULAR PRODUCTS (OFFICE CHAIRS) SECTION
+       ========================================================================== -->
+  <section class="section popular-products-section" style="padding-bottom: 0;">
+    <div class="container">
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+        <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Chairs', 'great-wall-theme' ); ?></h2>
+        <?php
+        $chair_cat = get_term_by( 'slug', 'chair', 'product_cat' );
+        $chair_link = $chair_cat ? get_term_link( $chair_cat ) : '#';
+        ?>
+        <a href="<?php echo esc_url( $chair_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+          <span><?php esc_html_e( 'View All Chairs', 'great-wall-theme' ); ?></span>
+          <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
+        </a>
+      </div>
+
+      <div class="grid popular-grid">
+        <?php
+        if ( class_exists( 'WooCommerce' ) ) {
+            global $wpdb;
+            // Get all published product IDs starting with OC- or OC
+            $chair_ids = $wpdb->get_col( "
+                SELECT ID FROM {$wpdb->posts}
+                WHERE post_type = 'product'
+                  AND post_status = 'publish'
+                  AND (post_title LIKE 'OC-%' OR post_title LIKE 'OC %')
+                ORDER BY menu_order ASC, post_title ASC
+            " );
+
+            if ( ! empty( $chair_ids ) ) {
+                $args = array(
+                    'post_type'      => 'product',
+                    'post__in'       => $chair_ids,
+                    'posts_per_page' => 10,
+                    'orderby'        => 'post__in',
+                );
+                $products_query = new WP_Query( $args );
+
+                if ( $products_query->have_posts() ) {
+                    $delay = 100;
+                    while ( $products_query->have_posts() ) {
+                        $products_query->the_post();
+                        $product = wc_get_product( get_the_ID() );
+                        if ( ! $product ) {
+                            continue;
+                        }
+                        $permalink = get_permalink( $product->get_id() );
+                        $title = $product->get_name();
+                        $price_html = $product->get_price_html();
+                        $image_id = $product->get_image_id();
+                        $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
+                        ?>
+                        <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
+                          <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="popular-img-box">
+                              <?php if ( $product->is_featured() ) : ?>
+                                <span class="popular-badge-pill">UNIQUE</span>
+                              <?php endif; ?>
+                              <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+                            </div>
+                            <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                            <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                          </a>
+                          <div class="popular-swatches">
+                            <?php
+                            $colors = $product->get_attribute( 'pa_color' );
+                            if ( $colors ) {
+                                $color_arr = explode( ',', $colors );
+                                foreach ( $color_arr as $c ) {
+                                    $c = trim( $c );
+                                    $hex = '#8E8E93';
+                                    if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                                    elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                    elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                    elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                    elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                    echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                                }
+                            }
+                            ?>
+                          </div>
+                        </div>
+                        <?php
+                        $delay += 100;
+                        if ( $delay > 400 ) {
+                            $delay = 100;
+                        }
+                    }
+                    wp_reset_postdata();
+                }
+            }
+        }
+        ?>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
        RECEPTION LOUNGE SET SPOTLIGHT (RLS-3 Showcase)
        ========================================================================== -->
   <section class="section rls-showcase-section" style="background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 90px 0; overflow: hidden;">
@@ -563,177 +731,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     </div>
   </div>
 
-  <!-- ==========================================================================
-       MOST POPULAR PRODUCTS (OFFICE CHAIRS) SECTION
-       ========================================================================== -->
-  <section class="section popular-products-section" style="padding-bottom: 0;">
-    <div class="container">
-      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
-        <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Products', 'great-wall-theme' ); ?></h2>
-        <?php
-        $chair_cat = get_term_by( 'slug', 'chair', 'product_cat' );
-        $chair_link = $chair_cat ? get_term_link( $chair_cat ) : '#';
-        ?>
-        <a href="<?php echo esc_url( $chair_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
-          <span><?php esc_html_e( 'View All Chairs', 'great-wall-theme' ); ?></span>
-          <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
-        </a>
-      </div>
 
-      <div class="grid popular-grid">
-        <?php
-        if ( class_exists( 'WooCommerce' ) ) {
-            global $wpdb;
-            // Get all published product IDs starting with OC- or OC
-            $chair_ids = $wpdb->get_col( "
-                SELECT ID FROM {$wpdb->posts}
-                WHERE post_type = 'product'
-                  AND post_status = 'publish'
-                  AND (post_title LIKE 'OC-%' OR post_title LIKE 'OC %')
-                ORDER BY menu_order ASC, post_title ASC
-            " );
-
-            if ( ! empty( $chair_ids ) ) {
-                $args = array(
-                    'post_type'      => 'product',
-                    'post__in'       => $chair_ids,
-                    'posts_per_page' => 10,
-                    'orderby'        => 'post__in',
-                );
-                $products_query = new WP_Query( $args );
-
-                if ( $products_query->have_posts() ) {
-                    $delay = 100;
-                    while ( $products_query->have_posts() ) {
-                        $products_query->the_post();
-                        $product = wc_get_product( get_the_ID() );
-                        if ( ! $product ) {
-                            continue;
-                        }
-                        $permalink = get_permalink( $product->get_id() );
-                        $title = $product->get_name();
-                        $price_html = $product->get_price_html();
-                        $image_id = $product->get_image_id();
-                        $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
-                        ?>
-                        <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
-                          <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
-                            <div class="popular-img-box">
-                              <?php if ( $product->is_featured() ) : ?>
-                                <span class="popular-badge-pill">UNIQUE</span>
-                              <?php endif; ?>
-                              <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
-                            </div>
-                            <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
-                            <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
-                          </a>
-                          <div class="popular-swatches">
-                            <?php
-                            $colors = $product->get_attribute( 'pa_color' );
-                            if ( $colors ) {
-                                $color_arr = explode( ',', $colors );
-                                foreach ( $color_arr as $c ) {
-                                    $c = trim( $c );
-                                    $hex = '#8E8E93';
-                                    if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
-                                    elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
-                                    elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
-                                    elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
-                                    elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
-                                    echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
-                                }
-                            }
-                            ?>
-                          </div>
-                        </div>
-                        <?php
-                        $delay += 100;
-                        if ( $delay > 400 ) {
-                            $delay = 100;
-                        }
-                    }
-                    wp_reset_postdata();
-                }
-            }
-        }
-        ?>
-      </div>
-    </div>
-  </section>
-
-
-
-
-
-  <!-- ==========================================================================
-       CURATED SHOWROOM EXPERIENCE SECTION (Second asymmetric promo grid with header)
-       ========================================================================== -->
-  <section class="section promo-grid-section bg-light-accent" style="padding-top: 80px; padding-bottom: 80px; background-color: var(--bg-light-accent);">
-    <div class="container">
-      <div class="section-title-wrapper text-center" style="margin-bottom: 50px;" data-scroll>
-        <span class="section-subtitle"><?php esc_html_e( 'Exquisite Spaces', 'great-wall-theme' ); ?></span>
-        <h2 class="section-title"><?php esc_html_e( 'The Curated Showroom Experience', 'great-wall-theme' ); ?></h2>
-        <p class="section-desc" style="max-width: 650px; margin: 15px auto 0; color: var(--color-secondary); font-size: 1rem; line-height: 1.6;">
-          <?php esc_html_e( 'Explore our designer-curated settings, blending minimalist structural integrity with the warm textiles of high-end contemporary living.', 'great-wall-theme' ); ?>
-        </p>
-      </div>
-
-      <div class="promo-grid-layout">
-        
-        <!-- Left large panel: Bespoke Bedroom Sanctuary -->
-        <div class="promo-left-panel" style="background-color: #ECE7E1;" data-scroll>
-          <div class="promo-left-img-wrapper">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="<?php esc_attr_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?>">
-          </div>
-          <div>
-            <h3 class="promo-card-title"><?php esc_html_e( 'Bespoke Bedroom Sanctuary', 'great-wall-theme' ); ?></h3>
-            <p class="promo-card-desc"><?php esc_html_e( 'Indulge in absolute comfort with our premium, bespoke bed frames designed for deep, restorative sleep.', 'great-wall-theme' ); ?></p>
-          </div>
-        </div>
-
-        <!-- Right stacked panel -->
-        <div class="promo-right-panel">
-          
-          <!-- Top row: 2 small squares -->
-          <div class="promo-right-row-1">
-            <!-- Top-left small card -->
-            <div class="promo-right-card-small delay-100" style="background-color: #E3E9EB;" data-scroll>
-              <div class="promo-small-img-wrapper">
-                <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'blue_chair_isolated.webp' ); ?>" alt="<?php esc_attr_e( 'Aegean Bouclé Armchair', 'great-wall-theme' ); ?>">
-              </div>
-              <div>
-                <h3 class="promo-card-title" style="font-size: 1.25rem; margin-bottom: 8px;"><?php esc_html_e( 'Aegean Bouclé', 'great-wall-theme' ); ?></h3>
-                <p class="promo-card-desc" style="font-size: 0.82rem;"><?php esc_html_e( 'Add a striking pop of texture and deep sea tone to your living space.', 'great-wall-theme' ); ?></p>
-              </div>
-            </div>
-            <!-- Top-right small card -->
-            <div class="promo-right-card-small delay-200" style="background-color: #F0EAE1;" data-scroll>
-              <div class="promo-small-img-wrapper">
-                <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'table_lamp.webp' ); ?>" alt="<?php esc_attr_e( 'Artisanal Sculptural Lighting', 'great-wall-theme' ); ?>">
-              </div>
-              <div>
-                <h3 class="promo-card-title" style="font-size: 1.25rem; margin-bottom: 8px;"><?php esc_html_e( 'Bespoke Lighting', 'great-wall-theme' ); ?></h3>
-                <p class="promo-card-desc" style="font-size: 0.82rem;"><?php esc_html_e( 'Warm, ambient lighting options to complete your cozy home interior.', 'great-wall-theme' ); ?></p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom row: 1 wide rectangle card -->
-          <div class="promo-right-card-wide delay-300" style="background-color: #EAE6DF;" data-scroll>
-            <div class="promo-wide-img-wrapper">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'cushion_chair.webp' ); ?>" alt="<?php esc_attr_e( 'The Lounger Collection', 'great-wall-theme' ); ?>">
-            </div>
-            <div>
-              <h3 class="promo-card-title" style="font-size: 1.35rem; margin-bottom: 8px;"><?php esc_html_e( 'The Lounger Collection', 'great-wall-theme' ); ?></h3>
-              <p class="promo-card-desc" style="font-size: 0.85rem;"><?php esc_html_e( 'Ergonomically crafted statement chairs that balance soft cushioning with minimalist timber frames.', 'great-wall-theme' ); ?></p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
 
     </div>
   </section>
