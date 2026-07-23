@@ -1321,3 +1321,14 @@ function great_wall_add_free_shipping_fixing_badge() {
 	echo '<div class="free-shipping-fixing-badge">' . esc_html__( 'Free Shipping and Fixing', 'great-wall-theme' ) . '</div>';
 	echo '</div>';
 }
+
+/**
+ * Add "Free shipping" badge inside product loop cards.
+ */
+add_action( 'woocommerce_after_shop_loop_item', 'great_wall_add_free_shipping_loop_badge', 15 );
+function great_wall_add_free_shipping_loop_badge() {
+	echo '<div class="card-free-shipping-badge">';
+	echo '<i class="ri-truck-fill"></i>';
+	echo '<span>' . esc_html__( 'Free shipping', 'great-wall-theme' ) . '</span>';
+	echo '</div>';
+}

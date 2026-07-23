@@ -8758,3 +8758,31 @@ ul.products li.product .price del,
     height: 220px !important; /* Aspect-ratio optimization for narrower desktop columns */
   }
 }
+
+/* ==========================================================================
+   PRODUCT CARD FREE SHIPPING BADGE
+   ========================================================================== */
+.card-free-shipping-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background-color: #e2f3e1 !important; /* Light mint background */
+  color: #206d25 !important; /* Dark green text */
+  font-family: var(--font-sans, sans-serif) !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border-radius: 50px !important;
+  margin-top: 10px !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  width: fit-content !important;
+  letter-spacing: 0.01em !important;
+}
+
+.card-free-shipping-badge i {
+  color: #206d25 !important;
+  font-size: 0.88rem !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}

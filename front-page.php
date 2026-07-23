@@ -430,6 +430,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                         }
                         ?>
                       </div>
+                      <div class="card-free-shipping-badge">
+                        <i class="ri-truck-fill"></i>
+                        <span><?php esc_html_e( 'Free shipping', 'great-wall-theme' ); ?></span>
+                      </div>
                     </div>
                     <?php
                     $delay += 100;
@@ -598,6 +602,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                                 }
                             }
                             ?>
+                          </div>
+                          <div class="card-free-shipping-badge">
+                            <i class="ri-truck-fill"></i>
+                            <span><?php esc_html_e( 'Free shipping', 'great-wall-theme' ); ?></span>
                           </div>
                         </div>
                         <?php

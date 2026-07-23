@@ -209,6 +209,10 @@ if ( ! empty( $collections ) ) : ?>
 								<div class="product-meta">
 									<div class="product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
 								</div>
+								<div class="card-free-shipping-badge">
+									<i class="ri-truck-fill"></i>
+									<span><?php esc_html_e( 'Free shipping', 'great-wall-theme' ); ?></span>
+								</div>
 							</div>
 						</div>
 					<?php endwhile; wp_reset_postdata(); ?>
