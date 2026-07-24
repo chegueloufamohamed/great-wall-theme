@@ -1168,7 +1168,7 @@ function initSidebarCategoryAccordion() {
  * Sidebar Categories Pill Hover Wrappers
  */
 function initSidebarCategoryPills() {
-  const categoryLinks = document.querySelectorAll('.shop-sidebar .filter-list li a');
+  const categoryLinks = document.querySelectorAll('.shop-sidebar .filter-list:not(.categories-list) li a');
   categoryLinks.forEach(link => {
     if (link.querySelector('.nav-text-original')) return;
     const innerHTML = link.innerHTML;
