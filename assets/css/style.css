@@ -6683,45 +6683,73 @@ ul.products.list-view-active li.product .product-loop-actions {
   font-weight: 700 !important;
 }
 
-/* Trust Badges Row */
-.product-trust-badges-row {
+/* Trust Badges Row (New Layout with Circular Icons and Dividers) */
+.product-trust-badges-row-new {
   display: flex !important;
-  gap: 20px !important;
-  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 1.5rem !important;
   border-top: 1px solid var(--border-color, #e5e0d8) !important;
   padding-top: 1.5rem !important;
   margin-top: 1.5rem !important;
+  flex-wrap: nowrap !important;
 }
 
-.trust-badge-item {
+.trust-badge-item-new {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  font-size: 13px !important;
-  color: var(--color-secondary, #777) !important;
-  font-weight: 500 !important;
+  gap: 12px !important;
 }
 
-.trust-badge-item i {
-  font-size: 18px !important;
-  color: var(--color-accent, #c5a880) !important;
+.trust-badge-circle {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background-color: #f2f2f2 !important; /* Soft grey background circle */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.trust-badge-circle i {
+  font-size: 1.15rem !important;
+  color: #333333 !important; /* Dark grey icon outline */
+}
+
+.trust-badge-label {
+  font-family: var(--font-sans, sans-serif) !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  color: #4a4641 !important;
+  line-height: 1.3 !important;
+  text-align: left !important;
+}
+
+/* Vertical divider line */
+.trust-badge-divider {
+  width: 1px !important;
+  height: 32px !important;
+  background-color: #e5e0d8 !important; /* Matches theme border color */
+  flex-shrink: 0 !important;
 }
 
 @media (max-width: 768px) {
-  .product-trust-badges-row {
-    flex-wrap: nowrap !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
+  .product-trust-badges-row-new {
+    gap: 0.6rem !important;
   }
   
-  .trust-badge-item {
-    font-size: 10.5px !important;
-    gap: 4px !important;
-    white-space: nowrap !important;
+  .trust-badge-circle {
+    width: 36px !important;
+    height: 36px !important;
   }
   
-  .trust-badge-item i {
-    font-size: 14px !important;
+  .trust-badge-circle i {
+    font-size: 0.95rem !important;
+  }
+  
+  .trust-badge-label {
+    font-size: 0.72rem !important;
   }
 }
 

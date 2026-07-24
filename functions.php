@@ -844,18 +844,30 @@ function great_wall_render_bnpl_tabs() {
 add_action( 'woocommerce_single_product_summary', 'great_wall_render_trust_badges', 35 );
 function great_wall_render_trust_badges() {
     ?>
-    <div class="product-trust-badges-row">
-        <div class="trust-badge-item">
-            <i class="ri-truck-line"></i>
-            <span><?php esc_html_e( 'Free UAE delivery', 'great-wall-theme' ); ?></span>
+    <div class="product-trust-badges-row-new">
+        <div class="trust-badge-item-new">
+            <div class="trust-badge-circle">
+                <i class="ri-shield-check-line"></i>
+            </div>
+            <span class="trust-badge-label"><?php echo wp_kses_post( __( 'Secured<br>payments', 'great-wall-theme' ) ); ?></span>
         </div>
-        <div class="trust-badge-item">
-            <i class="ri-refresh-line"></i>
-            <span><?php esc_html_e( '14-day returns', 'great-wall-theme' ); ?></span>
+        
+        <div class="trust-badge-divider"></div>
+        
+        <div class="trust-badge-item-new">
+            <div class="trust-badge-circle">
+                <i class="ri-lock-line"></i>
+            </div>
+            <span class="trust-badge-label"><?php echo wp_kses_post( __( 'Privacy<br>protection', 'great-wall-theme' ) ); ?></span>
         </div>
-        <div class="trust-badge-item">
-            <i class="ri-shield-check-line"></i>
-            <span><?php esc_html_e( '2-year warranty', 'great-wall-theme' ); ?></span>
+        
+        <div class="trust-badge-divider"></div>
+        
+        <div class="trust-badge-item-new">
+            <div class="trust-badge-circle">
+                <i class="ri-verified-badge-line"></i>
+            </div>
+            <span class="trust-badge-label"><?php echo wp_kses_post( __( 'Quality<br>guaranteed', 'great-wall-theme' ) ); ?></span>
         </div>
     </div>
     <?php
