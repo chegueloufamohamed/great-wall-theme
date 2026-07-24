@@ -8883,3 +8883,96 @@ ul.products li.product .price del,
     font-size: 0.76rem !important;
   }
 }
+
+/* ==========================================================================
+   CHECKBOX CATEGORY FILTERS
+   ========================================================================== */
+.categories-list li a.category-filter-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  font-family: var(--font-sans, sans-serif) !important;
+  font-size: 0.88rem !important;
+  color: #4a4641 !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  padding: 4px 0 !important;
+  border-radius: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  transition: color 0.2s ease !important;
+  width: auto !important;
+}
+
+.categories-list li a.category-filter-link:hover {
+  color: #007aff !important; /* Premium macOS/iOS blue on hover */
+}
+
+/* iOS/macOS styled checkbox */
+.category-checkbox {
+  width: 18px !important;
+  height: 18px !important;
+  border: 1.5px solid #a19a90 !important; /* Muted brown border */
+  border-radius: 4px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  background-color: #FFFFFF !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+}
+
+.category-checkbox.checked {
+  background-color: #007aff !important; /* Solid blue active background */
+  border-color: #007aff !important;
+}
+
+/* Checkmark graphic inside solid blue checkbox */
+.category-checkbox.checked::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 5px !important;
+  top: 2px !important;
+  width: 5px !important;
+  height: 9px !important;
+  border: solid #FFFFFF !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Active Category item overrides */
+.categories-list li.active > a.category-filter-link,
+.categories-list li.active > .parent-link-row > a.category-filter-link,
+.categories-list li.active-parent > .parent-link-row > a.category-filter-link {
+  font-weight: 700 !important;
+  color: #0C0C0C !important;
+}
+
+/* Text and count elements */
+.category-name {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+.category-count {
+  color: #8c8476 !important;
+  font-size: 0.85rem !important;
+  margin-left: 2px !important;
+  font-weight: 400 !important;
+}
+
+/* Override and disable general slide-up hover text animation for category lists */
+.categories-list li a.category-filter-link::before,
+.categories-list li a.category-filter-link::after,
+.categories-list li a.category-filter-link .nav-text-original,
+.categories-list li a.category-filter-link .nav-text-hover {
+  display: none !important;
+}
+
+/* Subcategories list padding alignment */
+.categories-list .sub-list {
+  padding-left: 28px !important; /* Indent subcategories to line up under parent names */
+}

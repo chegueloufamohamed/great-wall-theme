@@ -23,8 +23,16 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 	<div class="filter-widget widget_categories">
 		<h3 class="filter-widget-title"><?php esc_html_e( 'CATEGORIES', 'great-wall-theme' ); ?></h3>
 		<ul class="filter-list categories-list">
-			<li class="<?php echo ( ! is_product_category() && ! isset( $_GET['cat'] ) ) ? 'active' : ''; ?>">
-				<a href="<?php echo esc_url( $shop_page_url ); ?>"><?php esc_html_e( 'All Products', 'great-wall-theme' ); ?></a>
+			<?php
+			$is_all_active = ( ! is_product_category() && ! isset( $_GET['cat'] ) );
+			$total_products = wp_count_posts( 'product' )->publish;
+			?>
+			<li class="<?php echo $is_all_active ? 'active' : ''; ?>">
+				<a href="<?php echo esc_url( $shop_page_url ); ?>" class="category-filter-link">
+					<span class="category-checkbox <?php echo $is_all_active ? 'checked' : ''; ?>"></span>
+					<span class="category-name"><?php esc_html_e( 'All Products', 'great-wall-theme' ); ?></span>
+					<span class="category-count">(<?php echo intval( $total_products ); ?>)</span>
+				</a>
 			</li>
 			<?php
 			$categories = get_terms( array(
@@ -87,7 +95,11 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 					
 					echo '<li class="' . esc_attr( $li_class ) . '">';
 					echo '<div class="parent-link-row">';
-					echo '<a href="' . esc_url( get_term_link( $cat ) ) . '">' . esc_html( $cat->name ) . '</a>';
+					echo '<a href="' . esc_url( get_term_link( $cat ) ) . '" class="category-filter-link">';
+					echo '<span class="category-checkbox ' . ( $is_parent_active ? 'checked' : '' ) . '"></span>';
+					echo '<span class="category-name">' . esc_html( $cat->name ) . '</span>';
+					echo '<span class="category-count">(' . intval( $cat->count ) . ')</span>';
+					echo '</a>';
 					if ( $has_sub ) {
 						$toggle_icon = ( $is_parent_active || $is_child_active ) ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line';
 						echo '<span class="sub-toggle"><i class="' . esc_attr( $toggle_icon ) . '"></i></span>';
@@ -101,7 +113,11 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 							$is_sub_active = is_product_category( $sub->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $sub->slug );
 							$sub_class = $is_sub_active ? 'active' : '';
 							echo '<li class="' . esc_attr( $sub_class ) . '">';
-							echo '<a href="' . esc_url( get_term_link( $sub ) ) . '">' . esc_html( $sub->name ) . '</a>';
+							echo '<a href="' . esc_url( get_term_link( $sub ) ) . '" class="category-filter-link">';
+							echo '<span class="category-checkbox ' . ( $is_sub_active ? 'checked' : '' ) . '"></span>';
+							echo '<span class="category-name">' . esc_html( $sub->name ) . '</span>';
+							echo '<span class="category-count">(' . intval( $sub->count ) . ')</span>';
+							echo '</a>';
 							echo '</li>';
 						}
 						echo '</ul>';
@@ -129,7 +145,11 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 					$is_active = ( isset( $_GET['cat'] ) && $_GET['cat'] === $mc['slug'] );
 					$active_class = $is_active ? 'active' : '';
 					echo '<li class="' . esc_attr( $active_class ) . '">';
-					echo '<a href="' . esc_url( add_query_arg( 'cat', $mc['slug'], $shop_page_url ) ) . '">' . esc_html( $mc['name'] ) . '</a>';
+					echo '<a href="' . esc_url( add_query_arg( 'cat', $mc['slug'], $shop_page_url ) ) . '" class="category-filter-link">';
+					echo '<span class="category-checkbox ' . ( $is_active ? 'checked' : '' ) . '"></span>';
+					echo '<span class="category-name">' . esc_html( $mc['name'] ) . '</span>';
+					echo '<span class="category-count">(5)</span>';
+					echo '</a>';
 					echo '</li>';
 				}
 			}
