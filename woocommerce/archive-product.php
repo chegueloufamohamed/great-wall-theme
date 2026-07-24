@@ -35,7 +35,69 @@ do_action( 'woocommerce_before_main_content' );
 		$queried_obj = get_queried_object();
 		$is_parent_chair = ( is_product_category() && isset( $queried_obj->slug ) && ( 'chair' === $queried_obj->slug || 'chairs' === $queried_obj->slug ) );
 
-		if ( $is_parent_chair ) {
+		// Parse selected categories from URL parameter or query object
+		$selected_cat_slugs = array();
+		if ( is_product_category() ) {
+			if ( isset( $queried_obj->slug ) ) {
+				$selected_cat_slugs[] = $queried_obj->slug;
+			}
+		}
+		if ( isset( $_GET['cat'] ) ) {
+			$url_cats = explode( ',', sanitize_text_field( $_GET['cat'] ) );
+			foreach ( $url_cats as $uc ) {
+				$uc = trim( $uc );
+				if ( ! empty( $uc ) && ! in_array( $uc, $selected_cat_slugs ) ) {
+					$selected_cat_slugs[] = $uc;
+				}
+			}
+		}
+
+		if ( ! empty( $selected_cat_slugs ) ) {
+			// Render selected categories as individual scrollable sections
+			foreach ( $selected_cat_slugs as $cat_slug ) {
+				$term = get_term_by( 'slug', $cat_slug, 'product_cat' );
+				if ( ! $term ) {
+					continue;
+				}
+
+				echo '<div class="category-scroll-section" style="margin-bottom: 60px;">';
+				echo '<h2 class="subcategory-title" style="font-family: \'Cormorant Garamond\', serif; font-size: 2.4rem; font-weight: 500; border-bottom: 1px solid #e5e0d8; padding-bottom: 16px; margin-bottom: 24px; color: #2e2a25; text-transform: capitalize;">' . esc_html( $term->name ) . '</h2>';
+
+				// Product Query for this category
+				$args = array(
+					'post_type'      => 'product',
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
+					'tax_query'      => array(
+						array(
+							'taxonomy' => 'product_cat',
+							'field'    => 'slug',
+							'terms'    => $cat_slug,
+						),
+					),
+				);
+
+				$cat_query = new WP_Query( $args );
+
+				if ( $cat_query->have_posts() ) {
+					woocommerce_product_loop_start();
+
+					while ( $cat_query->have_posts() ) {
+						$cat_query->the_post();
+
+						do_action( 'woocommerce_shop_loop' );
+						wc_get_template_part( 'content', 'product' );
+					}
+
+					wp_reset_postdata();
+					woocommerce_product_loop_end();
+				} else {
+					echo '<p style="font-family: \'Plus Jakarta Sans\', sans-serif; color: #76726c; font-style: italic;">No products found in this section.</p>';
+				}
+
+				echo '</div>';
+			}
+		} elseif ( $is_parent_chair ) {
 			// Render subcategories separately: Office Chairs then Commercial Chairs
 			$children = get_terms( array(
 				'taxonomy'   => 'product_cat',

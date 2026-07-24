@@ -15,6 +15,42 @@ $active_tag = isset( $_GET['product_tag'] ) ? sanitize_text_field( $_GET['produc
 $active_brand = isset( $_GET['filter_brand'] ) ? sanitize_text_field( $_GET['filter_brand'] ) : '';
 
 $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_page_id( 'shop' ) ) : home_url( '/shop/' );
+
+// Parse active category slugs from URL query parameter or database terms
+$current_cats = array();
+if ( is_product_category() ) {
+	$queried_obj = get_queried_object();
+	if ( isset( $queried_obj->slug ) ) {
+		$current_cats[] = $queried_obj->slug;
+	}
+}
+if ( isset( $_GET['cat'] ) ) {
+	$url_cats = explode( ',', sanitize_text_field( $_GET['cat'] ) );
+	foreach ( $url_cats as $uc ) {
+		$uc = trim( $uc );
+		if ( ! empty( $uc ) && ! in_array( $uc, $current_cats ) ) {
+			$current_cats[] = $uc;
+		}
+	}
+}
+
+// Helper to generate multiple categories toggle URL
+if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
+	function great_wall_get_toggle_cat_url( $slug, $current_cats, $shop_page_url ) {
+		$temp_cats = $current_cats;
+		if ( in_array( $slug, $temp_cats ) ) {
+			$temp_cats = array_diff( $temp_cats, array( $slug ) );
+		} else {
+			$temp_cats[] = $slug;
+		}
+		
+		if ( empty( $temp_cats ) ) {
+			return remove_query_arg( 'cat', $shop_page_url );
+		} else {
+			return add_query_arg( 'cat', implode( ',', $temp_cats ), $shop_page_url );
+		}
+	}
+}
 ?>
 
 <div class="shop-filters-container">
@@ -72,12 +108,12 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 					}
 					
 					// Determine if the parent or any child is active
-					$is_parent_active = is_product_category( $cat->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $cat->slug );
+					$is_parent_active = in_array( $cat->slug, $current_cats );
 					
 					$is_child_active = false;
 					if ( $has_sub ) {
 						foreach ( $sub_cats as $sub ) {
-							if ( is_product_category( $sub->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $sub->slug ) ) {
+							if ( in_array( $sub->slug, $current_cats ) ) {
 								$is_child_active = true;
 								break;
 							}
@@ -95,7 +131,8 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 					
 					echo '<li class="' . esc_attr( $li_class ) . '">';
 					echo '<div class="parent-link-row">';
-					echo '<a href="' . esc_url( get_term_link( $cat ) ) . '" class="category-filter-link">';
+					$parent_toggle_url = great_wall_get_toggle_cat_url( $cat->slug, $current_cats, $shop_page_url );
+					echo '<a href="' . esc_url( $parent_toggle_url ) . '" class="category-filter-link">';
 					echo '<span class="category-checkbox ' . ( $is_parent_active ? 'checked' : '' ) . '"></span>';
 					echo '<span class="category-name">' . esc_html( $cat->name ) . '</span>';
 					echo '<span class="category-count">(' . intval( $cat->count ) . ')</span>';
@@ -110,10 +147,11 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 						$style = ( $is_parent_active || $is_child_active ) ? 'display: block;' : 'display: none;';
 						echo '<ul class="sub-list" style="' . $style . '">';
 						foreach ( $sub_cats as $sub ) {
-							$is_sub_active = is_product_category( $sub->slug ) || ( isset( $_GET['cat'] ) && $_GET['cat'] === $sub->slug );
+							$is_sub_active = in_array( $sub->slug, $current_cats );
 							$sub_class = $is_sub_active ? 'active' : '';
 							echo '<li class="' . esc_attr( $sub_class ) . '">';
-							echo '<a href="' . esc_url( get_term_link( $sub ) ) . '" class="category-filter-link">';
+							$sub_toggle_url = great_wall_get_toggle_cat_url( $sub->slug, $current_cats, $shop_page_url );
+							echo '<a href="' . esc_url( $sub_toggle_url ) . '" class="category-filter-link">';
 							echo '<span class="category-checkbox ' . ( $is_sub_active ? 'checked' : '' ) . '"></span>';
 							echo '<span class="category-name">' . esc_html( $sub->name ) . '</span>';
 							echo '<span class="category-count">(' . intval( $sub->count ) . ')</span>';
@@ -142,10 +180,11 @@ $shop_page_url = function_exists( 'wc_get_page_id' ) ? get_permalink( wc_get_pag
 				);
 
 				foreach ( $mock_cats as $mc ) {
-					$is_active = ( isset( $_GET['cat'] ) && $_GET['cat'] === $mc['slug'] );
+					$is_active = in_array( $mc['slug'], $current_cats );
 					$active_class = $is_active ? 'active' : '';
 					echo '<li class="' . esc_attr( $active_class ) . '">';
-					echo '<a href="' . esc_url( add_query_arg( 'cat', $mc['slug'], $shop_page_url ) ) . '" class="category-filter-link">';
+					$mc_toggle_url = great_wall_get_toggle_cat_url( $mc['slug'], $current_cats, $shop_page_url );
+					echo '<a href="' . esc_url( $mc_toggle_url ) . '" class="category-filter-link">';
 					echo '<span class="category-checkbox ' . ( $is_active ? 'checked' : '' ) . '"></span>';
 					echo '<span class="category-name">' . esc_html( $mc['name'] ) . '</span>';
 					echo '<span class="category-count">(5)</span>';
