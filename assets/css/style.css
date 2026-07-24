@@ -8147,6 +8147,11 @@ ul.products.list-view-active li.product .product-loop-actions {
   animation: heartBeat 0.35s ease;
 }
 
+.single-wishlist-btn .wishlist-icon {
+  font-size: 1.35rem !important; /* Make heart icon a bit bigger inside the 44px circle */
+  display: block !important;
+}
+
 @keyframes heartBeat {
   0% { transform: scale(1); }
   50% { transform: scale(1.3); }
