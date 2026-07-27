@@ -71,104 +71,112 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 				</a>
 			</li>
 			<?php
-			$categories = get_terms( array(
+			// 1. Get all root-level category terms
+			$all_root_categories = get_terms( array(
 				'taxonomy'   => 'product_cat',
 				'hide_empty' => false,
 				'parent'     => 0,
 			) );
 
-			if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
-				usort( $categories, function( $a, $b ) {
-					$a_name = strtolower( $a->name );
-					$b_name = strtolower( $b->name );
-					$is_office_a = ( strpos( $a_name, 'office furniture' ) !== false || $a->slug === 'office-furniture' );
-					$is_office_b = ( strpos( $b_name, 'office furniture' ) !== false || $b->slug === 'office-furniture' );
-					if ( $is_office_a && ! $is_office_b ) {
-						return -1;
+			// 2. Build custom root list: exclude 'chairs' and 'office-storage' (to manually nest them under Office Furniture)
+			$categories = array();
+			$office_furniture_term = null;
+
+			if ( ! is_wp_error( $all_root_categories ) && ! empty( $all_root_categories ) ) {
+				foreach ( $all_root_categories as $rc ) {
+					if ( 'uncategorized' === $rc->slug ) {
+						continue;
 					}
-					if ( ! $is_office_a && $is_office_b ) {
-						return 1;
+					if ( 'chairs' === $rc->slug || 'office-storage' === $rc->slug ) {
+						continue; // Hide from root list, we manually nest them under Office Furniture
 					}
-					return strcmp( $a_name, $b_name );
-				} );
+					if ( 'office-furniture' === $rc->slug ) {
+						$office_furniture_term = $rc;
+						continue;
+					}
+					$categories[] = $rc;
+				}
+			}
+
+			// Sort other root categories alphabetically by default
+			usort( $categories, function( $a, $b ) {
+				return strcmp( strtolower( $a->name ), strtolower( $b->name ) );
+			} );
+
+			// Place Office Furniture at the very beginning of the root list
+			if ( $office_furniture_term ) {
+				array_unshift( $categories, $office_furniture_term );
 			}
 
 			$has_categories = false;
 			if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
 				foreach ( $categories as $cat ) {
-					if ( 'uncategorized' === $cat->slug ) {
-						continue;
-					}
 					$has_categories = true;
-					
-					// Get subcategories of this parent category dynamically
-					$sub_cats = get_terms( array(
-						'taxonomy'   => 'product_cat',
-						'hide_empty' => false,
-						'parent'     => $cat->term_id,
-					) );
-					
-					$has_sub = ( ! is_wp_error( $sub_cats ) && ! empty( $sub_cats ) );
-					if ( $has_sub ) {
-						$cat_slug_lower = strtolower( $cat->slug );
-						$cat_name_lower = strtolower( $cat->name );
-						if ( 'office-furniture' === $cat_slug_lower || strpos( $cat_name_lower, 'office furniture' ) !== false ) {
-							$order_sub = array(
-								'desks'           => 1,
-								'chairs'          => 2,
-								'storage-cabinet' => 3,
-								'drawer-cabinet'  => 4,
-								'sofa'            => 5
-							);
-							usort( $sub_cats, function( $a, $b ) use ( $order_sub ) {
-								$rank_a = 99;
-								$rank_b = 99;
-								foreach ( $order_sub as $slug_key => $rank ) {
-									if ( stripos( $a->slug, $slug_key ) !== false || stripos( $a->name, $slug_key ) !== false ) {
-										$rank_a = $rank;
-										break;
-									}
-								}
-								foreach ( $order_sub as $slug_key => $rank ) {
-									if ( stripos( $b->slug, $slug_key ) !== false || stripos( $b->name, $slug_key ) !== false ) {
-										$rank_b = $rank;
-										break;
-									}
-								}
-								if ( $rank_a === $rank_b ) {
-									return strcmp( strtolower( $a->name ), strtolower( $b->name ) );
-								}
-								return $rank_a - $rank_b;
-							} );
-						} else {
+					$is_office_furniture = ( 'office-furniture' === $cat->slug );
+
+					// Get subcategories of this parent category dynamically or manually
+					if ( $is_office_furniture ) {
+						// Retrieve the 5 subcategories manually in the exact order requested
+						$sub_slugs_ordered = array( 'desks', 'chairs', 'storage-cabinet', 'sofa', 'drawer-cabinet' );
+						$sub_cats = array();
+						foreach ( $sub_slugs_ordered as $slug ) {
+							$term = get_term_by( 'slug', $slug, 'product_cat' );
+							if ( $term && ! is_wp_error( $term ) ) {
+								$sub_cats[] = $term;
+							}
+						}
+					} else {
+						// Default parent categories: retrieve child terms from database
+						$sub_cats = get_terms( array(
+							'taxonomy'   => 'product_cat',
+							'hide_empty' => false,
+							'parent'     => $cat->term_id,
+						) );
+						if ( ! is_wp_error( $sub_cats ) && ! empty( $sub_cats ) ) {
 							usort( $sub_cats, function( $a, $b ) {
 								return strcmp( strtolower( $a->name ), strtolower( $b->name ) );
 							} );
 						}
 					}
-					
-					// Determine if the parent or any child is active
+
+					$has_sub = ( ! is_wp_error( $sub_cats ) && ! empty( $sub_cats ) );
+
+					// Determine if parent category or any of its subcategories (or nested sub-subcategories) are active
 					$is_parent_active = in_array( $cat->slug, $current_cats );
-					
 					$is_child_active = false;
+
 					if ( $has_sub ) {
 						foreach ( $sub_cats as $sub ) {
 							if ( in_array( $sub->slug, $current_cats ) ) {
 								$is_child_active = true;
 								break;
 							}
+							// Check nested sub-subcategories
+							$child_cats = get_terms( array(
+								'taxonomy'   => 'product_cat',
+								'hide_empty' => false,
+								'parent'     => $sub->term_id,
+							) );
+							if ( ! is_wp_error( $child_cats ) && ! empty( $child_cats ) ) {
+								foreach ( $child_cats as $cc ) {
+									if ( in_array( $cc->slug, $current_cats ) ) {
+										$is_child_active = true;
+										break 2;
+									}
+								}
+							}
 						}
 					}
-					
+
 					$parent_class = '';
 					if ( $is_parent_active ) {
 						$parent_class = 'active';
 					} elseif ( $is_child_active ) {
 						$parent_class = 'active-parent';
 					}
-					
+
 					$li_class = trim( 'parent-cat-item ' . ( $has_sub ? 'has-children ' : '' ) . $parent_class );
-					
+
 					echo '<li class="' . esc_attr( $li_class ) . '">';
 					echo '<div class="parent-link-row">';
 					$parent_toggle_url = great_wall_get_toggle_cat_url( $cat->slug, $current_cats, $shop_page_url );
@@ -182,20 +190,78 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 						echo '<span class="sub-toggle"><i class="' . esc_attr( $toggle_icon ) . '"></i></span>';
 					}
 					echo '</div>';
-					
+
 					if ( $has_sub ) {
 						$style = ( $is_parent_active || $is_child_active ) ? 'display: block;' : 'display: none;';
 						echo '<ul class="sub-list" style="' . $style . '">';
 						foreach ( $sub_cats as $sub ) {
+							// Check if this subcategory itself has nested children (e.g. Chairs -> Office Chairs, Commercial Chairs)
+							$child_cats = get_terms( array(
+								'taxonomy'   => 'product_cat',
+								'hide_empty' => false,
+								'parent'     => $sub->term_id,
+							) );
+							$has_children = ( ! is_wp_error( $child_cats ) && ! empty( $child_cats ) );
+							
+							if ( $has_children ) {
+								usort( $child_cats, function( $a, $b ) {
+									$is_office_a = ( stripos( $a->slug, 'office' ) !== false || stripos( $a->name, 'office' ) !== false );
+									$is_office_b = ( stripos( $b->slug, 'office' ) !== false || stripos( $b->name, 'office' ) !== false );
+									if ( $is_office_a && ! $is_office_b ) {
+										return -1;
+									}
+									if ( ! $is_office_a && $is_office_b ) {
+										return 1;
+									}
+									return strcmp( $a->name, $b->name );
+								} );
+							}
+
 							$is_sub_active = in_array( $sub->slug, $current_cats );
-							$sub_class = $is_sub_active ? 'active' : '';
-							echo '<li class="' . esc_attr( $sub_class ) . '">';
+							$is_sub_child_active = false;
+							if ( $has_children ) {
+								foreach ( $child_cats as $cc ) {
+									if ( in_array( $cc->slug, $current_cats ) ) {
+										$is_sub_child_active = true;
+										break;
+									}
+								}
+							}
+
+							$sub_li_class = trim( ($is_sub_active ? 'active' : '') . ' ' . ($has_children ? 'has-children ' : '') . ($is_sub_child_active ? 'active-parent' : '') );
+
+							echo '<li class="' . esc_attr( $sub_li_class ) . '">';
+							echo '<div class="parent-link-row">';
 							$sub_toggle_url = great_wall_get_toggle_cat_url( $sub->slug, $current_cats, $shop_page_url );
 							echo '<a href="' . esc_url( $sub_toggle_url ) . '" class="category-filter-link">';
 							echo '<span class="category-checkbox ' . ( $is_sub_active ? 'checked' : '' ) . '"></span>';
 							echo '<span class="category-name">' . esc_html( $sub->name ) . '</span>';
 							echo '<span class="category-count">(' . intval( $sub->count ) . ')</span>';
 							echo '</a>';
+
+							if ( $has_children ) {
+								$sub_toggle_icon = ( $is_sub_active || $is_sub_child_active ) ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line';
+								echo '<span class="sub-toggle"><i class="' . esc_attr( $sub_toggle_icon ) . '"></i></span>';
+							}
+							echo '</div>';
+
+							if ( $has_children ) {
+								$sub_style = ( $is_sub_active || $is_sub_child_active ) ? 'display: block;' : 'display: none;';
+								echo '<ul class="sub-list" style="' . $sub_style . '">';
+								foreach ( $child_cats as $child_cat ) {
+									$is_child_active = in_array( $child_cat->slug, $current_cats );
+									$child_class = $is_child_active ? 'active' : '';
+									echo '<li class="' . esc_attr( $child_class ) . '">';
+									$child_toggle_url = great_wall_get_toggle_cat_url( $child_cat->slug, $current_cats, $shop_page_url );
+									echo '<a href="' . esc_url( $child_toggle_url ) . '" class="category-filter-link">';
+									echo '<span class="category-checkbox ' . ( $is_child_active ? 'checked' : '' ) . '"></span>';
+									echo '<span class="category-name">' . esc_html( $child_cat->name ) . '</span>';
+									echo '<span class="category-count">(' . intval( $child_cat->count ) . ')</span>';
+									echo '</a>';
+									echo '</li>';
+								}
+								echo '</ul>';
+							}
 							echo '</li>';
 						}
 						echo '</ul>';
