@@ -5887,6 +5887,33 @@ wc-order-attribution-inputs,
   box-sizing: border-box !important;
 }
 
+@media (min-width: 992px) {
+  .shop-sidebar {
+    max-height: calc(100vh - 160px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important; /* Prevents scroll chaining to parent window/cards side */
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(0, 0, 0, 0.08) transparent !important;
+  }
+
+  .shop-sidebar::-webkit-scrollbar {
+    width: 4px !important;
+  }
+
+  .shop-sidebar::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  .shop-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    border-radius: 4px !important;
+  }
+
+  .shop-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
 .sidebar-drawer-header {
   display: none !important;
 }
