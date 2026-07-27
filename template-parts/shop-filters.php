@@ -473,6 +473,10 @@ function applyPriceFilter() {
 	currentUrl.searchParams.set('min_price', minVal);
 	currentUrl.searchParams.set('max_price', maxVal);
 	
-	window.location.href = currentUrl.toString();
+	if (typeof loadShopContentAJAX === 'function') {
+		loadShopContentAJAX(currentUrl.toString());
+	} else {
+		window.location.href = currentUrl.toString();
+	}
 }
 </script>

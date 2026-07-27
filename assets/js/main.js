@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initViewModeToggle();
   initShopCategoriesSlider();
   initSidebarCategoryAccordion();
+  initSidebarCategoryAJAX();
   initWooCommerceFeaturedProduct();
   initLoungeScrollDrag();
   initWishlist();
@@ -1174,6 +1175,92 @@ function initSidebarCategoryPills() {
     const innerHTML = link.innerHTML;
     link.innerHTML = `<span class="nav-text-original">${innerHTML}</span><span class="nav-text-hover">${innerHTML}</span>`;
   });
+}
+
+/**
+ * AJAX Category Filter Loading
+ */
+function initSidebarCategoryAJAX() {
+  const filterContainer = document.querySelector('.shop-sidebar');
+  if (!filterContainer) return;
+
+  // Intercept all link clicks inside the sidebar filters
+  filterContainer.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    // Skip accordion expand toggles, other trigger buttons, or external links
+    if (link.classList.contains('sub-toggle') || link.getAttribute('href') === '#' || link.getAttribute('href').startsWith('javascript:')) {
+      return;
+    }
+
+    e.preventDefault();
+    const targetUrl = link.getAttribute('href');
+    if (!targetUrl) return;
+
+    // Perform AJAX load
+    loadShopContentAJAX(targetUrl);
+  });
+}
+
+function loadShopContentAJAX(url) {
+  const shopMain = document.querySelector('.shop-main-content');
+  if (!shopMain) return;
+
+  // Fade out main content slightly for loading indicator feedback
+  shopMain.style.transition = 'opacity 0.2s ease';
+  shopMain.style.opacity = '0.35';
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) throw new Error('Response not ok');
+      return response.text();
+    })
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      // 1. Update Shop main products grid listing content
+      const newContent = doc.querySelector('.shop-main-content');
+      if (newContent) {
+        shopMain.innerHTML = newContent.innerHTML;
+      }
+
+      // 2. Update Sidebar filters list to synchronize checkboxes visual checked states
+      const sidebar = document.querySelector('.shop-sidebar');
+      const newSidebar = doc.querySelector('.shop-sidebar');
+      if (sidebar && newSidebar) {
+        // Find existing scroll position of the sidebar to keep it steady!
+        const scrollPos = sidebar.scrollTop;
+        
+        sidebar.innerHTML = newSidebar.innerHTML;
+        
+        // Restore scroll position so sidebar doesn't jump!
+        sidebar.scrollTop = scrollPos;
+
+        // Re-initialize dynamic accordion event listeners on the newly enjected sidebar elements
+        if (typeof initSidebarCategoryAccordion === 'function') {
+          initSidebarCategoryAccordion();
+        }
+        if (typeof initSidebarCategoryPills === 'function') {
+          initSidebarCategoryPills();
+        }
+      }
+
+      // 3. Update browser address bar and history
+      window.history.pushState({ path: url }, '', url);
+
+      // Restore opacity (fade back in)
+      shopMain.style.opacity = '1';
+
+      // 4. Trigger window resize event to let layout frameworks re-adjust grids/lazyload images
+      window.dispatchEvent(new Event('resize'));
+    })
+    .catch(error => {
+      console.error('AJAX Load error:', error);
+      // Fail-safe fallback: perform standard page redirection
+      window.location.href = url;
+    });
 }
 
 
