@@ -77,6 +77,22 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 				'parent'     => 0,
 			) );
 
+			if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
+				usort( $categories, function( $a, $b ) {
+					$a_name = strtolower( $a->name );
+					$b_name = strtolower( $b->name );
+					$is_office_a = ( strpos( $a_name, 'office furniture' ) !== false || $a->slug === 'office-furniture' );
+					$is_office_b = ( strpos( $b_name, 'office furniture' ) !== false || $b->slug === 'office-furniture' );
+					if ( $is_office_a && ! $is_office_b ) {
+						return -1;
+					}
+					if ( ! $is_office_a && $is_office_b ) {
+						return 1;
+					}
+					return strcmp( $a_name, $b_name );
+				} );
+			}
+
 			$has_categories = false;
 			if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
 				foreach ( $categories as $cat ) {
@@ -94,17 +110,41 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 					
 					$has_sub = ( ! is_wp_error( $sub_cats ) && ! empty( $sub_cats ) );
 					if ( $has_sub ) {
-						usort( $sub_cats, function( $a, $b ) {
-							$is_office_a = ( stripos( $a->slug, 'office' ) !== false || stripos( $a->name, 'office' ) !== false );
-							$is_office_b = ( stripos( $b->slug, 'office' ) !== false || stripos( $b->name, 'office' ) !== false );
-							if ( $is_office_a && ! $is_office_b ) {
-								return -1;
-							}
-							if ( ! $is_office_a && $is_office_b ) {
-								return 1;
-							}
-							return strcmp( $a->name, $b->name );
-						} );
+						$cat_slug_lower = strtolower( $cat->slug );
+						$cat_name_lower = strtolower( $cat->name );
+						if ( 'office-furniture' === $cat_slug_lower || strpos( $cat_name_lower, 'office furniture' ) !== false ) {
+							$order_sub = array(
+								'desks'           => 1,
+								'chairs'          => 2,
+								'storage-cabinet' => 3,
+								'drawer-cabinet'  => 4,
+								'sofa'            => 5
+							);
+							usort( $sub_cats, function( $a, $b ) use ( $order_sub ) {
+								$rank_a = 99;
+								$rank_b = 99;
+								foreach ( $order_sub as $slug_key => $rank ) {
+									if ( stripos( $a->slug, $slug_key ) !== false || stripos( $a->name, $slug_key ) !== false ) {
+										$rank_a = $rank;
+										break;
+									}
+								}
+								foreach ( $order_sub as $slug_key => $rank ) {
+									if ( stripos( $b->slug, $slug_key ) !== false || stripos( $b->name, $slug_key ) !== false ) {
+										$rank_b = $rank;
+										break;
+									}
+								}
+								if ( $rank_a === $rank_b ) {
+									return strcmp( strtolower( $a->name ), strtolower( $b->name ) );
+								}
+								return $rank_a - $rank_b;
+							} );
+						} else {
+							usort( $sub_cats, function( $a, $b ) {
+								return strcmp( strtolower( $a->name ), strtolower( $b->name ) );
+							} );
+						}
 					}
 					
 					// Determine if the parent or any child is active
