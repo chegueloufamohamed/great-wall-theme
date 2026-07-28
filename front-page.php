@@ -939,12 +939,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               <span><?php esc_html_e( 'Buy Now', 'great-wall-theme' ); ?></span>
             </button>
           </div>
-        </div></div>
-        
+        </div>
       </div>
-    </div>
-  </section>
->
     </div>
   </section>
 
