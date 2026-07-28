@@ -851,24 +851,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     </div>
   </section>
 
-  <!-- ==========================================================================
-       SPLIT PROMOTIONAL BLOCK / BANNER
-       ========================================================================== -->
-  <section class="section promo-block" data-scroll>
-    <div class="promo-grid">
-      <div class="promo-content">
-        <span class="section-subtitle" style="color: var(--color-accent-hover);">Bespoke Creations</span>
-        <h2 class="promo-title">Hand-Crafted In Dubai.<br>Designed For Eternity.</h2>
-        <p class="promo-desc">Our dedicated workshop in Ras Al Khor combines ancient carpentry traditions with sharp contemporary shapes. Every piece can be customized by width, veneer type, and upholstery grade to blend seamlessly into your architectural concept.</p>
-        <div>
-          <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn-accent">Request Custom Design</a>
-        </div>
-      </div>
-      <div class="promo-img">
-        <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="Artisanal Furniture Construction Details">
-      </div>
-    </div>
-  </section>
 
   <!-- ==========================================================================
        WHY CHOOSE US / VALUE PROPOSITIONS
