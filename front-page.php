@@ -355,7 +355,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        MOST POPULAR PRODUCTS (OFFICE DESKS) SECTION
        ========================================================================== -->
-  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 0;">
+  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
       <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Desks', 'great-wall-theme' ); ?></h2>
@@ -524,7 +524,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        MOST POPULAR PRODUCTS (OFFICE CHAIRS) SECTION
        ========================================================================== -->
-  <section class="section popular-products-section" style="padding-bottom: 0;">
+  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
       <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Chairs', 'great-wall-theme' ); ?></h2>
@@ -742,7 +742,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        MOST POPULAR SOFA SECTION
        ========================================================================== -->
-  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 0;">
+  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
       <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Sofa', 'great-wall-theme' ); ?></h2>
