@@ -81,6 +81,14 @@ body {
   position: relative;
 }
 
+/* Explicitly strip out any left/right page border frames or section side outlines */
+html, body, #page, .site, #content, .site-content, .section, .rls-showcase-section, .featured-product-section {
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 img {
   max-width: 100%;
   height: auto;
