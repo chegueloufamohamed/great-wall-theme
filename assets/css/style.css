@@ -7753,7 +7753,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 
 .rls-horizontal-scroll::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
-  margin-left: calc((100vw - var(--container-width, 1200px)) / 2);
+  margin-left: calc((100% - var(--container-width, 1200px)) / 2);
   margin-right: 40px;
   border-radius: 10px;
 }
@@ -7766,7 +7766,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 .rls-scroll-inner {
   display: flex;
   gap: 30px;
-  padding-left: max(24px, calc((100vw - 1200px) / 2));
+  padding-left: max(24px, calc((100% - 1200px) / 2));
   padding-right: 40px;
   width: max-content;
 }

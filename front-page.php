@@ -626,7 +626,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        RECEPTION LOUNGE SET SPOTLIGHT (RLS-3 Showcase)
        ========================================================================== -->
-  <section class="section rls-showcase-section" style="background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 90px 0; overflow: hidden;">
+  <section class="section rls-showcase-section" style="width: 100%; margin: 0; box-sizing: border-box; background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 90px 0; overflow: hidden;">
     <div class="container">
       <div class="section-title-wrapper" style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end;" data-scroll>
         <div>
@@ -742,7 +742,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        MOST POPULAR SOFA SECTION
        ========================================================================== -->
-  <section class="section">
+  <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 0;">
     <div class="container">
       <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Sofa', 'great-wall-theme' ); ?></h2>
