@@ -626,7 +626,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        RECEPTION LOUNGE SET SPOTLIGHT (RLS-3 Showcase)
        ========================================================================== -->
-  <section class="section rls-showcase-section" style="width: 100%; margin: 0; box-sizing: border-box; background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 90px 0; overflow: hidden;">
+  <section class="section rls-showcase-section" style="width: 100%; margin: 0; box-sizing: border-box; background-color: #FAF8F5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 140px 0 90px 0; overflow: hidden;">
     <div class="container">
       <div class="section-title-wrapper" style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end;" data-scroll>
         <div>

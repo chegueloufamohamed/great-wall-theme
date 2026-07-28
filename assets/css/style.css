@@ -64,7 +64,9 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
-  width: 100%;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body {
@@ -73,7 +75,9 @@ body {
   color: var(--color-primary);
   line-height: 1.6;
   overflow-x: clip;
-  width: 100%;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   position: relative;
 }
 
@@ -391,8 +395,8 @@ p {
   transition: all var(--transition-smooth);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
   background-color: #FFFFFF !important;
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   margin-top: 0 !important;
@@ -415,8 +419,8 @@ p {
   background-color: #FFFFFF !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   margin-top: 0 !important;
