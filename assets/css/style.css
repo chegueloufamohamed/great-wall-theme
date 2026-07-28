@@ -3593,7 +3593,7 @@ p {
 .fc3-outer {
   width: 100%;
   background: #faf8f6;
-  padding: 80px 0;
+  padding: 20px 0;
   box-sizing: border-box;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -3620,11 +3620,11 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 35px;
-  padding: 60px 0;
+  gap: 0;
+  padding: 0;
   position: relative;
   overflow: hidden;
-  min-height: 650px;
+  min-height: 460px;
 }
 
 .fc3-section::before {

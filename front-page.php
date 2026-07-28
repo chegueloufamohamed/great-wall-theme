@@ -710,11 +710,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     <div class="fc3-frame">
       <div class="fc3-section">
 
-        <div class="fc3-header">
-          <span class="fc3-eyebrow"><span class="fc3-dot"></span><?php esc_html_e( 'Our Collection', 'great-wall-theme' ); ?></span>
-          <h2 class="fc3-title"><?php echo wp_kses( __( 'Design Masterpieces <em>in Motion</em>', 'great-wall-theme' ), array( 'em' => array() ) ); ?></h2>
-          <p class="fc3-desc"><?php esc_html_e( 'Explore our signature handcrafted furniture collections rotating from every angle.', 'great-wall-theme' ); ?></p>
-        </div>
 
         <div class="fc3-scene">
           <div class="fc3-ring" style="--n:14">
