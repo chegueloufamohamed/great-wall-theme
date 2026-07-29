@@ -8846,6 +8846,7 @@ ul.products li.product .price del,
   padding: 4px 12px !important;
   border-radius: 50px !important;
   margin-top: 10px !important;
+  margin-bottom: 10px !important;
   text-transform: none !important;
   line-height: 1.2 !important;
   width: fit-content !important;
@@ -8857,6 +8858,17 @@ ul.products li.product .price del,
   font-size: 0.88rem !important;
   line-height: 1 !important;
   margin: 0 !important;
+}
+
+/* Loop card free shipping badge margin overrides */
+.shop-main-content ul.products li.product .card-free-shipping-badge {
+  margin-left: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.related-collection-slider .product-card .card-free-shipping-badge {
+  margin-left: 15px !important;
+  margin-bottom: 15px !important;
 }
 
 /* Tooltip container styling */
