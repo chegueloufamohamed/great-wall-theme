@@ -32,6 +32,121 @@ do_action( 'woocommerce_before_main_content' );
 			woocommerce_output_all_notices();
 		}
 
+		// Predefined order of category sections requested by the user
+		$preferred_order = array( 'desks', 'chairs', 'storage-cabinet', 'sofa', 'drawer-cabinet' );
+
+		// Helper function to build custom query args with active filters
+		if ( ! function_exists( 'great_wall_get_filtered_product_query_args' ) ) {
+			function great_wall_get_filtered_product_query_args( $cat_slug ) {
+				$args = array(
+					'post_type'      => 'product',
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
+					'tax_query'      => array(
+						'relation' => 'AND',
+						array(
+							'taxonomy' => 'product_cat',
+							'field'    => 'slug',
+							'terms'    => $cat_slug,
+						),
+					),
+					'meta_query'     => array(
+						'relation' => 'AND',
+					),
+				);
+
+				// 1. Price Filters
+				$min_price = isset( $_GET['min_price'] ) ? intval( $_GET['min_price'] ) : 0;
+				$max_price = isset( $_GET['max_price'] ) ? intval( $_GET['max_price'] ) : 999999;
+				if ( $min_price > 0 || $max_price < 999999 ) {
+					$args['meta_query'][] = array(
+						'key'     => '_price',
+						'value'   => array( $min_price, $max_price ),
+						'compare' => 'BETWEEN',
+						'type'    => 'NUMERIC',
+					);
+				}
+
+				// 2. Attribute Color Filters
+				if ( isset( $_GET['filter_color'] ) ) {
+					$color = sanitize_text_field( $_GET['filter_color'] );
+					$args['tax_query'][] = array(
+						'taxonomy' => 'pa_color',
+						'field'    => 'slug',
+						'terms'    => $color,
+					);
+				}
+
+				// 3. Search query
+				if ( isset( $_GET['s'] ) ) {
+					$args['s'] = sanitize_text_field( $_GET['s'] );
+				}
+
+				// 4. Ordering
+				$orderby_value = isset( $_GET['orderby'] ) ? sanitize_text_field( $_GET['orderby'] ) : 'menu_order';
+				if ( 'price' === $orderby_value ) {
+					$args['orderby']  = 'meta_value_num';
+					$args['meta_key'] = '_price';
+					$args['order']    = 'ASC';
+				} elseif ( 'price-desc' === $orderby_value ) {
+					$args['orderby']  = 'meta_value_num';
+					$args['meta_key'] = '_price';
+					$args['order']    = 'DESC';
+				} elseif ( 'date' === $orderby_value ) {
+					$args['orderby']  = 'date';
+					$args['order']    = 'DESC';
+				} elseif ( 'popularity' === $orderby_value ) {
+					$args['orderby']  = 'meta_value_num';
+					$args['meta_key'] = 'total_sales';
+					$args['order']    = 'DESC';
+				} elseif ( 'rating' === $orderby_value ) {
+					$args['orderby']  = 'meta_value_num';
+					$args['meta_key'] = '_wc_average_rating';
+					$args['order']    = 'DESC';
+				} else {
+					$args['orderby']  = 'menu_order title';
+					$args['order']    = 'ASC';
+				}
+
+				return $args;
+			}
+		}
+
+		// Helper to sort chair products consistently in custom order
+		if ( ! function_exists( 'great_wall_sort_chair_products_if_needed' ) ) {
+			function great_wall_sort_chair_products_if_needed( $posts_arr, $cat_slug ) {
+				if ( 'chairs' === $cat_slug || 'office-chairs' === $cat_slug || 'chair' === $cat_slug ) {
+					$order_slugs = array(
+						'oc-77c'          => 1,
+						'oc-70c-black-1'  => 2,
+						'oc-70c-grey-1'   => 3,
+						'j109a-2'         => 4,
+						'gyhh-2'          => 5,
+						'gyhg-2'          => 6,
+						'gyh-2'           => 7,
+						'oc-23b-1'        => 8,
+						'oc-47b-1'        => 9,
+						'oc-50b-black-1'  => 10,
+						'oc-50b-grey-1'   => 11
+					);
+					
+					usort( $posts_arr, function( $a, $b ) use ( $order_slugs ) {
+						$slug_a = $a->post_name;
+						$slug_b = $b->post_name;
+						
+						$rank_a = isset( $order_slugs[ $slug_a ] ) ? $order_slugs[ $slug_a ] : 99;
+						$rank_b = isset( $order_slugs[ $slug_b ] ) ? $order_slugs[ $slug_b ] : 99;
+						
+						if ( $rank_a === $rank_b ) {
+							return strcmp( $a->post_title, $b->post_title );
+						}
+						return $rank_a - $rank_b;
+					} );
+				}
+				return $posts_arr;
+			}
+		}
+
 		$queried_obj = get_queried_object();
 		$is_parent_chair = ( is_product_category() && isset( $queried_obj->slug ) && ( 'chair' === $queried_obj->slug || 'chairs' === $queried_obj->slug ) );
 
@@ -52,7 +167,60 @@ do_action( 'woocommerce_before_main_content' );
 			}
 		}
 
+		// If no specific categories are selected, and it's not a search or tag archive page, treat as "All Products" and display all categories in sorted order
+		$is_search = is_search();
+		$is_tag = is_product_tag();
+		$is_all_products = ( empty( $selected_cat_slugs ) && ! $is_search && ! $is_tag );
+
+		if ( $is_all_products ) {
+			$selected_cat_slugs = $preferred_order;
+			
+			// Dynamically retrieve all other active product categories and append them
+			$other_cats = get_terms( array(
+				'taxonomy'   => 'product_cat',
+				'hide_empty' => true,
+			) );
+			if ( ! is_wp_error( $other_cats ) && ! empty( $other_cats ) ) {
+				foreach ( $other_cats as $oc ) {
+					if ( ! in_array( $oc->slug, $selected_cat_slugs ) && 'office-furniture' !== $oc->slug && 'uncategorized' !== $oc->slug ) {
+						$selected_cat_slugs[] = $oc->slug;
+					}
+				}
+			}
+		} else {
+			// Sort selected categories in the preferred order
+			usort( $selected_cat_slugs, function( $a, $b ) use ( $preferred_order ) {
+				$pos_a = array_search( $a, $preferred_order );
+				$pos_b = array_search( $b, $preferred_order );
+				
+				$pos_a = ( false !== $pos_a ) ? $pos_a : 999;
+				$pos_b = ( false !== $pos_b ) ? $pos_b : 999;
+				
+				if ( $pos_a === $pos_b ) {
+					return strcmp( $a, $b );
+				}
+				return $pos_a - $pos_b;
+			} );
+		}
+
 		if ( ! empty( $selected_cat_slugs ) ) {
+			// Render toolbar header at the top of the main shop catalog listing
+			if ( woocommerce_product_loop() ) {
+				?>
+				<div class="shop-toolbar-header">
+					<div class="shop-toolbar-left">
+						<div class="view-mode-selector">
+							<button class="view-mode-btn grid-mode active" aria-label="Grid View"><i class="ri-grid-fill"></i></button>
+						</div>
+						<?php woocommerce_result_count(); ?>
+					</div>
+					<div class="shop-toolbar-right">
+						<?php woocommerce_catalog_ordering(); ?>
+					</div>
+				</div>
+				<?php
+			}
+
 			// Render selected categories as individual scrollable sections
 			foreach ( $selected_cat_slugs as $cat_slug ) {
 				$term = get_term_by( 'slug', $cat_slug, 'product_cat' );
@@ -60,42 +228,40 @@ do_action( 'woocommerce_before_main_content' );
 					continue;
 				}
 
-				echo '<div class="category-scroll-section" style="margin-bottom: 60px;">';
-				echo '<h2 class="subcategory-title" style="font-family: \'Cormorant Garamond\', serif; font-size: 2.4rem; font-weight: 500; border-bottom: 1px solid #e5e0d8; padding-bottom: 16px; margin-bottom: 24px; color: #2e2a25; text-transform: capitalize;">' . esc_html( $term->name ) . '</h2>';
-
 				// Product Query for this category
-				$args = array(
-					'post_type'      => 'product',
-					'posts_per_page' => -1,
-					'post_status'    => 'publish',
-					'tax_query'      => array(
-						array(
-							'taxonomy' => 'product_cat',
-							'field'    => 'slug',
-							'terms'    => $cat_slug,
-						),
-					),
-				);
-
+				$args = great_wall_get_filtered_product_query_args( $cat_slug );
 				$cat_query = new WP_Query( $args );
 
-				if ( $cat_query->have_posts() ) {
-					woocommerce_product_loop_start();
+				// Determine if we should show an empty section message
+				$show_empty = ( ! $is_all_products && count( $selected_cat_slugs ) === 1 );
 
-					while ( $cat_query->have_posts() ) {
-						$cat_query->the_post();
+				if ( $cat_query->have_posts() || $show_empty ) {
+					echo '<div class="category-scroll-section" style="margin-bottom: 60px;">';
+					echo '<h2 class="subcategory-title" style="font-family: \'Cormorant Garamond\', serif; font-size: 2.4rem; font-weight: 500; border-bottom: 1px solid #e5e0d8; padding-bottom: 16px; margin-bottom: 24px; color: #2e2a25; text-transform: capitalize;">' . esc_html( $term->name ) . '</h2>';
 
-						do_action( 'woocommerce_shop_loop' );
-						wc_get_template_part( 'content', 'product' );
+					if ( $cat_query->have_posts() ) {
+						$posts_arr = $cat_query->posts;
+						$posts_arr = great_wall_sort_chair_products_if_needed( $posts_arr, $cat_slug );
+
+						woocommerce_product_loop_start();
+
+						global $post;
+						foreach ( $posts_arr as $post_item ) {
+							$post = $post_item;
+							setup_postdata( $post );
+
+							do_action( 'woocommerce_shop_loop' );
+							wc_get_template_part( 'content', 'product' );
+						}
+
+						wp_reset_postdata();
+						woocommerce_product_loop_end();
+					} else {
+						echo '<p style="font-family: \'Plus Jakarta Sans\', sans-serif; color: #76726c; font-style: italic;">No products found in this section.</p>';
 					}
 
-					wp_reset_postdata();
-					woocommerce_product_loop_end();
-				} else {
-					echo '<p style="font-family: \'Plus Jakarta Sans\', sans-serif; color: #76726c; font-style: italic;">No products found in this section.</p>';
+					echo '</div>';
 				}
-
-				echo '</div>';
 			}
 		} elseif ( $is_parent_chair ) {
 			// Render subcategories separately: Office Chairs then Commercial Chairs
