@@ -17,14 +17,33 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <section class="hero">
     <div class="hero-slider">
       
-      <!-- Slide 1: Signature Sofa -->
+      <!-- Single active hero slide with background video -->
       <div class="hero-slide active">
         <div class="hero-bg">
-          <img loading="eager" src="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" alt="<?php esc_attr_e( 'Signature Sofa Living Room Collection', 'great-wall-theme' ); ?>">
+          <video id="hero-bg-video" autoplay loop muted playsinline poster="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+            <!-- Source will be dynamically appended here via inline JavaScript based on user screen size -->
+          </video>
+          <script>
+            (function() {
+              var video = document.getElementById('hero-bg-video');
+              if (video) {
+                var desktopSrc = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hero-Video-Desktop.mp4';
+                var mobileSrc = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hero-Video-mobile.mp4';
+                var source = document.createElement('source');
+                if (window.innerWidth <= 768) {
+                  source.setAttribute('src', mobileSrc);
+                } else {
+                  source.setAttribute('src', desktopSrc);
+                }
+                source.setAttribute('type', 'video/mp4');
+                video.appendChild(source);
+              }
+            })();
+          </script>
         </div>
         <div class="container">
           <div class="hero-content">
-            <span class="subtitle">The Living Room Collection</span>
+            <span class="subtitle">The Great Wall Collection</span>
             <h1>The Art of Architectural Living</h1>
             <p>Immerse yourself in clean lines, premium bouclé textures, and solid walnut craftsmanship. Hand-crafted statement pieces tailored for refined Dubai residences.</p>
             <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><span>Explore Collection</span></a>
@@ -32,43 +51,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
       </div>
       
-      <!-- Slide 2: Luxury Bedroom -->
-      <div class="hero-slide">
-        <div class="hero-bg">
-          <img loading="eager" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="<?php esc_attr_e( 'Luxury Master Bedroom Suite', 'great-wall-theme' ); ?>">
-        </div>
-        <div class="container">
-          <div class="hero-content">
-            <span class="subtitle">The Bedroom Sanctuary</span>
-            <h1>Serene Spaces & Quiet Luxury</h1>
-            <p>Elevate your personal space into an oasis of calm. Discover king beds upholstered in refined velvets and custom dark oak storage modules.</p>
-            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><span>Discover Bedding</span></a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Slide 3: Dining Room -->
-      <div class="hero-slide">
-        <div class="hero-bg">
-          <img loading="eager" src="<?php echo esc_url( $assets_uri . 'dining_room.webp' ); ?>" alt="<?php esc_attr_e( 'Luxurious Marble Dining Setup', 'great-wall-theme' ); ?>">
-        </div>
-        <div class="container">
-          <div class="hero-content">
-            <span class="subtitle">The Dining Collection</span>
-            <h1>Curate Elegant Gathering Places</h1>
-            <p>Host unforgettable evenings around custom-carved black marble tabletops paired with brushed champagne-bronze dining chairs.</p>
-            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><span>View Dining Tables</span></a>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-
-    <!-- Slider Navigations -->
-    <div class="hero-dots"></div>
-    <div class="hero-controls">
-      <button class="hero-control-btn hero-control-prev" aria-label="Previous Slide"><i class="ri-arrow-left-s-line"></i></button>
-      <button class="hero-control-btn hero-control-next" aria-label="Next Slide"><i class="ri-arrow-right-s-line"></i></button>
     </div>
   </section>
 

@@ -188,7 +188,7 @@ function initHeroSlider() {
   const nextBtn = document.querySelector('.hero-control-next');
   const dotsContainer = document.querySelector('.hero-dots');
 
-  if (slides.length === 0) return;
+  if (slides.length <= 1) return;
 
   let currentSlide = 0;
   let slideInterval;
