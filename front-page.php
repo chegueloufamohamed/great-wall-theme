@@ -41,14 +41,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             })();
           </script>
         </div>
-        <div class="container">
-          <div class="hero-content">
-            <span class="subtitle">The Great Wall Collection</span>
-            <h1>The Art of Architectural Living</h1>
-            <p>Immerse yourself in clean lines, premium bouclé textures, and solid walnut craftsmanship. Hand-crafted statement pieces tailored for refined Dubai residences.</p>
-            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><span>Explore Collection</span></a>
-          </div>
-        </div>
+
       </div>
       
     </div>
