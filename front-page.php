@@ -81,49 +81,131 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <span class="section-subtitle">Exquisite Hand-Crafted Ranges</span>
         <h2 class="section-title">Shop By Room Collection</h2>
       </div>
+      <?php
+      if ( ! function_exists( 'great_wall_get_collection_image_url' ) ) {
+          function great_wall_get_collection_image_url( $slugs ) {
+              if ( ! is_array( $slugs ) ) {
+                  $slugs = array( $slugs );
+              }
+              
+              foreach ( $slugs as $slug ) {
+                  $term = get_term_by( 'slug', $slug, 'product_cat' );
+                  if ( ! $term ) {
+                      continue;
+                  }
+                  
+                  // 1. Try WooCommerce category thumbnail
+                  $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
+                  if ( $thumbnail_id ) {
+                      $img_url = wp_get_attachment_url( $thumbnail_id );
+                      if ( $img_url ) {
+                          return $img_url;
+                      }
+                  }
+                  
+                  // 2. Try first product in this category
+                  $args = array(
+                      'post_type'      => 'product',
+                      'posts_per_page' => 1,
+                      'tax_query'      => array(
+                          array(
+                              'taxonomy' => 'product_cat',
+                              'field'    => 'slug',
+                              'terms'    => $slug,
+                          ),
+                      ),
+                  );
+                  $query = new WP_Query( $args );
+                  if ( $query->have_posts() ) {
+                      $query->the_post();
+                      $image_id = get_post_thumbnail_id();
+                      wp_reset_postdata();
+                      if ( $image_id ) {
+                          $img_url = wp_get_attachment_url( $image_id );
+                          if ( $img_url ) {
+                              return $img_url;
+                          }
+                      }
+                  }
+              }
+              
+              // Fallback
+              $assets_uri = get_template_directory_uri() . '/assets/images/';
+              $first_slug = $slugs[0];
+              if ( 'desks' === $first_slug ) {
+                  return $assets_uri . 'dining_room.webp';
+              } elseif ( 'chairs' === $first_slug || 'chair' === $first_slug || 'office-chairs' === $first_slug ) {
+                  return $assets_uri . 'designer_chair.webp';
+              } elseif ( 'storage-cabinet' === $first_slug ) {
+                  return $assets_uri . 'timber_dresser.webp';
+              } elseif ( 'sofa' === $first_slug ) {
+                  return $assets_uri . 'hero_sofa.webp';
+              }
+              
+              return wc_placeholder_img_src();
+          }
+      }
+
+      $desk_img = great_wall_get_collection_image_url( 'desks' );
+      $chair_img = great_wall_get_collection_image_url( array( 'chairs', 'office-chairs', 'chair' ) );
+      $storage_img = great_wall_get_collection_image_url( array( 'storage-cabinet', 'cabinet' ) );
+      $sofa_img = great_wall_get_collection_image_url( 'sofa' );
+
+      $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
+      $desks_link = $desks_cat ? get_term_link( $desks_cat ) : home_url( '/product-category/desks/' );
+
+      $chairs_cat = get_term_by( 'slug', 'chairs', 'product_cat' ) ?: get_term_by( 'slug', 'office-chairs', 'product_cat' );
+      $chairs_link = $chairs_cat ? get_term_link( $chairs_cat ) : home_url( '/product-category/office-chairs/' );
+
+      $storage_cat = get_term_by( 'slug', 'storage-cabinet', 'product_cat' ) ?: get_term_by( 'slug', 'cabinet', 'product_cat' );
+      $storage_link = $storage_cat ? get_term_link( $storage_cat ) : home_url( '/product-category/storage-cabinet/' );
+
+      $sofa_cat = get_term_by( 'slug', 'sofa', 'product_cat' );
+      $sofa_link = $sofa_cat ? get_term_link( $sofa_cat ) : home_url( '/product-category/sofa/' );
+      ?>
       
       <div class="grid categories-grid">
-        <!-- Card 1: Office Workspace -->
-        <div class="category-card delay-100" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/chair/office-chairs/' ) ); ?>'">
+        <!-- Card 1: Desks -->
+        <div class="category-card delay-100" data-scroll onclick="window.location.href='<?php echo esc_url( $desks_link ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Office Workspace Category">
+            <img loading="lazy" src="<?php echo esc_url( $desk_img ); ?>" alt="Desks Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Office Chairs</h3>
-            <span class="category-count">Ergonomic & Task Seating</span>
+            <h3 class="category-title">Desks</h3>
+            <span class="category-count">Executive Workspaces</span>
           </div>
         </div>
         
-        <!-- Card 2: Bunk & Single Beds -->
-        <div class="category-card delay-200" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
+        <!-- Card 2: Chairs -->
+        <div class="category-card delay-200" data-scroll onclick="window.location.href='<?php echo esc_url( $chairs_link ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'luxury_bed.webp' ); ?>" alt="Bunk & Single Beds Category">
+            <img loading="lazy" src="<?php echo esc_url( $chair_img ); ?>" alt="Chairs Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Luxury Beds</h3>
-            <span class="category-count">Bunk & Single Frames</span>
+            <h3 class="category-title">Chairs</h3>
+            <span class="category-count">Ergonomic Office Seating</span>
           </div>
         </div>
         
-        <!-- Card 3: Foldable Room Dividers -->
-        <div class="category-card delay-300" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>'">
+        <!-- Card 3: Storage Cabinet -->
+        <div class="category-card delay-300" data-scroll onclick="window.location.href='<?php echo esc_url( $storage_link ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/PF-1-2.jpg" alt="Foldable Room Dividers Category">
+            <img loading="lazy" src="<?php echo esc_url( $storage_img ); ?>" alt="Storage Cabinet Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Room Dividers</h3>
-            <span class="category-count">Foldable Partition Screens</span>
+            <h3 class="category-title">Storage Cabinet</h3>
+            <span class="category-count">Cabinets & Lockers</span>
           </div>
         </div>
         
-        <!-- Card 4: Cabinets & Storage -->
-        <div class="category-card delay-400" data-scroll onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+        <!-- Card 4: Sofa -->
+        <div class="category-card delay-400" data-scroll onclick="window.location.href='<?php echo esc_url( $sofa_link ); ?>'">
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="Storage Cabinets Category">
+            <img loading="lazy" src="<?php echo esc_url( $sofa_img ); ?>" alt="Sofa Category">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Storage Cabinets</h3>
-            <span class="category-count">Sideboards & Lockers</span>
+            <h3 class="category-title">Sofa</h3>
+            <span class="category-count">Premium Lounge Comfort</span>
           </div>
         </div>
       </div>
