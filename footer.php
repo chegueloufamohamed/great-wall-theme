@@ -318,7 +318,7 @@
   </div>
 
   <!-- Floating WhatsApp Chat Button -->
-  <a href="https://wa.me/97143202921" class="floating-whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat with us on WhatsApp', 'great-wall-theme' ); ?>">
+  <a href="https://wa.me/971582176351" class="floating-whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat with us on WhatsApp', 'great-wall-theme' ); ?>">
     <img src="https://greatwallfurniture.com/wp-content/uploads/2026/07/whatsapp.webp" alt="WhatsApp">
   </a>
 
