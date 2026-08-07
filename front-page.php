@@ -229,15 +229,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </div>
       </div>
 
-      <!-- Part 2: 14 Categories Grid -->
+      <!-- Part 2: 12 Categories Grid -->
       <div class="rls-category-grid-12">
-        <!-- Card 1: Air Cooler -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/air-cooler/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/LCB-1A（KT-1E-3NS）.jpg" alt="Air Cooler">
-          </div>
-          <h4 class="rls-cat-label">Air Cooler</h4>
-        </div>
 
         <!-- Card 2: Bunk Beds -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
@@ -287,13 +280,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           <h4 class="rls-cat-label">Foldable Room Divider</h4>
         </div>
 
-        <!-- Card 8: Hanger Stands -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/hanger-stands/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/HF-4.jpg" alt="Hanger Stands">
-          </div>
-          <h4 class="rls-cat-label">Hanger Stands</h4>
-        </div>
+
 
         <!-- Card 9: Office Furniture -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
