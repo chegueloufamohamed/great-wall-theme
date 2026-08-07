@@ -311,7 +311,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 13: Single Beds -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/GHF.jpg" alt="Single Beds">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-LK-3-PIC-1.webp" alt="Single Beds">
           </div>
           <h4 class="rls-cat-label">Single Beds</h4>
         </div>
