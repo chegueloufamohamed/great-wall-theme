@@ -27,8 +27,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             (function() {
               var video = document.getElementById('hero-bg-video');
               if (video) {
-                var desktopSrc = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hero-Video-Desktop.mp4';
-                var mobileSrc = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hero-Video-mobile.mp4';
+                var desktopSrc = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Grate-Wall-Website-Bunner-H-.mp4';
+                var mobileSrc = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Grate-Wall-Website-Bunner-V.mp4';
                 var source = document.createElement('source');
                 if (window.innerWidth <= 768) {
                   source.setAttribute('src', mobileSrc);
