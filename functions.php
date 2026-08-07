@@ -1344,3 +1344,93 @@ function great_wall_add_free_shipping_loop_badge() {
 	echo '<span>' . esc_html__( 'Free Shipping and Fixing', 'great-wall-theme' ) . '</span>';
 	echo '</div>';
 }
+
+/**
+ * Display linked variations/cross-sells under the product image/gallery on the left.
+ */
+add_action( 'woocommerce_product_thumbnails', 'great_wall_display_single_product_variations_links', 50 );
+function great_wall_display_single_product_variations_links() {
+	global $product;
+	if ( ! $product ) {
+		return;
+	}
+
+	$cross_sells = $product->get_cross_sell_ids();
+	
+	if ( empty( $cross_sells ) ) {
+		return;
+	}
+
+	$linked_products = array();
+	
+	// Add current product first in the swatches grid
+	$linked_products[] = $product;
+
+	// Add linked cross-sells
+	foreach ( $cross_sells as $id ) {
+		$linked_prod = wc_get_product( $id );
+		if ( $linked_prod && $linked_prod->is_visible() ) {
+			$linked_products[] = $linked_prod;
+		}
+	}
+
+	if ( count( $linked_products ) <= 1 ) {
+		return;
+	}
+
+	?>
+	<div class="product-variation-links">
+		<h4><?php esc_html_e( 'Available Sizes & Options', 'great-wall-theme' ); ?></h4>
+		<div class="variation-links-grid">
+			<?php foreach ( $linked_products as $lp ) : 
+				$is_current = ( $lp->get_id() === $product->get_id() );
+				$label = great_wall_get_variation_label( $lp );
+				$price = strip_tags( $lp->get_price_html() );
+				?>
+				<a href="<?php echo esc_url( get_permalink( $lp->get_id() ) ); ?>" class="variation-link-btn<?php echo $is_current ? ' active' : ''; ?>">
+					<span class="variation-link-label"><?php echo esc_html( $label ); ?></span>
+					<span class="variation-link-price"><?php echo wp_kses_post( $price ); ?></span>
+					<?php if ( $is_current ) : ?>
+						<span class="variation-link-badge"><?php esc_html_e( 'Current', 'great-wall-theme' ); ?></span>
+					<?php endif; ?>
+				</a>
+			<?php endforeach; ?>
+		</div>
+	</div>
+	<?php
+}
+
+/**
+ * Helper to clean and extract variation size labels from product names/attributes.
+ */
+function great_wall_get_variation_label( $lp ) {
+	$size = $lp->get_attribute( 'size' );
+	if ( ! empty( $size ) ) {
+		return $size;
+	}
+	$dimensions = $lp->get_attribute( 'dimensions' );
+	if ( ! empty( $dimensions ) ) {
+		return $dimensions;
+	}
+
+	$name = $lp->get_name();
+	
+	// Try parsing standard delimiters
+	if ( strpos( $name, '-' ) !== false ) {
+		$parts = explode( '-', $name );
+		$label = trim( end( $parts ) );
+		if ( strlen( $label ) > 0 && strlen( $label ) < 25 ) {
+			return $label;
+		}
+	}
+	
+	if ( strpos( $name, ':' ) !== false ) {
+		$parts = explode( ':', $name );
+		$label = trim( end( $parts ) );
+		if ( strlen( $label ) > 0 && strlen( $label ) < 25 ) {
+			return $label;
+		}
+	}
+
+	return $name;
+}

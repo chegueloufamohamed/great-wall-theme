@@ -83,12 +83,21 @@ if ( ! empty( $active_core_key ) ) {
 	$ordered_categories[] = array( 'slug' => 'sofa', 'name' => 'Sofa', 'title' => 'Complete The Look: Sofa' );
 }
 
+$exclude_ids = array( $current_product_id );
+$current_product = wc_get_product( $current_product_id );
+if ( $current_product ) {
+	$cross_sells = $current_product->get_cross_sell_ids();
+	if ( ! empty( $cross_sells ) ) {
+		$exclude_ids = array_merge( $exclude_ids, $cross_sells );
+	}
+}
+
 $collections = array();
 foreach ( $ordered_categories as $oc ) {
 	$args = array(
 		'post_type'      => 'product',
 		'posts_per_page' => 6,
-		'post__not_in'   => array( $current_product_id ),
+		'post__not_in'   => $exclude_ids,
 		'tax_query'      => array(
 			array(
 				'taxonomy' => 'product_cat',

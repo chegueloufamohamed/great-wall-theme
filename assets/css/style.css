@@ -9060,3 +9060,83 @@ ul.products li.product .price del,
 .categories-list .sub-list {
   padding-left: 28px !important; /* Indent subcategories to line up under parent names */
 }
+
+/* ==========================================================================
+   PRODUCT LINKED VARIATIONS (CROSS-SELLS) SWATCHES GRID
+   ========================================================================== */
+.product-variation-links {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px dashed #e5e5e5;
+  width: 100%;
+  clear: both;
+}
+
+.product-variation-links h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #8c8476;
+  margin-bottom: 12px;
+}
+
+.variation-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.variation-link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #FAFAFA;
+  color: #333333;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-width: 125px;
+}
+
+.variation-link-btn:hover {
+  border-color: #c5a880;
+  background: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.variation-link-btn.active {
+  border-color: #c5a880;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(197, 168, 128, 0.15);
+  pointer-events: none;
+}
+
+.variation-link-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: #1c1c1e;
+}
+
+.variation-link-btn.active .variation-link-label {
+  color: #c5a880;
+}
+
+.variation-link-price {
+  font-size: 0.72rem;
+  color: #8c8476;
+  font-weight: 500;
+}
+
+.variation-link-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #c5a880;
+  letter-spacing: 0.03em;
+  margin-top: 3px;
+}
