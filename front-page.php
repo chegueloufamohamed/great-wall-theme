@@ -285,7 +285,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 9: Office Furniture -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/233-12-1.webp" alt="Office Furniture">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/OB-17.webp" alt="Office Furniture">
           </div>
           <h4 class="rls-cat-label">Office Furniture</h4>
         </div>
@@ -306,13 +306,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           <h4 class="rls-cat-label">Shelves</h4>
         </div>
 
-        <!-- Card 12: Shoe Racks -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/shoerack/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/XG-5新.jpg" alt="Shoe Racks">
-          </div>
-          <h4 class="rls-cat-label">Shoe Racks</h4>
-        </div>
+
 
         <!-- Card 13: Single Beds -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>'">
