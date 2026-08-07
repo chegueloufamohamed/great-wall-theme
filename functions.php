@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.5.1' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.5.2' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -1385,7 +1385,7 @@ function great_wall_display_single_product_variations_links() {
 			<?php foreach ( $linked_products as $lp ) : 
 				$is_current = ( $lp->get_id() === $product->get_id() );
 				$label = great_wall_get_variation_label( $lp );
-				$price = strip_tags( $lp->get_price_html() );
+				$price = strip_tags( wc_price( $lp->get_price() ) );
 				
 				// Fetch variation image thumbnail
 				$image_id = $lp->get_image_id();
