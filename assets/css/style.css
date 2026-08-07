@@ -9158,21 +9158,34 @@ ul.products li.product .price del,
   color: #c5a880;
 }
 
+.variation-link-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  width: 100%;
+}
+
 .variation-link-dimensions {
-  font-size: 0.7rem;
-  color: #8c8476;
-  margin-top: 1px;
+  font-size: 0.72rem;
+  color: #1c1c1e !important;
+  font-weight: 700 !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+}
+
+.variation-link-separator {
+  color: #c5a880;
+  font-size: 0.65rem;
+  font-weight: 400;
 }
 
 .variation-link-price {
   font-size: 0.72rem;
-  color: #8c8476;
-  font-weight: 500;
-  margin-top: 2px;
+  color: #1c1c1e !important;
+  font-weight: 700 !important;
+  white-space: nowrap;
 }
 
 .variation-link-badge {
