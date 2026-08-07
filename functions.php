@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.4.8' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.5.0' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -1348,7 +1348,7 @@ function great_wall_add_free_shipping_loop_badge() {
 /**
  * Display linked variations/cross-sells under the product image/gallery on the left.
  */
-add_action( 'woocommerce_product_thumbnails', 'great_wall_display_single_product_variations_links', 50 );
+add_action( 'great_wall_after_product_gallery', 'great_wall_display_single_product_variations_links', 50 );
 function great_wall_display_single_product_variations_links() {
 	global $product;
 	if ( ! $product ) {
