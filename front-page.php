@@ -306,6 +306,14 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           <h4 class="rls-cat-label">Shelves</h4>
         </div>
 
+        <!-- Card 12: Sofa -->
+        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>'">
+          <div class="rls-cat-img-box">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Sofa">
+          </div>
+          <h4 class="rls-cat-label">Sofa</h4>
+        </div>
+
 
 
         <!-- Card 13: Single Beds -->

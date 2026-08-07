@@ -69,7 +69,6 @@
                 <ul class="mega-menu-list">
                   <li><a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>">Cabinets & Lockers <span class="mega-badge badge-hot">Hot</span></a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>">Shelves & Racks</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/shoerack/' ) ); ?>">Wooden Shoe Racks</a></li>
                 </ul>
               </div>
 
@@ -91,13 +90,12 @@
                 </ul>
               </div>
 
-              <!-- Column 5: UTILITY & SYSTEMS -->
+              <!-- Column 5: LIVING & DIVIDER -->
               <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Utility & Racks</h4>
+                <h4 class="mega-menu-title">Living & Divider</h4>
                 <ul class="mega-menu-list">
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>">Sofas & Seating</a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>">Foldable Divider</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/hanger-stands/' ) ); ?>">Hanger Stands</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/air-cooler/' ) ); ?>">Air Coolers</a></li>
                 </ul>
               </div>
 
