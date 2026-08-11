@@ -4231,56 +4231,89 @@ p {
 .single-product table.variations {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.single-product table.variations tr {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .single-product table.variations td {
-  padding: 8px 0;
+  padding: 0;
   border: none;
+  display: block;
+  width: 100%;
 }
 
 .single-product table.variations td.label {
-  width: 100px;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-primary);
-  vertical-align: middle;
+  letter-spacing: 0.08em;
+  color: #1c1c1e;
+  margin-bottom: 6px;
 }
 
 .single-product table.variations td.value {
   position: relative;
+  width: 100%;
 }
 
 .single-product table.variations select {
   width: 100%;
-  height: 44px;
-  background-color: var(--bg-primary);
-  border: 1.5px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  padding: 0 15px;
-  font-size: 0.9rem;
-  color: var(--color-primary);
+  height: 48px;
+  background-color: #F9F9FB;
+  border: 1px solid #E5E5EA;
+  border-radius: 12px;
+  padding: 0 45px 0 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1c1c1e;
   cursor: pointer;
   appearance: none;
+  -webkit-appearance: none;
   outline: none;
-  transition: border-color var(--transition-fast);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .single-product table.variations select:focus {
-  border-color: var(--color-accent);
+  border-color: #c5a880;
+  background-color: #FFFFFF;
 }
 
 .single-product table.variations td.value::after {
   content: '\ea4c';
-  font-family: 'remixicon';
+  font-family: 'remixicon' !important;
   position: absolute;
-  right: 15px;
-  top: 50%;
+  right: 16px;
+  top: 24px;
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--color-secondary);
+  color: #1c1c1e;
+  font-size: 1rem;
+  z-index: 2;
+}
+
+.single-product table.variations a.reset_variations {
+  position: absolute;
+  top: -24px;
+  right: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: #FF3B30 !important;
+  text-decoration: none !important;
+  transition: opacity 0.2s ease;
+}
+
+.single-product table.variations a.reset_variations:hover {
+  opacity: 0.7;
 }
 
 /* Product Meta */
