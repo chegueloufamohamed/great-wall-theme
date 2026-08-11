@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.5.8' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.5.9' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -1474,4 +1474,79 @@ function great_wall_get_variation_label( $lp ) {
 	}
 
 	return $name;
+}
+
+/**
+ * Enqueue custom JavaScript to convert standard select dropdown variations to premium button list swatches.
+ */
+add_action( 'wp_footer', 'great_wall_enqueue_custom_swatches_script' );
+function great_wall_enqueue_custom_swatches_script() {
+	if ( ! is_product() ) {
+		return;
+	}
+	?>
+	<script>
+		jQuery(document).ready(function($) {
+			function initCustomSwatches() {
+				$('.single-product table.variations select').each(function() {
+					var $select = $(this);
+					if ($select.siblings('.custom-swatches-wrapper').length) {
+						return;
+					}
+					
+					// Ensure select remains functional in background
+					$select.css({
+						'display': 'none',
+						'visibility': 'hidden',
+						'height': '0',
+						'width': '0',
+						'opacity': '0',
+						'position': 'absolute'
+					});
+					
+					var $wrapper = $('<div class="custom-swatches-wrapper"></div>');
+					var $grid = $('<div class="custom-swatches-list"></div>');
+					
+					$select.find('option').each(function() {
+						var $opt = $(this);
+						var val = $opt.val();
+						var label = $opt.text();
+						if (!val) return;
+						
+						var isSelected = ($select.val() === val);
+						var $swatch = $('<div class="custom-swatch-item' + (isSelected ? ' active' : '') + '" data-value="' + val + '">' + label + '</div>');
+						$grid.append($swatch);
+					});
+					
+					$wrapper.append($grid);
+					$select.after($wrapper);
+					
+					$grid.on('click', '.custom-swatch-item', function() {
+						var $item = $(this);
+						var val = $item.data('value');
+						$item.addClass('active').siblings().removeClass('active');
+						$select.val(val).trigger('change');
+					});
+				});
+			}
+			
+			// Initialize on ready and on variation load events
+			initCustomSwatches();
+			$(document).on('woocommerce_variation_has_changed check_variations show_variation reset_data', initCustomSwatches);
+			
+			// Keep active states in sync with WooCommerce variation core state resets
+			$(document).on('woocommerce_variation_has_changed', function() {
+				$('.single-product table.variations select').each(function() {
+					var $select = $(this);
+					var currentVal = $select.val();
+					var $swatches = $select.siblings('.custom-swatches-wrapper').find('.custom-swatch-item');
+					$swatches.removeClass('active');
+					if (currentVal) {
+						$swatches.filter('[data-value="' + currentVal + '"]').addClass('active');
+					}
+				});
+			});
+		});
+	</script>
+	<?php
 }
