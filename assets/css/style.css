@@ -4256,7 +4256,7 @@ p {
   letter-spacing: 0.08em;
   color: #1c1c1e;
   margin-bottom: 10px;
-  text-align: right;
+  text-align: left;
   width: 100%;
 }
 
@@ -4335,8 +4335,8 @@ p {
 .single-product table.variations a.reset_variations {
   position: absolute;
   top: -28px;
-  left: 0;
-  right: auto;
+  right: 0;
+  left: auto;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -4350,6 +4350,42 @@ p {
 .sticky-bar-price {
   font-weight: 700 !important;
   color: #1c1c1e !important;
+}
+
+/* Dynamic WooCommerce variation price styles */
+.single-product .woocommerce-variation-price {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.single-product .woocommerce-variation-price .price {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  font-family: var(--font-primary, serif) !important;
+  color: #1c1c1e !important;
+  font-weight: 700 !important;
+  font-size: 2.2rem !important;
+  text-decoration: none !important;
+}
+
+.single-product .woocommerce-variation-price .price ins,
+.single-product .woocommerce-variation-price .price > .amount {
+  text-decoration: none !important;
+  color: #1c1c1e !important;
+  font-weight: 700 !important;
+  font-size: 2.2rem !important;
+}
+
+.single-product .woocommerce-variation-price .price del,
+.single-product .woocommerce-variation-price .price del .amount {
+  color: #FF3B30 !important;
+  font-weight: 400 !important;
+  font-size: 1.4rem !important;
+  text-decoration: line-through !important;
+  display: inline-block !important;
 }
 
 .single-product table.variations a.reset_variations:hover {
@@ -6941,11 +6977,15 @@ ul.products.list-view-active li.product .product-loop-actions {
 }
 
 /* Crossed out original price (del) */
-.single-product p.price del {
+.single-product p.price del,
+.single-product p.price del .amount,
+.single-product .price del,
+.single-product .price del .amount {
   color: #FF3B30 !important; /* Bold red */
   font-weight: 400 !important;
   font-size: 1.4rem !important;
   text-decoration: line-through !important;
+  display: inline-block !important;
   margin-left: 5px !important;
 }
 
