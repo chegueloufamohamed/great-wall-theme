@@ -4256,13 +4256,17 @@ p {
   letter-spacing: 0.08em;
   color: #1c1c1e;
   margin-bottom: 10px;
-  text-align: left;
-  width: 100%;
+  text-align: left !important;
+  width: 100% !important;
+  display: block !important;
 }
 
 .single-product table.variations td.label label {
   font-weight: 700 !important;
   color: #1c1c1e !important;
+  text-align: left !important;
+  display: block !important;
+  margin: 0 !important;
 }
 
 .single-product table.variations td.value {
