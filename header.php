@@ -56,6 +56,7 @@
                 <h4 class="mega-menu-title">Office Furniture</h4>
                 <ul class="mega-menu-list">
                   <li><a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Office Desks <span class="mega-badge badge-new">New</span></a></li>
+                  <li><a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>">Storage Cabinet</a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs <span class="mega-badge badge-popular">Popular</span></a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a></li>
                   <li><a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">Office Systems</a></li>
