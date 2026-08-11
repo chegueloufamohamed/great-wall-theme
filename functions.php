@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.5.9' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.6.0' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -702,7 +702,7 @@ function great_wall_sticky_add_to_cart_bar() {
 		<div class="sticky-bar-content">
 			<div class="sticky-bar-info">
 				<p class="sticky-bar-title"><?php echo esc_html( $product->get_name() ); ?></p>
-				<span class="sticky-bar-meta"><?php echo esc_html( $price_html ); ?> &middot; <?php echo esc_html( $stock_status ); ?></span>
+				<span class="sticky-bar-meta"><span class="sticky-bar-price"><?php echo esc_html( $price_html ); ?></span> &middot; <?php echo esc_html( $stock_status ); ?></span>
 			</div>
 			<div class="sticky-bar-btns">
 				<button class="sticky-bar-btn-buy" onclick="clickNativeBuy()"><?php esc_html_e( 'Buy now', 'great-wall-theme' ); ?></button>
@@ -729,7 +729,20 @@ function great_wall_sticky_add_to_cart_bar() {
 		}
 	}
 	
-	// Sticky bar is permanently visible on load
+	// Sync sticky bar price dynamically when WooCommerce variations change
+	jQuery(document).ready(function($) {
+		$(document).on('found_variation', function(e, variation) {
+			if (variation && variation.price_html) {
+				var cleanPrice = $('<div>' + variation.price_html + '</div>').text().trim();
+				if (cleanPrice) {
+					$('.sticky-bar-price').text(cleanPrice);
+				}
+			}
+		});
+		$(document).on('reset_data', function() {
+			$('.sticky-bar-price').text('<?php echo esc_js( $price_html ); ?>');
+		});
+	});
 	</script>
 	<?php
 }
