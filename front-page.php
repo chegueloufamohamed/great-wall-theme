@@ -122,9 +122,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       }
 
       $desk_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp';
-      $chair_img = great_wall_get_collection_image_url( array( 'chairs', 'office-chairs', 'chair' ) );
-      $storage_img = great_wall_get_collection_image_url( array( 'storage-cabinet', 'cabinet' ) );
-      $sofa_img = great_wall_get_collection_image_url( 'sofa' );
+      $chair_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp';
+      $storage_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp';
+      $sofa_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Sofa.webp';
 
       $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
       $desks_link = $desks_cat ? get_term_link( $desks_cat ) : home_url( '/product-category/desks/' );
