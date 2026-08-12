@@ -121,7 +121,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           }
       }
 
-      $desk_img = great_wall_get_collection_image_url( 'desks' );
+      $desk_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp';
       $chair_img = great_wall_get_collection_image_url( array( 'chairs', 'office-chairs', 'chair' ) );
       $storage_img = great_wall_get_collection_image_url( array( 'storage-cabinet', 'cabinet' ) );
       $sofa_img = great_wall_get_collection_image_url( 'sofa' );
