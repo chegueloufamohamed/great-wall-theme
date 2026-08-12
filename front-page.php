@@ -235,7 +235,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 2: Bunk Beds -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/LK-2-3.jpg" alt="Bunk Beds">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp" alt="Bunk Beds">
           </div>
           <h4 class="rls-cat-label">Bunk Beds</h4>
         </div>
@@ -243,7 +243,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 3: Cabinet -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/TG-2，TG-2ATG-2B.jpg" alt="Cabinet">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp" alt="Cabinet">
           </div>
           <h4 class="rls-cat-label">Cabinet</h4>
         </div>
@@ -251,7 +251,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 4: Office Chairs -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/OC-10B-1.webp" alt="Office Chairs">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp" alt="Office Chairs">
           </div>
           <h4 class="rls-cat-label">Office Chairs</h4>
         </div>
@@ -259,7 +259,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 5: Commercial Chairs -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/OC-77C-1.webp" alt="Commercial Chairs">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp" alt="Commercial Chairs">
           </div>
           <h4 class="rls-cat-label">Commercial Chairs</h4>
         </div>
@@ -267,7 +267,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 6: Dining Tables -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/DT-1D01131.jpg" alt="Dining Tables">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp" alt="Dining Tables">
           </div>
           <h4 class="rls-cat-label">Dining Tables</h4>
         </div>
@@ -275,7 +275,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 7: Foldable Room Divider -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/PF-1-2.jpg" alt="Foldable Room Divider">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp" alt="Foldable Room Divider">
           </div>
           <h4 class="rls-cat-label">Foldable Room Divider</h4>
         </div>
@@ -285,7 +285,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 9: Office Furniture -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/OB-17.webp" alt="Office Furniture">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp" alt="Office Furniture">
           </div>
           <h4 class="rls-cat-label">Office Furniture</h4>
         </div>
@@ -301,7 +301,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 11: Shelves -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/HF-1.jpg" alt="Shelves">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Shelves.webp" alt="Shelves">
           </div>
           <h4 class="rls-cat-label">Shelves</h4>
         </div>
@@ -319,7 +319,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 13: Single Beds -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-LK-3-PIC-1.webp" alt="Single Beds">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp" alt="Single Beds">
           </div>
           <h4 class="rls-cat-label">Single Beds</h4>
         </div>
@@ -327,7 +327,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 14: Table -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/HW-7HY-R150B-1.jpg" alt="Table">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp" alt="Table">
           </div>
           <h4 class="rls-cat-label">Table</h4>
         </div>
