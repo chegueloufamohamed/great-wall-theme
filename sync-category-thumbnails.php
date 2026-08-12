@@ -30,7 +30,8 @@ $mappings = array(
     'office-furniture' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp',
     'chairs' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp',
     'storage-cabinet' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp',
-    'sofa' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Sofa.webp'
+    'sofa' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp',
+    'reception-lounge-set' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp'
 );
 
 echo "<h2>Starting WooCommerce Category Thumbnail Sync...</h2>";

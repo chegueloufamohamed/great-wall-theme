@@ -293,7 +293,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 10: Reception Lounge Set -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Reception Lounge Set">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp" alt="Reception Lounge Set">
           </div>
           <h4 class="rls-cat-label">Reception Lounge Set</h4>
         </div>
@@ -309,7 +309,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Card 12: Sofa -->
         <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>'">
           <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/07/Sofa-Grey-Hero-Photo.webp" alt="Sofa">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp" alt="Sofa">
           </div>
           <h4 class="rls-cat-label">Sofa</h4>
         </div>
