@@ -198,7 +198,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Banner 1: Steel Furniture -->
         <div class="rls-banner-card banner-steel" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
           <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/MODEL-TGD-1-PIC-1.webp" alt="Steel Furniture Banner">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp" alt="Steel Furniture Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Steel Furniture</h3>
@@ -209,7 +209,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Banner 2: Office Furniture -->
         <div class="rls-banner-card banner-office" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
           <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/OC-10B-1.webp" alt="Office Furniture Banner">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Furniture.webp" alt="Office Furniture Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Office Furniture</h3>
@@ -220,7 +220,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Banner 3: Staff Accommodation -->
         <div class="rls-banner-card banner-staff" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
           <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/06/LK-2-3--scaled.webp" alt="Staff Accommodation Banner">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Staff-Accomodation.webp" alt="Staff Accommodation Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Staff Accommodation</h3>
