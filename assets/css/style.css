@@ -712,14 +712,14 @@ p {
 .nav-item-dropdown:hover .mega-menu-col:nth-child(5) .mega-menu-list li:nth-child(3) { transition-delay: 0.77s; }
 
 .mega-menu-title {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #0C0C0C !important;
   background-color: rgba(0, 0, 0, 0.065) !important;
   border-radius: 99px !important;
-  padding: 6px 14px !important;
+  padding: 6px 16px !important;
   display: inline-block !important;
   width: fit-content !important;
   border-bottom: none !important;
