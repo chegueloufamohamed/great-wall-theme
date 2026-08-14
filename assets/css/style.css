@@ -759,19 +759,40 @@ p {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.mega-menu-list {
+.mega-menu-list,
+.mega-menu-sublist {
   list-style: none;
-  padding: 0;
+  padding: 14px 18px !important;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.035) !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(0, 0, 0, 0.01) !important;
 }
 
-.mega-menu-list li a {
-  font-size: 0.85rem;
+.mega-menu-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.45) !important;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.mega-menu-subgroup:first-of-type .mega-menu-subtitle {
+  margin-top: 0;
+}
+
+.mega-menu-list li a,
+.mega-menu-sublist li a {
+  font-size: 0.82rem;
   font-weight: 500;
-  color: #000000 !important;
+  color: #0C0C0C !important;
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
@@ -779,8 +800,9 @@ p {
   text-transform: capitalize;
 }
 
-.mega-menu-list li a:hover {
-  color: var(--color-accent, #E2B27E) !important;
+.mega-menu-list li a:hover,
+.mega-menu-sublist li a:hover {
+  color: var(--color-accent, #c5a880) !important;
   transform: translateX(4px);
 }
 
