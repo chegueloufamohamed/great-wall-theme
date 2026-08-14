@@ -480,11 +480,11 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                           ?>
                         </div>
                       </div>
-                      </div>
                       <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
                         <i class="ri-truck-fill"></i>
                         <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
                       </div>
+                    </div>
                     <?php
                     $delay += 100;
                     if ( $delay > 400 ) {
@@ -655,13 +655,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                                   }
                               }
                               ?>
-                            </div>
+                                                        </div>
                           </div>
-                      </div>
-                      <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
+                          <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
                             <i class="ri-truck-fill"></i>
                             <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
                           </div>
+                        </div>
                         <?php
                         $delay += 100;
                         if ( $delay > 400 ) {
@@ -875,11 +875,11 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                           ?>
                         </div>
                       </div>
-                      </div>
                       <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
                         <i class="ri-truck-fill"></i>
                         <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
                       </div>
+                    </div>
                     <?php
                     $delay += 100;
                     if ( $delay > 400 ) {
