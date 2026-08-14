@@ -458,7 +458,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                       </a>
                       <div class="popular-text-box">
                         <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
-                          <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
                           <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                         </a>
                         <div class="popular-swatches">
@@ -635,7 +634,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                           </a>
                           <div class="popular-text-box">
                             <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
-                              <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
                               <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                             </a>
                             <div class="popular-swatches">
@@ -853,7 +851,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                       </a>
                       <div class="popular-text-box">
                         <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
-                          <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
                           <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                         </a>
                         <div class="popular-swatches">
@@ -1062,7 +1059,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                       </a>
                       <div class="popular-text-box">
                         <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
-                          <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
                           <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                         </a>
                         <div class="popular-swatches">
