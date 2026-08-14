@@ -127,7 +127,7 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 						}
 
 						// 2. Add the manually nested terms if they are not already in true children
-						$manual_slugs = array( 'chairs', 'storage-cabinet', 'drawer-cabinet' );
+						$manual_slugs = array( 'chairs', 'office-storage' );
 						$sub_cats = $true_children;
 						$existing_slugs = array_map( function( $t ) { return $t->slug; }, $true_children );
 
@@ -140,9 +140,9 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 							}
 						}
 
-						// 3. Sort subcategories: desks first, chairs second, others alphabetically
+						// 3. Sort subcategories in the exact order requested: desks, workstations, office-storage, chairs, sofa
 						usort( $sub_cats, function( $a, $b ) {
-							$order = array( 'desks', 'chairs' );
+							$order = array( 'desks', 'workstations', 'office-storage', 'chairs', 'sofa' );
 							$a_idx = array_search( $a->slug, $order );
 							$b_idx = array_search( $b->slug, $order );
 							if ( $a_idx !== false && $b_idx !== false ) {
@@ -235,7 +235,22 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 							$has_children = ( ! is_wp_error( $child_cats ) && ! empty( $child_cats ) );
 							
 							if ( $has_children ) {
-								usort( $child_cats, function( $a, $b ) {
+								usort( $child_cats, function( $a, $b ) use ( $sub ) {
+									if ( 'office-storage' === $sub->slug ) {
+										$child_order = array( 'storage-cabinet', 'drawer-cabinet' );
+										$a_idx = array_search( $a->slug, $child_order );
+										$b_idx = array_search( $b->slug, $child_order );
+										if ( $a_idx !== false && $b_idx !== false ) {
+											return $a_idx - $b_idx;
+										}
+										if ( $a_idx !== false ) {
+											return -1;
+										}
+										if ( $b_idx !== false ) {
+											return 1;
+										}
+									}
+
 									$is_office_a = ( stripos( $a->slug, 'office' ) !== false || stripos( $a->name, 'office' ) !== false );
 									$is_office_b = ( stripos( $b->slug, 'office' ) !== false || stripos( $b->name, 'office' ) !== false );
 									if ( $is_office_a && ! $is_office_b ) {
