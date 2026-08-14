@@ -146,32 +146,34 @@
           }
         }
         ?>
-        <button class="action-btn search-trigger" title="<?php esc_attr_e( 'Search Products', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></button>
-        
-        <!-- Call Header Link -->
-        <a href="tel:+97143202921" class="action-btn call-header-btn" title="<?php esc_attr_e( 'Call Us', 'great-wall-theme' ); ?>">
-          <i class="ri-phone-line"></i>
-        </a>
+        <div class="header-action-icons">
+          <button class="action-btn search-trigger" title="<?php esc_attr_e( 'Search Products', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></button>
+          
+          <!-- Call Header Link -->
+          <a href="tel:+97143202921" class="action-btn call-header-btn" title="<?php esc_attr_e( 'Call Us', 'great-wall-theme' ); ?>">
+            <i class="ri-phone-line"></i>
+          </a>
 
-        <!-- Wishlist Header Trigger -->
-        <button class="action-btn wishlist-trigger" title="<?php esc_attr_e( 'Open Wishlist', 'great-wall-theme' ); ?>">
-          <i class="ri-heart-line wishlist-header-icon"></i>
-          <span class="wishlist-count" style="display: none;">0</span>
-        </button>
-        
-        <button class="action-btn cart-trigger" title="<?php esc_attr_e( 'Open Shopping Bag', 'great-wall-theme' ); ?>">
-          <i class="ri-shopping-bag-line"></i>
-          <!-- Show WooCommerce active cart contents dynamically if active -->
-          <span class="cart-count">
-            <?php 
-            if ( class_exists( 'WooCommerce' ) ) {
-              echo esc_html( WC()->cart->get_cart_contents_count() );
-            } else {
-              echo '0';
-            }
-            ?>
-          </span>
-        </button>
+          <!-- Wishlist Header Trigger -->
+          <button class="action-btn wishlist-trigger" title="<?php esc_attr_e( 'Open Wishlist', 'great-wall-theme' ); ?>">
+            <i class="ri-heart-line wishlist-header-icon"></i>
+            <span class="wishlist-count" style="display: none;">0</span>
+          </button>
+          
+          <button class="action-btn cart-trigger" title="<?php esc_attr_e( 'Open Shopping Bag', 'great-wall-theme' ); ?>">
+            <i class="ri-shopping-bag-line"></i>
+            <!-- Show WooCommerce active cart contents dynamically if active -->
+            <span class="cart-count">
+              <?php 
+              if ( class_exists( 'WooCommerce' ) ) {
+                echo esc_html( WC()->cart->get_cart_contents_count() );
+              } else {
+                echo '0';
+              }
+              ?>
+            </span>
+          </button>
+        </div>
         
         <button class="action-btn menu-toggle menu-toggle-trigger" title="<?php esc_attr_e( 'Open Menu', 'great-wall-theme' ); ?>">
           <span class="custom-hamburger">
