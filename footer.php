@@ -297,138 +297,107 @@
 
       <!-- Search Drawer Collections Grid -->
       <div class="search-drawer-collections" style="margin-top: 20px; transition: opacity 0.3s ease;">
-        <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1C1C1E; margin-bottom: 15px; text-align: left;">Explore Collections</h4>
+        <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1C1C1E; margin-bottom: 20px; text-align: left;">Explore Collections</h4>
         
-        <div class="search-collections-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 12px;">
-          <!-- 1. Desks -->
-          <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp" alt="Desks" />
+        <div class="search-collections-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 15px; padding-bottom: 30px;">
+          <!-- 1. Bunk Beds -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp" alt="Bunk Beds" />
             </div>
-            <span class="search-col-name">Desks</span>
-          </a>
+            <h4 class="rls-cat-label">Bunk Beds</h4>
+          </div>
 
-          <!-- 2. Office Chairs -->
-          <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp" alt="Office Chairs" />
+          <!-- 2. Cabinet -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp" alt="Cabinet" />
             </div>
-            <span class="search-col-name">Office Chairs</span>
-          </a>
+            <h4 class="rls-cat-label">Cabinet</h4>
+          </div>
 
-          <!-- 3. Storage Cabinet -->
-          <a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp" alt="Storage Cabinet" />
+          <!-- 3. Office Chairs -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp" alt="Office Chairs" />
             </div>
-            <span class="search-col-name">Storage</span>
-          </a>
+            <h4 class="rls-cat-label">Office Chairs</h4>
+          </div>
 
-          <!-- 4. Sofa -->
-          <a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp" alt="Sofa" />
+          <!-- 4. Commercial Chairs -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp" alt="Commercial Chairs" />
             </div>
-            <span class="search-col-name">Sofa</span>
-          </a>
+            <h4 class="rls-cat-label">Commercial Chairs</h4>
+          </div>
 
-          <!-- 5. Bunk Beds -->
-          <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp" alt="Bunk Beds" />
+          <!-- 5. Dining Tables -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp" alt="Dining Tables" />
             </div>
-            <span class="search-col-name">Bunk Beds</span>
-          </a>
+            <h4 class="rls-cat-label">Dining Tables</h4>
+          </div>
 
-          <!-- 6. Single Beds -->
-          <a href="<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp" alt="Single Beds" />
+          <!-- 6. Foldable Room Divider -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp" alt="Foldable Room Divider" />
             </div>
-            <span class="search-col-name">Single Beds</span>
-          </a>
+            <h4 class="rls-cat-label">Foldable Room Divider</h4>
+          </div>
 
-          <!-- 7. Commercial Chairs -->
-          <a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp" alt="Commercial Chairs" />
+          <!-- 7. Office Furniture -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp" alt="Office Furniture" />
             </div>
-            <span class="search-col-name">Commercial</span>
-          </a>
+            <h4 class="rls-cat-label">Office Furniture</h4>
+          </div>
 
-          <!-- 8. Dining Tables -->
-          <a href="<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp" alt="Dining Tables" />
+          <!-- 8. Reception Lounge Set -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp" alt="Reception Lounge Set" />
             </div>
-            <span class="search-col-name">Dining</span>
-          </a>
+            <h4 class="rls-cat-label">Reception Lounge Set</h4>
+          </div>
 
-          <!-- 9. Foldable Room Divider -->
-          <a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>" class="search-col-item">
-            <div class="search-col-img-box">
-              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp" alt="Foldable Room Divider" />
+          <!-- 9. Shelves -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Shelves.webp" alt="Shelves" />
             </div>
-            <span class="search-col-name">Divider</span>
-          </a>
+            <h4 class="rls-cat-label">Shelves</h4>
+          </div>
+
+          <!-- 10. Sofa -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp" alt="Sofa" />
+            </div>
+            <h4 class="rls-cat-label">Sofa</h4>
+          </div>
+
+          <!-- 11. Single Beds -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp" alt="Single Beds" />
+            </div>
+            <h4 class="rls-cat-label">Single Beds</h4>
+          </div>
+
+          <!-- 12. Table -->
+          <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>'">
+            <div class="rls-cat-img-box">
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp" alt="Table" />
+            </div>
+            <h4 class="rls-cat-label">Table</h4>
+          </div>
         </div>
       </div>
     </div>
-
-    <style>
-      .search-col-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none !important;
-        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .search-col-item:hover {
-        transform: translateY(-3px);
-      }
-      .search-col-img-box {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        border-radius: 16px;
-        background-color: #F6F6F6;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 8px;
-        border: 1.5px solid transparent;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-      }
-      .search-col-item:hover .search-col-img-box {
-        border-color: var(--color-accent, #c5a880);
-        background-color: #FFFFFF;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      }
-      .search-col-img-box img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        border-radius: 10px;
-        transition: transform 0.4s ease;
-      }
-      .search-col-item:hover .search-col-img-box img {
-        transform: scale(1.06);
-      }
-      .search-col-name {
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: #1C1C1E;
-        margin-top: 6px;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-        transition: color 0.2s ease;
-      }
-      .search-col-item:hover .search-col-name {
-        color: var(--color-accent, #c5a880);
-      }
-    </style>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
