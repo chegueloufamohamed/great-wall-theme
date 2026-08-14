@@ -912,15 +912,15 @@ p {
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 22px;
-  height: 14px;
+  width: 28px;
+  height: 18px;
   position: relative;
   vertical-align: middle;
 }
 
 .custom-hamburger .bar {
   display: block;
-  height: 2px;
+  height: 2.5px;
   background-color: #0C0C0C;
   border-radius: 99px;
   transition: all 0.3s ease;
