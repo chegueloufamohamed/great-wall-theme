@@ -285,7 +285,7 @@
       <button class="drawer-close" aria-label="<?php esc_attr_e( 'Close Search', 'great-wall-theme' ); ?>"><i class="ri-close-line"></i></button>
     </div>
     
-    <div class="drawer-search-content" style="padding: 30px;">
+    <div class="drawer-search-content" style="padding: 30px; overflow-y: auto; max-height: calc(100vh - 90px);">
       <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
         <div class="search-input-wrapper" style="position: relative; margin-bottom: 20px;">
           <input type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'Search products...', 'placeholder', 'great-wall-theme' ); ?>" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'great-wall-theme' ); ?>" style="width: 100%; padding: 12px 40px 12px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; font-family: inherit; font-size: 0.95rem; outline: none; background: rgba(0,0,0,0.02);" />
@@ -293,8 +293,166 @@
           <button type="submit" class="search-submit-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--color-accent, #c5a880);"><i class="ri-search-line"></i></button>
         </div>
       </form>
-      <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center;">Press Enter to search, or click the search icon.</p>
+      <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-bottom: 30px;">Press Enter to search, or click the search icon.</p>
+
+      <!-- Search Drawer Collections Grid -->
+      <div class="search-drawer-collections" style="margin-top: 20px; transition: opacity 0.3s ease;">
+        <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1C1C1E; margin-bottom: 15px; text-align: left;">Explore Collections</h4>
+        
+        <div class="search-collections-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 12px;">
+          <!-- 1. Desks -->
+          <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp" alt="Desks" />
+            </div>
+            <span class="search-col-name">Desks</span>
+          </a>
+
+          <!-- 2. Office Chairs -->
+          <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp" alt="Office Chairs" />
+            </div>
+            <span class="search-col-name">Office Chairs</span>
+          </a>
+
+          <!-- 3. Storage Cabinet -->
+          <a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp" alt="Storage Cabinet" />
+            </div>
+            <span class="search-col-name">Storage</span>
+          </a>
+
+          <!-- 4. Sofa -->
+          <a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp" alt="Sofa" />
+            </div>
+            <span class="search-col-name">Sofa</span>
+          </a>
+
+          <!-- 5. Bunk Beds -->
+          <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp" alt="Bunk Beds" />
+            </div>
+            <span class="search-col-name">Bunk Beds</span>
+          </a>
+
+          <!-- 6. Single Beds -->
+          <a href="<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp" alt="Single Beds" />
+            </div>
+            <span class="search-col-name">Single Beds</span>
+          </a>
+
+          <!-- 7. Commercial Chairs -->
+          <a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp" alt="Commercial Chairs" />
+            </div>
+            <span class="search-col-name">Commercial</span>
+          </a>
+
+          <!-- 8. Dining Tables -->
+          <a href="<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp" alt="Dining Tables" />
+            </div>
+            <span class="search-col-name">Dining</span>
+          </a>
+
+          <!-- 9. Foldable Room Divider -->
+          <a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>" class="search-col-item">
+            <div class="search-col-img-box">
+              <img src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp" alt="Foldable Room Divider" />
+            </div>
+            <span class="search-col-name">Divider</span>
+          </a>
+        </div>
+      </div>
     </div>
+
+    <style>
+      .search-col-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none !important;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .search-col-item:hover {
+        transform: translateY(-3px);
+      }
+      .search-col-img-box {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 16px;
+        background-color: #F6F6F6;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        border: 1.5px solid transparent;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+      .search-col-item:hover .search-col-img-box {
+        border-color: var(--color-accent, #c5a880);
+        background-color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .search-col-img-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        transition: transform 0.4s ease;
+      }
+      .search-col-item:hover .search-col-img-box img {
+        transform: scale(1.06);
+      }
+      .search-col-name {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #1C1C1E;
+        margin-top: 6px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        transition: color 0.2s ease;
+      }
+      .search-col-item:hover .search-col-name {
+        color: var(--color-accent, #c5a880);
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('#search-drawer .search-field');
+        const collectionsGrid = document.querySelector('.search-drawer-collections');
+        if (searchInput && collectionsGrid) {
+          searchInput.addEventListener('input', function() {
+            if (searchInput.value.trim().length > 0) {
+              collectionsGrid.style.opacity = '0';
+              setTimeout(() => {
+                if (searchInput.value.trim().length > 0) {
+                  collectionsGrid.style.display = 'none';
+                }
+              }, 300);
+            } else {
+              collectionsGrid.style.display = 'block';
+              setTimeout(() => {
+                collectionsGrid.style.opacity = '1';
+              }, 10);
+            }
+          });
+        }
+      });
+    </script>
   </div>
 
   <!-- Wishlist Drawer Panel -->
