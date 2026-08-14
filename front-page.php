@@ -448,37 +448,41 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                     $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
                     ?>
                     <div class="popular-card delay-<?php echo esc_attr( $delay ); ?>" data-scroll>
-                      <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
+                                            <a href="<?php echo esc_url( $permalink ); ?>" class="popular-card-link" style="text-decoration: none; color: inherit; display: block;">
                         <div class="popular-img-box">
                           <?php if ( $product->is_featured() ) : ?>
                             <span class="popular-badge-pill">UNIQUE</span>
                           <?php endif; ?>
                           <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
                         </div>
-                        <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
-                        <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                       </a>
-                      <div class="popular-swatches">
-                        <?php
-                        $colors = $product->get_attribute( 'pa_color' );
-                        if ( $colors ) {
-                            $color_arr = explode( ',', $colors );
-                            foreach ( $color_arr as $c ) {
-                                $c = trim( $c );
-                                $hex = '#8E8E93';
-                                if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
-                                elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
-                                elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
-                                elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
-                                elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
-                                echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
-                            }
-                        }
-                        ?>
-                      </div>
-                      <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
-                        <i class="ri-truck-fill"></i>
-                        <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                      <div class="popular-text-box">
+                        <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                          <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                          <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                        </a>
+                        <div class="popular-swatches">
+                          <?php
+                          $colors = $product->get_attribute( 'pa_color' );
+                          if ( $colors ) {
+                              $color_arr = explode( ',', $colors );
+                              foreach ( $color_arr as $c ) {
+                                  $c = trim( $c );
+                                  $hex = '#8E8E93';
+                                  if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                                  elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                  elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                  elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                  elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                  echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                              }
+                          }
+                          ?>
+                        </div>
+                        <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
+                          <i class="ri-truck-fill"></i>
+                          <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                        </div>
                       </div>
                     </div>
                     <?php
@@ -628,30 +632,34 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                               <?php endif; ?>
                               <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
                             </div>
-                            <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
-                            <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                           </a>
-                          <div class="popular-swatches">
-                            <?php
-                            $colors = $product->get_attribute( 'pa_color' );
-                            if ( $colors ) {
-                                $color_arr = explode( ',', $colors );
-                                foreach ( $color_arr as $c ) {
-                                    $c = trim( $c );
-                                    $hex = '#8E8E93';
-                                    if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
-                                    elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
-                                    elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
-                                    elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
-                                    elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
-                                    echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
-                                }
-                            }
-                            ?>
-                          </div>
-                          <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
-                            <i class="ri-truck-fill"></i>
-                            <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                          <div class="popular-text-box">
+                            <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                              <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                              <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                            </a>
+                            <div class="popular-swatches">
+                              <?php
+                              $colors = $product->get_attribute( 'pa_color' );
+                              if ( $colors ) {
+                                  $color_arr = explode( ',', $colors );
+                                  foreach ( $color_arr as $c ) {
+                                      $c = trim( $c );
+                                      $hex = '#8E8E93';
+                                      if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                                      elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                      elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                      elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                      elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                      echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                                  }
+                              }
+                              ?>
+                            </div>
+                            <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
+                              <i class="ri-truck-fill"></i>
+                              <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                            </div>
                           </div>
                         </div>
                         <?php
@@ -842,30 +850,34 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                           <?php endif; ?>
                           <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
                         </div>
-                        <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
-                        <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                       </a>
-                      <div class="popular-swatches">
-                        <?php
-                        $colors = $product->get_attribute( 'pa_color' );
-                        if ( $colors ) {
-                            $color_arr = explode( ',', $colors );
-                            foreach ( $color_arr as $c ) {
-                                $c = trim( $c );
-                                $hex = '#8E8E93';
-                                if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
-                                elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
-                                elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
-                                elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
-                                elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
-                                echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
-                            }
-                        }
-                        ?>
-                      </div>
-                      <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
-                        <i class="ri-truck-fill"></i>
-                        <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                      <div class="popular-text-box">
+                        <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                          <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                          <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                        </a>
+                        <div class="popular-swatches">
+                          <?php
+                          $colors = $product->get_attribute( 'pa_color' );
+                          if ( $colors ) {
+                              $color_arr = explode( ',', $colors );
+                              foreach ( $color_arr as $c ) {
+                                  $c = trim( $c );
+                                  $hex = '#8E8E93';
+                                  if ( stripos( $c, 'black' ) !== false ) { $hex = '#1C1C1E'; }
+                                  elseif ( stripos( $c, 'grey' ) !== false || stripos( $c, 'gray' ) !== false ) { $hex = '#8E8E93'; }
+                                  elseif ( stripos( $c, 'blue' ) !== false ) { $hex = '#1A1F3C'; }
+                                  elseif ( stripos( $c, 'cream' ) !== false ) { $hex = '#F5E6C9'; }
+                                  elseif ( stripos( $c, 'brown' ) !== false ) { $hex = '#705B54'; }
+                                  echo '<span class="popular-swatch-dot" style="background-color: ' . esc_attr( $hex ) . ';" title="' . esc_attr( $c ) . '"></span>';
+                              }
+                          }
+                          ?>
+                        </div>
+                        <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
+                          <i class="ri-truck-fill"></i>
+                          <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                        </div>
                       </div>
                     </div>
                     <?php
@@ -1047,10 +1059,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                           <?php endif; ?>
                           <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>">
                         </div>
-                        <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
-                        <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
                       </a>
-                      <div class="popular-swatches">
+                      <div class="popular-text-box">
+                        <a href="<?php echo esc_url( $permalink ); ?>" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                          <h3 class="popular-card-title"><?php echo esc_html( $title ); ?></h3>
+                          <div class="popular-card-price"><?php echo wp_kses_post( $price_html ); ?></div>
+                        </a>
+                        <div class="popular-swatches">
                         <?php
                         $colors = $product->get_attribute( 'pa_color' );
                         if ( $colors ) {
@@ -1068,9 +1083,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                         }
                         ?>
                       </div>
-                      <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
+                        <div class="card-free-shipping-badge" data-tooltip="For Dubai • Sharjah • Ajman">
                         <i class="ri-truck-fill"></i>
                         <span><?php esc_html_e( 'Free Shipping and Fixing', 'great-wall-theme' ); ?></span>
+                      </div>
                       </div>
                     </div>
                     <?php
