@@ -473,7 +473,6 @@ p {
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 40px;
-  position: relative;
 }
 
 .logo {
@@ -625,14 +624,12 @@ p {
 
 .mega-menu-panel {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 12px) !important;
   left: 0;
   width: 100%;
   background-color: #FFFFFF !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-  border-bottom-left-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1) !important;
   padding: 40px var(--container-padding, 80px);
   opacity: 0;
@@ -989,6 +986,7 @@ p {
   }
   .header-container {
     padding: 0 20px !important;
+    position: relative !important;
   }
 }
 
