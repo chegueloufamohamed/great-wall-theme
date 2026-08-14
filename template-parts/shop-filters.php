@@ -116,15 +116,46 @@ if ( ! function_exists( 'great_wall_get_toggle_cat_url' ) ) {
 
 					// Get subcategories of this parent category dynamically or manually
 					if ( $is_office_furniture ) {
-						// Retrieve the 5 subcategories manually in the exact order requested
-						$sub_slugs_ordered = array( 'desks', 'chairs', 'storage-cabinet', 'sofa', 'drawer-cabinet' );
-						$sub_cats = array();
-						foreach ( $sub_slugs_ordered as $slug ) {
-							$term = get_term_by( 'slug', $slug, 'product_cat' );
-							if ( $term && ! is_wp_error( $term ) ) {
-								$sub_cats[] = $term;
+						// 1. Get true database child terms under Office Furniture (e.g. desks, sofa, workstations)
+						$true_children = get_terms( array(
+							'taxonomy'   => 'product_cat',
+							'hide_empty' => false,
+							'parent'     => $cat->term_id,
+						) );
+						if ( is_wp_error( $true_children ) ) {
+							$true_children = array();
+						}
+
+						// 2. Add the manually nested terms if they are not already in true children
+						$manual_slugs = array( 'chairs', 'storage-cabinet', 'drawer-cabinet' );
+						$sub_cats = $true_children;
+						$existing_slugs = array_map( function( $t ) { return $t->slug; }, $true_children );
+
+						foreach ( $manual_slugs as $slug ) {
+							if ( ! in_array( $slug, $existing_slugs ) ) {
+								$term = get_term_by( 'slug', $slug, 'product_cat' );
+								if ( $term && ! is_wp_error( $term ) ) {
+									$sub_cats[] = $term;
+								}
 							}
 						}
+
+						// 3. Sort subcategories: desks first, chairs second, others alphabetically
+						usort( $sub_cats, function( $a, $b ) {
+							$order = array( 'desks', 'chairs' );
+							$a_idx = array_search( $a->slug, $order );
+							$b_idx = array_search( $b->slug, $order );
+							if ( $a_idx !== false && $b_idx !== false ) {
+								return $a_idx - $b_idx;
+							}
+							if ( $a_idx !== false ) {
+								return -1;
+							}
+							if ( $b_idx !== false ) {
+								return 1;
+							}
+							return strcmp( strtolower( $a->name ), strtolower( $b->name ) );
+						} );
 					} else {
 						// Default parent categories: retrieve child terms from database
 						$sub_cats = get_terms( array(
