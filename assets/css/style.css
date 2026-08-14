@@ -760,9 +760,9 @@ p {
 }
 
 .mega-menu-list,
-.mega-menu-sublist {
+.mega-menu-group-box {
   list-style: none;
-  padding: 14px 18px !important;
+  padding: 16px 20px !important;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -772,6 +772,19 @@ p {
   border: 1px solid rgba(0, 0, 0, 0.01) !important;
 }
 
+.mega-menu-group-box {
+  gap: 16px;
+}
+
+.mega-menu-sublist {
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .mega-menu-subtitle {
   font-family: var(--font-sans);
   font-size: 0.68rem;
@@ -779,13 +792,9 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(0, 0, 0, 0.45) !important;
-  margin-top: 14px;
-  margin-bottom: 6px;
-  padding-left: 4px;
-}
-
-.mega-menu-subgroup:first-of-type .mega-menu-subtitle {
   margin-top: 0;
+  margin-bottom: 6px;
+  padding-left: 0;
 }
 
 .mega-menu-list li a,

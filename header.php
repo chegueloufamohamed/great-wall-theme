@@ -55,35 +55,37 @@
               <div class="mega-menu-col">
                 <h4 class="mega-menu-title">Office Furniture</h4>
                 
-                <div class="mega-menu-subgroup">
-                  <h5 class="mega-menu-subtitle">Desks & Workstations</h5>
-                  <ul class="mega-menu-sublist">
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Desks</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/workstations/' ) ); ?>">Workstations <span class="mega-badge badge-new">New</span></a></li>
-                  </ul>
-                </div>
+                <div class="mega-menu-group-box">
+                  <div class="mega-menu-subgroup">
+                    <h5 class="mega-menu-subtitle">Desks & Workstations</h5>
+                    <ul class="mega-menu-sublist">
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Desks</a></li>
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/workstations/' ) ); ?>">Workstations <span class="mega-badge badge-new">New</span></a></li>
+                    </ul>
+                  </div>
 
-                <div class="mega-menu-subgroup">
-                  <h5 class="mega-menu-subtitle">Office Storage</h5>
-                  <ul class="mega-menu-sublist">
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>">Storage Cabinet</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/drawer-cabinet/' ) ); ?>">Drawer Cabinet</a></li>
-                  </ul>
-                </div>
+                  <div class="mega-menu-subgroup">
+                    <h5 class="mega-menu-subtitle">Office Storage</h5>
+                    <ul class="mega-menu-sublist">
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>">Storage Cabinet</a></li>
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/drawer-cabinet/' ) ); ?>">Drawer Cabinet</a></li>
+                    </ul>
+                  </div>
 
-                <div class="mega-menu-subgroup">
-                  <h5 class="mega-menu-subtitle">Chairs</h5>
-                  <ul class="mega-menu-sublist">
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs <span class="mega-badge badge-popular">Popular</span></a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a></li>
-                  </ul>
-                </div>
+                  <div class="mega-menu-subgroup">
+                    <h5 class="mega-menu-subtitle">Chairs</h5>
+                    <ul class="mega-menu-sublist">
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs <span class="mega-badge badge-popular">Popular</span></a></li>
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a></li>
+                    </ul>
+                  </div>
 
-                <div class="mega-menu-subgroup">
-                  <h5 class="mega-menu-subtitle">Sofa</h5>
-                  <ul class="mega-menu-sublist">
-                    <li><a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge</a></li>
-                  </ul>
+                  <div class="mega-menu-subgroup">
+                    <h5 class="mega-menu-subtitle">Sofa</h5>
+                    <ul class="mega-menu-sublist">
+                      <li><a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
