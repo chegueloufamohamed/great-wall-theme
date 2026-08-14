@@ -103,7 +103,7 @@
             </div>
             
             <div class="mega-menu-footer" style="margin-top: 35px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: center; width: 100%;">
-              <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth); pointer-events: auto;">
+              <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="mega-menu-view-all">
                 <span><?php esc_html_e( 'View All Products', 'great-wall-theme' ); ?></span>
                 <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
               </a>
