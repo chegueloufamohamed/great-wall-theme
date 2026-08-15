@@ -127,7 +127,7 @@
 
             </div>
             
-            <div class="mega-menu-footer" style="margin-top: 35px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: center; width: 100%;">
+            <div class="mega-menu-footer" style="margin-top: 24px; padding-top: 0; display: flex; justify-content: center; width: 100%;">
               <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="mega-menu-view-all">
                 <span><?php esc_html_e( 'View All Products', 'great-wall-theme' ); ?></span>
                 <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
