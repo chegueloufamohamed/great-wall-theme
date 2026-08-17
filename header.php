@@ -86,8 +86,8 @@
               // Map categories to columns
               if ( ! empty( $all_cats ) && ! is_wp_error( $all_cats ) ) {
                   foreach ( $all_cats as $cat ) {
-                      // Skip office-storage and chairs parent categories
-                      if ( in_array( $cat->slug, array( 'office-storage', 'chairs' ) ) ) {
+                      // Skip office-storage, chairs, and table parent categories
+                      if ( in_array( $cat->slug, array( 'office-storage', 'chairs', 'table' ) ) ) {
                           continue;
                       }
                       // Find which column this category belongs to by checking parent categories or its own slug
