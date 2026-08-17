@@ -51,79 +51,204 @@
           <div class="mega-menu-panel">
             <div class="mega-menu-grid">
               
-              <!-- Column 1: OFFICE FURNITURE -->
+              <?php
+              // Fetch all non-empty product categories (excluding uncategorized)
+              $all_cats = get_terms( array(
+                  'taxonomy'   => 'product_cat',
+                  'hide_empty' => true,
+                  'exclude'    => array( get_option( 'default_product_cat' ) ),
+              ) );
+
+              // Define our 5 columns and their associated category slugs
+              $columns = array(
+                  'office-furniture' => array(
+                      'title' => 'Office Furniture',
+                      'cats'  => array(),
+                  ),
+                  'steel-furniture' => array(
+                      'title' => 'Steel Furniture',
+                      'cats'  => array(),
+                  ),
+                  'accommodation' => array(
+                      'title' => 'Accommodation',
+                      'cats'  => array(),
+                  ),
+                  'tables-dining' => array(
+                      'title' => 'Tables & Dining',
+                      'cats'  => array(),
+                  ),
+                  'living-divider' => array(
+                      'title' => 'Living & Divider',
+                      'cats'  => array(),
+                  ),
+              );
+
+              // Map categories to columns
+              if ( ! empty( $all_cats ) && ! is_wp_error( $all_cats ) ) {
+                  foreach ( $all_cats as $cat ) {
+                      // Find which column this category belongs to by checking parent categories or its own slug
+                      $assigned_col = '';
+                      
+                      // 1. Check parent hierarchy
+                      $ancestors = get_ancestors( $cat->term_id, 'product_cat' );
+                      if ( ! empty( $ancestors ) ) {
+                          foreach ( $ancestors as $ancestor_id ) {
+                              $ancestor = get_term( $ancestor_id, 'product_cat' );
+                              if ( $ancestor && isset( $columns[ $ancestor->slug ] ) ) {
+                                  $assigned_col = $ancestor->slug;
+                                  break;
+                              }
+                          }
+                      }
+                      
+                      // 2. If no parent matches, try mapping by category slug or parent slug matching
+                      if ( ! $assigned_col ) {
+                          $slug = $cat->slug;
+                          if ( in_array( $slug, array( 'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'office-chairs', 'commercial-chairs', 'reception-lounge-set', 'office-furniture' ) ) ) {
+                              $assigned_col = 'office-furniture';
+                          } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture' ) ) ) {
+                              $assigned_col = 'steel-furniture';
+                          } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation' ) ) ) {
+                              $assigned_col = 'accommodation';
+                          } elseif ( in_array( $slug, array( 'dinning-tables', 'table', 'tables-dining' ) ) ) {
+                              $assigned_col = 'tables-dining';
+                          } elseif ( in_array( $slug, array( 'sofa', 'partition-stands', 'living-divider' ) ) ) {
+                              $assigned_col = 'living-divider';
+                          }
+                      }
+                      
+                      // Assign if a column is matched
+                      if ( $assigned_col ) {
+                          $columns[ $assigned_col ]['cats'][] = $cat;
+                      }
+                  }
+              }
+
+              // Column 1: OFFICE FURNITURE (with dynamic subgroups)
+              ?>
               <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Office Furniture</h4>
+                <h4 class="mega-menu-title"><?php echo esc_html( $columns['office-furniture']['title'] ); ?></h4>
                 
                 <div class="mega-menu-group-box">
-                  <div class="mega-menu-subgroup">
-                    <h5 class="mega-menu-subtitle">Desks & Workstations</h5>
-                    <ul class="mega-menu-sublist">
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Desks</a></li>
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/workstations/' ) ); ?>">Workstations <span class="mega-badge badge-new">New</span></a></li>
-                    </ul>
-                  </div>
-
-                  <div class="mega-menu-subgroup">
-                    <h5 class="mega-menu-subtitle">Office Storage</h5>
-                    <ul class="mega-menu-sublist">
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>">Storage Cabinet</a></li>
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/drawer-cabinet/' ) ); ?>">Drawer Cabinet</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="mega-menu-subgroup">
-                    <h5 class="mega-menu-subtitle">Chairs</h5>
-                    <ul class="mega-menu-sublist">
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs <span class="mega-badge badge-popular">Popular</span></a></li>
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="mega-menu-subgroup">
-                    <h5 class="mega-menu-subtitle">Sofa</h5>
-                    <ul class="mega-menu-sublist">
-                      <li><a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge</a></li>
-                    </ul>
-                  </div>
+                  <?php
+                  $office_cats = $columns['office-furniture']['cats'];
+                  
+                  // Define subgroups
+                  $subgroups = array(
+                      'desks' => array(
+                          'title' => 'Desks & Workstations',
+                          'cats'  => array(),
+                      ),
+                      'storage' => array(
+                          'title' => 'Office Storage',
+                          'cats'  => array(),
+                      ),
+                      'chairs' => array(
+                          'title' => 'Chairs',
+                          'cats'  => array(),
+                      ),
+                      'sofa' => array(
+                          'title' => 'Sofa',
+                          'cats'  => array(),
+                      ),
+                      'other' => array(
+                          'title' => 'Other Office',
+                          'cats'  => array(),
+                      ),
+                  );
+                  
+                  // Distribute to subgroups
+                  foreach ( $office_cats as $cat ) {
+                      $slug = $cat->slug;
+                      if ( strpos( $slug, 'desk' ) !== false || strpos( $slug, 'workstation' ) !== false ) {
+                          $subgroups['desks']['cats'][] = $cat;
+                      } elseif ( strpos( $slug, 'cabinet' ) !== false || strpos( $slug, 'storage' ) !== false || strpos( $slug, 'drawer' ) !== false || strpos( $slug, 'locker' ) !== false || strpos( $slug, 'safe' ) !== false ) {
+                          $subgroups['storage']['cats'][] = $cat;
+                      } elseif ( strpos( $slug, 'chair' ) !== false || strpos( $slug, 'seating' ) !== false || strpos( $slug, 'stool' ) !== false ) {
+                          $subgroups['chairs']['cats'][] = $cat;
+                      } elseif ( strpos( $slug, 'sofa' ) !== false || strpos( $slug, 'lounge' ) !== false || strpos( $slug, 'reception' ) !== false ) {
+                          $subgroups['sofa']['cats'][] = $cat;
+                      } else {
+                          // Exclude the parent 'office-furniture' category itself from showing as a duplicate child item inside the box
+                          if ( $slug !== 'office-furniture' ) {
+                              $subgroups['other']['cats'][] = $cat;
+                          }
+                      }
+                  }
+                  
+                  // Render subgroups
+                  foreach ( $subgroups as $sub_key => $subgroup ) {
+                      if ( empty( $subgroup['cats'] ) ) {
+                          continue;
+                      }
+                      ?>
+                      <div class="mega-menu-subgroup">
+                        <h5 class="mega-menu-subtitle"><?php echo esc_html( $subgroup['title'] ); ?></h5>
+                        <ul class="mega-menu-sublist">
+                          <?php foreach ( $subgroup['cats'] as $cat ) : 
+                              $term_link = get_term_link( $cat );
+                              $label = $cat->name;
+                              if ( $sub_key === 'desks' && strcasecmp( $label, 'Office Desks' ) === 0 ) {
+                                  $label = 'Desks';
+                              }
+                              ?>
+                              <li>
+                                <a href="<?php echo esc_url( $term_link ); ?>">
+                                  <?php echo esc_html( $label ); ?>
+                                  <?php
+                                  if ( $cat->slug === 'workstations' ) {
+                                      echo '<span class="mega-badge badge-new">New</span>';
+                                  } elseif ( $cat->slug === 'office-chairs' ) {
+                                      echo '<span class="mega-badge badge-popular">Popular</span>';
+                                  }
+                                  ?>
+                                </a>
+                              </li>
+                          <?php endforeach; ?>
+                        </ul>
+                      </div>
+                      <?php
+                  }
+                  ?>
                 </div>
               </div>
 
-              <!-- Column 2: STEEL FURNITURE -->
-              <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Steel Furniture</h4>
-                <ul class="mega-menu-list">
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>">Cabinets & Lockers <span class="mega-badge badge-hot">Hot</span></a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>">Shelves & Racks</a></li>
-                </ul>
-              </div>
-
-              <!-- Column 3: BEDS & ACCOMMODATION -->
-              <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Accommodation</h4>
-                <ul class="mega-menu-list">
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>">Metal Bunk Beds</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>">Single Metal Beds</a></li>
-                </ul>
-              </div>
-
-              <!-- Column 4: TABLES & DINING -->
-              <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Tables & Dining</h4>
-                <ul class="mega-menu-list">
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>">Dining Tables</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>">Folding Tables</a></li>
-                </ul>
-              </div>
-
-              <!-- Column 5: LIVING & DIVIDER -->
-              <div class="mega-menu-col">
-                <h4 class="mega-menu-title">Living & Divider</h4>
-                <ul class="mega-menu-list">
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>">Sofas & Seating</a></li>
-                  <li><a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>">Foldable Divider</a></li>
-                </ul>
-              </div>
+              <?php
+              // Columns 2, 3, 4, 5: Single list boxes
+              foreach ( array( 'steel-furniture', 'accommodation', 'tables-dining', 'living-divider' ) as $col_key ) : 
+                  $col = $columns[ $col_key ];
+                  ?>
+                  <div class="mega-menu-col">
+                    <h4 class="mega-menu-title"><?php echo esc_html( $col['title'] ); ?></h4>
+                    <ul class="mega-menu-list">
+                      <?php
+                      if ( ! empty( $col['cats'] ) ) {
+                          foreach ( $col['cats'] as $cat ) {
+                              $term_link = get_term_link( $cat );
+                              if ( $cat->slug === $col_key ) {
+                                  continue;
+                              }
+                              $label = $cat->name;
+                              ?>
+                              <li>
+                                <a href="<?php echo esc_url( $term_link ); ?>">
+                                  <?php echo esc_html( $label ); ?>
+                                  <?php
+                                  if ( $cat->slug === 'cabinet' ) {
+                                      echo '<span class="mega-badge badge-hot">Hot</span>';
+                                  }
+                                  ?>
+                                </a>
+                              </li>
+                              <?php
+                          }
+                      } else {
+                          echo '<li><span style="font-size: 0.8rem; color: var(--color-muted);">' . esc_html__( 'No categories', 'great-wall-theme' ) . '</span></li>';
+                      }
+                      ?>
+                    </ul>
+                  </div>
+              <?php endforeach; ?>
 
             </div>
             

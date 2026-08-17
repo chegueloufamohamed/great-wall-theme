@@ -231,106 +231,69 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
       <!-- Part 2: 12 Categories Grid -->
       <div class="rls-category-grid-12">
+        <?php
+        $cats = get_terms( array(
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => true,
+            'exclude'    => array( get_option( 'default_product_cat' ) ), // Exclude Uncategorized
+            'orderby'    => 'name',
+            'order'      => 'ASC',
+        ) );
 
-        <!-- Card 2: Bunk Beds -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp" alt="Bunk Beds">
-          </div>
-          <h4 class="rls-cat-label">Bunk Beds</h4>
-        </div>
-
-        <!-- Card 3: Cabinet -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp" alt="Cabinet">
-          </div>
-          <h4 class="rls-cat-label">Cabinet</h4>
-        </div>
-
-        <!-- Card 4: Office Chairs -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp" alt="Office Chairs">
-          </div>
-          <h4 class="rls-cat-label">Office Chairs</h4>
-        </div>
-
-        <!-- Card 5: Commercial Chairs -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp" alt="Commercial Chairs">
-          </div>
-          <h4 class="rls-cat-label">Commercial Chairs</h4>
-        </div>
-
-        <!-- Card 6: Dining Tables -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp" alt="Dining Tables">
-          </div>
-          <h4 class="rls-cat-label">Dining Tables</h4>
-        </div>
-
-        <!-- Card 7: Foldable Room Divider -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp" alt="Foldable Room Divider">
-          </div>
-          <h4 class="rls-cat-label">Foldable Room Divider</h4>
-        </div>
-
-
-
-        <!-- Card 9: Office Furniture -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp" alt="Office Furniture">
-          </div>
-          <h4 class="rls-cat-label">Office Furniture</h4>
-        </div>
-
-        <!-- Card 10: Reception Lounge Set -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp" alt="Reception Lounge Set">
-          </div>
-          <h4 class="rls-cat-label">Reception Lounge Set</h4>
-        </div>
-
-        <!-- Card 11: Shelves -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Shelves.webp" alt="Shelves">
-          </div>
-          <h4 class="rls-cat-label">Shelves</h4>
-        </div>
-
-        <!-- Card 12: Sofa -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp" alt="Sofa">
-          </div>
-          <h4 class="rls-cat-label">Sofa</h4>
-        </div>
-
-
-
-        <!-- Card 13: Single Beds -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp" alt="Single Beds">
-          </div>
-          <h4 class="rls-cat-label">Single Beds</h4>
-        </div>
-
-        <!-- Card 14: Table -->
-        <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>'">
-          <div class="rls-cat-img-box">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp" alt="Table">
-          </div>
-          <h4 class="rls-cat-label">Table</h4>
-        </div>
+        if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
+            foreach ( $cats as $cat ) {
+                $term_link = get_term_link( $cat );
+                if ( is_wp_error( $term_link ) ) {
+                    continue;
+                }
+                
+                // Get WooCommerce category thumbnail
+                $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+                $image_url = $thumbnail_id ? wp_get_attachment_url( $thumbnail_id ) : '';
+                
+                // Fallback mappings to high-quality images based on slug
+                if ( ! $image_url ) {
+                    $slug = $cat->slug;
+                    if ( $slug === 'bunk-beds' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp';
+                    } elseif ( $slug === 'cabinet' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp';
+                    } elseif ( $slug === 'office-chairs' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp';
+                    } elseif ( $slug === 'commercial-chairs' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp';
+                    } elseif ( $slug === 'dinning-tables' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp';
+                    } elseif ( $slug === 'partition-stands' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp';
+                    } elseif ( $slug === 'office-furniture' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp';
+                    } elseif ( $slug === 'reception-lounge-set' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp';
+                    } elseif ( $slug === 'shelves' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Shelves.webp';
+                    } elseif ( $slug === 'sofa' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp';
+                    } elseif ( $slug === 'single-beds' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp';
+                    } elseif ( $slug === 'table' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp';
+                    } else {
+                        // Safe fallback placeholder
+                        $image_url = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '';
+                    }
+                }
+                ?>
+                <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( $term_link ); ?>'">
+                  <div class="rls-cat-img-box">
+                    <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $cat->name ); ?>">
+                  </div>
+                  <h4 class="rls-cat-label"><?php echo esc_html( $cat->name ); ?></h4>
+                </div>
+                <?php
+            }
+        }
+        ?>
       </div>
 
     </div>
