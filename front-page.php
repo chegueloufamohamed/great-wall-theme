@@ -280,7 +280,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp';
                     } elseif ( $slug === 'single-beds' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp';
-                    } elseif ( $slug === 'table' ) {
+                    } elseif ( $slug === 'table' || $slug === 'folding-tables' || $slug === 'folding-table' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp';
                     } elseif ( $slug === 'bed-frames' || $slug === 'bed-frame' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Bed-Frames.webp';
@@ -292,8 +292,12 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Conference-Tables.webp';
                     } elseif ( $slug === 'drawer-cabinet' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Drawer-Cabinet.webp';
-                    } elseif ( $slug === 'hanger' || $slug === 'hangers' ) {
+                    } elseif ( $slug === 'hanger' || $slug === 'hangers' || $slug === 'coat-hanger' || $slug === 'court-hanger' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hanger.webp';
+                    } elseif ( $slug === 'desks' || $slug === 'desk' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks-1.webp';
+                    } elseif ( $slug === 'storage-cabinet' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Storage-Cabinet.webp';
                     } else {
                         // Safe fallback placeholder
                         $image_url = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '';

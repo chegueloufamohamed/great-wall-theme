@@ -112,9 +112,9 @@
                                $assigned_col = 'office-furniture';
                            } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture' ) ) ) {
                                $assigned_col = 'steel-furniture';
-                           } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation', 'bed-frames', 'bed-frame', 'hanger', 'hangers' ) ) ) {
+                           } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation', 'bed-frames', 'bed-frame', 'hanger', 'hangers', 'coat-hanger', 'court-hanger' ) ) ) {
                                $assigned_col = 'accommodation';
-                           } elseif ( in_array( $slug, array( 'dinning-tables', 'table', 'tables-dining', 'coffee-tables', 'coffee-table' ) ) ) {
+                           } elseif ( in_array( $slug, array( 'dinning-tables', 'table', 'tables-dining', 'coffee-tables', 'coffee-table', 'folding-tables', 'folding-table' ) ) ) {
                                $assigned_col = 'tables-dining';
                            } elseif ( in_array( $slug, array( 'sofa', 'partition-stands', 'living-divider' ) ) ) {
                                $assigned_col = 'living-divider';
