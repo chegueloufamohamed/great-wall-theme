@@ -242,6 +242,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
         if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
             foreach ( $cats as $cat ) {
+                // Skip office-storage and chairs parent categories
+                if ( in_array( $cat->slug, array( 'office-storage', 'chairs' ) ) ) {
+                    continue;
+                }
                 $term_link = get_term_link( $cat );
                 if ( is_wp_error( $term_link ) ) {
                     continue;
