@@ -110,7 +110,7 @@
                           $slug = $cat->slug;
                            if ( in_array( $slug, array( 'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'office-chairs', 'commercial-chairs', 'reception-lounge-set', 'office-furniture', 'conference-tables', 'conference-table' ) ) ) {
                                $assigned_col = 'office-furniture';
-                           } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture' ) ) ) {
+                           } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture', 'steel-storage' ) ) ) {
                                $assigned_col = 'steel-furniture';
                            } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation', 'bed-frames', 'bed-frame', 'hanger', 'hangers', 'coat-hanger', 'court-hanger' ) ) ) {
                                $assigned_col = 'accommodation';

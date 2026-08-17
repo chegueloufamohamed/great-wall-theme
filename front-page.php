@@ -298,6 +298,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks-1.webp';
                     } elseif ( $slug === 'storage-cabinet' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Storage-Cabinet.webp';
+                    } elseif ( $slug === 'steel-storage' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp';
                     } else {
                         // Safe fallback placeholder
                         $image_url = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '';
