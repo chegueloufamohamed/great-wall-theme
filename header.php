@@ -108,17 +108,17 @@
                       // 2. If no parent matches, try mapping by category slug or parent slug matching
                       if ( ! $assigned_col ) {
                           $slug = $cat->slug;
-                          if ( in_array( $slug, array( 'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'office-chairs', 'commercial-chairs', 'reception-lounge-set', 'office-furniture' ) ) ) {
-                              $assigned_col = 'office-furniture';
-                          } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture' ) ) ) {
-                              $assigned_col = 'steel-furniture';
-                          } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation' ) ) ) {
-                              $assigned_col = 'accommodation';
-                          } elseif ( in_array( $slug, array( 'dinning-tables', 'table', 'tables-dining' ) ) ) {
-                              $assigned_col = 'tables-dining';
-                          } elseif ( in_array( $slug, array( 'sofa', 'partition-stands', 'living-divider' ) ) ) {
-                              $assigned_col = 'living-divider';
-                          }
+                           if ( in_array( $slug, array( 'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'office-chairs', 'commercial-chairs', 'reception-lounge-set', 'office-furniture', 'conference-tables', 'conference-table' ) ) ) {
+                               $assigned_col = 'office-furniture';
+                           } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture' ) ) ) {
+                               $assigned_col = 'steel-furniture';
+                           } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation', 'bed-frames', 'bed-frame', 'hanger', 'hangers' ) ) ) {
+                               $assigned_col = 'accommodation';
+                           } elseif ( in_array( $slug, array( 'dinning-tables', 'table', 'tables-dining', 'coffee-tables', 'coffee-table' ) ) ) {
+                               $assigned_col = 'tables-dining';
+                           } elseif ( in_array( $slug, array( 'sofa', 'partition-stands', 'living-divider' ) ) ) {
+                               $assigned_col = 'living-divider';
+                           }
                       }
                       
                       // Assign if a column is matched
@@ -164,7 +164,7 @@
                   // Distribute to subgroups
                   foreach ( $office_cats as $cat ) {
                       $slug = $cat->slug;
-                      if ( strpos( $slug, 'desk' ) !== false || strpos( $slug, 'workstation' ) !== false ) {
+                      if ( strpos( $slug, 'desk' ) !== false || strpos( $slug, 'workstation' ) !== false || strpos( $slug, 'conference' ) !== false ) {
                           $subgroups['desks']['cats'][] = $cat;
                       } elseif ( strpos( $slug, 'cabinet' ) !== false || strpos( $slug, 'storage' ) !== false || strpos( $slug, 'drawer' ) !== false || strpos( $slug, 'locker' ) !== false || strpos( $slug, 'safe' ) !== false ) {
                           $subgroups['storage']['cats'][] = $cat;
