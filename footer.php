@@ -451,6 +451,7 @@
 
   <!-- Global Floating Back to Top Button -->
   <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="<?php esc_attr_e( 'Scroll to top', 'great-wall-theme' ); ?>">
+    <span class="back-to-top-text"><?php esc_html_e( 'Back To Top', 'great-wall-theme' ); ?></span>
     <i class="ri-arrow-up-line"></i>
   </button>
 
