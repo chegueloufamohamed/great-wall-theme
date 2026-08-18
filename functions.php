@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.9.6' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.9.7' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -612,10 +612,31 @@ function great_wall_custom_related_products( $related_posts, $product_id, $args 
             }
         }
         
-        // For other products, fetch products strictly matching the same product categories
+        // For other products, fetch products strictly matching the most specific (leaf) product categories
         $terms = get_the_terms( $product_id, 'product_cat' );
         if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-            $term_ids = wp_list_pluck( $terms, 'term_id' );
+            // Filter out parent terms if their children are in the list, and ignore top-level parent terms
+            $leaf_term_ids = array();
+            foreach ( $terms as $term ) {
+                $is_parent = false;
+                foreach ( $terms as $other_term ) {
+                    if ( $other_term->parent === $term->term_id ) {
+                        $is_parent = true;
+                        break;
+                    }
+                }
+                if ( ! $is_parent ) {
+                    // Exclude known top-level parent categories
+                    if ( ! in_array( $term->slug, array( 'office-furniture', 'steel-furniture', 'accommodation', 'tables-dining', 'living-divider' ) ) ) {
+                        $leaf_term_ids[] = $term->term_id;
+                    }
+                }
+            }
+
+            // Fallback to all terms if leaf_term_ids became empty
+            if ( empty( $leaf_term_ids ) ) {
+                $leaf_term_ids = wp_list_pluck( $terms, 'term_id' );
+            }
             
             $query_args = array(
                 'post_type'      => 'product',
@@ -626,7 +647,7 @@ function great_wall_custom_related_products( $related_posts, $product_id, $args 
                     array(
                         'taxonomy' => 'product_cat',
                         'field'    => 'term_id',
-                        'terms'    => $term_ids,
+                        'terms'    => $leaf_term_ids,
                         'operator' => 'IN',
                     ),
                 ),
