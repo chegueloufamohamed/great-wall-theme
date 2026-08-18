@@ -322,6 +322,156 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
+       SHOP THE LOOK - INTERACTIVE IMAGE HOTSPOTS SECTION
+       ========================================================================== -->
+  <section class="section hotspot-showcase-section" style="padding-top: 0; padding-bottom: 80px;">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header text-center" style="margin-bottom: 40px;">
+        <h2 class="section-title" style="font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 500; color: #2e2a25; margin-bottom: 12px;"><?php esc_html_e( 'Shop The Look', 'great-wall-theme' ); ?></h2>
+        <p class="section-subtitle" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; color: #76726c; max-width: 600px; margin: 0 auto;"><?php esc_html_e( 'Interact with the pulsing hotspots in the office showcase image below to view and shop the featured products directly.', 'great-wall-theme' ); ?></p>
+      </div>
+
+      <!-- Hotspot Container -->
+      <div class="hotspot-image-container-wrapper">
+        <div class="hotspot-image-container">
+          <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Image-Hotspots.webp" alt="Office Furniture Showcase Hotspots" class="hotspot-main-img">
+          
+          <?php
+          // Define hotspots: product ID, top percentage, left percentage, and tooltip orientation (top, bottom, left, right)
+          $hotspots = array(
+              array(
+                  'id'          => 70, // Conference Tables (temporary product ID)
+                  'top'         => '38%',
+                  'left'        => '55%',
+                  'orientation' => 'top',
+              ),
+              array(
+                  'id'          => 67, // Workstations (temporary product ID)
+                  'top'         => '64%',
+                  'left'        => '32%',
+                  'orientation' => 'right',
+              ),
+              array(
+                  'id'          => 58, // Desks (temporary product ID)
+                  'top'         => '48%',
+                  'left'        => '75%',
+                  'orientation' => 'left',
+              ),
+          );
+
+          foreach ( $hotspots as $index => $hs ) :
+              $prod = wc_get_product( $hs['id'] );
+              if ( ! $prod || ! $prod->is_visible() ) {
+                  // Fallback query if the mapped product ID doesn't exist or is not visible, get the first 3 visible products
+                  $fallback_products = wc_get_products( array(
+                      'status' => 'publish',
+                      'limit'  => 3,
+                  ) );
+                  if ( isset( $fallback_products[ $index ] ) ) {
+                      $prod = $fallback_products[ $index ];
+                  } else {
+                      continue;
+                  }
+              }
+
+              $prod_id = $prod->get_id();
+              $prod_title = $prod->get_name();
+              $prod_price = $prod->get_price_html();
+              $prod_link = $prod->get_permalink();
+              $prod_image = wp_get_attachment_image_src( $prod->get_image_id(), 'thumbnail' );
+              $prod_image_url = $prod_image ? $prod_image[0] : wc_placeholder_img_src();
+              ?>
+              <div class="hotspot-dot" style="top: <?php echo esc_attr( $hs['top'] ); ?>; left: <?php echo esc_attr( $hs['left'] ); ?>;" data-hotspot="<?php echo esc_attr( $index ); ?>">
+                <div class="hotspot-pulse"></div>
+                <div class="hotspot-trigger"><i class="ri-add-line"></i></div>
+                
+                <!-- Tooltip card (Desktop only) -->
+                <div class="hotspot-tooltip orientation-<?php echo esc_attr( $hs['orientation'] ); ?>">
+                  <div class="hotspot-card">
+                    <div class="hotspot-card-img">
+                      <img src="<?php echo esc_url( $prod_image_url ); ?>" alt="<?php echo esc_attr( $prod_title ); ?>">
+                    </div>
+                    <div class="hotspot-card-info">
+                      <h4 class="hotspot-card-title"><?php echo esc_html( $prod_title ); ?></h4>
+                      <div class="hotspot-card-price"><?php echo wp_kses_post( $prod_price ); ?></div>
+                      <a href="<?php echo esc_url( $prod_link ); ?>" class="hotspot-card-btn"><?php esc_html_e( 'View Product', 'great-wall-theme' ); ?></a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hidden mobile data for JS drawer -->
+                <div class="hotspot-mobile-data" style="display: none;" 
+                     data-title="<?php echo esc_attr( $prod_title ); ?>" 
+                     data-price="<?php echo esc_attr( wp_strip_all_tags( $prod_price ) ); ?>" 
+                     data-img="<?php echo esc_url( $prod_image_url ); ?>" 
+                     data-link="<?php echo esc_url( $prod_link ); ?>">
+                </div>
+              </div>
+              <?php
+          endforeach;
+          ?>
+
+          <!-- Admin click overlay and help panel -->
+          <?php if ( current_user_can( 'manage_options' ) ) : ?>
+              <div class="hotspot-admin-helper-overlay">
+                <div class="hotspot-admin-helper-badge"><?php esc_html_e( 'Admin: Click image to get coordinates', 'great-wall-theme' ); ?></div>
+              </div>
+          <?php endif; ?>
+
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Mobile Bottom Drawer container -->
+  <div class="hotspot-mobile-drawer" id="hotspotMobileDrawer">
+    <div class="hotspot-drawer-overlay"></div>
+    <div class="hotspot-drawer-content">
+      <div class="hotspot-drawer-handle"></div>
+      <button class="hotspot-drawer-close" id="closeHotspotDrawer"><i class="ri-close-line"></i></button>
+      <div class="hotspot-drawer-body">
+        <!-- Content will be injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <div id="hotspotToast" class="hotspot-toast"></div>
+
+  <?php if ( current_user_can( 'manage_options' ) ) : ?>
+      <script>
+      jQuery(document).ready(function($) {
+          $('.hotspot-image-container').on('click', '.hotspot-admin-helper-overlay', function(e) {
+              var rect = this.getBoundingClientRect();
+              var x = e.clientX - rect.left;
+              var y = e.clientY - rect.top;
+              
+              var topPercent = ((y / rect.height) * 100).toFixed(1) + '%';
+              var leftPercent = ((x / rect.width) * 100).toFixed(1) + '%';
+              
+              var coordinateString = "'top' => '" + topPercent + "', 'left' => '" + leftPercent + "'";
+              
+              // Copy to clipboard
+              var tempInput = $('<input>');
+              $('body').append(tempInput);
+              tempInput.val(coordinateString).select();
+              document.execCommand('copy');
+              tempInput.remove();
+              
+              // Show Toast
+              var toast = $('#hotspotToast');
+              toast.html('Copied to clipboard!<br><strong>' + coordinateString + '</strong>').addClass('show');
+              setTimeout(function() {
+                  toast.removeClass('show');
+              }, 4000);
+          });
+      });
+      </script>
+  <?php endif; ?>
+
+  <!-- ==========================================================================
        ASYMMETRIC PROMOTIONAL GRID SECTION (Sale event and feature cards)
        ========================================================================== -->
   <section class="section promo-grid-section" style="padding-bottom: 60px;">

@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoungeScrollDrag();
   initWishlist();
   initMobileFilterDrawer();
+  initHomepageHotspots();
   
   // Sidebar Category Pill Hover initializations
   initSidebarCategoryPills();
@@ -1827,6 +1828,89 @@ function initMobileFilterDrawer() {
       });
     }
   }
+}
+
+/**
+ * Interactive Homepage Hotspots (Shop The Look)
+ */
+function initHomepageHotspots() {
+  const container = document.querySelector('.hotspot-image-container');
+  if (!container) return;
+
+  const dots = container.querySelectorAll('.hotspot-dot');
+  const drawer = document.getElementById('hotspotMobileDrawer');
+  const drawerBody = drawer ? drawer.querySelector('.hotspot-drawer-body') : null;
+  const drawerClose = document.getElementById('closeHotspotDrawer');
+  const overlay = drawer ? drawer.querySelector('.hotspot-drawer-overlay') : null;
+
+  // Active status helper
+  const clearActiveDots = () => {
+    dots.forEach(d => d.classList.remove('active'));
+  };
+
+  dots.forEach(dot => {
+    // Touch/click event
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // Check window width
+      if (window.innerWidth <= 768) {
+        // Mobile behavior: Open slide-up bottom drawer
+        const mobileData = dot.querySelector('.hotspot-mobile-data');
+        if (!mobileData || !drawer || !drawerBody) return;
+
+        const title = mobileData.getAttribute('data-title');
+        const price = mobileData.getAttribute('data-price');
+        const img = mobileData.getAttribute('data-img');
+        const link = mobileData.getAttribute('data-link');
+
+        // Inject content
+        drawerBody.innerHTML = `
+          <div class="hotspot-card">
+            <div class="hotspot-card-img">
+              <img src="${img}" alt="${title}">
+            </div>
+            <div class="hotspot-card-info">
+              <h4 class="hotspot-card-title">${title}</h4>
+              <div class="hotspot-card-price">${price}</div>
+              <a href="${link}" class="hotspot-card-btn">View Product</a>
+            </div>
+          </div>
+        `;
+
+        clearActiveDots();
+        dot.classList.add('active');
+        drawer.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Lock scrolling
+      } else {
+        // Desktop behavior: Toggle active state
+        const isActive = dot.classList.contains('active');
+        clearActiveDots();
+        if (!isActive) {
+          dot.classList.add('active');
+        }
+      }
+    });
+  });
+
+  // Close drawer helpers
+  const closeDrawer = () => {
+    if (drawer) {
+      drawer.classList.remove('open');
+      clearActiveDots();
+      document.body.style.overflow = ''; // Unlock scrolling
+    }
+  };
+
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+
+  // Close desktop tooltips when clicking anywhere else
+  document.addEventListener('click', () => {
+    if (window.innerWidth > 768) {
+      clearActiveDots();
+    }
+  });
 }
 
 
