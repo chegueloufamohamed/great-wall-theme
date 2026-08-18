@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.9.5' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '2.9.6' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -1563,3 +1563,15 @@ function great_wall_enqueue_custom_swatches_script() {
 	</script>
 	<?php
 }
+
+/**
+ * Hide the main price range for variable products on single product page summaries.
+ */
+add_filter( 'woocommerce_variable_price_html', 'great_wall_hide_variable_price_range', 10, 2 );
+function great_wall_hide_variable_price_range( $price, $product ) {
+	if ( is_product() ) {
+		return '';
+	}
+	return $price;
+}
+
