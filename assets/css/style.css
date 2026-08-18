@@ -1006,6 +1006,10 @@ p {
 }
 
 @media (max-width: 991px) {
+  .header,
+  .header.sticky {
+    height: 70px !important;
+  }
   .nav-menu {
     display: none;
   }
@@ -1022,6 +1026,10 @@ p {
 }
 
 @media (max-width: 480px) {
+  .header,
+  .header.sticky {
+    height: 64px !important;
+  }
   .header .logo img {
     max-height: 32px !important;
   }
