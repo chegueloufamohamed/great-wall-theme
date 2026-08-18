@@ -350,56 +350,56 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                   'id'          => 1426, // XG-10 Livia Contemporary Sideboard
                   'top'         => '69.8%',
                   'left'        => '24.8%',
-                  'mobile_top'  => '69.8%',
-                  'mobile_left' => '24.8%',
+                  'mobile_top'  => '59.5%',
+                  'mobile_left' => '15.6%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1245, // Heritage Comfort 2-Seater Sofa – Grey
                   'top'         => '72.0%',
                   'left'        => '77.0%',
-                  'mobile_top'  => '72.0%',
-                  'mobile_left' => '77.0%',
+                  'mobile_top'  => '61.8%',
+                  'mobile_left' => '87.7%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1405, // RT-14B Walden Round Pedestal Table
                   'top'         => '71.2%',
                   'left'        => '61.4%',
-                  'mobile_top'  => '71.2%',
-                  'mobile_left' => '61.4%',
+                  'mobile_top'  => '63.8%',
+                  'mobile_left' => '64.9%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1171, // OB-11 Executive Office Desk
                   'top'         => '66.1%',
                   'left'        => '48.0%',
-                  'mobile_top'  => '66.1%',
-                  'mobile_left' => '48.0%',
+                  'mobile_top'  => '58.2%',
+                  'mobile_left' => '45.4%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1182, // OC-104C Executive Office Chair
                   'top'         => '53.9%',
                   'left'        => '54.9%',
-                  'mobile_top'  => '53.9%',
-                  'mobile_left' => '54.9%',
+                  'mobile_top'  => '49.9%',
+                  'mobile_left' => '57.7%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1218, // BR-7 Executive Office Storage Cabinet
                   'top'         => '39.6%',
                   'left'        => '40.0%',
-                  'mobile_top'  => '39.6%',
-                  'mobile_left' => '40.0%',
+                  'mobile_top'  => '45.9%',
+                  'mobile_left' => '64.1%',
                   'orientation' => 'bottom',
               ),
               array(
                   'id'          => 1444, // 8040F Marbella White Marble-Style Coat Stand
                   'top'         => '41.0%',
                   'left'        => '70.5%',
-                  'mobile_top'  => '41.0%',
-                  'mobile_left' => '70.5%',
+                  'mobile_top'  => '49.6%',
+                  'mobile_left' => '77.9%',
                   'orientation' => 'left',
               ),
           );
