@@ -390,8 +390,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                   'id'          => 1218, // BR-7 Executive Office Storage Cabinet
                   'top'         => '39.6%',
                   'left'        => '40.0%',
-                  'mobile_top'  => '45.9%',
-                  'mobile_left' => '64.1%',
+                  'mobile_top'  => '46.4%',
+                  'mobile_left' => '35.1%',
                   'orientation' => 'bottom',
               ),
               array(
