@@ -342,21 +342,45 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           // Define hotspots: product ID, top percentage, left percentage, and tooltip orientation (top, bottom, left, right)
           $hotspots = array(
               array(
-                  'id'          => 70, // Conference Tables (temporary product ID)
-                  'top'         => '38%',
-                  'left'        => '55%',
+                  'id'          => 1426, // XG-10 Livia Contemporary Sideboard
+                  'top'         => '69.8%',
+                  'left'        => '24.8%',
                   'orientation' => 'top',
               ),
               array(
-                  'id'          => 67, // Workstations (temporary product ID)
-                  'top'         => '64%',
-                  'left'        => '32%',
-                  'orientation' => 'right',
+                  'id'          => 1245, // Heritage Comfort 2-Seater Sofa – Grey
+                  'top'         => '72.0%',
+                  'left'        => '77.0%',
+                  'orientation' => 'top',
               ),
               array(
-                  'id'          => 58, // Desks (temporary product ID)
-                  'top'         => '48%',
-                  'left'        => '75%',
+                  'id'          => 1405, // RT-14B Walden Round Pedestal Table
+                  'top'         => '71.2%',
+                  'left'        => '61.4%',
+                  'orientation' => 'top',
+              ),
+              array(
+                  'id'          => 1171, // OB-11 Executive Office Desk
+                  'top'         => '66.1%',
+                  'left'        => '48.0%',
+                  'orientation' => 'top',
+              ),
+              array(
+                  'id'          => 1182, // OC-104C Executive Office Chair
+                  'top'         => '53.9%',
+                  'left'        => '54.9%',
+                  'orientation' => 'top',
+              ),
+              array(
+                  'id'          => 1218, // BR-7 Executive Office Storage Cabinet
+                  'top'         => '39.6%',
+                  'left'        => '40.0%',
+                  'orientation' => 'bottom',
+              ),
+              array(
+                  'id'          => 1444, // 8040F Marbella White Marble-Style Coat Stand
+                  'top'         => '41.0%',
+                  'left'        => '70.5%',
                   'orientation' => 'left',
               ),
           );
