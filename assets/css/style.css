@@ -3967,15 +3967,29 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 80px;
-  margin-top: 40px;
+  margin-top: 15px !important;
   margin-bottom: 80px;
   align-items: start;
+}
+
+.single-product section.section {
+  padding-top: 125px !important;
 }
 
 @media (max-width: 991px) {
   .single-product div.product {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
+    margin-top: 15px !important;
+  }
+  .single-product section.section {
+    padding-top: 105px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .single-product section.section {
+    padding-top: 100px !important;
   }
 }
 
@@ -4018,6 +4032,7 @@ p {
 }
 
 .single-product .woocommerce-product-gallery__wrapper {
+  position: relative !important;
   margin: 0 !important;
   background-color: var(--bg-light-accent);
   border-radius: var(--border-radius-lg);

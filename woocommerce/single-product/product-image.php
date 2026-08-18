@@ -33,6 +33,11 @@ $wrapper_classes   = apply_filters(
 	?>
 	<figure class="woocommerce-product-gallery__wrapper">
 		<?php
+		if ( function_exists( 'great_wall_single_wishlist_button' ) ) {
+			great_wall_single_wishlist_button();
+		}
+		?>
+		<?php
 		if ( $product->get_image_id() ) {
 			$html = wc_get_gallery_image_html( $post_thumbnail_id, true );
 		} else {
