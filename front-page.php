@@ -328,9 +328,11 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     <div class="container">
       
       <!-- Section Header -->
-      <div class="section-header text-center" style="margin-bottom: 40px;">
-        <h2 class="section-title" style="font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 500; color: #2e2a25; margin-bottom: 12px;"><?php esc_html_e( 'Shop The Look', 'great-wall-theme' ); ?></h2>
-        <p class="section-subtitle" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; color: #76726c; max-width: 600px; margin: 0 auto;"><?php esc_html_e( 'Interact with the pulsing hotspots in the office showcase image below to view and shop the featured products directly.', 'great-wall-theme' ); ?></p>
+      <div class="section-header text-center" style="margin-bottom: 50px;">
+        <span class="hotspot-section-tag" style="display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--color-accent, #c5a880); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px;"><?php esc_html_e( 'Interactive Showcase', 'great-wall-theme' ); ?></span>
+        <h2 class="section-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.6rem; font-weight: 800; color: #1c1c1e; letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 16px; line-height: 1.2;"><?php esc_html_e( 'Shop The Look', 'great-wall-theme' ); ?></h2>
+        <div style="width: 60px; height: 3px; background-color: var(--color-accent, #c5a880); margin: 0 auto 20px auto; border-radius: 2px;"></div>
+        <p class="section-subtitle" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem; font-weight: 500; color: #5c5954; max-width: 650px; margin: 0 auto; line-height: 1.6;"><?php esc_html_e( 'Interact with the pulsing hotspots in the office showcase image below to view and shop the featured products directly.', 'great-wall-theme' ); ?></p>
       </div>
 
       <!-- Hotspot Container -->
@@ -495,67 +497,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       </script>
   <?php endif; ?>
 
-  <!-- ==========================================================================
-       ASYMMETRIC PROMOTIONAL GRID SECTION (Sale event and feature cards)
-       ========================================================================== -->
-  <section class="section promo-grid-section" style="padding-bottom: 60px;">
-    <div class="container">
-      <div class="promo-grid-layout">
-        
-        <!-- Left large panel: Furniture Sale Event -->
-        <div class="promo-left-panel" data-scroll>
-          <div class="promo-left-img-wrapper">
-            <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'pillows_stack.webp' ); ?>" alt="Furniture Sale Event Stack">
-          </div>
-          <div>
-            <h3 class="promo-card-title">Furniture Sale Event</h3>
-            <p class="promo-card-desc">Join us for our Furniture Sale Event to find great deals on a wide range of stylish, high-quality furniture.</p>
-          </div>
-        </div>
 
-        <!-- Right stacked panel -->
-        <div class="promo-right-panel">
-          
-          <!-- Top row: 2 small squares -->
-          <div class="promo-right-row-1">
-            <!-- Top-left small card -->
-            <div class="promo-right-card-small delay-100" data-scroll>
-              <div class="promo-small-img-wrapper">
-                <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'designer_chair.webp' ); ?>" alt="Up to 30% Off Armchair">
-              </div>
-              <div>
-                <h3 class="promo-card-title" style="font-size: 1.25rem; margin-bottom: 8px;">Up to 30% Off</h3>
-                <p class="promo-card-desc" style="font-size: 0.82rem;">Our exclusive offer of up to 30% off on select furniture pieces!</p>
-              </div>
-            </div>
-            <!-- Top-right small card -->
-            <div class="promo-right-card-small color-tint-2 delay-200" data-scroll>
-              <div class="promo-small-img-wrapper">
-                <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'timber_dresser.webp' ); ?>" alt="Smart Bedside Cabinet Table">
-              </div>
-              <div>
-                <h3 class="promo-card-title" style="font-size: 1.25rem; margin-bottom: 8px;">Smart Furniture</h3>
-                <p class="promo-card-desc" style="font-size: 0.82rem;">Perfectly tailored to your modern lifestyle.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom row: 1 wide rectangle card -->
-          <div class="promo-right-card-wide delay-300" data-scroll>
-            <div class="promo-wide-img-wrapper">
-              <img loading="lazy" src="<?php echo esc_url( $assets_uri . 'sofa_isolated.webp' ); ?>" alt="Modern Teal Couch Sofa">
-            </div>
-            <div>
-              <h3 class="promo-card-title" style="font-size: 1.35rem; margin-bottom: 8px;">Refresh Your Interiors</h3>
-              <p class="promo-card-desc" style="font-size: 0.85rem;">Breathe new life into your home with our curated collection designed to refresh your interiors.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- ==========================================================================
        MOST POPULAR PRODUCTS (OFFICE DESKS) SECTION

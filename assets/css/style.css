@@ -9550,6 +9550,7 @@ ul.products li.product .price del,
   visibility: hidden;
   z-index: 20;
   transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.3s;
+  transition-delay: 0.25s; /* Kept open briefly to slide cursor over the gap */
   pointer-events: none; /* Block interactions until shown */
 }
 
@@ -9558,7 +9559,43 @@ ul.products li.product .price del,
 .hotspot-dot.active .hotspot-tooltip {
   opacity: 1;
   visibility: visible;
+  transition-delay: 0s; /* Open instantly on hover */
   pointer-events: auto;
+}
+
+/* Invisible bridge overlay to span the 14px gap */
+.hotspot-tooltip::after {
+  content: '' !important;
+  position: absolute !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  z-index: -2 !important;
+}
+.hotspot-tooltip.orientation-top::after {
+  bottom: -22px;
+  left: 0;
+  width: 100%;
+  height: 22px;
+}
+.hotspot-tooltip.orientation-bottom::after {
+  top: -22px;
+  left: 0;
+  width: 100%;
+  height: 22px;
+}
+.hotspot-tooltip.orientation-left::after {
+  right: -22px;
+  top: 0;
+  width: 22px;
+  height: 100%;
+}
+.hotspot-tooltip.orientation-right::after {
+  left: -22px;
+  top: 0;
+  width: 22px;
+  height: 100%;
 }
 
 /* Tooltip placements */
