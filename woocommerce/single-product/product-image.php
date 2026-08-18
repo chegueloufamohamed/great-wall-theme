@@ -26,6 +26,11 @@ $wrapper_classes   = apply_filters(
 );
 ?>
 <div class="<?php echo esc_attr( implode( ' ', array_filter( $wrapper_classes ) ) ); ?>" data-columns="<?php echo esc_attr( $columns ); ?>" style="opacity: 0; transition: opacity .25s ease-in-out;">
+	<?php
+	if ( function_exists( 'woocommerce_breadcrumb' ) ) {
+		woocommerce_breadcrumb();
+	}
+	?>
 	<figure class="woocommerce-product-gallery__wrapper">
 		<?php
 		if ( $product->get_image_id() ) {
