@@ -338,51 +338,68 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <!-- Hotspot Container -->
       <div class="hotspot-image-container-wrapper">
         <div class="hotspot-image-container">
-          <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Image-Hotspots.webp" alt="Office Furniture Showcase Hotspots" class="hotspot-main-img">
+          <picture class="hotspot-picture-wrapper">
+            <source media="(max-width: 768px)" srcset="https://greatwallfurniture.com/wp-content/uploads/2026/08/Image-Hotspots-Mobile.webp">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Image-Hotspots.webp" alt="Office Furniture Showcase Hotspots" class="hotspot-main-img">
+          </picture>
           
           <?php
-          // Define hotspots: product ID, top percentage, left percentage, and tooltip orientation (top, bottom, left, right)
+          // Define hotspots: product ID, top/left percentage for desktop, and mobile_top/mobile_left for mobile, and orientation
           $hotspots = array(
               array(
                   'id'          => 1426, // XG-10 Livia Contemporary Sideboard
                   'top'         => '69.8%',
                   'left'        => '24.8%',
+                  'mobile_top'  => '69.8%',
+                  'mobile_left' => '24.8%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1245, // Heritage Comfort 2-Seater Sofa – Grey
                   'top'         => '72.0%',
                   'left'        => '77.0%',
+                  'mobile_top'  => '72.0%',
+                  'mobile_left' => '77.0%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1405, // RT-14B Walden Round Pedestal Table
                   'top'         => '71.2%',
                   'left'        => '61.4%',
+                  'mobile_top'  => '71.2%',
+                  'mobile_left' => '61.4%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1171, // OB-11 Executive Office Desk
                   'top'         => '66.1%',
                   'left'        => '48.0%',
+                  'mobile_top'  => '66.1%',
+                  'mobile_left' => '48.0%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1182, // OC-104C Executive Office Chair
                   'top'         => '53.9%',
                   'left'        => '54.9%',
+                  'mobile_top'  => '53.9%',
+                  'mobile_left' => '54.9%',
                   'orientation' => 'top',
               ),
               array(
                   'id'          => 1218, // BR-7 Executive Office Storage Cabinet
                   'top'         => '39.6%',
                   'left'        => '40.0%',
+                  'mobile_top'  => '39.6%',
+                  'mobile_left' => '40.0%',
                   'orientation' => 'bottom',
               ),
               array(
                   'id'          => 1444, // 8040F Marbella White Marble-Style Coat Stand
                   'top'         => '41.0%',
                   'left'        => '70.5%',
+                  'mobile_top'  => '41.0%',
+                  'mobile_left' => '70.5%',
                   'orientation' => 'left',
               ),
           );
@@ -409,7 +426,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               $prod_image = wp_get_attachment_image_src( $prod->get_image_id(), 'thumbnail' );
               $prod_image_url = $prod_image ? $prod_image[0] : wc_placeholder_img_src();
               ?>
-              <div class="hotspot-dot" style="top: <?php echo esc_attr( $hs['top'] ); ?>; left: <?php echo esc_attr( $hs['left'] ); ?>;" data-hotspot="<?php echo esc_attr( $index ); ?>">
+              <div class="hotspot-dot" style="--desktop-top: <?php echo esc_attr( $hs['top'] ); ?>; --desktop-left: <?php echo esc_attr( $hs['left'] ); ?>; --mobile-top: <?php echo esc_attr( $hs['mobile_top'] ); ?>; --mobile-left: <?php echo esc_attr( $hs['mobile_left'] ); ?>;" data-hotspot="<?php echo esc_attr( $index ); ?>">
                 <div class="hotspot-pulse"></div>
                 <div class="hotspot-trigger"><i class="ri-add-line"></i></div>
                 

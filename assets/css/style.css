@@ -9481,6 +9481,8 @@ ul.products li.product .price del,
   position: absolute;
   width: 32px;
   height: 32px;
+  top: var(--desktop-top);
+  left: var(--desktop-left);
   transform: translate(-50%, -50%);
   z-index: 10;
   cursor: pointer;
@@ -9759,6 +9761,10 @@ ul.products li.product .price del,
   /* Disable tooltips on mobile/tablet */
   .hotspot-tooltip {
     display: none !important;
+  }
+  .hotspot-dot {
+    top: var(--mobile-top) !important;
+    left: var(--mobile-left) !important;
   }
 }
 
