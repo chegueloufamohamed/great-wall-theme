@@ -4064,6 +4064,12 @@ p {
   background-color: var(--bg-light-accent);
 }
 
+.single-product .woocommerce-product-gallery__image a {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .single-product .woocommerce-product-gallery__image img {
   max-height: 100% !important;
   width: 100% !important;
