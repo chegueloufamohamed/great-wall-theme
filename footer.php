@@ -455,6 +455,47 @@
     <i class="ri-arrow-up-line"></i>
   </button>
 
+<?php if ( is_product() ) : ?>
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var report = [];
+    var addReport = function(selector) {
+      var el = document.querySelector(selector);
+      if (!el) {
+        report.push(selector + ": NOT FOUND");
+        return;
+      }
+      var rect = el.getBoundingClientRect();
+      var styles = window.getComputedStyle(el);
+      report.push(selector + " -> " +
+        "top: " + rect.top + ", " +
+        "height: " + rect.height + ", " +
+        "padding-top: " + styles.paddingTop + ", " +
+        "margin-top: " + styles.marginTop + ", " +
+        "margin-bottom: " + styles.marginBottom + ", " +
+        "position: " + styles.position + ", " +
+        "display: " + styles.display
+      );
+    };
+    addReport('body');
+    addReport('.site-header-wrapper');
+    addReport('.top-bar');
+    addReport('.header');
+    addReport('section.section');
+    addReport('.container');
+    addReport('.woocommerce-notices-wrapper');
+    addReport('.product');
+    addReport('.woocommerce-product-gallery');
+    addReport('.woocommerce-breadcrumb');
+    
+    var data = report.join("\n");
+    fetch('/?save_diagnostics=' + encodeURIComponent(data));
+  }, 1000);
+});
+</script>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
