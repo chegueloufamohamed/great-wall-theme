@@ -523,91 +523,92 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     <div class="container">
       
       <!-- Section Header -->
-      <div class="collections-header-wrapper" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
-        <div>
-          <span style="display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--color-accent, #c5a880); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px;"><?php esc_html_e( 'Explore Range', 'great-wall-theme' ); ?></span>
-          <h2 class="section-title" style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.2rem; font-weight: 800; color: #1c1c1e; letter-spacing: -0.02em; text-transform: uppercase;"><?php esc_html_e( 'Shop By Collection', 'great-wall-theme' ); ?></h2>
-        </div>
-        
-        <!-- Navigation Arrows -->
-        <div class="collections-carousel-nav" style="display: flex; gap: 12px;">
-          <button class="collections-nav-btn prev" aria-label="Previous Slide"><i class="ri-arrow-left-s-line"></i></button>
-          <button class="collections-nav-btn next" aria-label="Next Slide"><i class="ri-arrow-right-s-line"></i></button>
-        </div>
+      <div class="collections-header-wrapper" style="margin-bottom: 40px; width: 100%;">
+        <span style="display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--color-accent, #c5a880); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px;"><?php esc_html_e( 'Explore Range', 'great-wall-theme' ); ?></span>
+        <h2 class="section-title" style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.2rem; font-weight: 800; color: #1c1c1e; letter-spacing: -0.02em; text-transform: uppercase;"><?php esc_html_e( 'Shop By Collection', 'great-wall-theme' ); ?></h2>
       </div>
       
-      <!-- Carousel Track Wrapper -->
-      <div class="collections-carousel-wrapper" style="position: relative; overflow: hidden; width: 100%;">
-        <div class="collections-carousel-track" style="display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform;">
-          
-          <?php
-          $categories_to_show = array(
-              array( 'slug' => 'desks', 'title' => 'Desks' ),
-              array( 'slug' => 'office-chairs', 'title' => 'Office Chairs' ),
-              array( 'slug' => 'commercial-chairs', 'title' => 'Commercial Chairs' ),
-              array( 'slug' => 'storage-cabinet', 'title' => 'Storage Cabinet' ),
-              array( 'slug' => 'workstations', 'title' => 'Workstations' ),
-              array( 'slug' => 'sofa', 'title' => 'Sofa' ),
-              array( 'slug' => 'conference-tables', 'title' => 'Conference Tables' ),
-              array( 'slug' => 'coffee-tables', 'title' => 'Coffee Tables' ),
-              array( 'slug' => 'cabinet', 'title' => 'Cabinet' )
-          );
+      <!-- Outer Wrapper for Center-Aligned Side Arrows -->
+      <div class="collections-carousel-outer-container">
+        
+        <!-- Center-Aligned Side Arrows -->
+        <button class="collections-nav-btn prev" aria-label="Previous Slide"><i class="ri-arrow-left-s-line"></i></button>
+        <button class="collections-nav-btn next" aria-label="Next Slide"><i class="ri-arrow-right-s-line"></i></button>
+        
+        <!-- Carousel Track Wrapper (Style controlled entirely by style.css for responsive scrolling) -->
+        <div class="collections-carousel-wrapper">
+          <div class="collections-carousel-track" style="display: flex; gap: 24px;">
+            
+            <?php
+            $categories_to_show = array(
+                array( 'slug' => 'desks', 'title' => 'Desks' ),
+                array( 'slug' => 'office-chairs', 'title' => 'Office Chairs' ),
+                array( 'slug' => 'commercial-chairs', 'title' => 'Commercial Chairs' ),
+                array( 'slug' => 'storage-cabinet', 'title' => 'Storage Cabinet' ),
+                array( 'slug' => 'workstations', 'title' => 'Workstations' ),
+                array( 'slug' => 'sofa', 'title' => 'Sofa' ),
+                array( 'slug' => 'conference-tables', 'title' => 'Conference Tables' ),
+                array( 'slug' => 'coffee-tables', 'title' => 'Coffee Tables' ),
+                array( 'slug' => 'cabinet', 'title' => 'Cabinet' )
+            );
 
-          $fallback_images = array(
-              'desks'             => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp',
-              'office-chairs'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp',
-              'commercial-chairs' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp',
-              'storage-cabinet'   => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp',
-              'workstations'      => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp',
-              'sofa'              => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp',
-              'conference-tables' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp',
-              'coffee-tables'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp',
-              'cabinet'           => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp'
-          );
+            $fallback_images = array(
+                'desks'             => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp',
+                'office-chairs'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp',
+                'commercial-chairs' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp',
+                'storage-cabinet'   => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp',
+                'workstations'      => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp',
+                'sofa'              => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp',
+                'conference-tables' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp',
+                'coffee-tables'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp',
+                'cabinet'           => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp'
+            );
 
-          foreach ( $categories_to_show as $cat ) :
-              $term = get_term_by( 'slug', $cat['slug'], 'product_cat' );
-              $link = $term ? get_term_link( $term ) : '#';
-              
-              // Get Image
-              $img_url = '';
-              if ( $term ) {
-                  $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
-                  if ( $thumbnail_id ) {
-                      $img_url = wp_get_attachment_image_url( $thumbnail_id, 'medium_large' );
-                  }
-              }
-              if ( empty( $img_url ) && isset( $fallback_images[ $cat['slug'] ] ) ) {
-                  $img_url = $fallback_images[ $cat['slug'] ];
-              }
-              if ( empty( $img_url ) ) {
-                  $img_url = wc_placeholder_img_src();
-              }
+            foreach ( $categories_to_show as $cat ) :
+                $term = get_term_by( 'slug', $cat['slug'], 'product_cat' );
+                $link = $term ? get_term_link( $term ) : '#';
+                
+                // Get Image
+                $img_url = '';
+                if ( $term ) {
+                    $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
+                    if ( $thumbnail_id ) {
+                        $img_url = wp_get_attachment_image_url( $thumbnail_id, 'medium_large' );
+                    }
+                }
+                if ( empty( $img_url ) && isset( $fallback_images[ $cat['slug'] ] ) ) {
+                    $img_url = $fallback_images[ $cat['slug'] ];
+                }
+                if ( empty( $img_url ) ) {
+                    $img_url = wc_placeholder_img_src();
+                }
 
-              // Get count
-              $count = $term ? $term->count : 0;
-              ?>
-              <div class="collections-carousel-item">
-                <a href="<?php echo esc_url( $link ); ?>" style="display: block; width: 100%; height: 100%; text-decoration: none;">
-                  <!-- Image Wrapper with Zoom Effect -->
-                  <div class="collection-img-wrap" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
-                    <img loading="lazy" src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $cat['title'] ); ?>">
-                    <!-- Dark Gradient Overlay -->
-                    <div class="collection-overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 100%); transition: background 0.3s ease;"></div>
-                  </div>
-                  
-                  <!-- Content Box -->
-                  <div class="collection-content-box" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 24px; box-sizing: border-box; z-index: 2;">
-                    <h3 class="collection-card-title" style="margin: 0 0 4px 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.2rem; font-weight: 700; color: #FFFFFF; letter-spacing: -0.01em; text-transform: capitalize;"><?php echo esc_html( $cat['title'] ); ?></h3>
-                    <p class="collection-card-count" style="margin: 0; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.05em;"><?php echo sprintf( _n( '%s Product', '%s Products', $count, 'great-wall-theme' ), number_format_i18n( $count ) ); ?></p>
-                  </div>
-                </a>
-              </div>
-              <?php
-          endforeach;
-          ?>
-          
+                // Get count
+                $count = $term ? $term->count : 0;
+                ?>
+                <div class="collections-carousel-item">
+                  <a href="<?php echo esc_url( $link ); ?>" style="display: block; width: 100%; height: 100%; text-decoration: none;">
+                    <!-- Image Wrapper with Zoom Effect -->
+                    <div class="collection-img-wrap" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+                      <img loading="lazy" src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $cat['title'] ); ?>">
+                      <!-- Dark Gradient Overlay -->
+                      <div class="collection-overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 100%); transition: background 0.3s ease;"></div>
+                    </div>
+                    
+                    <!-- Content Box -->
+                    <div class="collection-content-box" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 24px; box-sizing: border-box; z-index: 2;">
+                      <h3 class="collection-card-title" style="margin: 0 0 4px 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.2rem; font-weight: 700; color: #FFFFFF; letter-spacing: -0.01em; text-transform: capitalize;"><?php echo esc_html( $cat['title'] ); ?></h3>
+                      <p class="collection-card-count" style="margin: 0; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.05em;"><?php echo sprintf( _n( '%s Product', '%s Products', $count, 'great-wall-theme' ), number_format_i18n( $count ) ); ?></p>
+                    </div>
+                  </a>
+                </div>
+                <?php
+            endforeach;
+            ?>
+            
+          </div>
         </div>
+        
       </div>
       
     </div>
