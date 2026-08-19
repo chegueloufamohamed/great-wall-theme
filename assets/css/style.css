@@ -10035,6 +10035,12 @@ ul.products li.product .price del,
   display: none !important;
 }
 
+.collections-carousel-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important; /* Force width to expand based on children instead of parent wrapping */
+}
+
 .collections-nav-btn {
   position: absolute !important;
   top: 50% !important;
