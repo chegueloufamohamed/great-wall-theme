@@ -6905,7 +6905,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 
 .single-product .woocommerce-product-gallery__image img {
   mix-blend-mode: multiply !important;
-  padding: 15px !important;
+  padding: 0 !important;
 }
 
 /* Thumbnails bg, border, active state */
