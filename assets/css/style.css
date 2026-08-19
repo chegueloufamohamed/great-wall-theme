@@ -4005,8 +4005,9 @@ p {
 .single-product .woocommerce-product-gallery {
   position: relative;
   width: 100% !important;
+  max-width: 500px !important; /* Cap gallery container size so it doesn't look too massive on desktop */
   float: none !important;
-  margin: 0 !important;
+  margin: 0 auto !important; /* Center the container */
   min-width: 0;
   overflow: hidden;
   opacity: 1 !important;
