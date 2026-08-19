@@ -470,24 +470,22 @@ window.addEventListener('load', function() {
       var styles = window.getComputedStyle(el);
       report.push(selector + " -> " +
         "top: " + rect.top + ", " +
+        "left: " + rect.left + ", " +
         "height: " + rect.height + ", " +
-        "padding-top: " + styles.paddingTop + ", " +
-        "margin-top: " + styles.marginTop + ", " +
-        "margin-bottom: " + styles.marginBottom + ", " +
+        "width: " + rect.width + ", " +
         "position: " + styles.position + ", " +
-        "display: " + styles.display
+        "offsetParent: " + (el.offsetParent ? el.offsetParent.className + ' (' + el.offsetParent.tagName + ')' : 'NONE')
       );
     };
     addReport('body');
     addReport('.site-header-wrapper');
-    addReport('.top-bar');
     addReport('.header');
     addReport('section.section');
-    addReport('.container');
-    addReport('.woocommerce-notices-wrapper');
     addReport('.product');
     addReport('.woocommerce-product-gallery');
+    addReport('.woocommerce-product-gallery__wrapper');
     addReport('.woocommerce-breadcrumb');
+    addReport('.single-wishlist-btn');
     
     var data = report.join("\n");
     fetch('/?save_diagnostics=' + encodeURIComponent(data));
