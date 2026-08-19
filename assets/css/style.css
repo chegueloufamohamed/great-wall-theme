@@ -7680,7 +7680,7 @@ ul.products.list-view-active li.product .product-loop-actions {
    PRODUCT GALLERY NAVIGATION ARROWS OVERLAYS
    ========================================================================== */
 .single-product .woocommerce-product-gallery {
-  position: relative !important;
+  position: relative;
 }
 
 .gallery-nav-btn {
