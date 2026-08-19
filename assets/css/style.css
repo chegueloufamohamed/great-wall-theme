@@ -10038,7 +10038,6 @@ ul.products li.product .price del,
 .collections-carousel-track {
   display: flex !important;
   flex-wrap: nowrap !important;
-  width: max-content !important; /* Force width to expand based on children instead of parent wrapping */
 }
 
 .collections-nav-btn {
