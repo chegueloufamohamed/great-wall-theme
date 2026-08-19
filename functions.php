@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '3.1.1' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '3.1.2' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -1597,22 +1597,13 @@ function great_wall_hide_variable_price_range( $price, $product ) {
 /**
  * Change WooCommerce Variable Product Add to Cart Button Text to 'Check Option'
  */
+// Custom variables add-to-cart button text override
 add_filter( 'woocommerce_product_add_to_cart_text', 'great_wall_custom_variable_add_to_cart_text', 10, 2 );
 function great_wall_custom_variable_add_to_cart_text( $text, $product ) {
 	if ( $product->is_type( 'variable' ) ) {
 		return __( 'Check Option', 'great-wall-theme' );
 	}
 	return $text;
-}
-
-// Temporary diagnostics hook
-add_action( 'init', 'great_wall_save_diagnostics' );
-function great_wall_save_diagnostics() {
-	if ( isset( $_GET['save_diagnostics'] ) ) {
-		file_put_contents( get_template_directory() . '/diagnostics.txt', sanitize_text_field( wp_unslash( $_GET['save_diagnostics'] ) ) );
-		echo 'Saved!';
-		exit;
-	}
 }
 
 

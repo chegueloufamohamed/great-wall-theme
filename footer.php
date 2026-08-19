@@ -455,45 +455,6 @@
     <i class="ri-arrow-up-line"></i>
   </button>
 
-<?php if ( is_product() ) : ?>
-<script>
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    var report = [];
-    var addReport = function(selector) {
-      var el = document.querySelector(selector);
-      if (!el) {
-        report.push(selector + ": NOT FOUND");
-        return;
-      }
-      var rect = el.getBoundingClientRect();
-      var styles = window.getComputedStyle(el);
-      report.push(selector + " -> " +
-        "top: " + rect.top + ", " +
-        "left: " + rect.left + ", " +
-        "height: " + rect.height + ", " +
-        "width: " + rect.width + ", " +
-        "position: " + styles.position + ", " +
-        "offsetParent: " + (el.offsetParent ? el.offsetParent.className + ' (' + el.offsetParent.tagName + ')' : 'NONE')
-      );
-    };
-    addReport('body');
-    addReport('.site-header-wrapper');
-    addReport('.header');
-    addReport('section.section');
-    addReport('.product');
-    addReport('.woocommerce-product-gallery');
-    addReport('.woocommerce-product-gallery__wrapper');
-    addReport('.woocommerce-breadcrumb');
-    addReport('.single-wishlist-btn');
-    
-    var data = report.join("\n");
-    fetch('/?save_diagnostics=' + encodeURIComponent(data));
-  }, 1000);
-});
-</script>
-<?php endif; ?>
-
 <?php wp_footer(); ?>
 </body>
 </html>
