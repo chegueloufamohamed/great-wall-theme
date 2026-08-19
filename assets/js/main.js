@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWishlist();
   initMobileFilterDrawer();
   initHomepageHotspots();
+  initCollectionsCarousel();
   
   // Sidebar Category Pill Hover initializations
   initSidebarCategoryPills();
@@ -1911,6 +1912,38 @@ function initHomepageHotspots() {
       clearActiveDots();
     }
   });
+}
+
+/**
+ * Initialize Collections Carousel on Home Page
+ */
+function initCollectionsCarousel() {
+  const wrapper = document.querySelector('.collections-carousel-wrapper');
+  const prevBtn = document.querySelector('.collections-nav-btn.prev');
+  const nextBtn = document.querySelector('.collections-nav-btn.next');
+  if (!wrapper || !prevBtn || !nextBtn) return;
+
+  const updateButtons = () => {
+    prevBtn.disabled = wrapper.scrollLeft <= 5;
+    // Set a tiny threshold to account for rounding errors on high DPI displays
+    nextBtn.disabled = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 8;
+  };
+
+  nextBtn.addEventListener('click', () => {
+    const scrollAmount = wrapper.clientWidth * 0.85;
+    wrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+
+  prevBtn.addEventListener('click', () => {
+    const scrollAmount = wrapper.clientWidth * 0.85;
+    wrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  wrapper.addEventListener('scroll', updateButtons);
+  window.addEventListener('resize', updateButtons);
+  // Run on start and after a small delay to allow WooCommerce scripts to settle layout heights
+  updateButtons();
+  setTimeout(updateButtons, 500);
 }
 
 
