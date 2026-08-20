@@ -619,13 +619,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
        ========================================================================== -->
   <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
-      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Desks', 'great-wall-theme' ); ?></h2>
         <?php
         $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
         $desks_link = $desks_cat ? get_term_link( $desks_cat ) : '#';
         ?>
-        <a href="<?php echo esc_url( $desks_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+        <a href="<?php echo esc_url( $desks_link ); ?>" class="popular-view-all">
           <span><?php esc_html_e( 'View All Desks', 'great-wall-theme' ); ?></span>
           <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
         </a>
@@ -791,13 +791,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
        ========================================================================== -->
   <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
-      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Chairs', 'great-wall-theme' ); ?></h2>
         <?php
         $chair_cat = get_term_by( 'slug', 'chair', 'product_cat' );
         $chair_link = $chair_cat ? get_term_link( $chair_cat ) : '#';
         ?>
-        <a href="<?php echo esc_url( $chair_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+        <a href="<?php echo esc_url( $chair_link ); ?>" class="popular-view-all">
           <span><?php esc_html_e( 'View All Chairs', 'great-wall-theme' ); ?></span>
           <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
         </a>
@@ -897,13 +897,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
        ========================================================================== -->
   <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
-      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Sofa', 'great-wall-theme' ); ?></h2>
         <?php
         $sofa_cat = get_term_by( 'slug', 'sofa', 'product_cat' );
         $sofa_link = $sofa_cat ? get_term_link( $sofa_cat ) : '#';
         ?>
-        <a href="<?php echo esc_url( $sofa_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+        <a href="<?php echo esc_url( $sofa_link ); ?>" class="popular-view-all">
           <span><?php esc_html_e( 'View All Sofa', 'great-wall-theme' ); ?></span>
           <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
         </a>
@@ -1105,13 +1105,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
        ========================================================================== -->
   <section class="section popular-products-section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
-      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; width: 100%;">
+      <div class="popular-products-title-wrapper" data-scroll style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; width: 100%;">
         <h2 class="popular-products-title" style="margin: 0;"><?php esc_html_e( 'Most Popular Storage Cabinet', 'great-wall-theme' ); ?></h2>
         <?php
         $storage_cat = get_term_by( 'slug', 'storage-cabinet', 'product_cat' );
         $storage_link = $storage_cat ? get_term_link( $storage_cat ) : '#';
         ?>
-        <a href="<?php echo esc_url( $storage_link ); ?>" class="popular-view-all" style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1.5px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--transition-smooth);">
+        <a href="<?php echo esc_url( $storage_link ); ?>" class="popular-view-all">
           <span><?php esc_html_e( 'View All Storage Cabinet', 'great-wall-theme' ); ?></span>
           <i class="ri-arrow-right-line" style="font-size: 1rem; line-height: 1;"></i>
         </a>
