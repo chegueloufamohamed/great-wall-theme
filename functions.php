@@ -1606,4 +1606,36 @@ function great_wall_custom_variable_add_to_cart_text( $text, $product ) {
 	return $text;
 }
 
+/**
+ * Restrict WooCommerce search queries to product titles only (excludes content/excerpt)
+ */
+add_filter( 'posts_search', 'great_wall_search_by_title_only', 500, 2 );
+function great_wall_search_by_title_only( $search, $wp_query ) {
+	global $wpdb;
+
+	// Only run on front-end product search queries
+	if ( ! is_admin() && $wp_query->is_search() && $wp_query->is_main_query() ) {
+		if ( isset( $wp_query->query_vars['post_type'] ) && 'product' === $wp_query->query_vars['post_type'] ) {
+			$search_terms = $wp_query->get( 'search_terms' );
+			
+			if ( ! empty( $search_terms ) ) {
+				$search = '';
+				foreach ( $search_terms as $term ) {
+					$term = esc_sql( $wpdb->esc_like( $term ) );
+					$search .= " AND ({$wpdb->posts}.post_title LIKE '%{$term}%')";
+				}
+				
+				if ( ! empty( $search ) ) {
+					$search = " AND ({$search}) ";
+					if ( ! is_user_logged_in() ) {
+						$search .= " AND ({$wpdb->posts}.post_password = '') ";
+					}
+				}
+			}
+		}
+	}
+
+	return $search;
+}
+
 
