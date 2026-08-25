@@ -89,7 +89,7 @@ function great_wall_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap', array(), null );
 
 	// Enqueue main design system stylesheet directly (bypasses parent style.css @import chain).
-	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '3.2.1' );
+	wp_enqueue_style( 'great-wall-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '3.2.2' );
 
 	// Enqueue Remix Icons CDN.
 	wp_enqueue_style( 'remix-icons', 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css', array(), '4.2.0' );
@@ -1607,35 +1607,17 @@ function great_wall_custom_variable_add_to_cart_text( $text, $product ) {
 }
 
 /**
- * Restrict WooCommerce search queries to product titles only (excludes content/excerpt)
+ * Restrict WooCommerce search queries to product titles only (excludes content/excerpt) using native WordPress columns filter
  */
-add_filter( 'posts_search', 'great_wall_search_by_title_only', 500, 2 );
-function great_wall_search_by_title_only( $search, $wp_query ) {
-	global $wpdb;
-
-	// Only run on front-end product search queries
+add_filter( 'post_search_columns', 'great_wall_search_columns_only_title', 10, 3 );
+function great_wall_search_columns_only_title( $search_columns, $search, $wp_query ) {
+	// Only restrict frontend search queries targeting WooCommerce products
 	if ( ! is_admin() && $wp_query->is_search() && $wp_query->is_main_query() ) {
 		if ( isset( $wp_query->query_vars['post_type'] ) && 'product' === $wp_query->query_vars['post_type'] ) {
-			$search_terms = $wp_query->get( 'search_terms' );
-			
-			if ( ! empty( $search_terms ) ) {
-				$search = '';
-				foreach ( $search_terms as $term ) {
-					$term = esc_sql( $wpdb->esc_like( $term ) );
-					$search .= " AND ({$wpdb->posts}.post_title LIKE '%{$term}%')";
-				}
-				
-				if ( ! empty( $search ) ) {
-					$search = " AND ({$search}) ";
-					if ( ! is_user_logged_in() ) {
-						$search .= " AND ({$wpdb->posts}.post_password = '') ";
-					}
-				}
-			}
+			return array( 'post_title' );
 		}
 	}
-
-	return $search;
+	return $search_columns;
 }
 
 
