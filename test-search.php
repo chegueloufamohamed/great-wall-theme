@@ -31,6 +31,12 @@ $args = array(
 
 $query = new WP_Query( $args );
 
+echo '<h3>Generated Search Terms:</h3>';
+echo '<pre>';
+print_r( $query->get( 'search_terms' ) );
+echo '</pre>';
+echo '<hr>';
+
 echo '<h3>Query SQL:</h3>';
 echo '<pre>' . esc_html( $query->request ) . '</pre>';
 echo '<hr>';
