@@ -20,7 +20,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <!-- Single active hero slide with background video -->
       <div class="hero-slide active">
         <div class="hero-bg">
-          <video id="hero-bg-video" autoplay loop muted playsinline>
+          <video id="hero-bg-video" autoplay loop muted playsinline poster="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
             <!-- Source will be dynamically appended here via inline JavaScript based on user screen size -->
           </video>
           <script>

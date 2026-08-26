@@ -1396,26 +1396,29 @@ p {
    ========================================================================== */
 .hero {
   position: relative;
+  height: 100vh;
   width: 100%;
   overflow: hidden;
-  background-color: #fafafa;
-  padding: 40px 0 60px 0;
+  background-color: var(--bg-dark);
 }
 
 .hero-slider {
   width: 100%;
+  height: 100%;
   position: relative;
 }
 
 .hero-slide {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--transition-slow), visibility var(--transition-slow);
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .hero-slide.active {
@@ -1425,37 +1428,12 @@ p {
 }
 
 .hero-bg {
-  width: 90%;
-  max-width: 1300px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  background-color: #000000;
-  position: relative;
-  z-index: 1;
-}
-
-#hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    padding: 0;
-  }
-  
-  .hero-bg {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0;
-    aspect-ratio: 9 / 16;
-    box-shadow: none;
-  }
+  z-index: 1;
 }
 
 .hero-bg::after {
