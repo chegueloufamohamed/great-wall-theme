@@ -141,7 +141,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       
       <div class="grid categories-grid">
         <!-- Card 1: Desks -->
-        <div class="category-card delay-100" data-scroll onclick="window.location.href='<?php echo esc_url( $desks_link ); ?>'">
+        <a href="<?php echo esc_url( $desks_link ); ?>" class="category-card delay-100" data-scroll>
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $desk_img ); ?>" alt="Desks Category">
           </div>
@@ -149,10 +149,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="category-title">Desks</h3>
             <span class="category-count">Executive Workspaces</span>
           </div>
-        </div>
+        </a>
         
         <!-- Card 2: Chairs -->
-        <div class="category-card delay-200" data-scroll onclick="window.location.href='<?php echo esc_url( $chairs_link ); ?>'">
+        <a href="<?php echo esc_url( $chairs_link ); ?>" class="category-card delay-200" data-scroll>
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $chair_img ); ?>" alt="Chairs Category">
           </div>
@@ -160,10 +160,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="category-title">Chairs</h3>
             <span class="category-count">Ergonomic Office Seating</span>
           </div>
-        </div>
+        </a>
         
         <!-- Card 3: Storage Cabinet -->
-        <div class="category-card delay-300" data-scroll onclick="window.location.href='<?php echo esc_url( $storage_link ); ?>'">
+        <a href="<?php echo esc_url( $storage_link ); ?>" class="category-card delay-300" data-scroll>
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $storage_img ); ?>" alt="Storage Cabinet Category">
           </div>
@@ -171,10 +171,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="category-title">Storage Cabinet</h3>
             <span class="category-count">Cabinets & Lockers</span>
           </div>
-        </div>
+        </a>
         
         <!-- Card 4: Sofa -->
-        <div class="category-card delay-400" data-scroll onclick="window.location.href='<?php echo esc_url( $sofa_link ); ?>'">
+        <a href="<?php echo esc_url( $sofa_link ); ?>" class="category-card delay-400" data-scroll>
           <div class="category-img">
             <img loading="lazy" src="<?php echo esc_url( $sofa_img ); ?>" alt="Sofa Category">
           </div>
@@ -182,7 +182,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="category-title">Sofa</h3>
             <span class="category-count">Premium Lounge Comfort</span>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -196,7 +196,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <!-- Part 1: Top 3 Large Banners -->
       <div class="rls-banners-row" style="margin-bottom: 50px;">
         <!-- Banner 1: Steel Furniture -->
-        <div class="rls-banner-card banner-steel" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>'">
+        <a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>" class="rls-banner-card banner-steel">
           <div class="rls-banner-img">
             <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp" alt="Steel Furniture Banner">
           </div>
@@ -204,10 +204,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="rls-banner-title">Steel Furniture</h3>
             <span class="rls-banner-btn btn-white">Shop This</span>
           </div>
-        </div>
+        </a>
 
         <!-- Banner 2: Office Furniture -->
-        <div class="rls-banner-card banner-office" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>'">
+        <a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>" class="rls-banner-card banner-office">
           <div class="rls-banner-img">
             <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Furniture.webp" alt="Office Furniture Banner">
           </div>
@@ -215,10 +215,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="rls-banner-title">Office Furniture</h3>
             <span class="rls-banner-btn btn-pink">Shop Online</span>
           </div>
-        </div>
+        </a>
 
         <!-- Banner 3: Staff Accommodation -->
-        <div class="rls-banner-card banner-staff" onclick="window.location.href='<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>'">
+        <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="rls-banner-card banner-staff">
           <div class="rls-banner-img">
             <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Staff-Accomodation.webp" alt="Staff Accommodation Banner">
           </div>
@@ -226,7 +226,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <h3 class="rls-banner-title">Staff Accommodation</h3>
             <span class="rls-banner-btn btn-black">Shop Online</span>
           </div>
-        </div>
+        </a>
       </div>
 
       <!-- Part 2: 12 Categories Grid -->
@@ -306,12 +306,12 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                     }
                 }
                 ?>
-                <div class="rls-cat-item" onclick="window.location.href='<?php echo esc_url( $term_link ); ?>'">
+                <a href="<?php echo esc_url( $term_link ); ?>" class="rls-cat-item">
                   <div class="rls-cat-img-box">
                     <img loading="lazy" src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $cat->name ); ?>">
                   </div>
                   <h4 class="rls-cat-label"><?php echo esc_html( $cat->name ); ?></h4>
-                </div>
+                </a>
                 <?php
             }
         }
