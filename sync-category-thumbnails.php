@@ -32,7 +32,12 @@ $mappings = array(
     'storage-cabinet' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp',
     'sofa' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp',
     'reception-lounge-set' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp',
-    'office-storage' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp'
+    'office-storage' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp',
+    'coffee-tables' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Coffee-Tables.webp',
+    'conference-tables' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Conference-Tables.webp',
+    'drawer-cabinet' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Drawer-Cabinet.webp',
+    'court-hanger' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hanger.webp',
+    'workstations' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Workstations.webp'
 );
 
 echo "<h2>Starting WooCommerce Category Thumbnail Sync...</h2>";
