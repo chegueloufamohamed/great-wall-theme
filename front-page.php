@@ -251,17 +251,62 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             'taxonomy'   => 'product_cat',
             'hide_empty' => true,
             'exclude'    => array( get_option( 'default_product_cat' ) ), // Exclude Uncategorized
-            'orderby'    => 'name',
-            'order'      => 'ASC',
         ) );
 
         if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
+            // 1. Filter out parent categories with children
+            $filtered_cats = array();
             foreach ( $cats as $cat ) {
-                // Skip any category that has subcategories (parent categories)
                 $children = get_term_children( $cat->term_id, 'product_cat' );
-                if ( ! empty( $children ) && ! is_wp_error( $children ) ) {
-                    continue;
+                if ( empty( $children ) || is_wp_error( $children ) ) {
+                    $filtered_cats[] = $cat;
                 }
+            }
+
+            // 2. Sort by the exact custom order
+            $ordered_slugs = array(
+                'desks',
+                'workstations',
+                'storage-cabinet',
+                'drawer-cabinet',
+                'cabinet',
+                'steel-storage',
+                'steel-storage-and-lockers',
+                'office-chairs',
+                'commercial-chairs',
+                'sofa',
+                'bed-frames',
+                'bunk-beds',
+                'court-hanger',
+                'hanger-stands',
+                'hanger',
+                'hangers',
+                'partition-stands',
+                'foldable-room-divider',
+                'reception-lounge-set',
+                'shelves',
+                'single-beds',
+                'coffee-tables',
+                'coffee-table',
+                'conference-tables',
+                'conference-table',
+                'dinning-tables',
+                'dining-tables',
+                'folding-tables',
+                'folding-table'
+            );
+
+            usort( $filtered_cats, function( $a, $b ) use ( $ordered_slugs ) {
+                $pos_a = array_search( $a->slug, $ordered_slugs );
+                $pos_b = array_search( $b->slug, $ordered_slugs );
+                
+                $pos_a = ( $pos_a === false ) ? 999 : $pos_a;
+                $pos_b = ( $pos_b === false ) ? 999 : $pos_b;
+                
+                return $pos_a - $pos_b;
+            } );
+
+            foreach ( $filtered_cats as $cat ) {
                 $term_link = get_term_link( $cat );
                 if ( is_wp_error( $term_link ) ) {
                     continue;
