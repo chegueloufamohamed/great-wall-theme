@@ -57,6 +57,22 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <h2 class="section-title">Shop By Room Collection</h2>
       </div>
       <?php
+      if ( ! function_exists( 'great_wall_get_category_image_with_fallback' ) ) {
+          function great_wall_get_category_image_with_fallback( $slug, $default_fallback ) {
+              $term = get_term_by( 'slug', $slug, 'product_cat' );
+              if ( $term ) {
+                  $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
+                  if ( $thumbnail_id ) {
+                      $img_url = wp_get_attachment_url( $thumbnail_id );
+                      if ( $img_url ) {
+                          return $img_url;
+                      }
+                  }
+              }
+              return $default_fallback;
+          }
+      }
+
       if ( ! function_exists( 'great_wall_get_collection_image_url' ) ) {
           function great_wall_get_collection_image_url( $slugs ) {
               if ( ! is_array( $slugs ) ) {
@@ -104,27 +120,26 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                   }
               }
               
-              // Fallback
-              $assets_uri = get_template_directory_uri() . '/assets/images/';
+              // Fallback to high-quality default uploads
               $first_slug = $slugs[0];
               if ( 'desks' === $first_slug ) {
-                  return $assets_uri . 'dining_room.webp';
+                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp';
               } elseif ( 'chairs' === $first_slug || 'chair' === $first_slug || 'office-chairs' === $first_slug ) {
-                  return $assets_uri . 'designer_chair.webp';
-              } elseif ( 'storage-cabinet' === $first_slug ) {
-                  return $assets_uri . 'timber_dresser.webp';
+                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp';
+              } elseif ( 'storage-cabinet' === $first_slug || 'cabinet' === $first_slug ) {
+                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp';
               } elseif ( 'sofa' === $first_slug ) {
-                  return $assets_uri . 'hero_sofa.webp';
+                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Sofa.webp';
               }
               
               return wc_placeholder_img_src();
           }
       }
 
-      $desk_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp';
-      $chair_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp';
-      $storage_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp';
-      $sofa_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Sofa.webp';
+      $desk_img = great_wall_get_collection_image_url( 'desks' );
+      $chair_img = great_wall_get_collection_image_url( array( 'chairs', 'office-chairs' ) );
+      $storage_img = great_wall_get_collection_image_url( 'storage-cabinet' );
+      $sofa_img = great_wall_get_collection_image_url( 'sofa' );
 
       $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
       $desks_link = $desks_cat ? get_term_link( $desks_cat ) : home_url( '/product-category/desks/' );
@@ -198,7 +213,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Banner 1: Steel Furniture -->
         <a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>" class="rls-banner-card banner-steel">
           <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp" alt="Steel Furniture Banner">
+            <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'cabinet', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp' ) ); ?>" alt="Steel Furniture Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Steel Furniture</h3>
@@ -209,7 +224,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Banner 2: Office Furniture -->
         <a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>" class="rls-banner-card banner-office">
           <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Furniture.webp" alt="Office Furniture Banner">
+            <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'office-furniture', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Furniture.webp' ) ); ?>" alt="Office Furniture Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Office Furniture</h3>
@@ -220,7 +235,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Banner 3: Staff Accommodation -->
         <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="rls-banner-card banner-staff">
           <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Staff-Accomodation.webp" alt="Staff Accommodation Banner">
+            <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'bunk-beds', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Staff-Accomodation.webp' ) ); ?>" alt="Staff Accommodation Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Staff Accommodation</h3>
