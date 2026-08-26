@@ -1436,6 +1436,22 @@ p {
   z-index: 1;
 }
 
+#hero-bg-video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  background-color: #000000;
+}
+
+@media (max-width: 768px) {
+  #hero-bg-video {
+    object-fit: cover;
+  }
+}
+
 .hero-bg::after {
   content: '';
   position: absolute;
