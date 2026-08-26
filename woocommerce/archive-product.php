@@ -33,7 +33,12 @@ do_action( 'woocommerce_before_main_content' );
 		}
 
 		// Predefined order of category sections requested by the user
-		$preferred_order = array( 'desks', 'chairs', 'storage-cabinet', 'sofa', 'drawer-cabinet' );
+		$preferred_order = array(
+			'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'cabinet', 'steel-storage', 'steel-storage-and-lockers',
+			'office-chairs', 'commercial-chairs', 'sofa', 'bed-frames', 'bunk-beds', 'court-hanger', 'hanger-stands', 'hanger', 'hangers',
+			'partition-stands', 'foldable-room-divider', 'reception-lounge-set', 'shelves', 'single-beds', 'coffee-tables', 'coffee-table',
+			'conference-tables', 'conference-table', 'dinning-tables', 'dining-tables', 'folding-tables', 'folding-table'
+		);
 
 		// Helper function to build custom query args with active filters
 		if ( ! function_exists( 'great_wall_get_filtered_product_query_args' ) ) {
@@ -147,6 +152,36 @@ do_action( 'woocommerce_before_main_content' );
 			}
 		}
 
+		// Recursive helper to expand any parent categories to their leaf subcategories
+		if ( ! function_exists( 'great_wall_get_leaf_categories' ) ) {
+			function great_wall_get_leaf_categories( $term_id, &$leaf_slugs = array() ) {
+				$children = get_term_children( $term_id, 'product_cat' );
+				if ( empty( $children ) || is_wp_error( $children ) ) {
+					$term = get_term( $term_id, 'product_cat' );
+					if ( $term && ! is_wp_error( $term ) ) {
+						$leaf_slugs[] = $term->slug;
+					}
+				} else {
+					$child_terms = get_terms( array(
+						'taxonomy'   => 'product_cat',
+						'include'    => $children,
+						'hide_empty' => true,
+					) );
+					if ( ! empty( $child_terms ) && ! is_wp_error( $child_terms ) ) {
+						foreach ( $child_terms as $ct ) {
+							$sub_children = get_term_children( $ct->term_id, 'product_cat' );
+							if ( empty( $sub_children ) || is_wp_error( $sub_children ) ) {
+								$leaf_slugs[] = $ct->slug;
+							} else {
+								great_wall_get_leaf_categories( $ct->term_id, $leaf_slugs );
+							}
+						}
+					}
+				}
+				return array_unique( $leaf_slugs );
+			}
+		}
+
 		$queried_obj = get_queried_object();
 		$is_parent_chair = ( is_product_category() && isset( $queried_obj->slug ) && ( 'chair' === $queried_obj->slug || 'chairs' === $queried_obj->slug ) );
 
@@ -187,21 +222,43 @@ do_action( 'woocommerce_before_main_content' );
 					}
 				}
 			}
-		} else {
-			// Sort selected categories in the preferred order
-			usort( $selected_cat_slugs, function( $a, $b ) use ( $preferred_order ) {
-				$pos_a = array_search( $a, $preferred_order );
-				$pos_b = array_search( $b, $preferred_order );
-				
-				$pos_a = ( false !== $pos_a ) ? $pos_a : 999;
-				$pos_b = ( false !== $pos_b ) ? $pos_b : 999;
-				
-				if ( $pos_a === $pos_b ) {
-					return strcmp( $a, $b );
-				}
-				return $pos_a - $pos_b;
-			} );
 		}
+
+		// Expand parent categories to their leaf subcategories dynamically
+		$expanded_cat_slugs = array();
+		foreach ( $selected_cat_slugs as $cat_slug ) {
+			$term = get_term_by( 'slug', $cat_slug, 'product_cat' );
+			if ( $term ) {
+				$children = get_term_children( $term->term_id, 'product_cat' );
+				if ( ! empty( $children ) && ! is_wp_error( $children ) ) {
+					$leaves = great_wall_get_leaf_categories( $term->term_id );
+					if ( ! empty( $leaves ) ) {
+						foreach ( $leaves as $leaf_slug ) {
+							$expanded_cat_slugs[] = $leaf_slug;
+						}
+					}
+				} else {
+					$expanded_cat_slugs[] = $cat_slug;
+				}
+			} else {
+				$expanded_cat_slugs[] = $cat_slug;
+			}
+		}
+		$selected_cat_slugs = array_unique( $expanded_cat_slugs );
+
+		// Sort all selected categories in the preferred order
+		usort( $selected_cat_slugs, function( $a, $b ) use ( $preferred_order ) {
+			$pos_a = array_search( $a, $preferred_order );
+			$pos_b = array_search( $b, $preferred_order );
+			
+			$pos_a = ( false !== $pos_a ) ? $pos_a : 999;
+			$pos_b = ( false !== $pos_b ) ? $pos_b : 999;
+			
+			if ( $pos_a === $pos_b ) {
+				return strcmp( $a, $b );
+			}
+			return $pos_a - $pos_b;
+		} );
 
 		if ( ! empty( $selected_cat_slugs ) ) {
 			// Render toolbar header at the top of the main shop catalog listing
