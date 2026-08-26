@@ -348,12 +348,12 @@
             <h4 class="rls-cat-label">Foldable Room Divider</h4>
           </a>
 
-          <!-- 7. Office Furniture -->
-          <a class="rls-cat-item" href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">
+          <!-- 7. Desks -->
+          <a class="rls-cat-item" href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">
             <div class="rls-cat-img-box">
-              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp" alt="Office Furniture" />
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp" alt="Desks" />
             </div>
-            <h4 class="rls-cat-label">Office Furniture</h4>
+            <h4 class="rls-cat-label">Desks</h4>
           </a>
 
           <!-- 8. Reception Lounge Set -->
@@ -388,12 +388,12 @@
             <h4 class="rls-cat-label">Single Beds</h4>
           </a>
 
-          <!-- 12. Table -->
-          <a class="rls-cat-item" href="<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>">
+          <!-- 12. Coffee Tables -->
+          <a class="rls-cat-item" href="<?php echo esc_url( home_url( '/product-category/coffee-tables/' ) ); ?>">
             <div class="rls-cat-img-box">
-              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp" alt="Table" />
+              <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Coffee-Tables.webp" alt="Coffee Tables" />
             </div>
-            <h4 class="rls-cat-label">Table</h4>
+            <h4 class="rls-cat-label">Coffee Tables</h4>
           </a>
         </div>
       </div>

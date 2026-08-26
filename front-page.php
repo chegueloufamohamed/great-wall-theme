@@ -257,8 +257,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
         if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
             foreach ( $cats as $cat ) {
-                // Skip office-storage, chairs, and table parent categories
-                if ( in_array( $cat->slug, array( 'office-storage', 'chairs', 'table' ) ) ) {
+                // Skip any category that has subcategories (parent categories)
+                $children = get_term_children( $cat->term_id, 'product_cat' );
+                if ( ! empty( $children ) && ! is_wp_error( $children ) ) {
                     continue;
                 }
                 $term_link = get_term_link( $cat );
