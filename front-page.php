@@ -211,7 +211,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <!-- Part 1: Top 3 Large Banners -->
       <div class="rls-banners-row" style="margin-bottom: 50px;">
         <!-- Banner 1: Steel Furniture -->
-        <a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>" class="rls-banner-card banner-steel">
+        <a href="<?php echo esc_url( add_query_arg( 'cat', 'cabinet,single-beds,bunk-beds', home_url( '/shop/' ) ) ); ?>" class="rls-banner-card banner-steel">
           <div class="rls-banner-img">
             <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'cabinet', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp' ) ); ?>" alt="Steel Furniture Banner">
           </div>
