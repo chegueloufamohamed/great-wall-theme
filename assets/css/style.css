@@ -4065,20 +4065,26 @@ p {
 }
 
 .single-product .woocommerce-product-gallery .flex-viewport {
-  overflow: hidden;
+  overflow: hidden !important;
   width: 100% !important;
   aspect-ratio: 1 / 1 !important;
   max-height: none !important;
   height: auto !important;
+  background-color: var(--bg-light-accent, #f2ede5) !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--border-color, #e5e0d8) !important;
+  position: relative !important;
+  isolation: isolate !important;
 }
 
 .single-product .woocommerce-product-gallery__wrapper {
   position: relative !important;
   margin: 0 !important;
-  background-color: var(--bg-light-accent);
-  border-radius: var(--border-radius-lg);
-  border: 1px solid var(--border-color);
-  overflow: hidden;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
   min-width: 0;
   aspect-ratio: 1 / 1 !important;
   max-height: none !important;
@@ -4092,7 +4098,10 @@ p {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background-color: var(--bg-light-accent);
+  background-color: transparent !important;
+  overflow: hidden !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
 }
 
 .single-product .woocommerce-product-gallery__image a {
@@ -6930,14 +6939,21 @@ ul.products.list-view-active li.product .product-loop-actions {
    PRODUCT PAGE DETAIL SUMMARY PANEL & GALLERY (HIGH FIDELITY)
    ========================================================================== */
 /* Main Gallery image bg and radius */
-.single-product .woocommerce-product-gallery__wrapper {
+.single-product .woocommerce-product-gallery .flex-viewport {
   background-color: var(--bg-light-accent, #f2ede5) !important;
   border-radius: 14px !important;
   border: 1px solid var(--border-color, #e5e0d8) !important;
+  overflow: hidden !important;
+}
+
+.single-product .woocommerce-product-gallery__wrapper {
+  background: transparent !important;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 .single-product .woocommerce-product-gallery__image {
-  background-color: var(--bg-light-accent, #f2ede5) !important;
+  background-color: transparent !important;
 }
 
 .single-product .woocommerce-product-gallery__image img {
