@@ -4121,7 +4121,7 @@ p {
   object-fit: contain !important;
   display: block;
   margin: 0 auto;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal !important;
 }
 
 /* Responsive Gallery Height Caps */
@@ -6960,7 +6960,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 }
 
 .single-product .woocommerce-product-gallery__image img {
-  mix-blend-mode: multiply !important;
+  mix-blend-mode: normal !important;
   padding: 0 !important;
 }
 
@@ -6972,7 +6972,7 @@ ul.products.list-view-active li.product .product-loop-actions {
 }
 
 .single-product .woocommerce-product-gallery ol.flex-control-thumbs li img {
-  mix-blend-mode: multiply !important;
+  mix-blend-mode: normal !important;
   padding: 4px !important;
 }
 
@@ -8125,6 +8125,7 @@ ul.products.list-view-active li.product .product-loop-actions {
   height: 100% !important;
   object-fit: contain !important;
   transform: none !important;
+  mix-blend-mode: normal !important;
 }
 
 /* ==========================================================================
