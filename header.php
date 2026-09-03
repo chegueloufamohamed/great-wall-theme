@@ -30,7 +30,7 @@
       
       <!-- Brand Logo -->
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-        <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Logo-White.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; display: block;">
+        <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Logo.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; display: block;">
       </a>
       
       <!-- Hardcoded Premium Navigation Menu with Mega Dropdown -->
