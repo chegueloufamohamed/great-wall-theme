@@ -15,13 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="product-tabs-outer-container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
 	
-	<!-- 1. Render Standalone Reviews Section at the top (before the Description/Specs tabs) -->
-	<?php if ( comments_open() ) : ?>
-		<div class="product-reviews-standalone-section" style="margin-bottom: 50px; text-align: center;">
-			<?php comments_template(); ?>
-		</div>
-	<?php endif;
-
+	<?php
 	/**
 	 * Filter tabs and allow third parties to add their own.
 	 *
@@ -33,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	if ( ! empty( $product_tabs ) ) : ?>
 
-		<div class="woocommerce-tabs wc-tabs-wrapper">
+		<div class="woocommerce-tabs wc-tabs-wrapper" style="margin-bottom: 60px;">
 			<ul class="tabs wc-tabs" role="tablist">
 				<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
 					<li class="<?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
@@ -44,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endforeach; ?>
 			</ul>
 			<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
-				<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-product_specifications">
+				<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
 					<?php
 					if ( isset( $product_tab['callback'] ) ) {
 						call_user_func( $product_tab['callback'], $key, $product_tab );
@@ -56,5 +50,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php do_action( 'woocommerce_product_after_tabs' ); ?>
 		</div>
 
+	<?php endif; ?>
+
+	<!-- Render Standalone Reviews Section UNDER the Description & Specifications tabs -->
+	<?php if ( comments_open() ) : ?>
+		<div class="product-reviews-standalone-section" style="margin-top: 40px; margin-bottom: 50px; text-align: center;">
+			<?php comments_template(); ?>
+		</div>
 	<?php endif; ?>
 </div>
