@@ -4041,9 +4041,16 @@ p {
   overflow: hidden;
 }
 
-/* Prevent layout flash (FOUC) of secondary gallery images before Flexslider JS initializes */
-.single-product .woocommerce-product-gallery:not(.flexslider):not(.wc-product-gallery--loaded) .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image:not(:first-child) {
+/* Before Flexslider JS creates .flex-viewport, hide secondary gallery images to prevent page refresh layout flash */
+.single-product .woocommerce-product-gallery > .woocommerce-product-gallery__wrapper > .woocommerce-product-gallery__image:not(:first-child) {
   display: none !important;
+}
+
+/* Once Flexslider JS initializes and wraps .woocommerce-product-gallery__wrapper inside .flex-viewport, display all gallery slides */
+.single-product .woocommerce-product-gallery .flex-viewport .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Make product gallery sticky on desktop viewports */
