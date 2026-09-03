@@ -4031,7 +4031,6 @@ p {
   }
 }
 
-/* 1. Gallery Styling */
 .single-product .woocommerce-product-gallery {
   position: relative;
   width: 100% !important;
@@ -4040,7 +4039,11 @@ p {
   margin: 0 auto !important; /* Center the container */
   min-width: 0;
   overflow: hidden;
-  opacity: 1 !important;
+}
+
+/* Prevent layout flash (FOUC) of secondary gallery images before Flexslider JS initializes */
+.single-product .woocommerce-product-gallery:not(.flexslider):not(.wc-product-gallery--loaded) .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image:not(:first-child) {
+  display: none !important;
 }
 
 /* Make product gallery sticky on desktop viewports */
