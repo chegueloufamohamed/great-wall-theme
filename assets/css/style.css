@@ -10210,3 +10210,35 @@ ul.products li.product .price del,
     flex: 0 0 100% !important;
   }
 }
+
+/* ==========================================================================
+   DESKTOP HERO VIDEO FRAMING (Side & Top Padding + Border Radius)
+   ========================================================================== */
+@media (min-width: 769px) {
+  .hero {
+    height: auto !important;
+    min-height: calc(100vh - 40px);
+    padding-top: 136px !important;
+    padding-bottom: 28px !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    box-sizing: border-box !important;
+    background-color: #0C0C0C !important;
+  }
+
+  .hero-slider {
+    height: clamp(500px, 75vh, 800px) !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .hero-slide,
+  .hero-bg,
+  #hero-bg-video {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+}
