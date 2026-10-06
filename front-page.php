@@ -16,21 +16,21 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       section.hero {
         position: relative !important;
         height: auto !important;
-        padding-top: 195px !important;
-        padding-bottom: 40px !important;
-        padding-left: 40px !important;
-        padding-right: 40px !important;
+        padding-top: 155px !important;
+        padding-bottom: 30px !important;
+        padding-left: 50px !important;
+        padding-right: 50px !important;
         box-sizing: border-box !important;
         background-color: #FFFFFF !important;
       }
 
       body.admin-bar section.hero {
-        padding-top: 225px !important;
+        padding-top: 185px !important;
       }
 
       section.hero .hero-slider {
         width: 100% !important;
-        max-width: 1320px !important;
+        max-width: 980px !important;
         aspect-ratio: 16 / 9 !important;
         height: auto !important;
         margin: 0 auto !important;
