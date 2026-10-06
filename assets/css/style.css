@@ -10230,8 +10230,10 @@ ul.products li.product .price del,
   }
 
   .hero-slider {
-    height: clamp(420px, 58vh, 620px) !important;
+    width: 100% !important;
     max-width: 1320px !important;
+    aspect-ratio: 16 / 9 !important;
+    height: auto !important;
     margin: 0 auto !important;
     border-radius: 20px !important;
     overflow: hidden !important;
@@ -10241,6 +10243,9 @@ ul.products li.product .price del,
   .hero-slide,
   .hero-bg,
   #hero-bg-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
     border-radius: 20px !important;
     overflow: hidden !important;
   }

@@ -30,8 +30,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
       section.hero .hero-slider {
         width: 100% !important;
-        height: clamp(420px, 58vh, 620px) !important;
         max-width: 1320px !important;
+        aspect-ratio: 16 / 9 !important;
+        height: auto !important;
         margin: 0 auto !important;
         border-radius: 20px !important;
         overflow: hidden !important;
@@ -41,6 +42,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       section.hero .hero-slide,
       section.hero .hero-bg,
       section.hero #hero-bg-video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
         border-radius: 20px !important;
         overflow: hidden !important;
       }
@@ -56,7 +60,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <!-- Single active hero slide with background video -->
       <div class="hero-slide active">
         <div class="hero-bg">
-          <video id="hero-bg-video" autoplay loop muted playsinline poster="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+          <video id="hero-bg-video" autoplay loop muted playsinline poster="<?php echo esc_url( $assets_uri . 'hero_sofa.webp' ); ?>" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;">
             <!-- Source will be dynamically appended here via inline JavaScript based on user screen size -->
           </video>
           <script>
