@@ -16,22 +16,26 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       section.hero {
         position: relative !important;
         height: auto !important;
-        padding-top: 140px !important;
-        padding-bottom: 36px !important;
+        padding-top: 195px !important;
+        padding-bottom: 40px !important;
         padding-left: 40px !important;
         padding-right: 40px !important;
         box-sizing: border-box !important;
         background-color: #FFFFFF !important;
       }
 
+      body.admin-bar section.hero {
+        padding-top: 225px !important;
+      }
+
       section.hero .hero-slider {
         width: 100% !important;
-        height: clamp(440px, 60vh, 640px) !important;
+        height: clamp(420px, 58vh, 620px) !important;
         max-width: 1320px !important;
         margin: 0 auto !important;
         border-radius: 20px !important;
         overflow: hidden !important;
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08) !important;
       }
 
       section.hero .hero-slide,
