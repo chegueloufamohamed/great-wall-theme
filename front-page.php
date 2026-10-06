@@ -11,6 +11,39 @@ get_header();
 $assets_uri = get_template_directory_uri() . '/assets/images/';
 ?>
 
+  <style id="hero-custom-desktop-framing">
+    @media (min-width: 769px) {
+      section.hero {
+        position: relative !important;
+        height: auto !important;
+        min-height: calc(100vh - 40px) !important;
+        padding-top: 136px !important;
+        padding-bottom: 28px !important;
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+        background-color: #0C0C0C !important;
+      }
+
+      section.hero .hero-slider {
+        width: 100% !important;
+        height: clamp(500px, 75vh, 800px) !important;
+        max-width: 1600px !important;
+        margin: 0 auto !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      section.hero .hero-slide,
+      section.hero .hero-bg,
+      section.hero #hero-bg-video {
+        border-radius: 16px !important;
+        overflow: hidden !important;
+      }
+    }
+  </style>
+
   <!-- ==========================================================================
        HERO CAROUSEL SECTION
        ========================================================================== -->
