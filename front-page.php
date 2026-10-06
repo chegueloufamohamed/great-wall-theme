@@ -16,29 +16,28 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       section.hero {
         position: relative !important;
         height: auto !important;
-        min-height: calc(100vh - 40px) !important;
-        padding-top: 136px !important;
-        padding-bottom: 28px !important;
-        padding-left: 32px !important;
-        padding-right: 32px !important;
+        padding-top: 140px !important;
+        padding-bottom: 36px !important;
+        padding-left: 40px !important;
+        padding-right: 40px !important;
         box-sizing: border-box !important;
-        background-color: #0C0C0C !important;
+        background-color: #FFFFFF !important;
       }
 
       section.hero .hero-slider {
         width: 100% !important;
-        height: clamp(500px, 75vh, 800px) !important;
-        max-width: 1600px !important;
+        height: clamp(440px, 60vh, 640px) !important;
+        max-width: 1320px !important;
         margin: 0 auto !important;
-        border-radius: 16px !important;
+        border-radius: 20px !important;
         overflow: hidden !important;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1) !important;
       }
 
       section.hero .hero-slide,
       section.hero .hero-bg,
       section.hero #hero-bg-video {
-        border-radius: 16px !important;
+        border-radius: 20px !important;
         overflow: hidden !important;
       }
     }
