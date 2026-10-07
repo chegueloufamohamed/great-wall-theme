@@ -10250,3 +10250,36 @@ ul.products li.product .price del,
     overflow: hidden !important;
   }
 }
+
+/* ==========================================================================
+   BRAND HERO INTRO & CTA SECTION STYLES
+   ========================================================================== */
+.brand-hero-intro-section .shortcut-pill {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.brand-hero-intro-section .shortcut-pill:hover {
+  background-color: #1C1C1E !important;
+  color: #FFFFFF !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  border-color: #1C1C1E !important;
+}
+
+.brand-hero-intro-section .shortcut-pill:hover i {
+  color: #C5A880 !important;
+}
+
+.brand-hero-intro-section .cta-quote-btn:hover {
+  background-color: #C5A880 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(197, 168, 128, 0.35) !important;
+}
+
+.brand-hero-intro-section .cta-contact-btn:hover {
+  background-color: #1C1C1E !important;
+  color: #FFFFFF !important;
+  transform: translateY(-3px);
+}
+
