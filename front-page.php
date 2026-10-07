@@ -105,13 +105,13 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
         <!-- CTA Action Buttons -->
         <div class="brand-cta-buttons" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-          <a href="https://wa.me/971506548778?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20request%20a%20quote" target="_blank" rel="noopener" class="btn btn-primary cta-quote-btn" style="background-color: #1C1C1E; color: #FFFFFF; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.12);">
-            <i class="ri-chat-quote-line" style="font-size: 1.2rem;"></i>
-            <span><?php esc_html_e( 'Request a Quote', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="#showroom-section" class="btn btn-secondary cta-contact-btn" style="background-color: transparent; color: #1C1C1E; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; border: 2px solid #1C1C1E; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
-            <i class="ri-map-pin-line" style="font-size: 1.2rem;"></i>
+          <a href="https://wa.me/971582176351?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20contact%20you%20for%20a%20quote" target="_blank" rel="noopener" class="btn btn-primary cta-quote-btn" style="background-color: #25D366; color: #FFFFFF; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(37,211,102,0.25);">
+            <i class="ri-whatsapp-line" style="font-size: 1.25rem;"></i>
             <span><?php esc_html_e( 'Contact Us', 'great-wall-theme' ); ?></span>
+          </a>
+          <a href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ); ?>" class="btn btn-secondary cta-contact-btn" style="background-color: transparent; color: #1C1C1E; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; border: 2px solid #1C1C1E; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+            <i class="ri-grid-line" style="font-size: 1.15rem;"></i>
+            <span><?php esc_html_e( 'Explore Product Categories', 'great-wall-theme' ); ?></span>
           </a>
         </div>
       </div>
