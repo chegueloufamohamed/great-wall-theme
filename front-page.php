@@ -86,69 +86,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       
     </div>
   <!-- ==========================================================================
-       HERO BRAND MESSAGING, CATEGORY SHORTCUTS & CTA SECTION
-       ========================================================================== -->
-  <section class="section brand-hero-intro-section" style="padding-top: 50px; padding-bottom: 60px; background-color: #FFFFFF;">
-    <div class="container" style="max-width: 1140px; margin: 0 auto; text-align: center;">
-      
-      <!-- Brand & Key Messaging -->
-      <div class="brand-intro-content" style="max-width: 820px; margin: 0 auto 40px auto;" data-scroll>
-        <span class="brand-badge-tag" style="display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 800; color: #C5A880; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 14px; background: rgba(197, 168, 128, 0.12); padding: 6px 16px; border-radius: 30px;">
-          <?php esc_html_e( 'Bespoke Craftsmanship & Luxury Living', 'great-wall-theme' ); ?>
-        </span>
-        <h1 class="brand-intro-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #1C1C1E; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 18px;">
-          <?php esc_html_e( 'Elevate Your Interior with Mastercrafted Furniture Built for Distinction', 'great-wall-theme' ); ?>
-        </h1>
-        <p class="brand-intro-desc" style="font-family: var(--font-sans); font-size: 1.1rem; color: #5C5954; line-height: 1.7; margin: 0 auto 32px auto; max-width: 720px;">
-          <?php esc_html_e( 'From executive corporate offices to luxury residential settings, Great Wall Furniture combines premium materials, local Dubai craftsmanship, and custom dimensions tailored across all seven Emirates.', 'great-wall-theme' ); ?>
-        </p>
-
-        <!-- CTA Action Buttons -->
-        <div class="brand-cta-buttons" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-          <a href="https://wa.me/971582176351?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20contact%20you%20for%20a%20quote" target="_blank" rel="noopener" class="btn btn-primary cta-quote-btn" style="background-color: #25D366; color: #FFFFFF; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(37,211,102,0.25);">
-            <i class="ri-whatsapp-line" style="font-size: 1.25rem;"></i>
-            <span><?php esc_html_e( 'Contact Us', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ); ?>" class="btn btn-secondary cta-contact-btn" style="background-color: transparent; color: #1C1C1E; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; border: 2px solid #1C1C1E; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
-            <i class="ri-grid-line" style="font-size: 1.15rem;"></i>
-            <span><?php esc_html_e( 'Explore Product Categories', 'great-wall-theme' ); ?></span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Main Product Category Shortcuts -->
-      <div class="brand-category-shortcuts" style="border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 35px;" data-scroll>
-        <span class="shortcuts-label" style="display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 800; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px;">
-          <?php esc_html_e( 'Explore Main Product Categories', 'great-wall-theme' ); ?>
-        </span>
-        <div class="shortcuts-grid" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center;">
-          <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-computer-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Desks & Workstations', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-armchair-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Office & Executive Chairs', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-archive-drawer-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Storage & Lockers', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-sofa-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Sofas & Loungers', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-hotel-bed-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Beds & Accommodation', 'great-wall-theme' ); ?></span>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================================================
        COLLECTION CATEGORIES GRID
        ========================================================================== -->
   <section class="section">
@@ -478,6 +415,69 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             }
         }
         ?>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HERO BRAND MESSAGING, CATEGORY SHORTCUTS & CTA SECTION
+       ========================================================================== -->
+  <section class="section brand-hero-intro-section" style="padding-top: 50px; padding-bottom: 60px; background-color: #FFFFFF;">
+    <div class="container" style="max-width: 1140px; margin: 0 auto; text-align: center;">
+      
+      <!-- Brand & Key Messaging -->
+      <div class="brand-intro-content" style="max-width: 820px; margin: 0 auto 40px auto;" data-scroll>
+        <span class="brand-badge-tag" style="display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 800; color: #C5A880; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 14px; background: rgba(197, 168, 128, 0.12); padding: 6px 16px; border-radius: 30px;">
+          <?php esc_html_e( 'Bespoke Craftsmanship & Luxury Living', 'great-wall-theme' ); ?>
+        </span>
+        <h1 class="brand-intro-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #1C1C1E; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 18px;">
+          <?php esc_html_e( 'Elevate Your Interior with Mastercrafted Furniture Built for Distinction', 'great-wall-theme' ); ?>
+        </h1>
+        <p class="brand-intro-desc" style="font-family: var(--font-sans); font-size: 1.1rem; color: #5C5954; line-height: 1.7; margin: 0 auto 32px auto; max-width: 720px;">
+          <?php esc_html_e( 'From executive corporate offices to luxury residential settings, Great Wall Furniture combines premium materials, local Dubai craftsmanship, and custom dimensions tailored across all seven Emirates.', 'great-wall-theme' ); ?>
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="brand-cta-buttons" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
+          <a href="https://wa.me/971582176351?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20contact%20you%20for%20a%20quote" target="_blank" rel="noopener" class="btn btn-primary cta-quote-btn" style="background-color: #25D366; color: #FFFFFF; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(37,211,102,0.25);">
+            <i class="ri-whatsapp-line" style="font-size: 1.25rem;"></i>
+            <span><?php esc_html_e( 'Contact Us', 'great-wall-theme' ); ?></span>
+          </a>
+          <a href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ); ?>" class="btn btn-secondary cta-contact-btn" style="background-color: transparent; color: #1C1C1E; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; border: 2px solid #1C1C1E; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+            <i class="ri-grid-line" style="font-size: 1.15rem;"></i>
+            <span><?php esc_html_e( 'Explore Product Categories', 'great-wall-theme' ); ?></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Product Category Shortcuts -->
+      <div class="brand-category-shortcuts" style="border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 35px;" data-scroll>
+        <span class="shortcuts-label" style="display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 800; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px;">
+          <?php esc_html_e( 'Explore Main Product Categories', 'great-wall-theme' ); ?>
+        </span>
+        <div class="shortcuts-grid" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center;">
+          <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
+            <i class="ri-computer-line" style="color: #C5A880; font-size: 1.1rem;"></i>
+            <span><?php esc_html_e( 'Desks & Workstations', 'great-wall-theme' ); ?></span>
+          </a>
+          <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
+            <i class="ri-armchair-line" style="color: #C5A880; font-size: 1.1rem;"></i>
+            <span><?php esc_html_e( 'Office & Executive Chairs', 'great-wall-theme' ); ?></span>
+          </a>
+          <a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
+            <i class="ri-archive-drawer-line" style="color: #C5A880; font-size: 1.1rem;"></i>
+            <span><?php esc_html_e( 'Storage & Lockers', 'great-wall-theme' ); ?></span>
+          </a>
+          <a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
+            <i class="ri-sofa-line" style="color: #C5A880; font-size: 1.1rem;"></i>
+            <span><?php esc_html_e( 'Sofas & Loungers', 'great-wall-theme' ); ?></span>
+          </a>
+          <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
+            <i class="ri-hotel-bed-line" style="color: #C5A880; font-size: 1.1rem;"></i>
+            <span><?php esc_html_e( 'Beds & Accommodation', 'great-wall-theme' ); ?></span>
+          </a>
+        </div>
       </div>
 
     </div>
