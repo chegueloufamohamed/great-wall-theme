@@ -52,127 +52,31 @@
             <div class="mega-menu-grid">
               
               <?php
-              // Build the 5 columns from the shared category groups (see great_wall_get_category_menu_groups())
-              $columns = array();
-              foreach ( great_wall_get_category_menu_groups() as $col_key => $group ) {
-                  $columns[ $col_key ] = array(
-                      'title' => $group['title'],
-                      'cats'  => great_wall_get_menu_group_terms( $group['slugs'] ),
-                  );
-              }
-
-              // Column 1: OFFICE FURNITURE (with dynamic subgroups)
-              ?>
-              <div class="mega-menu-col">
-                <h4 class="mega-menu-title"><?php echo esc_html( $columns['office-furniture']['title'] ); ?></h4>
-                
-                <div class="mega-menu-group-box">
-                  <?php
-                  $office_cats = $columns['office-furniture']['cats'];
-                  
-                  // Define subgroups
-                  $subgroups = array(
-                      'desks' => array(
-                          'title' => 'Desks & Workstations',
-                          'cats'  => array(),
-                      ),
-                      'storage' => array(
-                          'title' => 'Office Storage',
-                          'cats'  => array(),
-                      ),
-                      'chairs' => array(
-                          'title' => 'Chairs',
-                          'cats'  => array(),
-                      ),
-                      'sofa' => array(
-                          'title' => 'Sofa',
-                          'cats'  => array(),
-                      ),
-                      'other' => array(
-                          'title' => 'Other Office',
-                          'cats'  => array(),
-                      ),
-                  );
-                  
-                  // Distribute to subgroups
-                  foreach ( $office_cats as $cat ) {
-                      $slug = $cat->slug;
-                      if ( strpos( $slug, 'desk' ) !== false || strpos( $slug, 'workstation' ) !== false || strpos( $slug, 'conference' ) !== false || 'office-tables' === $slug ) {
-                          $subgroups['desks']['cats'][] = $cat;
-                      } elseif ( strpos( $slug, 'cabinet' ) !== false || strpos( $slug, 'storage' ) !== false || strpos( $slug, 'drawer' ) !== false || strpos( $slug, 'locker' ) !== false || strpos( $slug, 'safe' ) !== false ) {
-                          $subgroups['storage']['cats'][] = $cat;
-                      } elseif ( strpos( $slug, 'chair' ) !== false || strpos( $slug, 'seating' ) !== false || strpos( $slug, 'stool' ) !== false ) {
-                          $subgroups['chairs']['cats'][] = $cat;
-                      } elseif ( strpos( $slug, 'sofa' ) !== false || strpos( $slug, 'lounge' ) !== false || strpos( $slug, 'reception' ) !== false ) {
-                          $subgroups['sofa']['cats'][] = $cat;
-                      } else {
-                          // Exclude the parent 'office-furniture' category itself from showing as a duplicate child item inside the box
-                          if ( $slug !== 'office-furniture' ) {
-                              $subgroups['other']['cats'][] = $cat;
-                          }
-                      }
-                  }
-                  
-                  // Render subgroups
-                  foreach ( $subgroups as $sub_key => $subgroup ) {
-                      if ( empty( $subgroup['cats'] ) ) {
-                          continue;
-                      }
-                      ?>
-                      <div class="mega-menu-subgroup">
-                        <h5 class="mega-menu-subtitle"><?php echo esc_html( $subgroup['title'] ); ?></h5>
-                        <ul class="mega-menu-sublist">
-                          <?php foreach ( $subgroup['cats'] as $cat ) : 
-                              $term_link = get_term_link( $cat );
-                              $label = $cat->name;
-                              if ( $sub_key === 'desks' && strcasecmp( $label, 'Office Desks' ) === 0 ) {
-                                  $label = 'Desks';
-                              }
-                              ?>
-                              <li>
-                                <a href="<?php echo esc_url( $term_link ); ?>">
-                                  <?php echo esc_html( $label ); ?>
-                                  <?php
-                                  if ( $cat->slug === 'workstations' ) {
-                                      echo '<span class="mega-badge badge-new">New</span>';
-                                  } elseif ( $cat->slug === 'office-chairs' ) {
-                                      echo '<span class="mega-badge badge-popular">Popular</span>';
-                                  }
-                                  ?>
-                                </a>
-                              </li>
-                          <?php endforeach; ?>
-                        </ul>
-                      </div>
-                      <?php
-                  }
-                  ?>
-                </div>
-              </div>
-
-              <?php
-              // Columns 2, 3, 4, 5: Single list boxes
-              foreach ( array( 'steel-furniture', 'accommodation', 'tables-dining', 'living-divider' ) as $col_key ) : 
-                  $col = $columns[ $col_key ];
+              // Render all 5 columns with the 15 active categories
+              foreach ( great_wall_get_category_menu_groups() as $col_key => $group ) :
+                  $terms = great_wall_get_menu_group_terms( $group['slugs'] );
                   ?>
                   <div class="mega-menu-col">
-                    <h4 class="mega-menu-title"><?php echo esc_html( $col['title'] ); ?></h4>
+                    <h4 class="mega-menu-title"><?php echo esc_html( $group['title'] ); ?></h4>
                     <ul class="mega-menu-list">
                       <?php
-                      if ( ! empty( $col['cats'] ) ) {
-                          foreach ( $col['cats'] as $cat ) {
+                      if ( ! empty( $terms ) ) {
+                          foreach ( $terms as $cat ) {
                               $term_link = get_term_link( $cat );
-                              if ( $cat->slug === $col_key ) {
+                              if ( is_wp_error( $term_link ) ) {
                                   continue;
                               }
-                              $label = $cat->name;
                               ?>
                               <li>
                                 <a href="<?php echo esc_url( $term_link ); ?>">
-                                  <?php echo esc_html( $label ); ?>
+                                  <?php echo esc_html( $cat->name ); ?>
                                   <?php
-                                  if ( $cat->slug === 'cabinet' ) {
-                                      echo '<span class="mega-badge badge-hot">Hot</span>';
+                                  if ( $cat->slug === 'workstations' ) {
+                                      echo '<span class="mega-badge badge-new">' . esc_html__( 'New', 'great-wall-theme' ) . '</span>';
+                                  } elseif ( $cat->slug === 'office-chairs' ) {
+                                      echo '<span class="mega-badge badge-popular">' . esc_html__( 'Popular', 'great-wall-theme' ) . '</span>';
+                                  } elseif ( $cat->slug === 'steel-storage' ) {
+                                      echo '<span class="mega-badge badge-hot">' . esc_html__( 'Hot', 'great-wall-theme' ) . '</span>';
                                   }
                                   ?>
                                 </a>
@@ -186,7 +90,6 @@
                     </ul>
                   </div>
               <?php endforeach; ?>
-
             </div>
             
             <div class="mega-menu-footer" style="margin-top: 24px; padding-top: 0; display: flex; justify-content: center; width: 100%;">

@@ -32,13 +32,19 @@
             </ul>
             <?php
           } else {
+            // Curated featured collections matching active store categories
+            $footer_cat_slugs = array( 'office-chairs', 'desks', 'workstations', 'sofa', 'steel-storage', 'bunk-beds' );
             ?>
             <ul class="footer-links">
-              <li><a href="<?php echo esc_url( home_url( '/shop/?cat=living' ) ); ?>" class="footer-link">Living Room</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/shop/?cat=bedroom' ) ); ?>" class="footer-link">Bedroom Suite</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/shop/?cat=dining' ) ); ?>" class="footer-link">Dining Hall</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/shop/?cat=accents' ) ); ?>" class="footer-link">Designer Armchairs</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="footer-link">Bespoke Workshop</a></li>
+              <?php
+              foreach ( $footer_cat_slugs as $fc_slug ) {
+                  $term = get_term_by( 'slug', $fc_slug, 'product_cat' );
+                  if ( $term && ! is_wp_error( $term ) ) {
+                      echo '<li><a href="' . esc_url( get_term_link( $term ) ) . '" class="footer-link">' . esc_html( $term->name ) . '</a></li>';
+                  }
+              }
+              ?>
+              <li><a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="footer-link"><?php esc_html_e( 'View All Collections', 'great-wall-theme' ); ?></a></li>
             </ul>
             <?php
           }
@@ -309,9 +315,7 @@
                   return $pos_a - $pos_b;
               } );
 
-              // Limit to 12 items for the search drawer
-              $filtered_cats = array_slice( $filtered_cats, 0, 12 );
-
+              // Render all active categories in catalog order (15 categories)
               foreach ( $filtered_cats as $cat ) {
                   $term_link = get_term_link( $cat );
                   if ( is_wp_error( $term_link ) ) {
@@ -321,41 +325,25 @@
                   $image_url = $thumbnail_id ? wp_get_attachment_url( $thumbnail_id ) : '';
 
                   if ( ! $image_url ) {
-                      // Fallback image url based on slug
                       $slug = $cat->slug;
-                      if ( $slug === 'bunk-beds' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp';
-                      } elseif ( $slug === 'cabinet' || $slug === 'steel-storage' || $slug === 'office-storage' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp';
-                      } elseif ( $slug === 'office-chairs' || $slug === 'chairs' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp';
-                      } elseif ( $slug === 'commercial-chairs' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Commercial-Chairs.webp';
-                      } elseif ( $slug === 'dinning-tables' || $slug === 'dining-tables' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp';
-                      } elseif ( $slug === 'partition-stands' || $slug === 'foldable-room-divider' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp';
-                      } elseif ( $slug === 'desks' || $slug === 'office-furniture' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp';
-                      } elseif ( $slug === 'reception-lounge-set' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Reception-Lounge.webp';
-                      } elseif ( $slug === 'shelves' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Shelves.webp';
-                      } elseif ( $slug === 'sofa' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp';
-                      } elseif ( $slug === 'single-beds' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Single-Beds.webp';
-                      } elseif ( $slug === 'coffee-tables' || $slug === 'coffee-table' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Coffee-Tables.webp';
-                      } elseif ( $slug === 'conference-tables' || $slug === 'conference-table' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Conference-Tables.webp';
-                      } elseif ( $slug === 'office-tables' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp';
-                      } elseif ( $slug === 'folding-tables' ) {
-                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp';
-                      } else {
-                          $image_url = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '';
-                      }
+                      $fallback_images = array(
+                          'office-chairs'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Chairs.webp',
+                          'desks'             => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks-1.webp',
+                          'office-tables'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp',
+                          'workstations'      => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Workstations.webp',
+                          'conference-tables' => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Conference-Tables.webp',
+                          'storage-cabinet'   => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Storage-Cabinet.webp',
+                          'sofa'              => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Sofa.webp',
+                          'coffee-tables'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Coffee-Tables.webp',
+                          'steel-storage'     => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Cabinet.webp',
+                          'bunk-beds'         => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Bunk-Beds.webp',
+                          'shoe-rack'         => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Shelves.webp',
+                          'partition-stands'  => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Room-Divider.webp',
+                          'folding-tables'    => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp',
+                          'dinning-tables'    => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Dinning-Tables.webp',
+                          'court-hanger'      => 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hanger.webp',
+                      );
+                      $image_url = isset( $fallback_images[ $slug ] ) ? $fallback_images[ $slug ] : ( function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '' );
                   }
                   ?>
                   <a class="rls-cat-item" href="<?php echo esc_url( $term_link ); ?>">
