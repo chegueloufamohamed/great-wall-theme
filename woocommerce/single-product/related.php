@@ -15,47 +15,21 @@ $terms = get_the_terms( $current_product_id, 'product_cat' );
 $active_core_key = '';
 $active_cat_name = '';
 
-$core_categories = array(
-	'chairs'          => array( 'slug' => 'chairs', 'name' => 'Chairs' ),
-	'desks'           => array( 'slug' => 'desks', 'name' => 'Desks' ),
-	'storage-cabinet' => array( 'slug' => 'storage-cabinet', 'name' => 'Storage Cabinet' ),
-	'sofa'            => array( 'slug' => 'sofa', 'name' => 'Sofa' )
-);
+// Core categories offered as "Complete The Look" collections, in display order
+$core_slugs = array( 'office-chairs', 'desks', 'storage-cabinet', 'sofa' );
 
+// The product's own category comes first
 if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 	foreach ( $terms as $term ) {
-		$slug = strtolower( $term->slug );
-		if ( strpos( $slug, 'chair' ) !== false ) {
-			$active_core_key = 'chairs';
+		if ( 'uncategorized' !== $term->slug ) {
+			$active_core_key = $term->slug;
 			$active_cat_name = $term->name;
 			break;
-		} elseif ( strpos( $slug, 'desk' ) !== false ) {
-			$active_core_key = 'desks';
-			$active_cat_name = $term->name;
-			break;
-		} elseif ( strpos( $slug, 'storage' ) !== false || strpos( $slug, 'cabinet' ) !== false ) {
-			$active_core_key = 'storage-cabinet';
-			$active_cat_name = $term->name;
-			break;
-		} elseif ( strpos( $slug, 'sofa' ) !== false ) {
-			$active_core_key = 'sofa';
-			$active_cat_name = $term->name;
-			break;
-		}
-	}
-	
-	if ( empty( $active_core_key ) ) {
-		foreach ( $terms as $term ) {
-			if ( 'uncategorized' !== $term->slug ) {
-				$active_core_key = $term->slug;
-				$active_cat_name = $term->name;
-				break;
-			}
 		}
 	}
 }
 
-// Build the ordered category sequence (current category first, then remaining three core categories)
+// Build the ordered category sequence (current category first, then the remaining core categories)
 $ordered_categories = array();
 
 if ( ! empty( $active_core_key ) ) {
@@ -64,23 +38,22 @@ if ( ! empty( $active_core_key ) ) {
 		'name'  => $active_cat_name,
 		'title' => sprintf( esc_html__( 'Explore More %s', 'great-wall-theme' ), $active_cat_name )
 	);
-	
-	$order_list = array( 'chairs', 'desks', 'storage-cabinet', 'sofa' );
-	foreach ( $order_list as $key ) {
-		if ( $key === $active_core_key || ( 'chairs' === $key && strpos( $active_core_key, 'chair' ) !== false ) || ( 'desks' === $key && strpos( $active_core_key, 'desk' ) !== false ) ) {
-			continue;
-		}
-		$ordered_categories[] = array(
-			'slug'  => $core_categories[ $key ]['slug'],
-			'name'  => $core_categories[ $key ]['name'],
-			'title' => sprintf( esc_html__( 'Complete The Look: %s', 'great-wall-theme' ), $core_categories[ $key ]['name'] )
-		);
+}
+
+foreach ( $core_slugs as $core_slug ) {
+	if ( $core_slug === $active_core_key ) {
+		continue;
 	}
-} else {
-	$ordered_categories[] = array( 'slug' => 'chairs', 'name' => 'Chairs', 'title' => 'Explore More Chairs' );
-	$ordered_categories[] = array( 'slug' => 'desks', 'name' => 'Desks', 'title' => 'Complete The Look: Desks' );
-	$ordered_categories[] = array( 'slug' => 'storage-cabinet', 'name' => 'Storage Cabinet', 'title' => 'Complete The Look: Storage Cabinet' );
-	$ordered_categories[] = array( 'slug' => 'sofa', 'name' => 'Sofa', 'title' => 'Complete The Look: Sofa' );
+	$core_term = get_term_by( 'slug', $core_slug, 'product_cat' );
+	if ( ! $core_term ) {
+		continue;
+	}
+	$title_format = empty( $ordered_categories ) ? __( 'Explore More %s', 'great-wall-theme' ) : __( 'Complete The Look: %s', 'great-wall-theme' );
+	$ordered_categories[] = array(
+		'slug'  => $core_slug,
+		'name'  => $core_term->name,
+		'title' => sprintf( esc_html( $title_format ), $core_term->name )
+	);
 }
 
 $exclude_ids = array( $current_product_id );

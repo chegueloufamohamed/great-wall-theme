@@ -32,13 +32,8 @@ do_action( 'woocommerce_before_main_content' );
 			woocommerce_output_all_notices();
 		}
 
-		// Predefined order of category sections requested by the user
-		$preferred_order = array(
-			'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'cabinet', 'steel-storage', 'steel-storage-and-lockers',
-			'office-chairs', 'commercial-chairs', 'sofa', 'bed-frames', 'bunk-beds', 'court-hanger', 'hanger-stands', 'hanger', 'hangers',
-			'partition-stands', 'foldable-room-divider', 'reception-lounge-set', 'shelves', 'single-beds', 'coffee-tables', 'coffee-table',
-			'conference-tables', 'conference-table', 'dinning-tables', 'dining-tables', 'folding-tables', 'folding-table'
-		);
+		// Order of category sections (catalog order)
+		$preferred_order = great_wall_get_category_order();
 
 		// Helper function to build custom query args with active filters
 		if ( ! function_exists( 'great_wall_get_filtered_product_query_args' ) ) {

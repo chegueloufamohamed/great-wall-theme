@@ -226,41 +226,22 @@
           Shop <i class="ri-add-line dropdown-icon"></i>
         </a>
         <div class="mobile-dropdown-content">
-          
-          <div class="mobile-dropdown-section">
-            <span class="mobile-section-title">Office Furniture</span>
-            <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>">Office Desks</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>">Office Chairs</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/commercial-chairs/' ) ); ?>">Commercial Chairs</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>">Office Systems</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/reception-lounge-set/' ) ); ?>">Reception Lounge</a>
-          </div>
-          
-          <div class="mobile-dropdown-section">
-            <span class="mobile-section-title">Steel Furniture</span>
-            <a href="<?php echo esc_url( home_url( '/product-category/cabinet/' ) ); ?>">Cabinets & Lockers</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/shelves/' ) ); ?>">Shelves & Racks</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/shoerack/' ) ); ?>">Wooden Shoe Racks</a>
-          </div>
-          
-          <div class="mobile-dropdown-section">
-            <span class="mobile-section-title">Accommodation</span>
-            <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>">Metal Bunk Beds</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/single-beds/' ) ); ?>">Single Metal Beds</a>
-          </div>
-          
-          <div class="mobile-dropdown-section">
-            <span class="mobile-section-title">Tables & Dining</span>
-            <a href="<?php echo esc_url( home_url( '/product-category/dinning-tables/' ) ); ?>">Dining Tables</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/table/' ) ); ?>">Folding Tables</a>
-          </div>
-          
-          <div class="mobile-dropdown-section">
-            <span class="mobile-section-title">Utility & Racks</span>
-            <a href="<?php echo esc_url( home_url( '/product-category/partition-stands/' ) ); ?>">Foldable Divider</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/hanger-stands/' ) ); ?>">Hanger Stands</a>
-            <a href="<?php echo esc_url( home_url( '/product-category/air-cooler/' ) ); ?>">Air Coolers</a>
-          </div>
+
+          <?php
+          // Same groups as the desktop mega menu (see great_wall_get_category_menu_groups())
+          foreach ( great_wall_get_category_menu_groups() as $group ) :
+              $group_terms = great_wall_get_menu_group_terms( $group['slugs'] );
+              if ( empty( $group_terms ) ) {
+                  continue;
+              }
+              ?>
+              <div class="mobile-dropdown-section">
+                <span class="mobile-section-title"><?php echo esc_html( $group['title'] ); ?></span>
+                <?php foreach ( $group_terms as $group_term ) : ?>
+                  <a href="<?php echo esc_url( get_term_link( $group_term ) ); ?>"><?php echo esc_html( $group_term->name ); ?></a>
+                <?php endforeach; ?>
+              </div>
+          <?php endforeach; ?>
 
         </div>
       </div>
@@ -317,13 +298,8 @@
                   }
               }
 
-              // 2. Sort by the exact custom order
-              $ordered_slugs = array(
-                  'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'cabinet', 'steel-storage', 'steel-storage-and-lockers',
-                  'office-chairs', 'commercial-chairs', 'sofa', 'bed-frames', 'bunk-beds', 'court-hanger', 'hanger-stands', 'hanger', 'hangers',
-                  'partition-stands', 'foldable-room-divider', 'reception-lounge-set', 'shelves', 'single-beds', 'coffee-tables', 'coffee-table',
-                  'conference-tables', 'conference-table', 'dinning-tables', 'dining-tables', 'folding-tables', 'folding-table'
-              );
+              // 2. Sort by the catalog order
+              $ordered_slugs = great_wall_get_category_order();
 
               usort( $filtered_cats, function( $a, $b ) use ( $ordered_slugs ) {
                   $pos_a = array_search( $a->slug, $ordered_slugs );
@@ -373,6 +349,10 @@
                           $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Coffee-Tables.webp';
                       } elseif ( $slug === 'conference-tables' || $slug === 'conference-table' ) {
                           $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Conference-Tables.webp';
+                      } elseif ( $slug === 'office-tables' ) {
+                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp';
+                      } elseif ( $slug === 'folding-tables' ) {
+                          $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Table.webp';
                       } else {
                           $image_url = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src() : '';
                       }

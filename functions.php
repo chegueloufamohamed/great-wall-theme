@@ -559,6 +559,80 @@ function great_wall_is_menu_item_active( $item ) {
 }
 
 /**
+ * The 15 product categories (all top-level), in the display order of the catalog list.
+ * Single source of truth for the homepage grid, search drawer and shop page section order.
+ *
+ * @return array Category slugs.
+ */
+function great_wall_get_category_order() {
+	return array(
+		'office-chairs',     // Office Chairs
+		'desks',             // Executive Desks
+		'office-tables',     // Office Tables
+		'workstations',      // Work Stations
+		'conference-tables', // Meeting & Conference Tables
+		'storage-cabinet',   // Book Racks
+		'sofa',              // Sofas & Lounge Seating
+		'coffee-tables',     // Coffee Tables
+		'steel-storage',     // Steel Cabinets & Lockers
+		'bunk-beds',         // Beds & Bedding
+		'shoe-rack',         // Shoe Racks
+		'partition-stands',  // Partition
+		'folding-tables',    // Folding Tables
+		'dinning-tables',    // Dining Tables & Chairs
+		'court-hanger',      // Coat Stands & Simple Furniture
+	);
+}
+
+/**
+ * Navigation groups for the desktop mega menu and the mobile shop menu.
+ * Each group lists its category slugs; empty or missing categories are skipped when rendering.
+ *
+ * @return array Groups keyed by column slug, each with 'title' and 'slugs'.
+ */
+function great_wall_get_category_menu_groups() {
+	return array(
+		'office-furniture' => array(
+			'title' => 'Office Furniture',
+			'slugs' => array( 'desks', 'office-tables', 'workstations', 'conference-tables', 'office-chairs', 'storage-cabinet' ),
+		),
+		'steel-furniture'  => array(
+			'title' => 'Steel Furniture',
+			'slugs' => array( 'steel-storage', 'shoe-rack' ),
+		),
+		'accommodation'    => array(
+			'title' => 'Accommodation',
+			'slugs' => array( 'bunk-beds', 'court-hanger' ),
+		),
+		'tables-dining'    => array(
+			'title' => 'Tables & Dining',
+			'slugs' => array( 'dinning-tables', 'coffee-tables', 'folding-tables' ),
+		),
+		'living-divider'   => array(
+			'title' => 'Living & Divider',
+			'slugs' => array( 'sofa', 'partition-stands' ),
+		),
+	);
+}
+
+/**
+ * Resolve a menu group's slugs to non-empty product category terms, keeping the group order.
+ *
+ * @param array $slugs Category slugs.
+ * @return WP_Term[] Terms that exist and have products.
+ */
+function great_wall_get_menu_group_terms( $slugs ) {
+	$terms = array();
+	foreach ( $slugs as $slug ) {
+		$term = get_term_by( 'slug', $slug, 'product_cat' );
+		if ( $term && ! is_wp_error( $term ) && $term->count > 0 ) {
+			$terms[] = $term;
+		}
+	}
+	return $terms;
+}
+
+/**
  * Set default product catalog ordering to "date" (Latest first)
  */
 add_filter( 'woocommerce_default_catalog_orderby', 'great_wall_default_catalog_orderby' );
@@ -1002,27 +1076,6 @@ function great_wall_custom_breadcrumbs( $crumbs, $breadcrumb ) {
 }
 
 /**
- * Automatically rename "Chair" category to "Chairs" (and optionally update slug) in the database if it exists
- */
-add_action( 'init', 'great_wall_rename_chair_category_term' );
-function great_wall_rename_chair_category_term() {
-	$term = get_term_by( 'slug', 'chair', 'product_cat' );
-	if ( $term && $term->name !== 'Chairs' ) {
-		wp_update_term( $term->term_id, 'product_cat', array(
-			'name' => 'Chairs',
-			'slug' => 'chairs'
-		) );
-	}
-
-	$term_plural = get_term_by( 'slug', 'chairs', 'product_cat' );
-	if ( $term_plural && $term_plural->name !== 'Chairs' ) {
-		wp_update_term( $term_plural->term_id, 'product_cat', array(
-			'name' => 'Chairs'
-		) );
-	}
-}
-
-/**
  * Customize default WooCommerce breadcrumb arguments to wrap items in spans
  */
 add_filter( 'woocommerce_breadcrumb_defaults', 'great_wall_breadcrumb_defaults' );
@@ -1213,24 +1266,6 @@ remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_pr
 add_action( 'wp_enqueue_scripts', 'great_wall_dequeue_gallery_zoom', 999 );
 function great_wall_dequeue_gallery_zoom() {
     wp_dequeue_script( 'zoom' );
-}
-
-/**
- * Dynamically fix category spelling typos on the frontend.
- */
-add_filter( 'get_term', 'greatwall_fix_term_name_spelling', 10, 2 );
-function greatwall_fix_term_name_spelling( $_term, $taxonomy ) {
-    if ( 'product_cat' === $taxonomy && is_object( $_term ) ) {
-        $display_names = array(
-            'Forldable Room Divider' => 'Foldable Room Divider',
-            'Dinning Tables'         => 'Dining Tables',
-            'Shoerack'               => 'Shoe Racks',
-        );
-        if ( isset( $display_names[ $_term->name ] ) ) {
-            $_term->name = $display_names[ $_term->name ];
-        }
-    }
-    return $_term;
 }
 
 /**

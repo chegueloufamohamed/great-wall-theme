@@ -175,64 +175,69 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       }
 
       $desk_img = great_wall_get_collection_image_url( 'desks' );
-      $chair_img = great_wall_get_collection_image_url( array( 'chairs', 'office-chairs' ) );
+      // Collection artwork that was the thumbnail of the former "Chairs" parent category
+      $chair_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp';
       $storage_img = great_wall_get_collection_image_url( 'storage-cabinet' );
       $sofa_img = great_wall_get_collection_image_url( 'sofa' );
 
       $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
       $desks_link = $desks_cat ? get_term_link( $desks_cat ) : home_url( '/product-category/desks/' );
+      $desks_name = $desks_cat ? $desks_cat->name : 'Executive Desks';
 
-      $chairs_cat = get_term_by( 'slug', 'chairs', 'product_cat' ) ?: get_term_by( 'slug', 'office-chairs', 'product_cat' );
+      $chairs_cat = get_term_by( 'slug', 'office-chairs', 'product_cat' );
       $chairs_link = $chairs_cat ? get_term_link( $chairs_cat ) : home_url( '/product-category/office-chairs/' );
+      $chairs_name = $chairs_cat ? $chairs_cat->name : 'Office Chairs';
 
-      $storage_cat = get_term_by( 'slug', 'storage-cabinet', 'product_cat' ) ?: get_term_by( 'slug', 'cabinet', 'product_cat' );
+      $storage_cat = get_term_by( 'slug', 'storage-cabinet', 'product_cat' );
       $storage_link = $storage_cat ? get_term_link( $storage_cat ) : home_url( '/product-category/storage-cabinet/' );
+      $storage_name = $storage_cat ? $storage_cat->name : 'Book Racks';
 
       $sofa_cat = get_term_by( 'slug', 'sofa', 'product_cat' );
       $sofa_link = $sofa_cat ? get_term_link( $sofa_cat ) : home_url( '/product-category/sofa/' );
+      $sofa_name = $sofa_cat ? $sofa_cat->name : 'Sofas & Lounge Seating';
       ?>
-      
+
       <div class="grid categories-grid">
-        <!-- Card 1: Desks -->
+        <!-- Card 1: Executive Desks -->
         <a href="<?php echo esc_url( $desks_link ); ?>" class="category-card delay-100" data-scroll>
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $desk_img ); ?>" alt="Desks Category">
+            <img loading="lazy" src="<?php echo esc_url( $desk_img ); ?>" alt="<?php echo esc_attr( $desks_name ); ?>">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Desks</h3>
+            <h3 class="category-title"><?php echo esc_html( $desks_name ); ?></h3>
             <span class="category-count">Executive Workspaces</span>
           </div>
         </a>
-        
-        <!-- Card 2: Chairs -->
+
+        <!-- Card 2: Office Chairs -->
         <a href="<?php echo esc_url( $chairs_link ); ?>" class="category-card delay-200" data-scroll>
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $chair_img ); ?>" alt="Chairs Category">
+            <img loading="lazy" src="<?php echo esc_url( $chair_img ); ?>" alt="<?php echo esc_attr( $chairs_name ); ?>">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Chairs</h3>
+            <h3 class="category-title"><?php echo esc_html( $chairs_name ); ?></h3>
             <span class="category-count">Ergonomic Office Seating</span>
           </div>
         </a>
-        
-        <!-- Card 3: Storage Cabinet -->
+
+        <!-- Card 3: Book Racks -->
         <a href="<?php echo esc_url( $storage_link ); ?>" class="category-card delay-300" data-scroll>
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $storage_img ); ?>" alt="Storage Cabinet Category">
+            <img loading="lazy" src="<?php echo esc_url( $storage_img ); ?>" alt="<?php echo esc_attr( $storage_name ); ?>">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Storage Cabinet</h3>
-            <span class="category-count">Cabinets & Lockers</span>
+            <h3 class="category-title"><?php echo esc_html( $storage_name ); ?></h3>
+            <span class="category-count">Office Storage & Shelving</span>
           </div>
         </a>
-        
-        <!-- Card 4: Sofa -->
+
+        <!-- Card 4: Sofas & Lounge Seating -->
         <a href="<?php echo esc_url( $sofa_link ); ?>" class="category-card delay-400" data-scroll>
           <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $sofa_img ); ?>" alt="Sofa Category">
+            <img loading="lazy" src="<?php echo esc_url( $sofa_img ); ?>" alt="<?php echo esc_attr( $sofa_name ); ?>">
           </div>
           <div class="category-overlay">
-            <h3 class="category-title">Sofa</h3>
+            <h3 class="category-title"><?php echo esc_html( $sofa_name ); ?></h3>
             <span class="category-count">Premium Lounge Comfort</span>
           </div>
         </a>
@@ -249,9 +254,10 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       <!-- Part 1: Top 3 Large Banners -->
       <div class="rls-banners-row" style="margin-bottom: 50px;">
         <!-- Banner 1: Steel Furniture -->
-        <a href="<?php echo esc_url( add_query_arg( 'cat', 'cabinet,single-beds,bunk-beds', home_url( '/shop/' ) ) ); ?>" class="rls-banner-card banner-steel">
+        <?php $menu_groups = great_wall_get_category_menu_groups(); ?>
+        <a href="<?php echo esc_url( add_query_arg( 'cat', implode( ',', $menu_groups['steel-furniture']['slugs'] ), home_url( '/shop/' ) ) ); ?>" class="rls-banner-card banner-steel">
           <div class="rls-banner-img">
-            <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'cabinet', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp' ) ); ?>" alt="Steel Furniture Banner">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp" alt="Steel Furniture Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Steel Furniture</h3>
@@ -260,9 +266,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </a>
 
         <!-- Banner 2: Office Furniture -->
-        <a href="<?php echo esc_url( home_url( '/product-category/office-furniture/' ) ); ?>" class="rls-banner-card banner-office">
+        <a href="<?php echo esc_url( add_query_arg( 'cat', implode( ',', $menu_groups['office-furniture']['slugs'] ), home_url( '/shop/' ) ) ); ?>" class="rls-banner-card banner-office">
           <div class="rls-banner-img">
-            <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'office-furniture', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Office-Furniture.webp' ) ); ?>" alt="Office Furniture Banner">
+            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp" alt="Office Furniture Banner">
           </div>
           <div class="rls-banner-overlay">
             <h3 class="rls-banner-title">Office Furniture</h3>
@@ -282,7 +288,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         </a>
       </div>
 
-      <!-- Part 2: 12 Categories Grid -->
+      <!-- Part 2: Categories Grid (all 15 categories, 5 per row) -->
       <div class="rls-category-grid-12">
         <?php
         $cats = get_terms( array(
@@ -301,38 +307,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                 }
             }
 
-            // 2. Sort by the exact custom order
-            $ordered_slugs = array(
-                'desks',
-                'workstations',
-                'storage-cabinet',
-                'drawer-cabinet',
-                'cabinet',
-                'steel-storage',
-                'steel-storage-and-lockers',
-                'office-chairs',
-                'commercial-chairs',
-                'sofa',
-                'bed-frames',
-                'bunk-beds',
-                'court-hanger',
-                'hanger-stands',
-                'hanger',
-                'hangers',
-                'partition-stands',
-                'foldable-room-divider',
-                'reception-lounge-set',
-                'shelves',
-                'single-beds',
-                'coffee-tables',
-                'coffee-table',
-                'conference-tables',
-                'conference-table',
-                'dinning-tables',
-                'dining-tables',
-                'folding-tables',
-                'folding-table'
-            );
+            // 2. Sort by the catalog order
+            $ordered_slugs = great_wall_get_category_order();
 
             usort( $filtered_cats, function( $a, $b ) use ( $ordered_slugs ) {
                 $pos_a = array_search( $a->slug, $ordered_slugs );
@@ -395,6 +371,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Hanger.webp';
                     } elseif ( $slug === 'desks' || $slug === 'desk' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks-1.webp';
+                    } elseif ( $slug === 'office-tables' ) {
+                        $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp';
                     } elseif ( $slug === 'storage-cabinet' ) {
                         $image_url = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Storage-Cabinet.webp';
                     } elseif ( $slug === 'steel-storage' ) {

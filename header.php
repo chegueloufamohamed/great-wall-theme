@@ -52,80 +52,13 @@
             <div class="mega-menu-grid">
               
               <?php
-              // Fetch all non-empty product categories (excluding uncategorized)
-              $all_cats = get_terms( array(
-                  'taxonomy'   => 'product_cat',
-                  'hide_empty' => true,
-                  'exclude'    => array( get_option( 'default_product_cat' ) ),
-              ) );
-
-              // Define our 5 columns and their associated category slugs
-              $columns = array(
-                  'office-furniture' => array(
-                      'title' => 'Office Furniture',
-                      'cats'  => array(),
-                  ),
-                  'steel-furniture' => array(
-                      'title' => 'Steel Furniture',
-                      'cats'  => array(),
-                  ),
-                  'accommodation' => array(
-                      'title' => 'Accommodation',
-                      'cats'  => array(),
-                  ),
-                  'tables-dining' => array(
-                      'title' => 'Tables & Dining',
-                      'cats'  => array(),
-                  ),
-                  'living-divider' => array(
-                      'title' => 'Living & Divider',
-                      'cats'  => array(),
-                  ),
-              );
-
-              // Map categories to columns
-              if ( ! empty( $all_cats ) && ! is_wp_error( $all_cats ) ) {
-                  foreach ( $all_cats as $cat ) {
-                      // Skip office-storage, chairs, and table parent categories
-                      if ( in_array( $cat->slug, array( 'office-storage', 'chairs', 'table' ) ) ) {
-                          continue;
-                      }
-                      // Find which column this category belongs to by checking parent categories or its own slug
-                      $assigned_col = '';
-                      
-                      // 1. Check parent hierarchy
-                      $ancestors = get_ancestors( $cat->term_id, 'product_cat' );
-                      if ( ! empty( $ancestors ) ) {
-                          foreach ( $ancestors as $ancestor_id ) {
-                              $ancestor = get_term( $ancestor_id, 'product_cat' );
-                              if ( $ancestor && isset( $columns[ $ancestor->slug ] ) ) {
-                                  $assigned_col = $ancestor->slug;
-                                  break;
-                              }
-                          }
-                      }
-                      
-                      // 2. If no parent matches, try mapping by category slug or parent slug matching
-                      if ( ! $assigned_col ) {
-                          $slug = $cat->slug;
-                           if ( in_array( $slug, array( 'desks', 'workstations', 'storage-cabinet', 'drawer-cabinet', 'office-chairs', 'commercial-chairs', 'reception-lounge-set', 'office-furniture', 'conference-tables', 'conference-table' ) ) ) {
-                               $assigned_col = 'office-furniture';
-                           } elseif ( in_array( $slug, array( 'cabinet', 'shelves', 'steel-furniture', 'steel-storage' ) ) ) {
-                               $assigned_col = 'steel-furniture';
-                           } elseif ( in_array( $slug, array( 'bunk-beds', 'single-beds', 'accommodation', 'bed-frames', 'bed-frame', 'hanger', 'hangers', 'coat-hanger', 'court-hanger' ) ) ) {
-                               $assigned_col = 'accommodation';
-                           } elseif ( in_array( $slug, array( 'dinning-tables', 'table', 'tables-dining', 'coffee-tables', 'coffee-table', 'folding-tables', 'folding-table' ) ) ) {
-                               $assigned_col = 'tables-dining';
-                           } elseif ( in_array( $slug, array( 'sofa', 'partition-stands', 'living-divider' ) ) ) {
-                               $assigned_col = 'living-divider';
-                           }
-                      }
-                      
-                      // Assign if a column is matched
-                      if ( $assigned_col ) {
-                          $columns[ $assigned_col ]['cats'][] = $cat;
-                      }
-                  }
+              // Build the 5 columns from the shared category groups (see great_wall_get_category_menu_groups())
+              $columns = array();
+              foreach ( great_wall_get_category_menu_groups() as $col_key => $group ) {
+                  $columns[ $col_key ] = array(
+                      'title' => $group['title'],
+                      'cats'  => great_wall_get_menu_group_terms( $group['slugs'] ),
+                  );
               }
 
               // Column 1: OFFICE FURNITURE (with dynamic subgroups)
@@ -164,7 +97,7 @@
                   // Distribute to subgroups
                   foreach ( $office_cats as $cat ) {
                       $slug = $cat->slug;
-                      if ( strpos( $slug, 'desk' ) !== false || strpos( $slug, 'workstation' ) !== false || strpos( $slug, 'conference' ) !== false ) {
+                      if ( strpos( $slug, 'desk' ) !== false || strpos( $slug, 'workstation' ) !== false || strpos( $slug, 'conference' ) !== false || 'office-tables' === $slug ) {
                           $subgroups['desks']['cats'][] = $cat;
                       } elseif ( strpos( $slug, 'cabinet' ) !== false || strpos( $slug, 'storage' ) !== false || strpos( $slug, 'drawer' ) !== false || strpos( $slug, 'locker' ) !== false || strpos( $slug, 'safe' ) !== false ) {
                           $subgroups['storage']['cats'][] = $cat;
