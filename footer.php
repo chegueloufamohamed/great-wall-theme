@@ -8,7 +8,7 @@
         <!-- Column 1: Brand & Socials -->
         <div class="footer-about">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-            <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Logo.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 52px; width: auto; display: block;">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer-logo-red.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 80px; width: auto; display: block;">
           </a>
           <p class="footer-desc">Curating premium contemporary and minimalist wooden & upholstered masterpieces. Bringing high-end design showroom standards directly to Dubai.</p>
           <div class="social-links">
@@ -68,7 +68,7 @@
             ?>
             <ul class="footer-links">
               <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="footer-link">Our Heritage</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="footer-link">Ras Al Khor Showroom</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="footer-link">Dubai Furniture Market (Shop 15+16)</a></li>
               <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="footer-link">Schedule Consult</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="footer-link">Material Care</a></li>
               <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="footer-link">FAQs</a></li>
@@ -84,15 +84,18 @@
           <div class="footer-contact-info" style="margin-bottom: 25px;">
             <div class="footer-contact-item">
               <i class="ri-map-pin-line"></i>
-              <span>Showroom 4, Ras Al Khor Industrial 2,<br>Dubai, United Arab Emirates</span>
+              <span>Gate 3, Shop 15+16, Dubai Furniture Market,<br>Nad Al Sheba 3, Dubai, UAE</span>
             </div>
             <div class="footer-contact-item">
               <i class="ri-phone-line"></i>
-              <span>+971 4 320 2921</span>
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <div><span style="color: rgba(255,255,255,0.55); font-size: 0.82rem; font-weight: 600;">Chinese:</span> <a href="tel:+971523982539" style="color: inherit; text-decoration: none;">+971 52 398 2539</a></div>
+                <div><span style="color: rgba(255,255,255,0.55); font-size: 0.82rem; font-weight: 600;">English:</span> <a href="tel:+971582176351" style="color: inherit; text-decoration: none;">+971 58 217 6351</a></div>
+              </div>
             </div>
             <div class="footer-contact-item">
               <i class="ri-mail-line"></i>
-              <span>info@greatwallfurniture.com</span>
+              <a href="mailto:info@greatwallfurnitures.com" style="color: inherit; text-decoration: none;">info@greatwallfurnitures.com</a>
             </div>
           </div>
 
@@ -405,10 +408,95 @@
     </div>
   </div>
 
-  <!-- Floating WhatsApp Chat Button -->
-  <a href="https://wa.me/971582176351" class="floating-whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat with us on WhatsApp', 'great-wall-theme' ); ?>">
+  <!-- Floating WhatsApp Chat Button & Modal -->
+  <button type="button" class="floating-whatsapp-btn" onclick="toggleWhatsAppModal(event)" aria-label="<?php esc_attr_e( 'Contact us on WhatsApp', 'great-wall-theme' ); ?>">
     <img src="https://greatwallfurniture.com/wp-content/uploads/2026/07/whatsapp.webp" alt="WhatsApp">
-  </a>
+  </button>
+
+  <!-- WhatsApp Contact Selector Pop-up Modal -->
+  <div class="whatsapp-modal-popup" id="whatsapp-contact-modal" role="dialog" aria-modal="true" aria-labelledby="wa-modal-title">
+    <div class="wa-popup-header">
+      <div class="wa-popup-header-title">
+        <i class="ri-whatsapp-fill"></i>
+        <span id="wa-modal-title"><?php esc_html_e( 'Chat via WhatsApp', 'great-wall-theme' ); ?></span>
+      </div>
+      <button type="button" class="wa-popup-close" onclick="closeWhatsAppModal(event)" aria-label="<?php esc_attr_e( 'Close', 'great-wall-theme' ); ?>">&times;</button>
+    </div>
+    
+    <div class="wa-popup-body">
+      <p class="wa-popup-desc"><?php esc_html_e( 'Choose your preferred team to start a chat or call:', 'great-wall-theme' ); ?></p>
+      
+      <!-- Option 1: English Support -->
+      <div class="wa-channel-card">
+        <div class="wa-channel-info">
+          <div class="wa-channel-badge">EN</div>
+          <div>
+            <div class="wa-channel-name"><?php esc_html_e( 'English Support', 'great-wall-theme' ); ?></div>
+            <div class="wa-channel-phone">+971 58 217 6351</div>
+          </div>
+        </div>
+        <div class="wa-channel-actions">
+          <a href="https://wa.me/971582176351?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20inquire%20about%20your%20products" target="_blank" rel="noopener noreferrer" class="wa-action-btn wa-btn-chat">
+            <i class="ri-whatsapp-line"></i> <span>WhatsApp</span>
+          </a>
+          <a href="tel:+971582176351" class="wa-action-btn wa-btn-call">
+            <i class="ri-phone-line"></i> <span>Call</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Option 2: Chinese Support -->
+      <div class="wa-channel-card">
+        <div class="wa-channel-info">
+          <div class="wa-channel-badge wa-badge-cn">CN</div>
+          <div>
+            <div class="wa-channel-name"><?php esc_html_e( 'Chinese Support / 中文客服', 'great-wall-theme' ); ?></div>
+            <div class="wa-channel-phone">+971 52 398 2539</div>
+          </div>
+        </div>
+        <div class="wa-channel-actions">
+          <a href="https://wa.me/971523982539?text=您好，我想咨询长城家具产品" target="_blank" rel="noopener noreferrer" class="wa-action-btn wa-btn-chat">
+            <i class="ri-whatsapp-line"></i> <span>WhatsApp</span>
+          </a>
+          <a href="tel:+971523982539" class="wa-action-btn wa-btn-call">
+            <i class="ri-phone-line"></i> <span>Call</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleWhatsAppModal(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      var modal = document.getElementById('whatsapp-contact-modal');
+      if (modal) {
+        modal.classList.toggle('active');
+      }
+    }
+    function closeWhatsAppModal(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      var modal = document.getElementById('whatsapp-contact-modal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+    document.addEventListener('click', function(e) {
+      var modal = document.getElementById('whatsapp-contact-modal');
+      var btn = document.querySelector('.floating-whatsapp-btn');
+      if (modal && modal.classList.contains('active')) {
+        if (!modal.contains(e.target) && (!btn || !btn.contains(e.target))) {
+          modal.classList.remove('active');
+        }
+      }
+    });
+  </script>
 
   <!-- Global Floating Back to Top Button -->
   <button class="floating-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="<?php esc_attr_e( 'Scroll to top', 'great-wall-theme' ); ?>">

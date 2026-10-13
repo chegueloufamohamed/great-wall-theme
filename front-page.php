@@ -90,8 +90,14 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   <!-- ==========================================================================
        SHOP BY ROOM COLLECTION - CATEGORY GRID SECTION (15 CATEGORIES)
        ========================================================================== -->
-  <section class="section category-extended-section" style="padding-top: 40px; padding-bottom: 70px;">
+  <section class="section category-extended-section" style="padding-top: 50px; padding-bottom: 70px;">
     <div class="container">
+
+      <!-- Section Title -->
+      <div class="section-title-wrapper text-center" data-scroll style="margin-bottom: 45px;">
+        <span class="section-subtitle"><?php esc_html_e( 'Exquisite Hand-Crafted Ranges', 'great-wall-theme' ); ?></span>
+        <h2 class="section-title"><?php esc_html_e( 'Explore Our Collections', 'great-wall-theme' ); ?></h2>
+      </div>
 
       <!-- Categories Grid (all 15 categories, 5 per row) -->
       <div class="rls-category-grid-12">
@@ -225,7 +231,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
 
         <!-- CTA Action Buttons -->
         <div class="brand-cta-buttons" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-          <a href="https://wa.me/971582176351?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20contact%20you%20for%20a%20quote" target="_blank" rel="noopener" class="btn btn-primary cta-quote-btn" style="background-color: #25D366; color: #FFFFFF; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(37,211,102,0.25);">
+          <a href="#" onclick="toggleWhatsAppModal(event); return false;" class="btn btn-primary cta-quote-btn" style="background-color: #25D366; color: #FFFFFF; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(37,211,102,0.25);">
             <i class="ri-whatsapp-line" style="font-size: 1.25rem;"></i>
             <span><?php esc_html_e( 'Contact Us', 'great-wall-theme' ); ?></span>
           </a>
@@ -312,8 +318,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <div class="showroom-info-block">
               <div class="showroom-icon-frame"><i class="ri-map-pin-line"></i></div>
               <div>
-                <div class="showroom-info-label"><?php esc_html_e( 'Address', 'great-wall-theme' ); ?></div>
-                <div class="showroom-info-text"><?php esc_html_e( 'Showroom 4, Ras Al Khor Industrial 2, Dubai, United Arab Emirates', 'great-wall-theme' ); ?></div>
+                <div class="showroom-info-label"><?php esc_html_e( 'Showroom Location', 'great-wall-theme' ); ?></div>
+                <div class="showroom-info-text"><?php esc_html_e( 'Gate 3, Shop 15+16, Dubai Furniture Market, Nad Al Sheba 3, Dubai', 'great-wall-theme' ); ?></div>
               </div>
             </div>
 
@@ -321,8 +327,11 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
             <div class="showroom-info-block">
               <div class="showroom-icon-frame"><i class="ri-phone-line"></i></div>
               <div>
-                <div class="showroom-info-label"><?php esc_html_e( 'Telephone', 'great-wall-theme' ); ?></div>
-                <div class="showroom-info-text"><?php esc_html_e( '+971 4 320 2921', 'great-wall-theme' ); ?></div>
+                <div class="showroom-info-label"><?php esc_html_e( 'Telephone & WhatsApp', 'great-wall-theme' ); ?></div>
+                <div class="showroom-info-text">
+                  <div><strong>English:</strong> <a href="tel:+971582176351" style="color: inherit; text-decoration: none;">+971 58 217 6351</a></div>
+                  <div style="margin-top: 5px;"><strong>Chinese:</strong> <a href="tel:+971523982539" style="color: inherit; text-decoration: none;">+971 52 398 2539</a></div>
+                </div>
               </div>
             </div>
 
@@ -331,7 +340,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
               <div class="showroom-icon-frame"><i class="ri-mail-line"></i></div>
               <div>
                 <div class="showroom-info-label"><?php esc_html_e( 'Email Support', 'great-wall-theme' ); ?></div>
-                <div class="showroom-info-text"><?php esc_html_e( 'info@greatwallfurniture.com', 'great-wall-theme' ); ?></div>
+                <div class="showroom-info-text"><a href="mailto:info@greatwallfurnitures.com" style="color: inherit; text-decoration: none;">info@greatwallfurnitures.com</a></div>
               </div>
             </div>
           </div>
@@ -353,7 +362,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Right Column: Google Map Embed iframe -->
         <div class="showroom-map-col" data-scroll>
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.8407842600277!2d55.352431!3d25.1748249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6630f5555555%3A0x6b81ef1246197be0!2sShowroom%204%2C%20Ras%20Al%20Khor%20Industrial%20Area%20-%202%20-%20Dubai!5e0!3m2!1sen!2sae!4v1717282000000!5m2!1sen!2sae" 
+            src="https://maps.google.com/maps?q=Dubai+Furniture+Market+Nad+Al+Sheba+3+Dubai&t=&z=15&ie=UTF8&iwloc=&output=embed" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"

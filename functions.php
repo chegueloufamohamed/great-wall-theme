@@ -463,7 +463,7 @@ function great_wall_provision_pages() {
 		),
 		'contact' => array(
 			'title'   => 'Contact Us',
-			'content' => '<h2>Visit Our Showroom</h2><p>Experience the quality of our materials and construction in person. Our design consultants are available to help you select or customize the perfect pieces for your space.</p><p><strong>Address:</strong> Showroom 4, Ras Al Khor Industrial 2, Dubai, United Arab Emirates</p><p><strong>Phone:</strong> +971 4 320 2921</p><p><strong>Email:</strong> info@greatwallfurniture.com</p><h2>Book a Consultation</h2><p>Please contact our showroom team to schedule a private walkthrough or custom furniture consultation.</p>',
+			'content' => '<h2>Visit Our Showroom</h2><p>Experience the quality of our materials and construction in person. Our design consultants are available to help you select or customize the perfect pieces for your space.</p><p><strong>Address:</strong> Gate 3, Shop 15+16, Dubai Furniture Market, Nad Al Sheba 3, Dubai, United Arab Emirates</p><p><strong>English Phone:</strong> +971 58 217 6351</p><p><strong>Chinese Phone:</strong> +971 52 398 2539</p><p><strong>Email:</strong> info@greatwallfurnitures.com</p><h2>Book a Consultation</h2><p>Please contact our showroom team to schedule a private walkthrough or custom furniture consultation.</p>',
 		),
 		'privacy-policy' => array(
 			'title'   => 'Privacy Policy',

@@ -140,7 +140,7 @@
           <button class="action-btn search-trigger" title="<?php esc_attr_e( 'Search Products', 'great-wall-theme' ); ?>"><i class="ri-search-line"></i></button>
           
           <!-- Call Header Link -->
-          <a href="tel:+97143202921" class="action-btn call-header-btn" title="<?php esc_attr_e( 'Call Us', 'great-wall-theme' ); ?>">
+          <a href="#" onclick="toggleWhatsAppModal(event); return false;" class="action-btn call-header-btn" title="<?php esc_attr_e( 'Contact Us / Call', 'great-wall-theme' ); ?>">
             <i class="ri-phone-line"></i>
           </a>
 
