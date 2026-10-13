@@ -85,6 +85,8 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
       </div>
       
     </div>
+  </section>
+
   <!-- ==========================================================================
        COLLECTION CATEGORIES GRID
        ========================================================================== -->
@@ -246,49 +248,12 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
-       SHOP BY ROOM COLLECTION - EXTENDED BANNER & CATEGORY GRID SECTION
+       SHOP BY ROOM COLLECTION - CATEGORY GRID SECTION (15 CATEGORIES)
        ========================================================================== -->
   <section class="section category-extended-section" style="padding-top: 0; padding-bottom: 80px;">
     <div class="container">
-      
-      <!-- Part 1: Top 3 Large Banners -->
-      <div class="rls-banners-row" style="margin-bottom: 50px;">
-        <!-- Banner 1: Steel Furniture -->
-        <?php $menu_groups = great_wall_get_category_menu_groups(); ?>
-        <a href="<?php echo esc_url( add_query_arg( 'cat', implode( ',', $menu_groups['steel-furniture']['slugs'] ), home_url( '/shop/' ) ) ); ?>" class="rls-banner-card banner-steel">
-          <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Steel-Furniture.webp" alt="Steel Furniture Banner">
-          </div>
-          <div class="rls-banner-overlay">
-            <h3 class="rls-banner-title">Steel Furniture</h3>
-            <span class="rls-banner-btn btn-white">Shop This</span>
-          </div>
-        </a>
 
-        <!-- Banner 2: Office Furniture -->
-        <a href="<?php echo esc_url( add_query_arg( 'cat', implode( ',', $menu_groups['office-furniture']['slugs'] ), home_url( '/shop/' ) ) ); ?>" class="rls-banner-card banner-office">
-          <div class="rls-banner-img">
-            <img loading="lazy" src="https://greatwallfurniture.com/wp-content/uploads/2026/08/Desks.webp" alt="Office Furniture Banner">
-          </div>
-          <div class="rls-banner-overlay">
-            <h3 class="rls-banner-title">Office Furniture</h3>
-            <span class="rls-banner-btn btn-pink">Shop Online</span>
-          </div>
-        </a>
-
-        <!-- Banner 3: Staff Accommodation -->
-        <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="rls-banner-card banner-staff">
-          <div class="rls-banner-img">
-            <img loading="lazy" src="<?php echo esc_url( great_wall_get_category_image_with_fallback( 'bunk-beds', 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Staff-Accomodation.webp' ) ); ?>" alt="Staff Accommodation Banner">
-          </div>
-          <div class="rls-banner-overlay">
-            <h3 class="rls-banner-title">Staff Accommodation</h3>
-            <span class="rls-banner-btn btn-black">Shop Online</span>
-          </div>
-        </a>
-      </div>
-
-      <!-- Part 2: Categories Grid (all 15 categories, 5 per row) -->
+      <!-- Categories Grid (all 15 categories, 5 per row) -->
       <div class="rls-category-grid-12">
         <?php
         $cats = get_terms( array(
