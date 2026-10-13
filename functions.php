@@ -486,6 +486,11 @@ function great_wall_provision_pages() {
 				'post_name'    => $slug,
 			);
 			wp_insert_post( $new_page );
+		} elseif ( 'contact' === $slug && strpos( $page->post_content, 'Nad Al Sheba' ) === false ) {
+			wp_update_post( array(
+				'ID'           => $page->ID,
+				'post_content' => $page_data['content'],
+			) );
 		}
 	}
 }
