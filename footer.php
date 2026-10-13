@@ -8,7 +8,7 @@
         <!-- Column 1: Brand & Socials -->
         <div class="footer-about">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-            <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Footer-Logo.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; display: block;">
+            <img src="https://greatwallfurniture.com/wp-content/uploads/2026/06/Logo.png" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 52px; width: auto; display: block;">
           </a>
           <p class="footer-desc">Curating premium contemporary and minimalist wooden & upholstered masterpieces. Bringing high-end design showroom standards directly to Dubai.</p>
           <div class="social-links">

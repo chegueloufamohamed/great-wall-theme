@@ -88,169 +88,9 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
   </section>
 
   <!-- ==========================================================================
-       COLLECTION CATEGORIES GRID
-       ========================================================================== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title-wrapper text-center" data-scroll>
-        <span class="section-subtitle">Exquisite Hand-Crafted Ranges</span>
-        <h2 class="section-title">Shop By Room Collection</h2>
-      </div>
-      <?php
-      if ( ! function_exists( 'great_wall_get_category_image_with_fallback' ) ) {
-          function great_wall_get_category_image_with_fallback( $slug, $default_fallback ) {
-              $term = get_term_by( 'slug', $slug, 'product_cat' );
-              if ( $term ) {
-                  $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
-                  if ( $thumbnail_id ) {
-                      $img_url = wp_get_attachment_url( $thumbnail_id );
-                      if ( $img_url ) {
-                          return $img_url;
-                      }
-                  }
-              }
-              return $default_fallback;
-          }
-      }
-
-      if ( ! function_exists( 'great_wall_get_collection_image_url' ) ) {
-          function great_wall_get_collection_image_url( $slugs ) {
-              if ( ! is_array( $slugs ) ) {
-                  $slugs = array( $slugs );
-              }
-              
-              foreach ( $slugs as $slug ) {
-                  $term = get_term_by( 'slug', $slug, 'product_cat' );
-                  if ( ! $term ) {
-                      continue;
-                  }
-                  
-                  // 1. Try WooCommerce category thumbnail
-                  $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
-                  if ( $thumbnail_id ) {
-                      $img_url = wp_get_attachment_url( $thumbnail_id );
-                      if ( $img_url ) {
-                          return $img_url;
-                      }
-                  }
-                  
-                  // 2. Try first product in this category
-                  $args = array(
-                      'post_type'      => 'product',
-                      'posts_per_page' => 1,
-                      'tax_query'      => array(
-                          array(
-                              'taxonomy' => 'product_cat',
-                              'field'    => 'slug',
-                              'terms'    => $slug,
-                          ),
-                      ),
-                  );
-                  $query = new WP_Query( $args );
-                  if ( $query->have_posts() ) {
-                      $query->the_post();
-                      $image_id = get_post_thumbnail_id();
-                      wp_reset_postdata();
-                      if ( $image_id ) {
-                          $img_url = wp_get_attachment_url( $image_id );
-                          if ( $img_url ) {
-                              return $img_url;
-                          }
-                      }
-                  }
-              }
-              
-              // Fallback to high-quality default uploads
-              $first_slug = $slugs[0];
-              if ( 'desks' === $first_slug ) {
-                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Deks.webp';
-              } elseif ( 'chairs' === $first_slug || 'chair' === $first_slug || 'office-chairs' === $first_slug ) {
-                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp';
-              } elseif ( 'storage-cabinet' === $first_slug || 'cabinet' === $first_slug ) {
-                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Book-Shelf.webp';
-              } elseif ( 'sofa' === $first_slug ) {
-                  return 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Sofa.webp';
-              }
-              
-              return wc_placeholder_img_src();
-          }
-      }
-
-      $desk_img = great_wall_get_collection_image_url( 'desks' );
-      // Collection artwork that was the thumbnail of the former "Chairs" parent category
-      $chair_img = 'https://greatwallfurniture.com/wp-content/uploads/2026/08/Collection-Chair.webp';
-      $storage_img = great_wall_get_collection_image_url( 'storage-cabinet' );
-      $sofa_img = great_wall_get_collection_image_url( 'sofa' );
-
-      $desks_cat = get_term_by( 'slug', 'desks', 'product_cat' );
-      $desks_link = $desks_cat ? get_term_link( $desks_cat ) : home_url( '/product-category/desks/' );
-      $desks_name = $desks_cat ? $desks_cat->name : 'Executive Desks';
-
-      $chairs_cat = get_term_by( 'slug', 'office-chairs', 'product_cat' );
-      $chairs_link = $chairs_cat ? get_term_link( $chairs_cat ) : home_url( '/product-category/office-chairs/' );
-      $chairs_name = $chairs_cat ? $chairs_cat->name : 'Office Chairs';
-
-      $storage_cat = get_term_by( 'slug', 'storage-cabinet', 'product_cat' );
-      $storage_link = $storage_cat ? get_term_link( $storage_cat ) : home_url( '/product-category/storage-cabinet/' );
-      $storage_name = $storage_cat ? $storage_cat->name : 'Book Racks';
-
-      $sofa_cat = get_term_by( 'slug', 'sofa', 'product_cat' );
-      $sofa_link = $sofa_cat ? get_term_link( $sofa_cat ) : home_url( '/product-category/sofa/' );
-      $sofa_name = $sofa_cat ? $sofa_cat->name : 'Sofas & Lounge Seating';
-      ?>
-
-      <div class="grid categories-grid">
-        <!-- Card 1: Executive Desks -->
-        <a href="<?php echo esc_url( $desks_link ); ?>" class="category-card delay-100" data-scroll>
-          <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $desk_img ); ?>" alt="<?php echo esc_attr( $desks_name ); ?>">
-          </div>
-          <div class="category-overlay">
-            <h3 class="category-title"><?php echo esc_html( $desks_name ); ?></h3>
-            <span class="category-count">Executive Workspaces</span>
-          </div>
-        </a>
-
-        <!-- Card 2: Office Chairs -->
-        <a href="<?php echo esc_url( $chairs_link ); ?>" class="category-card delay-200" data-scroll>
-          <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $chair_img ); ?>" alt="<?php echo esc_attr( $chairs_name ); ?>">
-          </div>
-          <div class="category-overlay">
-            <h3 class="category-title"><?php echo esc_html( $chairs_name ); ?></h3>
-            <span class="category-count">Ergonomic Office Seating</span>
-          </div>
-        </a>
-
-        <!-- Card 3: Book Racks -->
-        <a href="<?php echo esc_url( $storage_link ); ?>" class="category-card delay-300" data-scroll>
-          <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $storage_img ); ?>" alt="<?php echo esc_attr( $storage_name ); ?>">
-          </div>
-          <div class="category-overlay">
-            <h3 class="category-title"><?php echo esc_html( $storage_name ); ?></h3>
-            <span class="category-count">Office Storage & Shelving</span>
-          </div>
-        </a>
-
-        <!-- Card 4: Sofas & Lounge Seating -->
-        <a href="<?php echo esc_url( $sofa_link ); ?>" class="category-card delay-400" data-scroll>
-          <div class="category-img">
-            <img loading="lazy" src="<?php echo esc_url( $sofa_img ); ?>" alt="<?php echo esc_attr( $sofa_name ); ?>">
-          </div>
-          <div class="category-overlay">
-            <h3 class="category-title"><?php echo esc_html( $sofa_name ); ?></h3>
-            <span class="category-count">Premium Lounge Comfort</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
        SHOP BY ROOM COLLECTION - CATEGORY GRID SECTION (15 CATEGORIES)
        ========================================================================== -->
-  <section class="section category-extended-section" style="padding-top: 0; padding-bottom: 80px;">
+  <section class="section category-extended-section" style="padding-top: 40px; padding-bottom: 70px;">
     <div class="container">
 
       <!-- Categories Grid (all 15 categories, 5 per row) -->
@@ -372,7 +212,7 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
     <div class="container" style="max-width: 1140px; margin: 0 auto; text-align: center;">
       
       <!-- Brand & Key Messaging -->
-      <div class="brand-intro-content" style="max-width: 820px; margin: 0 auto 40px auto;" data-scroll>
+      <div class="brand-intro-content" style="max-width: 820px; margin: 0 auto;" data-scroll>
         <span class="brand-badge-tag" style="display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 800; color: #C5A880; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 14px; background: rgba(197, 168, 128, 0.12); padding: 6px 16px; border-radius: 30px;">
           <?php esc_html_e( 'Bespoke Craftsmanship & Luxury Living', 'great-wall-theme' ); ?>
         </span>
@@ -392,35 +232,6 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
           <a href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ); ?>" class="btn btn-secondary cta-contact-btn" style="background-color: transparent; color: #1C1C1E; font-weight: 700; padding: 14px 32px; border-radius: 40px; font-size: 1rem; text-decoration: none; border: 2px solid #1C1C1E; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
             <i class="ri-grid-line" style="font-size: 1.15rem;"></i>
             <span><?php esc_html_e( 'Explore Product Categories', 'great-wall-theme' ); ?></span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Main Product Category Shortcuts -->
-      <div class="brand-category-shortcuts" style="border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 35px;" data-scroll>
-        <span class="shortcuts-label" style="display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 800; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px;">
-          <?php esc_html_e( 'Explore Main Product Categories', 'great-wall-theme' ); ?>
-        </span>
-        <div class="shortcuts-grid" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center;">
-          <a href="<?php echo esc_url( home_url( '/product-category/desks/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-computer-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Desks & Workstations', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/office-chairs/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-armchair-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Office & Executive Chairs', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/storage-cabinet/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-archive-drawer-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Storage & Lockers', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/sofa/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-sofa-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Sofas & Loungers', 'great-wall-theme' ); ?></span>
-          </a>
-          <a href="<?php echo esc_url( home_url( '/product-category/bunk-beds/' ) ); ?>" class="shortcut-pill" style="display: inline-flex; align-items: center; gap: 10px; background-color: #F8F7F5; color: #1C1C1E; font-weight: 700; font-size: 0.92rem; padding: 12px 22px; border-radius: 30px; text-decoration: none; border: 1px solid rgba(0,0,0,0.06); transition: all 0.25s ease;">
-            <i class="ri-hotel-bed-line" style="color: #C5A880; font-size: 1.1rem;"></i>
-            <span><?php esc_html_e( 'Beds & Accommodation', 'great-wall-theme' ); ?></span>
           </a>
         </div>
       </div>
