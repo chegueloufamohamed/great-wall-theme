@@ -1647,17 +1647,79 @@ function great_wall_custom_variable_add_to_cart_text( $text, $product ) {
 }
 
 /**
- * Restrict WooCommerce search queries to product titles only (excludes content/excerpt) using native WordPress columns filter
+ * Hide SKU display on the frontend while keeping SKUs enabled in the admin panel for inventory and search
  */
-add_filter( 'post_search_columns', 'great_wall_search_columns_only_title', 10, 3 );
-function great_wall_search_columns_only_title( $search_columns, $search, $wp_query ) {
-	// Only restrict frontend search queries targeting WooCommerce products
-	if ( ! is_admin() && $wp_query->is_search() && $wp_query->is_main_query() ) {
-		if ( isset( $wp_query->query_vars['post_type'] ) && 'product' === $wp_query->query_vars['post_type'] ) {
-			return array( 'post_title' );
+add_filter( 'wc_product_sku_enabled', 'great_wall_hide_sku_on_frontend' );
+function great_wall_hide_sku_on_frontend( $enabled ) {
+	if ( ! is_admin() ) {
+		return false;
+	}
+	return $enabled;
+}
+
+/**
+ * Restrict WooCommerce search queries to product titles and SKUs (including variation SKUs),
+ * excluding description/excerpt content.
+ */
+add_filter( 'posts_search', 'great_wall_product_search_by_title_and_sku', 20, 2 );
+function great_wall_product_search_by_title_and_sku( $search, $wp_query ) {
+	global $wpdb;
+
+	if ( is_admin() || empty( $search ) ) {
+		return $search;
+	}
+
+	$post_type = $wp_query->get( 'post_type' );
+	$is_product_search = ( 'product' === $post_type || ( is_array( $post_type ) && in_array( 'product', $post_type, true ) ) );
+
+	if ( ! $is_product_search ) {
+		return $search;
+	}
+
+	$search_terms = $wp_query->get( 'search_terms' );
+	if ( empty( $search_terms ) ) {
+		$s = $wp_query->get( 's' );
+		if ( ! empty( $s ) ) {
+			$search_terms = array( $s );
+		} else {
+			return $search;
 		}
 	}
-	return $search_columns;
+
+	$conditions = array();
+	foreach ( $search_terms as $term ) {
+		$like = '%' . $wpdb->esc_like( $term ) . '%';
+		$conditions[] = $wpdb->prepare(
+			"(
+				({$wpdb->posts}.post_title LIKE %s)
+				OR ({$wpdb->posts}.ID IN (
+					SELECT post_id FROM {$wpdb->postmeta}
+					WHERE meta_key = '_sku' AND meta_value LIKE %s
+				))
+				OR ({$wpdb->posts}.ID IN (
+					SELECT p.post_parent FROM {$wpdb->posts} p
+					INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+					WHERE p.post_type = 'product_variation'
+					  AND p.post_parent > 0
+					  AND pm.meta_key = '_sku'
+					  AND pm.meta_value LIKE %s
+				))
+			)",
+			$like,
+			$like,
+			$like
+		);
+	}
+
+	if ( ! empty( $conditions ) ) {
+		$search = ' AND (' . implode( ' AND ', $conditions ) . ') ';
+		if ( ! is_user_logged_in() ) {
+			$search .= " AND ({$wpdb->posts}.post_password = '') ";
+		}
+	}
+
+	return $search;
 }
+
 
 
