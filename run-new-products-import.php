@@ -207,10 +207,21 @@ foreach ( $batch_items as $item ) {
 	$category_name = $item['category_name'];
 
 	try {
-		// Check if a product with this SKU (or raw multiline SKU) already exists
-		$existing_id = wc_get_product_id_by_sku( $sku );
-		if ( ! $existing_id && $raw_sku !== $sku ) {
-			$existing_id = wc_get_product_id_by_sku( $raw_sku );
+		global $wpdb;
+		// Find any existing draft product by exact title or SKU so we update in-place
+		$existing_id = (int) $wpdb->get_var( $wpdb->prepare(
+			"SELECT ID FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'draft' AND post_title = %s ORDER BY ID DESC LIMIT 1",
+			$title
+		) );
+
+		if ( ! $existing_id ) {
+			$sku_id = wc_get_product_id_by_sku( $sku );
+			if ( $sku_id ) {
+				$sku_prod = wc_get_product( $sku_id );
+				if ( $sku_prod && $sku_prod->get_status() === 'draft' ) {
+					$existing_id = $sku_id;
+				}
+			}
 		}
 
 		$product = null;
@@ -218,8 +229,7 @@ foreach ( $batch_items as $item ) {
 
 		if ( $existing_id ) {
 			$existing_product = wc_get_product( $existing_id );
-			if ( $existing_product && $existing_product->get_status() !== 'publish' ) {
-				// Reuse and clean up existing draft product from any earlier import
+			if ( $existing_product && $existing_product->get_status() === 'draft' ) {
 				$product = $existing_product;
 				$action_label = 'UPDATED DRAFT';
 			}
@@ -231,6 +241,7 @@ foreach ( $batch_items as $item ) {
 
 		$product->set_name( $title );
 		$product->set_status( 'draft' );
+		$product->set_sku( '' );
 		$product->set_description( '' );
 		$product->set_short_description( '' );
 		$product->set_length( '' );
@@ -253,19 +264,12 @@ foreach ( $batch_items as $item ) {
 			$product->set_category_ids( array( 15 ) );
 		}
 
-		// Set SKU safely
-		try {
-			$product->set_sku( $sku );
-		} catch ( Exception $sku_ex ) {
-			// Will set via post meta after save if another published product holds the SKU
-		}
-
 		$saved_id = $product->save();
 		if ( $saved_id ) {
-			update_post_meta( $saved_id, '_sku', $sku );
+			delete_post_meta( $saved_id, '_sku' );
 		}
 
-		echo "<p style='color: green; font-family:sans-serif;'>[" . $action_label . "] <strong>" . esc_html( $title ) . "</strong> (ID: " . $saved_id . ") | SKU: <strong>" . esc_html( $sku ) . "</strong> | Price: <strong>AED " . $price . "</strong> | Category: <strong>" . esc_html( $category_name ) . " (ID: " . $category_id . ")</strong></p>";
+		echo "<p style='color: green; font-family:sans-serif;'>[" . $action_label . "] <strong>" . esc_html( $title ) . "</strong> (ID: " . $saved_id . ") | Price: <strong>AED " . $price . "</strong> | Category: <strong>" . esc_html( $category_name ) . " (ID: " . $category_id . ")</strong></p>";
 	} catch ( Exception $e ) {
 		echo "<p style='color: red; font-family:sans-serif;'>[ERROR] " . esc_html( $title ) . ": " . esc_html( $e->getMessage() ) . "</p>";
 	}
