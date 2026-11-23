@@ -226,11 +226,12 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <span class="brand-badge-tag" style="display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 800; color: #C5A880; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 14px; background: rgba(197, 168, 128, 0.12); padding: 6px 16px; border-radius: 30px;">
           <?php esc_html_e( 'Bespoke Craftsmanship & Luxury Living', 'great-wall-theme' ); ?>
         </span>
-        <h1 class="brand-intro-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #1C1C1E; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 18px;">
-          <?php esc_html_e( 'Elevate Your Interior with Mastercrafted Furniture Built for Distinction', 'great-wall-theme' ); ?>
+        <h1 class="brand-intro-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.85rem, 3.8vw, 2.75rem); font-weight: 800; color: #1C1C1E; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 18px;">
+          <?php esc_html_e( 'Durable, Practical & Stylish Furniture', 'great-wall-theme' ); ?><br>
+          <span style="color: #841421;"><?php esc_html_e( 'for Labour Camps, Offices & Homes', 'great-wall-theme' ); ?></span>
         </h1>
-        <p class="brand-intro-desc" style="font-family: var(--font-sans); font-size: 1.1rem; color: #5C5954; line-height: 1.7; margin: 0 auto 32px auto; max-width: 720px;">
-          <?php esc_html_e( 'From executive corporate offices to luxury residential settings, Great Wall Furniture combines premium materials, local Dubai craftsmanship, and custom dimensions tailored across all seven Emirates.', 'great-wall-theme' ); ?>
+        <p class="brand-intro-desc" style="font-family: var(--font-sans); font-size: 1.1rem; color: #5C5954; line-height: 1.7; margin: 0 auto 32px auto; max-width: 780px;">
+          <?php esc_html_e( 'Great Wall Furnitures supplies a wide range of high-quality, cost-effective and long-lasting furniture for labour accommodation, corporate offices and residential living across the UAE and GCC.', 'great-wall-theme' ); ?>
         </p>
 
         <!-- CTA Action Buttons -->
