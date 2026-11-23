@@ -452,14 +452,10 @@ function great_wall_fallback_content( $content ) {
  */
 add_action( 'init', 'great_wall_provision_pages' );
 function great_wall_provision_pages() {
-	if ( ! is_admin() ) {
-		return;
-	}
-
 	$pages_to_create = array(
 		'about' => array(
 			'title'   => 'Our Story',
-			'content' => '<h2>Our Heritage</h2><p>Founded on a passion for fine craftsmanship and architectural lines, Great Wall Furniture brings modern minimalist wood and upholstered masterpieces to Dubai. We partner with skilled artisans to select premium materials, ensuring every piece serves as a durable, functional art piece for your home.</p><h2>Bespoke Quality</h2><p>Every joint, finish, and detail is meticulously refined in our workshop. We invite you to explore our showroom and collaborate with our designers on custom dimensions and finishes tailored to your interior design vision.</p>',
+			'content' => '<p>Great Wall Furnitures Trading LLC was founded in 2005 and specializes in furniture import and export trading in Dubai, UAE. The company has registered two brands in the UAE (PILOTEER and MOMENT). Its main products are divided into three categories: residential furniture, office furniture, and labor camp series products.</p><p>After more than 20 years of continuous development and improvement, the company has continued to launch new products and expand its business. It now has a well-established and independent operating system that provides customers with comprehensive services and professional support at every stage—from pre-sale ordering to goods transportation and assembly, and through to after-sales service. The company has a large warehouse to ensure an ample supply of stored goods; it has more than ten vehicles and a team of dozens of staff, ensuring that the entire service process—from product inquiry and order confirmation to timely delivery, installation, and after-sales service—is completed efficiently. At present, the company holds a considerable share of the UAE furniture market and enjoys high recognition in the furniture industry. It also maintains ongoing and close business relationships with customers in several neighboring Gulf countries.</p><p>In 2018, the company established a branch in the Sultanate of Oman, with its own showroom and large warehouse. The company\'s headquarters is located in Tianjin, China, and it owns two self-operated furniture factories, enabling effective and reasonable control of quality and cost. The company has a professional foreign trade team and very stable partner manufacturers across the country, which can meet customers\' diverse procurement needs. The company is committed to providing customers with diversified products at the best value for money.</p><p>Through unremitting efforts, the company has established close and lasting cooperative relationships with dozens of large multinational groups and enterprises in the UAE. We sincerely thank our new and old customers for their trust and support of Great Wall Furnitures Trading LLC! The company will continue to uphold the principles of "integrity-based, service-first, win-win cooperation, and high cost-effectiveness," providing customers with all-round, multi-dimensional shopping services and ensuring a quality shopping experience.</p>',
 		),
 		'contact' => array(
 			'title'   => 'Contact Us',
@@ -478,15 +474,22 @@ function great_wall_provision_pages() {
 	foreach ( $pages_to_create as $slug => $page_data ) {
 		$page = get_page_by_path( $slug );
 		if ( ! $page ) {
-			$new_page = array(
-				'post_title'   => $page_data['title'],
+			if ( is_admin() ) {
+				$new_page = array(
+					'post_title'   => $page_data['title'],
+					'post_content' => $page_data['content'],
+					'post_status'  => 'publish',
+					'post_type'    => 'page',
+					'post_name'    => $slug,
+				);
+				wp_insert_post( $new_page );
+			}
+		} elseif ( 'about' === $slug && strpos( $page->post_content, 'Great Wall Furnitures Trading LLC was founded in 2005' ) === false ) {
+			wp_update_post( array(
+				'ID'           => $page->ID,
 				'post_content' => $page_data['content'],
-				'post_status'  => 'publish',
-				'post_type'    => 'page',
-				'post_name'    => $slug,
-			);
-			wp_insert_post( $new_page );
-		} elseif ( 'contact' === $slug && strpos( $page->post_content, 'Nad Al Sheba' ) === false ) {
+			) );
+		} elseif ( is_admin() && 'contact' === $slug && strpos( $page->post_content, 'Nad Al Sheba' ) === false ) {
 			wp_update_post( array(
 				'ID'           => $page->ID,
 				'post_content' => $page_data['content'],
