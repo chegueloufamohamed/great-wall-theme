@@ -265,29 +265,29 @@ $assets_uri = get_template_directory_uri() . '/assets/images/';
         <!-- Pillar 1 -->
         <div class="feature-card delay-100" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-award-line"></i></div>
-          <h3 class="feature-title">Refined Materials</h3>
-          <p class="feature-desc">We import Italian marble blocks, sustainable French oak veneers, and Belgian bouclé to ensure unmatched sensory luxury.</p>
+          <h3 class="feature-title">Trusted Furniture Supplier</h3>
+          <p class="feature-desc">Quality, durable and cost-effective furniture for homes, offices, projects and accommodations across the UAE and GCC.</p>
         </div>
         
         <!-- Pillar 2 -->
         <div class="feature-card delay-200" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-hand-heart-line"></i></div>
-          <h3 class="feature-title">Dubai Craftsmanship</h3>
-          <p class="feature-desc">Each piece is cut, assembled, and finished by highly accomplished master carpenters locally in Ras Al Khor.</p>
+          <h3 class="feature-title">GCC &amp; Global Partnerships</h3>
+          <p class="feature-desc">Working with trusted manufacturers worldwide to provide quality products, competitive prices and reliable supply.</p>
         </div>
         
         <!-- Pillar 3 -->
         <div class="feature-card delay-300" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-equalizer-line"></i></div>
-          <h3 class="feature-title">Bespoke Scaling</h3>
-          <p class="feature-desc">Need a table or sofa in custom dimensions? Our designers will draft CAD plans tailored specifically to your home.</p>
+          <h3 class="feature-title">Wide Product Range</h3>
+          <p class="feature-desc">From bunk beds and lockers to office, staff and project furniture, we offer solutions for businesses and institutions.</p>
         </div>
         
         <!-- Pillar 4 -->
         <div class="feature-card delay-400" data-scroll>
           <div class="feature-icon-wrapper"><i class="ri-truck-line"></i></div>
-          <h3 class="feature-title">Premium Delivery</h3>
-          <p class="feature-desc">Enjoy full-service white-glove transport and precise in-home installation across all seven Emirates.</p>
+          <h3 class="feature-title">Reliable &amp; Timely Delivery</h3>
+          <p class="feature-desc">Safe packaging, dependable delivery and professional support from order placement to installation.</p>
         </div>
       </div>
     </div>
