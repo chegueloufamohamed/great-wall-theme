@@ -67,7 +67,7 @@ get_header();
               <div style="flex: 1;">
                 <strong style="display: block; font-size: 0.82rem; text-transform: uppercase; color: #8E8E93; letter-spacing: 0.08em; margin-bottom: 6px;">Contact Numbers</strong>
                 
-                <!-- English Number -->
+                <!-- English Number 1 -->
                 <div style="display: flex; justify-content: space-between; align-items: center; background: #FAF9F6; padding: 12px 14px; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(0,0,0,0.04);">
                   <div>
                     <span style="font-size: 0.78rem; font-weight: 700; color: #2E7D32; background: #E8F5E9; padding: 2px 8px; border-radius: 6px; margin-right: 6px;">English</span>
@@ -78,6 +78,22 @@ get_header();
                       <i class="ri-phone-line"></i> Call
                     </a>
                     <a href="https://wa.me/971582176351?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20inquire%20about%20your%20products" target="_blank" rel="noopener noreferrer" style="background: #25D366; color: #FFFFFF; padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                      <i class="ri-whatsapp-line"></i> WhatsApp
+                    </a>
+                  </div>
+                </div>
+
+                <!-- English Number 2 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #FAF9F6; padding: 12px 14px; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(0,0,0,0.04);">
+                  <div>
+                    <span style="font-size: 0.78rem; font-weight: 700; color: #2E7D32; background: #E8F5E9; padding: 2px 8px; border-radius: 6px; margin-right: 6px;">English</span>
+                    <strong style="font-size: 0.95rem; color: #1C1C1E;">+971 52 986 8732</strong>
+                  </div>
+                  <div style="display: flex; gap: 6px;">
+                    <a href="tel:+971529868732" style="background: #1C1C1E; color: #FFFFFF; padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                      <i class="ri-phone-line"></i> Call
+                    </a>
+                    <a href="https://wa.me/971529868732?text=Hello%20Great%20Wall%20Furniture,%20I%20would%20like%20to%20inquire%20about%20your%20products" target="_blank" rel="noopener noreferrer" style="background: #25D366; color: #FFFFFF; padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
                       <i class="ri-whatsapp-line"></i> WhatsApp
                     </a>
                   </div>
